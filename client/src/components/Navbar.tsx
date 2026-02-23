@@ -65,7 +65,7 @@ export default function Navbar() {
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
               className="flex-shrink-0"
             >
-              <img src={LOGO} alt="Loomelic Media" className="h-7 sm:h-8 w-auto" />
+              <img src={LOGO} alt="Loomelic Media" className="h-8 sm:h-10 w-auto" style={{ mixBlendMode: 'screen', filter: 'invert(1)' }} />
             </a>
 
             {/* Desktop nav */}
@@ -120,7 +120,7 @@ export default function Navbar() {
 
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
-              <img src={LOGO} alt="Loomelic Media" className="h-7 w-auto" />
+              <img src={LOGO} alt="Loomelic Media" className="h-9 w-auto" style={{ mixBlendMode: 'screen', filter: 'invert(1)' }} />
               <button onClick={() => setMenuOpen(false)} className="text-white/60 hover:text-white transition-colors">
                 <X size={24} />
               </button>

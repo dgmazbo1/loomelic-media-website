@@ -194,7 +194,7 @@ export default function ContactSection() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 mb-12">
             {/* Brand */}
             <div className="lg:col-span-2">
-              <img src={LOGO} alt="Loomelic Media" className="h-8 w-auto mb-4" />
+              <img src={LOGO} alt="Loomelic Media" className="h-10 w-auto mb-4" style={{ mixBlendMode: 'screen', filter: 'invert(1)' }} />
               <p className="font-body text-sm text-white/50 leading-relaxed max-w-sm">
                 Las Vegas-based video production and digital content studio. Elevating brands through cinematic storytelling.
               </p>

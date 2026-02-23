@@ -2,18 +2,16 @@
    LOOMELIC MEDIA — Hero Section
    Design: Dark Cinematic Luxury
    - Full-screen video collage grid background
-   - Animated LOOMELIC letter-by-letter reveal
-   - Framer Motion scroll-triggered entrance
+   - Logo image as centerpiece (stacked LOOMELIC / MEDIA)
+   - Framer Motion entrance animations
    ============================================================ */
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { HERO_VIDEOS, VIDEO_POSTERS, HERO_GRID_IMAGES } from "@/lib/media";
+import { HERO_VIDEOS, VIDEO_POSTERS, HERO_GRID_IMAGES, LOGO } from "@/lib/media";
 
-const LETTERS = ["L", "O", "O", "M", "E", "L", "I", "C"];
-
-// 6 video cells for the background grid
+// 9 cells for the background grid
 const GRID_CELLS = [
   { type: "video" as const, src: HERO_VIDEOS.lexusRoll, poster: VIDEO_POSTERS.lexusRoll },
   { type: "video" as const, src: HERO_VIDEOS.janelWedding, poster: VIDEO_POSTERS.janelWedding },
@@ -28,13 +26,9 @@ const GRID_CELLS = [
 
 function VideoCell({ src, poster }: { src: string; poster: string }) {
   const ref = useRef<HTMLVideoElement>(null);
-
   useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
-    v.play().catch(() => {});
+    ref.current?.play().catch(() => {});
   }, []);
-
   return (
     <video
       ref={ref}
@@ -52,7 +46,6 @@ function VideoCell({ src, poster }: { src: string; poster: string }) {
 
 export default function HeroSection() {
   const [loaded, setLoaded] = useState(false);
-
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 150);
     return () => clearTimeout(t);
@@ -77,9 +70,9 @@ export default function HeroSection() {
           ))}
         </div>
         {/* Multi-layer overlay for cinematic depth */}
-        <div className="absolute inset-0 bg-[oklch(0.05_0.005_285/0.65)]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.05_0.005_285/0.7)] via-transparent to-[oklch(0.05_0.005_285/0.9)]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.05_0.005_285/0.5)] via-transparent to-[oklch(0.05_0.005_285/0.5)]" />
+        <div className="absolute inset-0 bg-[oklch(0.05_0.005_285/0.60)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.05_0.005_285/0.65)] via-transparent to-[oklch(0.05_0.005_285/0.88)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.05_0.005_285/0.45)] via-transparent to-[oklch(0.05_0.005_285/0.45)]" />
       </div>
 
       {/* ─── Hero content ─── */}
@@ -89,7 +82,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: -10 }}
           animate={loaded ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex items-center gap-3 mb-6 sm:mb-8"
+          className="flex items-center gap-3 mb-8 sm:mb-10"
         >
           <div className="w-6 h-px bg-[oklch(0.92_0.28_142)]" />
           <span className="font-body text-[10px] sm:text-xs tracking-[0.35em] text-[oklch(0.92_0.28_142)] uppercase">
@@ -98,52 +91,26 @@ export default function HeroSection() {
           <div className="w-6 h-px bg-[oklch(0.92_0.28_142)]" />
         </motion.div>
 
-        {/* LOOMELIC letters */}
-        <div className="flex items-end justify-center overflow-hidden mb-3 sm:mb-5">
-          {LETTERS.map((letter, i) => (
-            <motion.span
-              key={i}
-              initial={{ y: 140, opacity: 0 }}
-              animate={loaded ? { y: 0, opacity: 1 } : {}}
-              transition={{
-                duration: 0.85,
-                delay: 0.3 + i * 0.07,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className={`font-display leading-none select-none ${
-                i % 2 === 0
-                  ? "text-white"
-                  : "text-stroke"
-              }`}
-              style={{ fontSize: "clamp(3.5rem, 12vw, 13rem)" }}
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </div>
-
-        {/* MEDIA subtitle */}
+        {/* Logo image — stacked LOOMELIC / MEDIA */}
         <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={loaded ? { opacity: 1, scaleX: 1 } : {}}
-          transition={{ duration: 0.6, delay: 1.0 }}
-          className="flex items-center gap-4 mb-8 sm:mb-10"
+          initial={{ opacity: 0, scale: 0.92 }}
+          animate={loaded ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full max-w-[280px] sm:max-w-[420px] md:max-w-[560px] lg:max-w-[700px] xl:max-w-[820px] mx-auto mb-8 sm:mb-10"
         >
-          <div className="h-px flex-1 max-w-[60px] sm:max-w-[100px] bg-white/20" />
-          <span
-            className="font-display tracking-[0.5em] text-white/40"
-            style={{ fontSize: "clamp(0.75rem, 2vw, 1.1rem)" }}
-          >
-            MEDIA
-          </span>
-          <div className="h-px flex-1 max-w-[60px] sm:max-w-[100px] bg-white/20" />
+          <img
+            src={LOGO}
+            alt="Loomelic Media"
+            className="w-full h-auto"
+            style={{ mixBlendMode: 'screen', filter: 'invert(1)' }}
+          />
         </motion.div>
 
         {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={loaded ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1.15 }}
+          transition={{ duration: 0.6, delay: 0.85 }}
           className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center w-full max-w-xs sm:max-w-none"
         >
           <button
@@ -164,7 +131,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={loaded ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 1.35 }}
+          transition={{ duration: 0.6, delay: 1.05 }}
           className="flex flex-wrap justify-center gap-8 sm:gap-16 mt-12 sm:mt-16"
         >
           {[
@@ -183,7 +150,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={loaded ? { opacity: 1 } : {}}
-          transition={{ delay: 1.8 }}
+          transition={{ delay: 1.6 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
           <motion.div
