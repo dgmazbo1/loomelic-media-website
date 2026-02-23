@@ -1,26 +1,26 @@
 /* ============================================================
-   LOOMELIC MEDIA — Home Page
-   Design: Dark Cinematic Luxury
-   Sections: Hero → Showreel → About → Services → Projects → Portfolio → Contact
+   Home Page — Unusually-inspired redesign
+   Section order: Hero → About (light) → Services (dark) → Stats (light)
+                → Projects (black) → Portfolio (light) → Contact CTA (dark) → Contact Form (light) → Footer (dark)
    ============================================================ */
 
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ShowreelSection from "@/components/ShowreelSection";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
+import StatsSection from "@/components/StatsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[oklch(0.07_0.005_285)] overflow-x-hidden">
+    <div className="min-h-screen bg-[oklch(0.07_0_0)] overflow-x-hidden">
       <Navbar />
       <HeroSection />
-      <ShowreelSection />
       <AboutSection />
       <ServicesSection />
+      <StatsSection />
       <ProjectsSection />
       <PortfolioSection />
       <ContactSection />

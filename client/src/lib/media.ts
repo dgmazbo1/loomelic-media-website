@@ -7,7 +7,7 @@ const CDN = "https://cdn.prod.website-files.com/6459ea2e88a80f591a4439c5";
 const CDN2 = "https://cdn.prod.website-files.com/6459ea2e88a80f020e4439d0";
 
 // ─── LOGO ────────────────────────────────────────────────────
-export const LOGO = "https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/HmvxaXyTAFvfuZrn.png";
+export const LOGO = "https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/LfKqebTIKesNTdyo.png";
 
 // ─── CLIENT LOGOS ────────────────────────────────────────────
 export const CLIENT_LOGOS = {

@@ -1,14 +1,41 @@
 /* ============================================================
-   LOOMELIC MEDIA — Portfolio Section
-   Design: Dark Cinematic Luxury
-   - Masonry photo gallery with all original site images
-   - Video reel grid with all original site videos
+   PortfolioSection — Unusually-inspired
+   Style: Light background, category filter pills, masonry-style image grid
+          with rounded corners, hover overlay, lightbox
+   Uses all original Loomelic Media images and videos from media.ts
    ============================================================ */
 
-import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
 import { X, Play } from "lucide-react";
-import { PORTFOLIO_GALLERY, HERO_VIDEOS, VIDEO_POSTERS, DESIGN_WORK } from "@/lib/media";
+import {
+  LEXUS_HENDERSON,
+  LEXUS_LAS_VEGAS,
+  RAIDERS_BLAST,
+  JANEL_WEDDING,
+  CENTENNIAL_SUBARU,
+  JW_OFFROAD,
+  TWO_MOONS_LODGE,
+  WONDR_NATION,
+  HERO_VIDEOS,
+  VIDEO_POSTERS,
+  PORTFOLIO_GALLERY,
+} from "@/lib/media";
+
+type Category = "ALL" | "AUTOMOTIVE" | "WEDDINGS" | "EVENTS" | "LIFESTYLE";
+
+const ALL_PHOTOS: { src: string; category: Category; title: string }[] = [
+  ...LEXUS_HENDERSON.gallery.slice(0, 6).map((src: string) => ({ src, category: "AUTOMOTIVE" as Category, title: "Lexus of Henderson" })),
+  ...LEXUS_LAS_VEGAS.gallery.slice(0, 4).map((src: string) => ({ src, category: "AUTOMOTIVE" as Category, title: "Lexus of Las Vegas" })),
+  ...RAIDERS_BLAST.gallery.slice(0, 4).map((src: string) => ({ src, category: "EVENTS" as Category, title: "Raiders Tour" })),
+  ...JANEL_WEDDING.gallery.slice(0, 5).map((src: string) => ({ src, category: "WEDDINGS" as Category, title: "Janel & Nehiamia" })),
+  ...CENTENNIAL_SUBARU.gallery.slice(0, 3).map((src: string) => ({ src, category: "AUTOMOTIVE" as Category, title: "Centennial Subaru" })),
+  ...JW_OFFROAD.gallery.slice(0, 1).map((src: string) => ({ src, category: "LIFESTYLE" as Category, title: "JW Offroad" })),
+  ...TWO_MOONS_LODGE.gallery.slice(0, 3).map((src: string) => ({ src, category: "LIFESTYLE" as Category, title: "Two Moons Lodge" })),
+  ...WONDR_NATION.gallery.slice(0, 3).map((src: string) => ({ src, category: "EVENTS" as Category, title: "Wondr Nation G2E" })),
+  // Additional from PORTFOLIO_GALLERY
+  ...PORTFOLIO_GALLERY.slice(40, 50).map((src: string) => ({ src, category: "EVENTS" as Category, title: "Loomelic Media" })),
+];
 
 const VIDEO_REELS = [
   { title: "Headlight", src: HERO_VIDEOS.headlight, poster: VIDEO_POSTERS.headlight, category: "Automotive" },
@@ -19,22 +46,10 @@ const VIDEO_REELS = [
   { title: "Wedding Walk", src: HERO_VIDEOS.weddingWalk, poster: VIDEO_POSTERS.weddingWalk, category: "Wedding" },
   { title: "Website Video", src: HERO_VIDEOS.websiteVideo, poster: VIDEO_POSTERS.websiteVideo, category: "Brand" },
   { title: "Social Media Ads", src: HERO_VIDEOS.socialMediaAds, poster: VIDEO_POSTERS.socialMediaAds, category: "Social" },
-  { title: "Drone Filler", src: HERO_VIDEOS.droneFiller, poster: VIDEO_POSTERS.droneFiller, category: "Drone" },
-  { title: "GX Showroom", src: HERO_VIDEOS.gxShowroom, poster: VIDEO_POSTERS.lexusRoll, category: "Automotive" },
-  { title: "Kona Ice", src: HERO_VIDEOS.konaIce, poster: VIDEO_POSTERS.socialMediaAds, category: "Brand" },
-  { title: "Apartments", src: HERO_VIDEOS.apartments, poster: VIDEO_POSTERS.websiteVideo, category: "Real Estate" },
 ];
 
-const GALLERY_TABS = ["All", "Automotive", "Weddings", "Events", "Design"];
-
-// Categorize portfolio images
-const CATEGORIZED: Record<string, string[]> = {
-  "Automotive": PORTFOLIO_GALLERY.slice(0, 22),
-  "Weddings": PORTFOLIO_GALLERY.slice(22, 37),
-  "Events": PORTFOLIO_GALLERY.slice(37, 47),
-  "Design": DESIGN_WORK,
-  "All": [...PORTFOLIO_GALLERY, ...DESIGN_WORK],
-};
+const CATEGORIES: Category[] = ["ALL", "AUTOMOTIVE", "WEDDINGS", "EVENTS", "LIFESTYLE"];
+const INITIAL_SHOW = 12;
 
 function VideoCard({ video, index }: { video: typeof VIDEO_REELS[0]; index: number }) {
   const ref = useRef(null);
@@ -44,13 +59,8 @@ function VideoCard({ video, index }: { video: typeof VIDEO_REELS[0]; index: numb
 
   const togglePlay = () => {
     if (!videoRef.current) return;
-    if (playing) {
-      videoRef.current.pause();
-      setPlaying(false);
-    } else {
-      videoRef.current.play();
-      setPlaying(true);
-    }
+    if (playing) { videoRef.current.pause(); setPlaying(false); }
+    else { videoRef.current.play(); setPlaying(true); }
   };
 
   return (
@@ -59,164 +69,149 @@ function VideoCard({ video, index }: { video: typeof VIDEO_REELS[0]; index: numb
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: (index % 4) * 0.08 }}
-      className="group relative aspect-video overflow-hidden cursor-pointer bg-[oklch(0.10_0.005_285)]"
+      className="group relative aspect-video rounded-xl overflow-hidden cursor-pointer bg-[oklch(0.88_0_0)]"
       onClick={togglePlay}
     >
-      <video
-        ref={videoRef}
-        src={video.src}
-        poster={video.poster}
-        muted
-        loop
-        playsInline
-        className="w-full h-full object-cover"
-        onEnded={() => setPlaying(false)}
-      />
-      <div className={`absolute inset-0 bg-[oklch(0.07_0.005_285/0.5)] transition-opacity duration-300 ${playing ? "opacity-0" : "opacity-100 group-hover:opacity-30"}`} />
-
-      {/* Play button */}
+      <video ref={videoRef} src={video.src} poster={video.poster} muted loop playsInline className="w-full h-full object-cover" />
+      <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${playing ? "opacity-0" : "opacity-100 group-hover:opacity-20"}`} />
       <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${playing ? "opacity-0" : "opacity-100"}`}>
-        <div className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center bg-[oklch(0.07_0.005_285/0.5)] group-hover:border-[oklch(0.92_0.28_142)] group-hover:bg-[oklch(0.92_0.28_142/0.2)] transition-all duration-300">
-          <Play size={16} className="text-white ml-0.5" />
+        <div className="w-11 h-11 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform">
+          <Play size={14} className="text-black ml-0.5" />
         </div>
       </div>
-
-      {/* Label */}
-      <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[oklch(0.07_0.005_285)] to-transparent">
-        <span className="font-body text-[10px] text-white/40 tracking-widest uppercase">{video.category}</span>
-        <p className="font-display text-sm text-white tracking-[0.05em]">{video.title.toUpperCase()}</p>
+      <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
+        <p className="font-display-normal text-xs text-white">{video.title.toUpperCase()}</p>
+        <p className="font-body text-[0.6rem] text-white/50 tracking-widest uppercase">{video.category}</p>
       </div>
     </motion.div>
   );
 }
 
-export default function PortfolioSection() {
+function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [activeTab, setActiveTab] = useState("All");
-  const [lightboxImg, setLightboxImg] = useState<string | null>(null);
-  const [showAll, setShowAll] = useState(false);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  return (
+    <motion.div ref={ref} initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }} className={className}>
+      {children}
+    </motion.div>
+  );
+}
 
-  const currentImages = CATEGORIZED[activeTab] || CATEGORIZED["All"];
-  const displayImages = showAll ? currentImages : currentImages.slice(0, 24);
+export default function PortfolioSection() {
+  const [activeCategory, setActiveCategory] = useState<Category>("ALL");
+  const [showCount, setShowCount] = useState(INITIAL_SHOW);
+  const [lightbox, setLightbox] = useState<string | null>(null);
+
+  const filtered = activeCategory === "ALL" ? ALL_PHOTOS : ALL_PHOTOS.filter((p) => p.category === activeCategory);
+  const visible = filtered.slice(0, showCount);
+  const remaining = filtered.length - showCount;
 
   return (
-    <section id="portfolio" className="relative bg-[oklch(0.07_0.005_285)] py-20 sm:py-28 lg:py-36 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16">
+    <section id="portfolio" className="section-light text-[oklch(0.07_0_0)]">
+      <div className="container py-16 sm:py-24 lg:py-32">
         {/* Header */}
-        <div className="mb-16 sm:mb-20">
-          <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-          >
-            <span className="section-label">Our Work</span>
-            <h2 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-white mt-4 leading-none">
-              PORTFOLIO<br />
-              <span className="text-stroke">GALLERY</span>
-            </h2>
-          </motion.div>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-14">
+          <div>
+            <AnimFade>
+              <p className="section-label text-[oklch(0.07_0_0)/40] mb-4"><span>✦</span><span>OUR WORK —</span></p>
+            </AnimFade>
+            <AnimFade delay={0.1}>
+              <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-[oklch(0.07_0_0)]">
+                PHOTO<br /><span className="text-[oklch(0.78_0_0)]">GALLERY</span>
+              </h2>
+            </AnimFade>
+          </div>
         </div>
 
-        {/* ─── VIDEO REELS ─── */}
-        <div className="mb-20 sm:mb-28">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 }}
-            className="flex items-center justify-between mb-8"
-          >
-            <span className="section-label">Video Reels</span>
-          </motion.div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
+        {/* Video Reels subsection */}
+        <AnimFade delay={0.1} className="mb-14 sm:mb-20">
+          <p className="section-label text-[oklch(0.07_0_0)/40] mb-6"><span>✦</span><span>VIDEO REELS —</span></p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             {VIDEO_REELS.map((video, i) => (
               <VideoCard key={video.title} video={video} index={i} />
             ))}
           </div>
+        </AnimFade>
+
+        {/* Divider */}
+        <div className="divider-dark mb-14" />
+
+        {/* Category filters */}
+        <AnimFade delay={0.15} className="flex flex-wrap gap-2 mb-10">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => { setActiveCategory(cat); setShowCount(INITIAL_SHOW); }}
+              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-[0.1em] transition-all duration-200 ${
+                activeCategory === cat
+                  ? "bg-[oklch(0.07_0_0)] text-white"
+                  : "bg-[oklch(0.07_0_0/0.06)] text-[oklch(0.07_0_0)] hover:bg-[oklch(0.07_0_0/0.12)]"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </AnimFade>
+
+        {/* Photo masonry grid */}
+        <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
+          <AnimatePresence>
+            {visible.map((photo, i) => (
+              <motion.div
+                key={photo.src + i}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4, delay: (i % 4) * 0.05 }}
+                className="break-inside-avoid rounded-xl overflow-hidden cursor-pointer group relative bg-[oklch(0.9_0_0)] mb-3 sm:mb-4"
+                onClick={() => setLightbox(photo.src)}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.title}
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-all duration-300 flex items-end p-3">
+                  <span className="font-body text-[0.6rem] text-white tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {photo.title}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
-        {/* ─── PHOTO GALLERY ─── */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 }}
-            className="flex items-center justify-between mb-8"
-          >
-            <span className="section-label">Photography</span>
-          </motion.div>
-
-          {/* Filter tabs */}
-          <div className="flex flex-wrap gap-2 sm:gap-3 mb-8">
-            {GALLERY_TABS.map((tab) => (
-              <button
-                key={tab}
-                onClick={() => { setActiveTab(tab); setShowAll(false); }}
-                className={`font-body text-xs tracking-[0.15em] uppercase px-4 py-2 border transition-all duration-200 ${
-                  activeTab === tab
-                    ? "border-[oklch(0.92_0.28_142)] text-[oklch(0.92_0.28_142)] bg-[oklch(0.92_0.28_142/0.1)]"
-                    : "border-white/20 text-white/50 hover:border-white/40 hover:text-white/80"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-
-          {/* Masonry grid */}
-          <div className="gallery-grid">
-            {displayImages.map((img, i) => (
-              <motion.img
-                key={img + i}
-                src={img}
-                alt={`Portfolio ${i + 1}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: (i % 8) * 0.05 }}
-                className="cursor-pointer hover:opacity-90 transition-opacity duration-200"
-                loading="lazy"
-                onClick={() => setLightboxImg(img)}
-              />
-            ))}
-          </div>
-
-          {/* Load more */}
-          {!showAll && currentImages.length > 24 && (
-            <div className="mt-10 text-center">
-              <button
-                onClick={() => setShowAll(true)}
-                className="btn-outline text-sm"
-              >
-                LOAD MORE ({currentImages.length - 24} more)
-              </button>
-            </div>
-          )}
-        </div>
+        {/* Load more */}
+        {remaining > 0 && (
+          <AnimFade className="flex justify-center mt-10">
+            <button onClick={() => setShowCount((c) => c + 12)} className="btn-pill-dark text-xs">
+              LOAD MORE ({remaining} MORE) +
+            </button>
+          </AnimFade>
+        )}
       </div>
 
       {/* Lightbox */}
       <AnimatePresence>
-        {lightboxImg && (
+        {lightbox && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-[oklch(0.05_0.005_285/0.97)] flex items-center justify-center p-4"
-            onClick={() => setLightboxImg(null)}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center p-4"
+            onClick={() => setLightbox(null)}
           >
             <button
-              className="absolute top-4 right-4 w-10 h-10 border border-white/20 flex items-center justify-center text-white hover:border-[oklch(0.92_0.28_142)] transition-colors"
-              onClick={() => setLightboxImg(null)}
+              className="absolute top-5 right-5 w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white transition-colors"
+              onClick={() => setLightbox(null)}
             >
               <X size={18} />
             </button>
             <motion.img
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              src={lightboxImg}
-              alt="Portfolio"
-              className="max-w-full max-h-[90vh] object-contain"
+              initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
+              src={lightbox} alt="Portfolio"
+              className="max-w-full max-h-[90vh] object-contain rounded-xl"
               onClick={(e) => e.stopPropagation()}
             />
           </motion.div>
