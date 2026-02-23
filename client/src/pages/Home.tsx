@@ -1,25 +1,29 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+/* ============================================================
+   LOOMELIC MEDIA — Home Page
+   Design: Dark Cinematic Luxury
+   Sections: Hero → Showreel → About → Services → Projects → Portfolio → Contact
+   ============================================================ */
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
- */
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import ShowreelSection from "@/components/ShowreelSection";
+import AboutSection from "@/components/AboutSection";
+import ServicesSection from "@/components/ServicesSection";
+import ProjectsSection from "@/components/ProjectsSection";
+import PortfolioSection from "@/components/PortfolioSection";
+import ContactSection from "@/components/ContactSection";
+
 export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
-
   return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
-      </main>
+    <div className="min-h-screen bg-[oklch(0.07_0.005_285)] overflow-x-hidden">
+      <Navbar />
+      <HeroSection />
+      <ShowreelSection />
+      <AboutSection />
+      <ServicesSection />
+      <ProjectsSection />
+      <PortfolioSection />
+      <ContactSection />
     </div>
   );
 }

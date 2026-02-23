@@ -1,3 +1,10 @@
+/* ============================================================
+   LOOMELIC MEDIA — Global Styles
+   Design: Dark Cinematic Luxury
+   Palette: Deep Black + Electric Green (#9BFF57) + Purple (#7B3FE4)
+   Fonts: Bebas Neue (display) + Outfit (body)
+   ============================================================ */
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -27,11 +34,6 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -43,135 +45,255 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
+  --radius: 0.125rem;
+  /* Loomelic Palette */
+  --neon-green: oklch(0.92 0.28 142);
+  --neon-purple: oklch(0.55 0.22 293);
+  --deep-black: oklch(0.07 0.005 285);
+  --card-black: oklch(0.10 0.005 285);
+
+  /* Semantic tokens */
+  --background: oklch(0.07 0.005 285);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.10 0.005 285);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.10 0.005 285);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.92 0.28 142);
+  --primary-foreground: oklch(0.07 0.005 285);
+  --secondary: oklch(0.55 0.22 293);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.15 0.005 285);
+  --muted-foreground: oklch(0.60 0.005 285);
+  --accent: oklch(0.55 0.22 293);
+  --accent-foreground: oklch(0.97 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
-}
-
-.dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.92 0.28 142);
+  --sidebar: oklch(0.10 0.005 285);
+  --sidebar-foreground: oklch(0.97 0 0);
+  --sidebar-primary: oklch(0.92 0.28 142);
+  --sidebar-primary-foreground: oklch(0.07 0.005 285);
+  --sidebar-accent: oklch(0.15 0.005 285);
+  --sidebar-accent-foreground: oklch(0.97 0 0);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.92 0.28 142);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
   }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-background text-foreground;
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
+
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
-  [type="button"]:not(:disabled),
-  [type="submit"]:not(:disabled),
-  [type="reset"]:not(:disabled),
-  a[href],
-  select:not(:disabled),
-  input[type="checkbox"]:not(:disabled),
-  input[type="radio"]:not(:disabled) {
+  a[href] {
     @apply cursor-pointer;
   }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: oklch(0.07 0.005 285); }
+  ::-webkit-scrollbar-thumb { background: oklch(0.92 0.28 142 / 0.4); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: oklch(0.92 0.28 142 / 0.8); }
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
+  /* Container */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
-
-  .flex {
-    min-height: 0;
-    min-width: 0;
-  }
-
   @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
-      padding-right: 1.5rem;
-    }
+    .container { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .container { padding-left: 2rem; padding-right: 2rem; max-width: 1280px; }
   }
 
+  .flex { min-height: 0; min-width: 0; }
+
+  /* ─── Typography ─── */
+  .font-display {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.05em;
+  }
+  .font-body {
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* ─── Section Label ─── */
+  .section-label {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: oklch(0.92 0.28 142);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 1.5rem;
+    height: 1px;
+    background: oklch(0.92 0.28 142);
+  }
+
+  /* ─── Buttons ─── */
+  .btn-neon {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: oklch(0.07 0.005 285);
+    background: oklch(0.92 0.28 142);
+    padding: 0.75rem 2rem;
+    border: 1px solid oklch(0.92 0.28 142);
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+  }
+  .btn-neon:hover {
+    background: transparent;
+    color: oklch(0.92 0.28 142);
+    box-shadow: 0 0 20px oklch(0.92 0.28 142 / 0.3);
+  }
+
+  .btn-outline {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: oklch(0.92 0.28 142);
+    background: transparent;
+    padding: 0.75rem 2rem;
+    border: 1px solid oklch(0.92 0.28 142 / 0.5);
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+  }
+  .btn-outline:hover {
+    border-color: oklch(0.92 0.28 142);
+    background: oklch(0.92 0.28 142 / 0.05);
+    box-shadow: 0 0 20px oklch(0.92 0.28 142 / 0.15);
+  }
+
+  /* ─── Text stroke ─── */
+  .text-stroke {
+    -webkit-text-stroke: 1px oklch(0.97 0 0);
+    color: transparent;
+  }
+  .text-stroke-neon {
+    -webkit-text-stroke: 1px oklch(0.92 0.28 142);
+    color: transparent;
+  }
+
+  /* ─── Divider ─── */
+  .divider-neon {
+    height: 1px;
+    background: linear-gradient(90deg, oklch(0.92 0.28 142), transparent);
+  }
+
+  /* ─── Marquee ─── */
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 25s linear infinite;
+  }
+  .animate-marquee-reverse {
+    animation: marquee 30s linear infinite reverse;
+  }
+
+  /* ─── Project card ─── */
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  /* ─── Grain overlay ─── */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ─── Neon glow ─── */
+  .neon-glow {
+    text-shadow: 0 0 20px oklch(0.92 0.28 142 / 0.5), 0 0 40px oklch(0.92 0.28 142 / 0.3);
+  }
+
+  /* ─── Video grid ─── */
+  .video-grid-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .video-grid-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .video-grid-item:hover video {
+    transform: scale(1.05);
+  }
+
+  /* ─── Mobile menu ─── */
+  .mobile-menu-enter {
+    animation: menuSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes menuSlideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  /* ─── Gallery masonry ─── */
+  .gallery-grid {
+    columns: 2;
+    column-gap: 0.5rem;
+  }
+  @media (min-width: 640px) {
+    .gallery-grid { columns: 3; column-gap: 0.75rem; }
+  }
   @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem; /* 32px - desktop padding */
-      padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
-    }
+    .gallery-grid { columns: 4; column-gap: 1rem; }
+  }
+  .gallery-grid img {
+    break-inside: avoid;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    display: block;
+  }
+  @media (min-width: 640px) {
+    .gallery-grid img { margin-bottom: 0.75rem; }
+  }
+  @media (min-width: 1024px) {
+    .gallery-grid img { margin-bottom: 1rem; }
   }
 }
