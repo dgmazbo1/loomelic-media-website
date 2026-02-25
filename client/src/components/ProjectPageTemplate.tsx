@@ -1,16 +1,30 @@
 /* ============================================================
    ProjectPageTemplate — Shared template for all project detail pages
    Style: Dark hero with project title, light gallery section,
-          Vimeo video embeds, full masonry photo gallery, dark CTA
+          Vimeo video embeds, full masonry photo gallery,
+          Client Feedback & Project Outcomes section, dark CTA
    Unusually-inspired layout
    ============================================================ */
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "wouter";
-import { ArrowLeft, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, X, ChevronLeft, ChevronRight, TrendingUp, Quote } from "lucide-react";
 import { useState } from "react";
 import Navbar from "./Navbar";
 import ContactSection from "./ContactSection";
+
+export interface ProjectOutcome {
+  metric: string;
+  value: string;
+  label: string;
+}
+
+export interface ProjectFeedback {
+  quote: string;
+  name: string;
+  title: string;
+  company: string;
+}
 
 export interface ProjectPageData {
   slug: string;
@@ -24,8 +38,11 @@ export interface ProjectPageData {
   videoSrc?: string;
   client?: string;
   services?: string[];
+  feedback?: ProjectFeedback;
+  outcomes?: ProjectOutcome[];
 }
 
+// ─── LIGHTBOX ────────────────────────────────────────────────
 function Lightbox({ images, startIndex, onClose }: { images: string[]; startIndex: number; onClose: () => void }) {
   const [idx, setIdx] = useState(startIndex);
 
@@ -40,7 +57,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
       className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center"
       onClick={onClose}
     >
-      {/* Close */}
       <button
         className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
         onClick={onClose}
@@ -48,7 +64,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         <X size={18} />
       </button>
 
-      {/* Prev */}
       <button
         className="absolute left-4 sm:left-8 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
         onClick={(e) => { e.stopPropagation(); prev(); }}
@@ -56,7 +71,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         <ChevronLeft size={20} />
       </button>
 
-      {/* Image */}
       <motion.img
         key={idx}
         initial={{ opacity: 0, scale: 0.96 }}
@@ -68,7 +82,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         onClick={(e) => e.stopPropagation()}
       />
 
-      {/* Next */}
       <button
         className="absolute right-4 sm:right-8 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
         onClick={(e) => { e.stopPropagation(); next(); }}
@@ -76,7 +89,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         <ChevronRight size={20} />
       </button>
 
-      {/* Counter */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 font-body text-xs text-white/40 tracking-widest">
         {idx + 1} / {images.length}
       </div>
@@ -84,9 +96,12 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
   );
 }
 
+// ─── TEMPLATE ────────────────────────────────────────────────
 export default function ProjectPageTemplate({ data }: { data: ProjectPageData }) {
   const [, navigate] = useLocation();
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+
+  const hasFeedbackSection = data.feedback || (data.outcomes && data.outcomes.length > 0);
 
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
@@ -104,7 +119,6 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
         </div>
 
         <div className="relative z-10 container pb-16 sm:pb-24">
-          {/* Back button */}
           <motion.button
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -133,7 +147,6 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
             {data.title}
           </motion.h1>
 
-          {/* Meta row */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -170,7 +183,7 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
                 <p className="font-display-normal text-base text-[oklch(0.15_0_0)]">{data.category}</p>
               </div>
             </div>
-            <p className="font-body text-base sm:text-lg text-[oklch(0.3_0_0)] leading-relaxed">
+            <p className="font-body text-base sm:text-lg text-[oklch(0.3_0_0)] leading-relaxed whitespace-pre-line">
               {data.description}
             </p>
           </div>
@@ -244,6 +257,96 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
           )}
         </div>
       </section>
+
+      {/* ── CLIENT FEEDBACK & PROJECT OUTCOMES ─────────────────── */}
+      {hasFeedbackSection && (
+        <section className="bg-[oklch(0.07_0_0)] py-16 sm:py-24">
+          <div className="container">
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="section-label text-white/40 mb-10"
+            >
+              <span>✦</span><span>CLIENT FEEDBACK & PROJECT OUTCOMES —</span>
+            </motion.p>
+
+            <div className={`grid gap-6 ${data.feedback && data.outcomes ? "lg:grid-cols-[1fr_1fr]" : ""}`}>
+
+              {/* Testimonial quote card */}
+              {data.feedback && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative bg-[oklch(0.11_0_0)] border border-white/8 rounded-3xl p-8 sm:p-10 flex flex-col"
+                >
+                  {/* Decorative quote icon */}
+                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center mb-6 shrink-0">
+                    <Quote size={16} className="text-white/40" />
+                  </div>
+
+                  <blockquote className="font-body text-base sm:text-lg text-white/70 leading-relaxed flex-1 mb-8">
+                    &ldquo;{data.feedback.quote}&rdquo;
+                  </blockquote>
+
+                  <div className="border-t border-white/10 pt-6 flex items-center gap-4">
+                    {/* Avatar placeholder */}
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+                      <span className="font-display text-sm text-white/50">
+                        {data.feedback.name.charAt(0)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-display-normal text-sm text-white">{data.feedback.name}</p>
+                      <p className="font-body text-xs text-white/40 mt-0.5">{data.feedback.title} — {data.feedback.company}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Outcomes / metrics */}
+              {data.outcomes && data.outcomes.length > 0 && (
+                <div className="flex flex-col gap-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="flex items-center gap-2 mb-2"
+                  >
+                    <TrendingUp size={14} className="text-white/30" />
+                    <p className="font-body text-xs tracking-widest text-white/30 uppercase">Project Results</p>
+                  </motion.div>
+
+                  {data.outcomes.map((outcome, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.55, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                      className="bg-[oklch(0.11_0_0)] border border-white/8 rounded-2xl px-7 py-6 flex items-center justify-between gap-6 group hover:border-white/15 transition-colors duration-300"
+                    >
+                      <div>
+                        <p className="font-body text-[0.65rem] tracking-widest text-white/35 uppercase mb-1">{outcome.metric}</p>
+                        <p className="font-body text-sm text-white/55 leading-snug max-w-xs">{outcome.label}</p>
+                      </div>
+                      <div className="shrink-0 text-right">
+                        <p className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-none text-white">
+                          {outcome.value}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Lightbox */}
       <AnimatePresence>
