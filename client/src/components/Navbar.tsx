@@ -79,14 +79,21 @@ export default function Navbar() {
           {/* Transparent Logo */}
           <button
             onClick={goHome}
-            className="flex-shrink-0 z-10"
+            className="flex-shrink-0 z-10 overflow-hidden"
             aria-label="Go to home"
+            style={{ height: "52px" }}
           >
+            {/* Logo is 9:16 portrait (1080x1920). At w-[220px], full height = ~391px.
+                Logo text sits at ~45%-58% of image height = ~176px-227px from top.
+                We shift up by ~170px to center the text in the 52px container. */}
             <img
               src={LOGO_TRANSPARENT}
               alt="Loomelic Media"
-              className="h-14 sm:h-20 w-auto"
-              style={{ filter: "brightness(0) invert(1)" }}
+              className="w-[180px] sm:w-[220px] h-auto"
+              style={{
+                filter: "brightness(0) invert(1)",
+                marginTop: "-170px",
+              }}
             />
           </button>
 
