@@ -3,6 +3,7 @@
    Style: Dark hero with huge service name, light content section,
           dark CTA at bottom. Unusually-inspired.
    Includes: Lightbox for gallery photo click-to-enlarge
+             Testimonials section (optional)
    ============================================================ */
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,6 +23,7 @@ export interface ServicePageData {
   heroImage?: string;
   galleryImages?: string[];
   useCases?: string[];
+  testimonials?: { quote: string; name: string; company: string }[];
   relatedProjects?: { slug: string; title: string; category: string; image: string }[];
 }
 
@@ -32,7 +34,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
   const prev = (e: React.MouseEvent) => { e.stopPropagation(); setIdx((i) => (i - 1 + images.length) % images.length); };
   const next = (e: React.MouseEvent) => { e.stopPropagation(); setIdx((i) => (i + 1) % images.length); };
 
-  // Keyboard navigation
   const handleKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") setIdx((i) => (i - 1 + images.length) % images.length);
     if (e.key === "ArrowRight") setIdx((i) => (i + 1) % images.length);
@@ -49,7 +50,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
       onKeyDown={handleKey}
       tabIndex={0}
     >
-      {/* Close */}
       <button
         className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
         onClick={onClose}
@@ -58,7 +58,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         <X size={18} />
       </button>
 
-      {/* Prev */}
       {images.length > 1 && (
         <button
           className="absolute left-4 sm:left-8 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
@@ -69,7 +68,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         </button>
       )}
 
-      {/* Image */}
       <motion.img
         key={idx}
         initial={{ opacity: 0, scale: 0.96 }}
@@ -81,7 +79,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         onClick={(e) => e.stopPropagation()}
       />
 
-      {/* Next */}
       {images.length > 1 && (
         <button
           className="absolute right-4 sm:right-8 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
@@ -92,7 +89,6 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
         </button>
       )}
 
-      {/* Counter */}
       {images.length > 1 && (
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 font-body text-xs text-white/40 tracking-widest">
           {idx + 1} / {images.length}
@@ -131,7 +127,6 @@ export default function ServicePageTemplate({ data }: { data: ServicePageData })
         )}
 
         <div className="relative z-10 container pb-16 sm:pb-24">
-          {/* Back button */}
           <motion.button
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -247,6 +242,37 @@ export default function ServicePageTemplate({ data }: { data: ServicePageData })
                       className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
                       loading="lazy"
                     />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Testimonials */}
+          {data.testimonials && data.testimonials.length > 0 && (
+            <div className="mt-16">
+              <p className="section-label text-[oklch(0.6_0_0)] mb-8">
+                <span>✦</span><span>CLIENT TESTIMONIALS —</span>
+              </p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {data.testimonials.map((t, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.55, delay: i * 0.1 }}
+                    className="bg-[oklch(0.96_0_0)] border border-[oklch(0.88_0_0)] rounded-2xl px-7 py-8 flex flex-col"
+                  >
+                    {/* Opening quote mark */}
+                    <span className="font-display text-[4rem] leading-none text-[oklch(0.82_0_0)] select-none mb-2">&ldquo;</span>
+                    <p className="font-body text-sm text-[oklch(0.25_0_0)] leading-relaxed flex-1 mb-6">
+                      {t.quote}
+                    </p>
+                    <div className="border-t border-[oklch(0.88_0_0)] pt-5">
+                      <p className="font-display-normal text-sm tracking-widest text-[oklch(0.15_0_0)]">{t.name}</p>
+                      <p className="font-body text-xs text-[oklch(0.55_0_0)] mt-0.5">{t.company}</p>
+                    </div>
                   </motion.div>
                 ))}
               </div>

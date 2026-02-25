@@ -39,15 +39,27 @@ export function AutomotiveMarketingPage() {
           { title: "INVENTORY DOCUMENTATION", desc: "Systematic, consistent vehicle photography and video for your website, third-party listings, and digital advertising." },
         ],
         heroVideo: HERO_VIDEOS.lexusRoll,
-        galleryImages: [
-          ...LEXUS_HENDERSON.gallery.slice(0, 6),
-          ...LEXUS_LAS_VEGAS.gallery.slice(0, 6),
-          ...CENTENNIAL_SUBARU.gallery.slice(0, 4),
+        testimonials: [
+          {
+            quote: "Loomelic Media completely transformed how we present our vehicles online. The quality of their photography and video work is unlike anything we've seen from other production companies in Las Vegas. Our engagement rates doubled within the first month.",
+            name: "General Manager",
+            company: "Lexus of Henderson",
+          },
+          {
+            quote: "We've worked with a lot of content creators over the years, but Loomelic is on a different level. They understand the automotive space — they know how to make a car look incredible and how to tell a story that actually drives customers to the showroom.",
+            name: "Marketing Director",
+            company: "Lexus of Las Vegas",
+          },
+          {
+            quote: "From the first shoot to the final delivery, the process was seamless. They came prepared, worked efficiently, and the results spoke for themselves. Our social media content has never looked better.",
+            name: "Marketing Manager",
+            company: "Centennial Subaru",
+          },
         ],
         relatedProjects: [
-          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
-          { slug: "lexus-of-las-vegas", title: "LEXUS OF LAS VEGAS", category: "AUTOMOTIVE • PHOTOGRAPHY", image: LEXUS_LAS_VEGAS.hero },
-          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE • DEALER SERVICES", image: CENTENNIAL_SUBARU.hero },
+          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE \u2022 MARKETING", image: LEXUS_HENDERSON.hero },
+          { slug: "lexus-of-las-vegas", title: "LEXUS OF LAS VEGAS", category: "AUTOMOTIVE \u2022 PHOTOGRAPHY", image: LEXUS_LAS_VEGAS.hero },
+          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE \u2022 DEALER SERVICES", image: CENTENNIAL_SUBARU.hero },
         ],
       }}
     />
@@ -78,8 +90,8 @@ export function EventCoveragePage() {
           ...WONDR_NATION.gallery,
         ],
         relatedProjects: [
-          { slug: "las-vegas-raiders-tour", title: "LAS VEGAS RAIDERS TOUR", category: "EVENTS • VIDEOGRAPHY", image: RAIDERS_BLAST.hero },
-          { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS • PHOTOGRAPHY", image: WONDR_NATION.hero },
+          { slug: "las-vegas-raiders-tour", title: "LAS VEGAS RAIDERS TOUR", category: "EVENTS \u2022 VIDEOGRAPHY", image: RAIDERS_BLAST.hero },
+          { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS \u2022 PHOTOGRAPHY", image: WONDR_NATION.hero },
         ],
       }}
     />
@@ -111,8 +123,8 @@ export function SocialMediaContentPage() {
           ...CENTENNIAL_SUBARU.gallery.slice(0, 4),
         ],
         relatedProjects: [
-          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
-          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE • DEALER SERVICES", image: CENTENNIAL_SUBARU.hero },
+          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE \u2022 MARKETING", image: LEXUS_HENDERSON.hero },
+          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE \u2022 DEALER SERVICES", image: CENTENNIAL_SUBARU.hero },
         ],
       }}
     />
@@ -144,9 +156,9 @@ export function PhotographyPage() {
           ...CENTENNIAL_SUBARU.gallery.slice(0, 6),
         ],
         relatedProjects: [
-          { slug: "lexus-of-las-vegas", title: "LEXUS OF LAS VEGAS", category: "AUTOMOTIVE • PHOTOGRAPHY", image: LEXUS_LAS_VEGAS.hero },
-          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
-          { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS • PHOTOGRAPHY", image: WONDR_NATION.hero },
+          { slug: "lexus-of-las-vegas", title: "LEXUS OF LAS VEGAS", category: "AUTOMOTIVE \u2022 PHOTOGRAPHY", image: LEXUS_LAS_VEGAS.hero },
+          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE \u2022 MARKETING", image: LEXUS_HENDERSON.hero },
+          { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS \u2022 PHOTOGRAPHY", image: WONDR_NATION.hero },
         ],
       }}
     />
@@ -178,8 +190,8 @@ export function BrandStrategyPage() {
           ...LEXUS_LAS_VEGAS.gallery.slice(0, 4),
         ],
         relatedProjects: [
-          { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS • PHOTOGRAPHY", image: WONDR_NATION.hero },
-          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
+          { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS \u2022 PHOTOGRAPHY", image: WONDR_NATION.hero },
+          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE \u2022 MARKETING", image: LEXUS_HENDERSON.hero },
         ],
       }}
     />
@@ -215,8 +227,8 @@ export function HeadshotsPage() {
           "Press & media kits",
         ],
         relatedProjects: [
-          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
-          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE • DEALER SERVICES", image: CENTENNIAL_SUBARU.hero },
+          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE \u2022 MARKETING", image: LEXUS_HENDERSON.hero },
+          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE \u2022 DEALER SERVICES", image: CENTENNIAL_SUBARU.hero },
         ],
       }}
     />
@@ -243,8 +255,8 @@ export function WebsiteRedesignPage() {
           { title: "CONTENT INTEGRATION", desc: "We integrate your existing photo and video content into the site design so your media assets work harder for your brand." },
         ],
         relatedProjects: [
-          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
-          { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS • PHOTOGRAPHY", image: WONDR_NATION.hero },
+          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE \u2022 MARKETING", image: LEXUS_HENDERSON.hero },
+          { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS \u2022 PHOTOGRAPHY", image: WONDR_NATION.hero },
         ],
       }}
     />
