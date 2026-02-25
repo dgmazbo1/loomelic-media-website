@@ -13,11 +13,11 @@ import { useLocation } from "wouter";
 import { LOGO_TRANSPARENT } from "@/lib/media";
 
 const navLinks = [
-  { label: "PROJECTS", href: "#projects" },
-  { label: "SERVICES", href: "#services" },
-  { label: "ABOUT", href: "#about" },
-  { label: "PORTFOLIO", href: "#portfolio" },
-  { label: "CONTACT", href: "#contact" },
+  { label: "PROJECTS", href: "#projects", page: null },
+  { label: "SERVICES", href: "#services", page: null },
+  { label: "OUR STORY", href: "/about", page: "/about" },
+  { label: "PORTFOLIO", href: "#portfolio", page: null },
+  { label: "CONTACT", href: "#contact", page: null },
 ];
 
 export default function Navbar() {
@@ -48,8 +48,13 @@ export default function Navbar() {
     window.scrollTo({ top: Math.max(0, top - 80), behavior: "smooth" });
   };
 
-  const handleNavClick = (href: string) => {
+  const handleNavClick = (href: string, page: string | null) => {
     setMenuOpen(false);
+    // If it's a page route (not a hash), navigate directly
+    if (page) {
+      navigate(page);
+      return;
+    }
     const id = href.replace("#", "");
     if (isHome) {
       scrollToSection(id);
@@ -105,7 +110,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <button
                 key={link.label}
-                onClick={() => handleNavClick(link.href)}
+                onClick={() => handleNavClick(link.href, link.page)}
                 className="px-4 py-1.5 rounded-full text-[0.7rem] font-semibold tracking-[0.12em] text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
               >
                 {link.label}
@@ -116,7 +121,7 @@ export default function Navbar() {
           {/* Right: CTA + Hamburger */}
           <div className="flex items-center gap-3">
             <button
-              onClick={() => handleNavClick("#contact")}
+              onClick={() => handleNavClick("#contact", null)}
               className="hidden sm:flex btn-pill-light text-xs py-2 px-5"
             >
               GET IN TOUCH
@@ -144,12 +149,14 @@ export default function Navbar() {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-white/8">
-              <img
-                src={LOGO_TRANSPARENT}
-                alt="Loomelic Media"
-                className="h-14 w-auto"
-                style={{ filter: "brightness(0) invert(1)" }}
-              />
+              <div className="overflow-hidden" style={{ height: "56px" }}>
+                <img
+                  src={LOGO_TRANSPARENT}
+                  alt="Loomelic Media"
+                  className="w-[130px] h-auto"
+                  style={{ filter: "brightness(0) invert(1)", marginTop: "-97px" }}
+                />
+              </div>
               <button
                 onClick={() => setMenuOpen(false)}
                 className="w-10 h-10 flex items-center justify-center rounded-full border border-white/15 text-white/60 hover:text-white hover:border-white/40 transition-all"
@@ -167,7 +174,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -30 }}
                   transition={{ duration: 0.4, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                  onClick={() => handleNavClick(link.href)}
+                  onClick={() => handleNavClick(link.href, link.page)}
                   className="text-left py-4 border-b border-white/6 group"
                 >
                   <span className="font-display-normal text-5xl sm:text-7xl text-white/90 group-hover:text-lime transition-colors duration-200">

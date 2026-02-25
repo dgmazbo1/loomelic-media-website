@@ -154,6 +154,7 @@ export default function ContactSection() {
                         <option>Social Media Content</option>
                         <option>Photography</option>
                         <option>Brand Strategy</option>
+                        <option>Website Redesign</option>
                         <option>Other</option>
                       </select>
                     </div>
@@ -178,15 +179,18 @@ export default function ContactSection() {
       <footer className="section-black border-t border-white/8">
         <div className="container py-10 sm:py-14">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-8">
-            <img src={LOGO_TRANSPARENT} alt="Loomelic Media" className="h-8 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
+            <div className="overflow-hidden" style={{ height: "40px" }}>
+              <img src={LOGO_TRANSPARENT} alt="Loomelic Media" className="w-[130px] h-auto" style={{ filter: "brightness(0) invert(1)", marginTop: "-97px" }} />
+            </div>
             <nav className="flex flex-wrap gap-x-6 gap-y-2">
-              {["PROJECTS", "SERVICES", "ABOUT", "PORTFOLIO", "CONTACT"].map((link) => (
+              {["PROJECTS", "SERVICES", "PORTFOLIO", "CONTACT"].map((link) => (
                 <button key={link}
                   onClick={() => { const el = document.getElementById(link.toLowerCase()); if (el) { let top = 0; let node: HTMLElement | null = el; while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; } window.scrollTo({ top: Math.max(0, top - 80), behavior: "smooth" }); } }}
                   className="font-body text-[0.65rem] tracking-[0.15em] text-white/35 hover:text-white transition-colors">
                   {link}
                 </button>
               ))}
+              <a href="/about" className="font-body text-[0.65rem] tracking-[0.15em] text-white/35 hover:text-white transition-colors">OUR STORY</a>
             </nav>
             <div className="flex gap-3">
               <a href="https://www.instagram.com/loomelicmedia" target="_blank" rel="noopener noreferrer"

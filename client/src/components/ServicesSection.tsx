@@ -48,6 +48,13 @@ export const SERVICES = [
     shortName: "Brand Strategy",
     desc: "Visual identity development, content strategy, and digital marketing guidance to position your brand for sustained growth.",
   },
+  {
+    num: "06",
+    slug: "website-redesign",
+    name: "WEBSITE\nREDESIGN",
+    shortName: "Website Redesign",
+    desc: "Modern, mobile-first websites built to match the premium level of your brand — fast, clean, and designed to convert visitors into customers.",
+  },
 ];
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {

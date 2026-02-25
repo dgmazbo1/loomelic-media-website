@@ -209,6 +209,25 @@ export const WONDR_NATION = {
   ],
 };
 
+// ─── PROJECT: BOB MARLEY HOPE ROAD ─────────────────────────
+export const BOB_MARLEY = {
+  hero: `${CDN}/68170136336e9ad678bc2c4c_LTMDay1Tour-06.jpg`,
+  gallery: [
+    `${CDN}/68170136336e9ad678bc2c4c_LTMDay1Tour-06.jpg`,
+    `${CDN2}/6873ff7c8c0e440e2d35acf2_DSC_3489.jpg`,
+    `${CDN2}/6816d3add512ef0eed1696ad_DSC_6149-Enhanced-NR.jpg`,
+    `${CDN2}/681fdccdd64bddb9a532638a_DSC_7634.jpg`,
+    `${CDN2}/6874068d4d934452956c9977_DSC_3339.jpg`,
+    `${CDN2}/6874068d4d934452956c996e_DSC_3514.jpg`,
+    `${CDN2}/6874068d604dfcd2a65c6a5d_DSC_3334-2.jpg`,
+    `${CDN2}/6874068d60c51c129c5e2def_DSC_3435.jpg`,
+    `${CDN2}/6874068d682c0263eed8f0f5_DSC_3382.jpg`,
+    `${CDN2}/6874068d7695e3a04cd995b2_DSC_3341.jpg`,
+    `${CDN2}/6874068d91a3d65e29fb4abe_DSC_3516.jpg`,
+    `${CDN2}/6874068dc6cb5aeb2e82e0a0_DSC_3399.jpg`,
+  ],
+};
+
 // ─── PORTFOLIO GALLERY (all photos) ──────────────────────────
 export const PORTFOLIO_GALLERY = [
   // Lexus Henderson

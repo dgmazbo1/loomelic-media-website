@@ -14,6 +14,7 @@ import {
   CENTENNIAL_SUBARU,
   LEXUS_LAS_VEGAS,
   WONDR_NATION,
+  BOB_MARLEY,
 } from "@/lib/media";
 
 export const PROJECTS = [
@@ -38,7 +39,7 @@ export const PROJECTS = [
   {
     slug: "centennial-subaru",
     title: "CENTENNIAL SUBARU",
-    category: "AUTOMOTIVE • AERIAL",
+    category: "AUTOMOTIVE • DEALER SERVICES",
     image: CENTENNIAL_SUBARU.hero,
   },
   {
@@ -46,6 +47,12 @@ export const PROJECTS = [
     title: "WONDR NATION G2E",
     category: "EVENTS • PHOTOGRAPHY",
     image: WONDR_NATION.hero,
+  },
+  {
+    slug: "bob-marley-hope-road",
+    title: "BOB MARLEY HOPE ROAD",
+    category: "EVENTS • EDITORIAL PHOTOGRAPHY",
+    image: BOB_MARLEY.hero,
   },
 ];
 

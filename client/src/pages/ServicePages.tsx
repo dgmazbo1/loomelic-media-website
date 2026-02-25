@@ -1,10 +1,11 @@
 /* ============================================================
-   ServicePages — All 5 individual service pages
+   ServicePages — All 6 individual service pages
    Routes: /services/automotive-marketing
            /services/event-coverage
            /services/social-media-content
            /services/photography
            /services/brand-strategy
+           /services/website-redesign
    ============================================================ */
 
 import ServicePageTemplate from "@/components/ServicePageTemplate";
@@ -27,13 +28,13 @@ export function AutomotiveMarketingPage() {
         tagline: "Cinematic vehicle showcases and dealership campaigns that drive traffic, elevate your brand, and convert viewers into buyers.",
         description: [
           "We specialize in creating high-impact automotive content that makes your vehicles look as incredible on screen as they do in person. From dramatic exterior walkarounds to immersive interior reveals, our cinematic approach transforms standard dealership marketing into compelling visual stories.",
-          "Working with brands like Lexus of Henderson and Lexus of Las Vegas, we've developed a deep understanding of what automotive buyers respond to — and we bring that expertise to every shoot.",
+          "Working with the Findlay Automotive Group and the Ascent Group of Dealers, we've developed a deep understanding of what automotive buyers respond to — and we bring that expertise to every shoot, every month.",
         ],
         features: [
           { title: "CINEMATIC VEHICLE SHOWCASES", desc: "Multi-angle, professionally lit vehicle shoots that highlight every detail — from exterior lines to interior craftsmanship." },
           { title: "DEALERSHIP CAMPAIGNS", desc: "Full-scale marketing campaigns including photography, video, and social content tailored to your dealership's brand voice." },
           { title: "SOCIAL MEDIA ADS", desc: "Short-form video ads optimized for Instagram Reels, TikTok, and YouTube Shorts that stop the scroll and drive leads." },
-          { title: "AERIAL & DRONE COVERAGE", desc: "FAA-certified drone footage that adds cinematic scale to your dealership lot and vehicle showcase content." },
+          { title: "INVENTORY DOCUMENTATION", desc: "Systematic, consistent vehicle photography and video for your website, third-party listings, and digital advertising." },
         ],
         heroVideo: HERO_VIDEOS.lexusRoll,
         galleryImages: [
@@ -43,7 +44,7 @@ export function AutomotiveMarketingPage() {
         relatedProjects: [
           { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
           { slug: "lexus-of-las-vegas", title: "LEXUS OF LAS VEGAS", category: "AUTOMOTIVE • PHOTOGRAPHY", image: LEXUS_LAS_VEGAS.hero },
-          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE • AERIAL", image: CENTENNIAL_SUBARU.hero },
+          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE • DEALER SERVICES", image: CENTENNIAL_SUBARU.hero },
         ],
       }}
     />
@@ -91,13 +92,13 @@ export function SocialMediaContentPage() {
         name: "SOCIAL MEDIA\nCONTENT",
         tagline: "High-impact short-form video and photo content built to stop the scroll, grow your audience, and drive real results.",
         description: [
-          "In today's attention economy, your social media content needs to be exceptional to stand out. We create platform-native content specifically engineered for Instagram, TikTok, and YouTube — content that feels organic while delivering your brand message with precision.",
-          "From concept to final edit, we handle the entire production process, delivering ready-to-post content optimized for each platform's algorithm and audience behavior.",
+          "We create platform-native content specifically engineered for Instagram, TikTok, and YouTube — content that feels organic while delivering your brand message with precision. Our social media work is trusted by two of the most respected dealer groups in the region: the Findlay Automotive Group and the Ascent Group of Dealers.",
+          "From concept to final edit, we handle the entire production process, delivering ready-to-post content optimized for each platform's algorithm and audience behavior. Whether it's a monthly retainer or a single campaign, we build content systems that keep your brand consistent and visible.",
         ],
         features: [
           { title: "SHORT-FORM VIDEO", desc: "Reels, TikToks, and YouTube Shorts that combine cinematic quality with native platform aesthetics to maximize engagement." },
           { title: "CONTENT CALENDARS", desc: "Strategic monthly content planning that ensures consistent posting and cohesive brand storytelling across all platforms." },
-          { title: "TALKING HEAD & TESTIMONIALS", desc: "Professional on-camera interviews, testimonials, and spokesperson content that builds trust and authority." },
+          { title: "DEALERSHIP GROUP CONTENT", desc: "Scalable content systems for multi-location dealer groups — consistent quality across every store, every month." },
           { title: "PRODUCT & SERVICE SHOWCASES", desc: "Visually compelling product demos and service highlight videos designed to convert viewers into customers." },
         ],
         heroVideo: HERO_VIDEOS.socialMediaAds,
@@ -108,7 +109,7 @@ export function SocialMediaContentPage() {
         ],
         relatedProjects: [
           { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
-          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE • AERIAL", image: CENTENNIAL_SUBARU.hero },
+          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE • DEALER SERVICES", image: CENTENNIAL_SUBARU.hero },
         ],
       }}
     />
@@ -130,8 +131,8 @@ export function PhotographyPage() {
         features: [
           { title: "AUTOMOTIVE PHOTOGRAPHY", desc: "Studio-quality automotive photography on location — dramatic lighting, precise angles, and post-processing that makes every vehicle shine." },
           { title: "EVENT PHOTOGRAPHY", desc: "Fast, accurate event coverage that captures key moments, candid interactions, and the overall atmosphere of your event." },
+          { title: "HEADSHOTS & PORTRAITS", desc: "Executive headshots, team portraits, and personal branding photography that communicates confidence and professionalism." },
           { title: "COMMERCIAL & PRODUCT", desc: "Clean, professional product and commercial photography for advertising, e-commerce, and marketing materials." },
-          { title: "AERIAL PHOTOGRAPHY", desc: "FAA-certified drone photography delivering breathtaking aerial perspectives for real estate, events, and commercial use." },
         ],
         heroImage: LEXUS_LAS_VEGAS.hero,
         galleryImages: [
@@ -156,16 +157,16 @@ export function BrandStrategyPage() {
       data={{
         slug: "brand-strategy",
         name: "BRAND\nSTRATEGY",
-        tagline: "Visual identity development, content strategy, and digital marketing guidance to position your brand for sustained growth.",
+        tagline: "Visual identity, content systems, and marketing structure that position your brand for sustained growth — built to perform, not just look good.",
         description: [
-          "A great brand is more than a logo — it's a complete visual and strategic identity that communicates your values, attracts your ideal audience, and differentiates you from the competition. We help businesses build that identity from the ground up.",
-          "Our brand strategy services combine creative direction with data-driven marketing insights to deliver a cohesive brand presence across all touchpoints — from your website and social media to your physical marketing materials.",
+          "A great brand is more than a logo — it's a complete visual and strategic identity that communicates your values, attracts your ideal audience, and differentiates you from the competition. After 20 years in the corporate world, we understand that creative work only matters when it's organized, on-brand, and designed to scale.",
+          "Our brand strategy services combine creative direction with real-world marketing execution. We don't just hand you a style guide — we build the systems, workflows, and content infrastructure that keep your brand consistent across every platform, every touchpoint, and every campaign.",
         ],
         features: [
-          { title: "VISUAL IDENTITY", desc: "Logo design, color systems, typography, and brand guidelines that create a consistent, professional brand presence." },
-          { title: "CONTENT STRATEGY", desc: "Data-driven content planning that aligns your messaging with your audience's needs and your business goals." },
-          { title: "DIGITAL MARKETING", desc: "Strategic guidance on paid advertising, organic growth, and platform selection to maximize your marketing ROI." },
-          { title: "BRAND CONSULTING", desc: "One-on-one consulting sessions to audit your existing brand, identify opportunities, and develop an actionable growth roadmap." },
+          { title: "VISUAL IDENTITY SYSTEMS", desc: "Logo, color systems, typography, and brand guidelines that create a consistent, professional presence across all platforms and materials." },
+          { title: "CONTENT STRATEGY & PLANNING", desc: "Monthly content calendars, platform strategy, and editorial planning that align your messaging with your audience and business goals." },
+          { title: "BRAND AUDITS & CONSULTING", desc: "One-on-one sessions to audit your existing brand, identify gaps, and develop an actionable roadmap for growth and consistency." },
+          { title: "MARKETING STRUCTURE", desc: "We build the reporting, workflows, and accountability systems that turn creative production into a scalable marketing operation." },
         ],
         heroVideo: HERO_VIDEOS.websiteVideo,
         galleryImages: [
@@ -176,6 +177,39 @@ export function BrandStrategyPage() {
         relatedProjects: [
           { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS • PHOTOGRAPHY", image: WONDR_NATION.hero },
           { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
+        ],
+      }}
+    />
+  );
+}
+
+// ─── WEBSITE REDESIGN ────────────────────────────────────────
+export function WebsiteRedesignPage() {
+  return (
+    <ServicePageTemplate
+      data={{
+        slug: "website-redesign",
+        name: "WEBSITE\nREDESIGN",
+        tagline: "Modern, mobile-first websites built to match the premium level of your brand — fast, clean, and designed to convert.",
+        description: [
+          "Your website is the first impression for every potential client. We design and build modern, high-performance websites that match the premium quality of your brand — mobile-friendly, fast-loading, and built to convert visitors into customers.",
+          "From dealership microsites and portfolio sites to full business websites, we handle design, development, and launch. Every site we build is crafted with the same attention to detail we bring to our photo and video work — because your digital presence should look as good as your best content.",
+        ],
+        features: [
+          { title: "MOBILE-FIRST DESIGN", desc: "Every site is designed for mobile first — fully responsive, touch-friendly, and optimized for every screen size." },
+          { title: "BRAND-ALIGNED AESTHETICS", desc: "Custom design that reflects your brand identity — not a generic template. Every layout, color, and font choice is intentional." },
+          { title: "PERFORMANCE OPTIMIZED", desc: "Fast load times, clean code, and SEO-ready structure that helps your site rank and perform across all devices." },
+          { title: "CONTENT INTEGRATION", desc: "We integrate your existing photo and video content into the site design so your media assets work harder for your brand." },
+        ],
+        heroVideo: HERO_VIDEOS.websiteVideo,
+        galleryImages: [
+          ...LEXUS_HENDERSON.gallery.slice(0, 4),
+          ...LEXUS_LAS_VEGAS.gallery.slice(0, 4),
+          ...WONDR_NATION.gallery.slice(0, 4),
+        ],
+        relatedProjects: [
+          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
+          { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS • PHOTOGRAPHY", image: WONDR_NATION.hero },
         ],
       }}
     />

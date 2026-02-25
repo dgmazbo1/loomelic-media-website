@@ -1,11 +1,11 @@
 /* ============================================================
-   ProjectPages — All 5 project detail pages
+   ProjectPages — All 6 project detail pages
    Routes: /projects/lexus-of-henderson
            /projects/lexus-of-las-vegas
            /projects/las-vegas-raiders-tour
            /projects/centennial-subaru
            /projects/wondr-nation-g2e
-   Wedding removed.
+           /projects/bob-marley-hope-road
    ============================================================ */
 
 import ProjectPageTemplate from "@/components/ProjectPageTemplate";
@@ -15,6 +15,7 @@ import {
   RAIDERS_BLAST,
   CENTENNIAL_SUBARU,
   WONDR_NATION,
+  BOB_MARLEY,
   HERO_VIDEOS,
 } from "@/lib/media";
 
@@ -49,9 +50,9 @@ export function LexusLasVegasPage() {
         category: "AUTOMOTIVE • PHOTOGRAPHY",
         year: "2026",
         client: "Lexus of Las Vegas",
-        services: ["Automotive Photography", "Aerial Photography", "Commercial Photography"],
+        services: ["Automotive Photography", "Commercial Photography", "Social Media Content"],
         description:
-          "An extensive automotive photography project for Lexus of Las Vegas, combining ground-level precision photography with FAA-certified aerial drone shots. The project captured the full Lexus inventory across multiple sessions, delivering high-resolution images for the dealership's website, digital advertising, and social media platforms.",
+          "An extensive automotive photography project for Lexus of Las Vegas, combining ground-level precision photography with wide-angle dealership shots. The project captured the full Lexus inventory across multiple sessions, delivering high-resolution images for the dealership's website, digital advertising, and social media platforms.",
         heroImage: LEXUS_LAS_VEGAS.hero,
         gallery: LEXUS_LAS_VEGAS.gallery,
       }}
@@ -87,12 +88,12 @@ export function CentennialSubaruPage() {
       data={{
         slug: "centennial-subaru",
         title: "CENTENNIAL SUBARU",
-        category: "AUTOMOTIVE • AERIAL",
+        category: "AUTOMOTIVE • DEALER SERVICES",
         year: "2026",
         client: "Centennial Subaru",
-        services: ["Automotive Photography", "Aerial Photography", "Social Media Content"],
+        services: ["Automotive Photography", "Social Media Content", "Videography"],
         description:
-          "A dynamic automotive photography and aerial drone project for Centennial Subaru, showcasing their off-road capable lineup in dramatic desert and mountain environments. The project combined traditional automotive photography with breathtaking aerial perspectives to create a comprehensive content library for the dealership's marketing campaigns.",
+          "A dynamic automotive photography and video project for Centennial Subaru, showcasing their off-road capable lineup and dealership culture. The project combined traditional automotive photography with cinematic video to create a comprehensive content library for the dealership's marketing campaigns across social media and digital advertising.",
         heroImage: CENTENNIAL_SUBARU.hero,
         gallery: CENTENNIAL_SUBARU.gallery,
         videoSrc: HERO_VIDEOS.centennialDrone,
@@ -116,6 +117,26 @@ export function WondrNationPage() {
           "Comprehensive event photography coverage for Wondr Nation at the Global Gaming Expo (G2E) in Las Vegas. We documented the full event experience — from keynote sessions and networking events to the reception gala — delivering a complete visual record of this premier industry gathering.",
         heroImage: WONDR_NATION.hero,
         gallery: WONDR_NATION.gallery,
+      }}
+    />
+  );
+}
+
+// ─── BOB MARLEY HOPE ROAD ────────────────────────────────────
+export function BobMarleyPage() {
+  return (
+    <ProjectPageTemplate
+      data={{
+        slug: "bob-marley-hope-road",
+        title: "BOB MARLEY HOPE ROAD",
+        category: "EVENTS • EDITORIAL PHOTOGRAPHY",
+        year: "2026",
+        client: "The Blast — Bob Marley Hope Road",
+        services: ["Editorial Photography", "Event Coverage", "Social Media Content"],
+        description:
+          "Loomelic Media partnered with The Blast and Bob Marley at Hope Road to create immersive visual content that captured the late-night energy, culture, and vibe of this unique Las Vegas destination. Working in extremely low-light conditions with fast-paced movement — bartenders in action, guests flowing in and out, and intentionally moody ambient lighting — required advanced camera setups and real-time adjustments to capture sharp, vibrant imagery without losing the atmosphere.\n\nWe equipped our team with fast-aperture lenses, full-frame sensors, and stabilization tools to manage light sensitivity and motion blur. Strategic lighting placement and planned hero shots helped maximize key brand moments, while candid captures preserved the authenticity of the night. Post-production focused on maintaining the rich tones of the environment while ensuring faces, product highlights, and logos remained crisp and clear.",
+        heroImage: BOB_MARLEY.hero,
+        gallery: BOB_MARLEY.gallery,
       }}
     />
   );
