@@ -16,6 +16,7 @@ import {
   PhotographyPage,
   BrandStrategyPage,
   WebsiteRedesignPage,
+  HeadshotsPage,
 } from "./pages/ServicePages";
 
 // Project detail pages
@@ -55,6 +56,7 @@ function Router() {
         <Route path="/services/photography" component={PhotographyPage} />
         <Route path="/services/brand-strategy" component={BrandStrategyPage} />
         <Route path="/services/website-redesign" component={WebsiteRedesignPage} />
+        <Route path="/services/headshots" component={HeadshotsPage} />
 
         {/* Project detail pages */}
         <Route path="/projects/lexus-of-henderson" component={LexusHendersonPage} />

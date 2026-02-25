@@ -155,6 +155,7 @@ export default function ContactSection() {
                         <option>Photography</option>
                         <option>Brand Strategy</option>
                         <option>Website Redesign</option>
+                        <option>Headshots + Team Photography</option>
                         <option>Other</option>
                       </select>
                     </div>

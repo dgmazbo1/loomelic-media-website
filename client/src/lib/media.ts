@@ -279,3 +279,24 @@ export const SERVICES_IMAGES = {
   photoshoot: `${CDN}/68131b429db2eeff3506c6b5_Business-(1%20of%201)_(8).jpg`,
   automotive: `${CDN}/68121368e0a8987c5085430c_Lexus%20Roll%20-poster-00001.jpg`,
 };
+
+// ─── HEADSHOTS + TEAM PHOTOGRAPHY ───────────────────────────
+export const HEADSHOTS = {
+  // User-provided headshots
+  hero: `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/EqotpKRKqfybulio.jpg`,
+  gallery: [
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/EqotpKRKqfybulio.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/lAmGrwnaAjITGwmR.jpg`,
+    // ABC Hyundai site headshots
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/CONbCWLaFPGMNXht.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/DJtdIDNIerRBgwSA.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/sIRnqOlBsoEsukYP.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/sxJtlEOIjapFSXyV.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/auaMOnDbBYAmNhEh.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/kMplwuXnNjAYvNfw.jpeg`,
+    // Existing business headshots from original site
+    `${CDN}/68131b429db2eeff3506c6b5_Business-(1%20of%201)_(8).jpg`,
+    `${CDN}/68131cac0cd46bae1f1c3f83_business%20-(1%20of%201)_(5).jpg`,
+    `${CDN}/6816fba72a7e06d84169ca93_61B1055F-0ADB-4D8C-A82D-14398BEDF73D.jpeg`,
+  ],
+};

@@ -19,6 +19,7 @@ export interface ServicePageData {
   heroVideo?: string;
   heroImage?: string;
   galleryImages?: string[];
+  useCases?: string[];
   relatedProjects?: { slug: string; title: string; category: string; image: string }[];
 }
 
@@ -118,6 +119,29 @@ export default function ServicePageTemplate({ data }: { data: ServicePageData })
               ))}
             </div>
           </div>
+
+          {/* Use Cases */}
+          {data.useCases && data.useCases.length > 0 && (
+            <div className="mb-16">
+              <p className="section-label text-[oklch(0.6_0_0)] mb-8">
+                <span>✦</span><span>USE CASES —</span>
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {data.useCases.map((uc, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                    className="border border-[oklch(0.88_0_0)] rounded-xl px-5 py-4"
+                  >
+                    <p className="font-display-normal text-xs tracking-widest text-[oklch(0.2_0_0)] uppercase">{uc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Gallery */}
           {data.galleryImages && data.galleryImages.length > 0 && (

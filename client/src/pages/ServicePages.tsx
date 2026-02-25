@@ -16,6 +16,7 @@ import {
   CENTENNIAL_SUBARU,
   RAIDERS_BLAST,
   WONDR_NATION,
+  HEADSHOTS,
 } from "@/lib/media";
 
 // ─── AUTOMOTIVE MARKETING ────────────────────────────────────
@@ -177,6 +178,43 @@ export function BrandStrategyPage() {
         relatedProjects: [
           { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS • PHOTOGRAPHY", image: WONDR_NATION.hero },
           { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
+        ],
+      }}
+    />
+  );
+}
+
+// ─── HEADSHOTS + TEAM PHOTOGRAPHY ──────────────────────────
+export function HeadshotsPage() {
+  return (
+    <ServicePageTemplate
+      data={{
+        slug: "headshots",
+        name: "HEADSHOTS +\nTEAM PHOTOGRAPHY",
+        tagline: "Your people are your brand. Clean, consistent professional portraits for every department — built for websites, social media, and internal communications.",
+        description: [
+          "We deliver clean, consistent headshots and team photos that reflect professionalism and trust — whether on the showroom floor, in the office, or in the field. Every portrait is lit, retouched, and delivered with the same cinematic precision we bring to all of our work.",
+          "These images are built for real use: website staff pages, LinkedIn profiles, Google Business listings, social media, internal communications, and marketing materials. Fast turnaround, consistent quality, and a relaxed on-set experience that brings out the best in every subject.",
+        ],
+        features: [
+          { title: "INDIVIDUAL PORTRAITS", desc: "Clean, professionally lit headshots for executives, sales teams, service advisors, and staff at every level." },
+          { title: "TEAM PHOTOGRAPHY", desc: "Group shots and department photos that showcase your team culture and build trust with customers before they walk in the door." },
+          { title: "ON-LOCATION SESSIONS", desc: "We come to your office, dealership, or venue — no studio required. Minimal setup, maximum efficiency." },
+          { title: "SAME-DAY DELIVERY", desc: "Edited, retouched, and web-ready files delivered fast so your team can update profiles and listings immediately." },
+        ],
+        heroImage: HEADSHOTS.hero,
+        galleryImages: HEADSHOTS.gallery,
+        useCases: [
+          "Website staff pages",
+          "LinkedIn & social media profiles",
+          "Google Business profiles",
+          "Internal communications",
+          "Email signatures",
+          "Press & media kits",
+        ],
+        relatedProjects: [
+          { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
+          { slug: "centennial-subaru", title: "CENTENNIAL SUBARU", category: "AUTOMOTIVE • DEALER SERVICES", image: CENTENNIAL_SUBARU.hero },
         ],
       }}
     />

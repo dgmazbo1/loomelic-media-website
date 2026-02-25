@@ -55,6 +55,13 @@ export const SERVICES = [
     shortName: "Website Redesign",
     desc: "Modern, mobile-first websites built to match the premium level of your brand — fast, clean, and designed to convert visitors into customers.",
   },
+  {
+    num: "07",
+    slug: "headshots",
+    name: "HEADSHOTS +\nTEAM PHOTOGRAPHY",
+    shortName: "Headshots + Team Photography",
+    desc: "Clean, consistent professional portraits for every department — built for websites, LinkedIn profiles, Google Business listings, and internal communications.",
+  },
 ];
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
