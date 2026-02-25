@@ -36,7 +36,10 @@ function AnimFade({ children, className = "", delay = 0 }: { children: React.Rea
 export default function AboutSection() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
   return (

@@ -18,7 +18,10 @@ const categories = [
 export default function HeroSection() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   };
 
   return (
@@ -59,7 +62,7 @@ export default function HeroSection() {
           <img
             src={LOGO_TRANSPARENT}
             alt="Loomelic Media"
-            className="h-[160px] sm:h-[220px] md:h-[280px] lg:h-[340px] w-auto"
+            className="w-[280px] sm:w-[380px] md:w-[480px] lg:w-[580px] xl:w-[680px] h-auto"
             style={{ display: "block", filter: "brightness(0) invert(1)" }}
           />
         </motion.div>

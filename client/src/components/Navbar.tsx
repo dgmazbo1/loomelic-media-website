@@ -38,20 +38,24 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const navHeight = 80; // fixed navbar height
+      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
   const handleNavClick = (href: string) => {
     setMenuOpen(false);
+    const id = href.replace("#", "");
     if (isHome) {
-      const id = href.replace("#", "");
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
+      scrollToSection(id);
     } else {
       // Navigate home then scroll
       navigate("/");
-      setTimeout(() => {
-        const id = href.replace("#", "");
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-      }, 300);
+      setTimeout(() => scrollToSection(id), 400);
     }
   };
 
@@ -81,7 +85,7 @@ export default function Navbar() {
             <img
               src={LOGO_TRANSPARENT}
               alt="Loomelic Media"
-              className="h-8 sm:h-10 w-auto"
+              className="h-14 sm:h-20 w-auto"
               style={{ filter: "brightness(0) invert(1)" }}
             />
           </button>
@@ -133,7 +137,7 @@ export default function Navbar() {
               <img
                 src={LOGO_TRANSPARENT}
                 alt="Loomelic Media"
-                className="h-9 w-auto"
+                className="h-14 w-auto"
                 style={{ filter: "brightness(0) invert(1)" }}
               />
               <button
