@@ -324,10 +324,15 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
                   {data.outcomes.map((outcome, i) => (
                     <motion.div
                       key={i}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.55, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                      initial={{ opacity: 0, rotateX: -60, y: 24, scale: 0.97 }}
+                      whileInView={{ opacity: 1, rotateX: 0, y: 0, scale: 1 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      transition={{
+                        duration: 0.65,
+                        delay: i * 0.12,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                      style={{ transformPerspective: 800, transformOrigin: "top center" }}
                       className="bg-[oklch(0.11_0_0)] border border-white/8 rounded-2xl px-7 py-6 flex items-center justify-between gap-6 group hover:border-white/15 transition-colors duration-300"
                     >
                       <div>
