@@ -112,7 +112,7 @@ export default function AboutSection() {
           <p className="font-body text-base sm:text-lg text-[oklch(0.35_0_0)] leading-relaxed">
             By combining cinematic storytelling, precision photography, and strategic digital content,
             we transform brands into visual experiences that captivate audiences. Based in Las Vegas,
-            serving automotive dealerships, luxury brands, weddings, and events across the Southwest.
+            serving automotive dealerships, luxury brands, corporate events, and brand activations across the Southwest.
           </p>
           <p className="font-body text-sm text-[oklch(0.5_0_0)] mt-4 leading-relaxed">
             Led by <strong className="text-[oklch(0.07_0_0)]">Denham Gallimore</strong> — videographer,

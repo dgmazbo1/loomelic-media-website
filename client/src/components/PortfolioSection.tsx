@@ -2,7 +2,7 @@
    PortfolioSection — Unusually-inspired
    Style: Light background, category filter pills, masonry-style image grid
           with rounded corners, hover overlay, lightbox
-   Uses all original Loomelic Media images and videos from media.ts
+   Wedding removed. Categories: ALL, AUTOMOTIVE, EVENTS, LIFESTYLE
    ============================================================ */
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
@@ -12,7 +12,6 @@ import {
   LEXUS_HENDERSON,
   LEXUS_LAS_VEGAS,
   RAIDERS_BLAST,
-  JANEL_WEDDING,
   CENTENNIAL_SUBARU,
   JW_OFFROAD,
   TWO_MOONS_LODGE,
@@ -22,33 +21,31 @@ import {
   PORTFOLIO_GALLERY,
 } from "@/lib/media";
 
-type Category = "ALL" | "AUTOMOTIVE" | "WEDDINGS" | "EVENTS" | "LIFESTYLE";
+type Category = "ALL" | "AUTOMOTIVE" | "EVENTS" | "LIFESTYLE";
 
 const ALL_PHOTOS: { src: string; category: Category; title: string }[] = [
   ...LEXUS_HENDERSON.gallery.slice(0, 6).map((src: string) => ({ src, category: "AUTOMOTIVE" as Category, title: "Lexus of Henderson" })),
-  ...LEXUS_LAS_VEGAS.gallery.slice(0, 4).map((src: string) => ({ src, category: "AUTOMOTIVE" as Category, title: "Lexus of Las Vegas" })),
+  ...LEXUS_LAS_VEGAS.gallery.slice(0, 5).map((src: string) => ({ src, category: "AUTOMOTIVE" as Category, title: "Lexus of Las Vegas" })),
   ...RAIDERS_BLAST.gallery.slice(0, 4).map((src: string) => ({ src, category: "EVENTS" as Category, title: "Raiders Tour" })),
-  ...JANEL_WEDDING.gallery.slice(0, 5).map((src: string) => ({ src, category: "WEDDINGS" as Category, title: "Janel & Nehiamia" })),
-  ...CENTENNIAL_SUBARU.gallery.slice(0, 3).map((src: string) => ({ src, category: "AUTOMOTIVE" as Category, title: "Centennial Subaru" })),
+  ...CENTENNIAL_SUBARU.gallery.slice(0, 5).map((src: string) => ({ src, category: "AUTOMOTIVE" as Category, title: "Centennial Subaru" })),
   ...JW_OFFROAD.gallery.slice(0, 1).map((src: string) => ({ src, category: "LIFESTYLE" as Category, title: "JW Offroad" })),
-  ...TWO_MOONS_LODGE.gallery.slice(0, 3).map((src: string) => ({ src, category: "LIFESTYLE" as Category, title: "Two Moons Lodge" })),
-  ...WONDR_NATION.gallery.slice(0, 3).map((src: string) => ({ src, category: "EVENTS" as Category, title: "Wondr Nation G2E" })),
-  // Additional from PORTFOLIO_GALLERY
+  ...TWO_MOONS_LODGE.gallery.slice(0, 4).map((src: string) => ({ src, category: "LIFESTYLE" as Category, title: "Two Moons Lodge" })),
+  ...WONDR_NATION.gallery.slice(0, 5).map((src: string) => ({ src, category: "EVENTS" as Category, title: "Wondr Nation G2E" })),
   ...PORTFOLIO_GALLERY.slice(40, 50).map((src: string) => ({ src, category: "EVENTS" as Category, title: "Loomelic Media" })),
 ];
 
 const VIDEO_REELS = [
   { title: "Headlight", src: HERO_VIDEOS.headlight, poster: VIDEO_POSTERS.headlight, category: "Automotive" },
   { title: "Lexus Roll", src: HERO_VIDEOS.lexusRoll, poster: VIDEO_POSTERS.lexusRoll, category: "Automotive" },
-  { title: "Centennial Drone", src: HERO_VIDEOS.centennialDrone, poster: VIDEO_POSTERS.centennialDrone, category: "Drone" },
-  { title: "Wedding Film", src: HERO_VIDEOS.weddingVideo, poster: VIDEO_POSTERS.weddingVideo, category: "Wedding" },
-  { title: "Janel Wedding", src: HERO_VIDEOS.janelWedding, poster: VIDEO_POSTERS.janelWedding, category: "Wedding" },
-  { title: "Wedding Walk", src: HERO_VIDEOS.weddingWalk, poster: VIDEO_POSTERS.weddingWalk, category: "Wedding" },
+  { title: "Centennial Drone", src: HERO_VIDEOS.centennialDrone, poster: VIDEO_POSTERS.centennialDrone, category: "Aerial" },
   { title: "Website Video", src: HERO_VIDEOS.websiteVideo, poster: VIDEO_POSTERS.websiteVideo, category: "Brand" },
   { title: "Social Media Ads", src: HERO_VIDEOS.socialMediaAds, poster: VIDEO_POSTERS.socialMediaAds, category: "Social" },
+  { title: "GX Showroom", src: HERO_VIDEOS.gxShowroom, poster: VIDEO_POSTERS.lexusRoll, category: "Automotive" },
+  { title: "Kona Ice", src: HERO_VIDEOS.konaIce, poster: VIDEO_POSTERS.socialMediaAds, category: "Brand" },
+  { title: "Rollers", src: HERO_VIDEOS.rollers, poster: VIDEO_POSTERS.websiteVideo, category: "Events" },
 ];
 
-const CATEGORIES: Category[] = ["ALL", "AUTOMOTIVE", "WEDDINGS", "EVENTS", "LIFESTYLE"];
+const CATEGORIES: Category[] = ["ALL", "AUTOMOTIVE", "EVENTS", "LIFESTYLE"];
 const INITIAL_SHOW = 12;
 
 function VideoCard({ video, index }: { video: typeof VIDEO_REELS[0]; index: number }) {
@@ -198,20 +195,24 @@ export default function PortfolioSection() {
       <AnimatePresence>
         {lightbox && (
           <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center"
             onClick={() => setLightbox(null)}
           >
             <button
-              className="absolute top-5 right-5 w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white transition-colors"
+              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
               onClick={() => setLightbox(null)}
             >
               <X size={18} />
             </button>
             <motion.img
-              initial={{ scale: 0.9 }} animate={{ scale: 1 }} exit={{ scale: 0.9 }}
-              src={lightbox} alt="Portfolio"
-              className="max-w-full max-h-[90vh] object-contain rounded-xl"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              src={lightbox}
+              alt=""
+              className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl"
               onClick={(e) => e.stopPropagation()}
             />
           </motion.div>

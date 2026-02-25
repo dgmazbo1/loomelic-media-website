@@ -103,7 +103,7 @@ export default function StatsSection() {
                 <span className="text-[oklch(0.87_0_0)] text-2xl mt-1">✦</span>
               </div>
               <p className="font-body text-xs text-[oklch(0.5_0_0)] leading-relaxed mt-4">
-                From luxury automotive campaigns to emotional wedding films, we've delivered exceptional results for clients across Las Vegas and beyond.
+                From luxury automotive campaigns to high-energy event coverage, we've delivered exceptional results for clients across Las Vegas and beyond.
               </p>
             </AnimFade>
 

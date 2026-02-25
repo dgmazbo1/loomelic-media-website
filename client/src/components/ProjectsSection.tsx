@@ -2,47 +2,47 @@
    ProjectsSection — Unusually-inspired
    Style: Dark background, "SELECTED WORK" huge text left + year right,
           2-column grid of rounded project cards (dark bg, title+category top, image fills card)
-   Uses original Loomelic Media project images from media.ts
+   Wedding removed. Each card links to /projects/:slug
    ============================================================ */
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useLocation } from "wouter";
 import {
   LEXUS_HENDERSON,
   RAIDERS_BLAST,
-  JANEL_WEDDING,
   CENTENNIAL_SUBARU,
   LEXUS_LAS_VEGAS,
   WONDR_NATION,
 } from "@/lib/media";
 
-const PROJECTS = [
+export const PROJECTS = [
   {
+    slug: "lexus-of-henderson",
     title: "LEXUS OF HENDERSON",
     category: "AUTOMOTIVE • MARKETING",
     image: LEXUS_HENDERSON.hero,
   },
   {
+    slug: "lexus-of-las-vegas",
     title: "LEXUS OF LAS VEGAS",
     category: "AUTOMOTIVE • PHOTOGRAPHY",
     image: LEXUS_LAS_VEGAS.hero,
   },
   {
+    slug: "las-vegas-raiders-tour",
     title: "LAS VEGAS RAIDERS TOUR",
     category: "EVENTS • VIDEOGRAPHY",
     image: RAIDERS_BLAST.hero,
   },
   {
-    title: "JANEL & NEHIAMIA WEDDING",
-    category: "WEDDINGS • FILM",
-    image: JANEL_WEDDING.hero,
-  },
-  {
+    slug: "centennial-subaru",
     title: "CENTENNIAL SUBARU",
-    category: "AUTOMOTIVE • DRONE",
+    category: "AUTOMOTIVE • AERIAL",
     image: CENTENNIAL_SUBARU.hero,
   },
   {
+    slug: "wondr-nation-g2e",
     title: "WONDR NATION G2E",
     category: "EVENTS • PHOTOGRAPHY",
     image: WONDR_NATION.hero,
@@ -66,10 +66,7 @@ function AnimFade({ children, className = "", delay = 0 }: { children: React.Rea
 }
 
 export default function ProjectsSection() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
+  const [, navigate] = useLocation();
 
   return (
     <section id="projects" className="section-black">
@@ -87,7 +84,7 @@ export default function ProjectsSection() {
               </h2>
             </div>
             <span className="font-display text-[clamp(2rem,6vw,6rem)] text-[oklch(0.28_0_0)] leading-none hidden sm:block self-end pb-2">
-              ©2025
+              ©2026
             </span>
           </div>
         </AnimFade>
@@ -96,11 +93,12 @@ export default function ProjectsSection() {
         <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-10 sm:mb-14">
           {PROJECTS.map((project, i) => (
             <motion.div
-              key={project.title}
+              key={project.slug}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: (i % 2) * 0.1 }}
+              onClick={() => navigate(`/projects/${project.slug}`)}
               className="project-card group cursor-pointer"
             >
               {/* Card header */}
@@ -130,7 +128,7 @@ export default function ProjectsSection() {
         {/* CTA */}
         <AnimFade>
           <div className="flex justify-start">
-            <button onClick={() => scrollTo("portfolio")} className="btn-pill-light text-xs">
+            <button onClick={() => navigate("/projects")} className="btn-pill-light text-xs">
               ALL PROJECTS +
             </button>
           </div>

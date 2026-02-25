@@ -7,7 +7,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Instagram, Youtube, Phone, Mail, MapPin } from "lucide-react";
-import { LOGO } from "@/lib/media";
+import { LOGO_TRANSPARENT } from "@/lib/media";
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -150,9 +150,8 @@ export default function ContactSection() {
                         className="w-full bg-[oklch(0.07_0_0/0.04)] border border-[oklch(0_0_0/0.1)] rounded-xl px-4 py-3 font-body text-sm text-[oklch(0.07_0_0)] focus:outline-none focus:border-[oklch(0.07_0_0)] transition-colors">
                         <option value="">Select a service...</option>
                         <option>Automotive Marketing</option>
-                        <option>Wedding Videography</option>
+                        <option>Event Coverage</option>
                         <option>Social Media Content</option>
-                        <option>Drone & Aerial</option>
                         <option>Photography</option>
                         <option>Brand Strategy</option>
                         <option>Other</option>
@@ -179,7 +178,7 @@ export default function ContactSection() {
       <footer className="section-black border-t border-white/8">
         <div className="container py-10 sm:py-14">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-8">
-            <img src={LOGO} alt="Loomelic Media" className="h-8 w-auto" style={{ mixBlendMode: "screen", filter: "invert(1)" }} />
+            <img src={LOGO_TRANSPARENT} alt="Loomelic Media" className="h-8 w-auto" style={{ filter: "brightness(0) invert(1)" }} />
             <nav className="flex flex-wrap gap-x-6 gap-y-2">
               {["PROJECTS", "SERVICES", "ABOUT", "PORTFOLIO", "CONTACT"].map((link) => (
                 <button key={link}
@@ -201,7 +200,7 @@ export default function ContactSection() {
             </div>
           </div>
           <div className="pt-6 border-t border-white/6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <p className="font-body text-[0.6rem] text-white/25 tracking-widest">© 2025 LOOMELIC MEDIA LLC. ALL RIGHTS RESERVED.</p>
+            <p className="font-body text-[0.6rem] text-white/25 tracking-widest">© 2026 LOOMELIC MEDIA LLC. ALL RIGHTS RESERVED.</p>
             <p className="font-body text-[0.6rem] text-white/20 tracking-widest">LAS VEGAS · HENDERSON · SOUTH FLORIDA</p>
           </div>
         </div>

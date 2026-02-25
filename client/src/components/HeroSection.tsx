@@ -8,12 +8,11 @@
 import { motion } from "framer-motion";
 import { Instagram, Youtube } from "lucide-react";
 
-import { LOGO, HERO_VIDEOS } from "@/lib/media";
-const LOGO_URL = LOGO;
+import { LOGO_TRANSPARENT, HERO_VIDEOS } from "@/lib/media";
 const HERO_VIDEO = HERO_VIDEOS.lexusRoll;
 
 const categories = [
-  "CINEMATIC", "AUTOMOTIVE", "WEDDINGS", "SOCIAL MEDIA", "EVENTS", "PHOTOGRAPHY", "DRONE", "BRANDING"
+  "CINEMATIC", "AUTOMOTIVE", "EVENTS", "SOCIAL MEDIA", "PHOTOGRAPHY", "BRANDING"
 ];
 
 export default function HeroSection() {
@@ -55,13 +54,13 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-[260px] sm:max-w-[420px] md:max-w-[600px] lg:max-w-[820px] xl:max-w-[1000px] mx-auto mb-6 sm:mb-8"
+          className="mx-auto mb-6 sm:mb-8 flex items-center justify-center"
         >
           <img
-            src={LOGO_URL}
+            src={LOGO_TRANSPARENT}
             alt="Loomelic Media"
-            className="w-full h-auto"
-            style={{ mixBlendMode: "screen", filter: "invert(1)" }}
+            className="h-[160px] sm:h-[220px] md:h-[280px] lg:h-[340px] w-auto"
+            style={{ display: "block", filter: "brightness(0) invert(1)" }}
           />
         </motion.div>
 

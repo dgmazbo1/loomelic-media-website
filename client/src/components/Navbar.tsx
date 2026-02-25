@@ -1,15 +1,16 @@
 /* ============================================================
    Navbar — Unusually-inspired
-   Style: Logo left, nav center (pill group), hamburger right
+   Style: Transparent logo left, nav center (pill group), hamburger right
    Mobile: Full-screen overlay with staggered link reveal
+   Smart navigation: works from both home page (scroll) and sub-pages (navigate)
    ============================================================ */
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { X, Menu } from "lucide-react";
+import { useLocation } from "wouter";
 
-import { LOGO } from "@/lib/media";
-const LOGO_URL = LOGO;
+import { LOGO_TRANSPARENT } from "@/lib/media";
 
 const navLinks = [
   { label: "PROJECTS", href: "#projects" },
@@ -22,6 +23,9 @@ const navLinks = [
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [location, navigate] = useLocation();
+
+  const isHome = location === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -34,12 +38,30 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  const scrollTo = (href: string) => {
+  const handleNavClick = (href: string) => {
     setMenuOpen(false);
-    const id = href.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-    else window.scrollTo({ top: 0, behavior: "smooth" });
+    if (isHome) {
+      const id = href.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Navigate home then scroll
+      navigate("/");
+      setTimeout(() => {
+        const id = href.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+  };
+
+  const goHome = () => {
+    setMenuOpen(false);
+    if (isHome) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
+    }
   };
 
   return (
@@ -50,26 +72,26 @@ export default function Navbar() {
         }`}
       >
         <div className="flex items-center justify-between px-5 sm:px-8 lg:px-12 h-16 sm:h-20">
-          {/* Logo */}
-          <a
-            href="#"
-            onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+          {/* Transparent Logo */}
+          <button
+            onClick={goHome}
             className="flex-shrink-0 z-10"
+            aria-label="Go to home"
           >
             <img
-              src={LOGO_URL}
+              src={LOGO_TRANSPARENT}
               alt="Loomelic Media"
-              className="h-7 sm:h-9 w-auto"
-              style={{ mixBlendMode: "screen", filter: "invert(1)" }}
+              className="h-8 sm:h-10 w-auto"
+              style={{ filter: "brightness(0) invert(1)" }}
             />
-          </a>
+          </button>
 
           {/* Desktop nav — pill group */}
           <div className="hidden lg:flex items-center gap-1 bg-[oklch(1_0_0/0.06)] backdrop-blur-sm border border-[oklch(1_0_0/0.08)] rounded-full px-2 py-1.5">
             {navLinks.map((link) => (
               <button
                 key={link.label}
-                onClick={() => scrollTo(link.href)}
+                onClick={() => handleNavClick(link.href)}
                 className="px-4 py-1.5 rounded-full text-[0.7rem] font-semibold tracking-[0.12em] text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
               >
                 {link.label}
@@ -80,7 +102,7 @@ export default function Navbar() {
           {/* Right: CTA + Hamburger */}
           <div className="flex items-center gap-3">
             <button
-              onClick={() => scrollTo("#contact")}
+              onClick={() => handleNavClick("#contact")}
               className="hidden sm:flex btn-pill-light text-xs py-2 px-5"
             >
               GET IN TOUCH
@@ -109,10 +131,10 @@ export default function Navbar() {
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-white/8">
               <img
-                src={LOGO_URL}
+                src={LOGO_TRANSPARENT}
                 alt="Loomelic Media"
-                className="h-8 w-auto"
-                style={{ mixBlendMode: "screen", filter: "invert(1)" }}
+                className="h-9 w-auto"
+                style={{ filter: "brightness(0) invert(1)" }}
               />
               <button
                 onClick={() => setMenuOpen(false)}
@@ -131,7 +153,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -30 }}
                   transition={{ duration: 0.4, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                  onClick={() => scrollTo(link.href)}
+                  onClick={() => handleNavClick(link.href)}
                   className="text-left py-4 border-b border-white/6 group"
                 >
                   <span className="font-display-normal text-5xl sm:text-7xl text-white/90 group-hover:text-lime transition-colors duration-200">
