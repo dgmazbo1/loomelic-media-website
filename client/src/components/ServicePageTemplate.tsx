@@ -2,11 +2,13 @@
    ServicePageTemplate — Shared template for all service pages
    Style: Dark hero with huge service name, light content section,
           dark CTA at bottom. Unusually-inspired.
+   Includes: Lightbox for gallery photo click-to-enlarge
    ============================================================ */
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "wouter";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import Navbar from "./Navbar";
 import ContactSection from "./ContactSection";
 
@@ -23,8 +25,87 @@ export interface ServicePageData {
   relatedProjects?: { slug: string; title: string; category: string; image: string }[];
 }
 
+// ─── LIGHTBOX ────────────────────────────────────────────────
+function Lightbox({ images, startIndex, onClose }: { images: string[]; startIndex: number; onClose: () => void }) {
+  const [idx, setIdx] = useState(startIndex);
+
+  const prev = (e: React.MouseEvent) => { e.stopPropagation(); setIdx((i) => (i - 1 + images.length) % images.length); };
+  const next = (e: React.MouseEvent) => { e.stopPropagation(); setIdx((i) => (i + 1) % images.length); };
+
+  // Keyboard navigation
+  const handleKey = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") setIdx((i) => (i - 1 + images.length) % images.length);
+    if (e.key === "ArrowRight") setIdx((i) => (i + 1) % images.length);
+    if (e.key === "Escape") onClose();
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center"
+      onClick={onClose}
+      onKeyDown={handleKey}
+      tabIndex={0}
+    >
+      {/* Close */}
+      <button
+        className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+        onClick={onClose}
+        aria-label="Close lightbox"
+      >
+        <X size={18} />
+      </button>
+
+      {/* Prev */}
+      {images.length > 1 && (
+        <button
+          className="absolute left-4 sm:left-8 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+          onClick={prev}
+          aria-label="Previous image"
+        >
+          <ChevronLeft size={20} />
+        </button>
+      )}
+
+      {/* Image */}
+      <motion.img
+        key={idx}
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+        src={images[idx]}
+        alt=""
+        className="max-w-[90vw] max-h-[85vh] object-contain rounded-xl"
+        onClick={(e) => e.stopPropagation()}
+      />
+
+      {/* Next */}
+      {images.length > 1 && (
+        <button
+          className="absolute right-4 sm:right-8 z-10 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+          onClick={next}
+          aria-label="Next image"
+        >
+          <ChevronRight size={20} />
+        </button>
+      )}
+
+      {/* Counter */}
+      {images.length > 1 && (
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 font-body text-xs text-white/40 tracking-widest">
+          {idx + 1} / {images.length}
+        </div>
+      )}
+    </motion.div>
+  );
+}
+
+// ─── TEMPLATE ────────────────────────────────────────────────
 export default function ServicePageTemplate({ data }: { data: ServicePageData }) {
   const [, navigate] = useLocation();
+  const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
@@ -157,12 +238,13 @@ export default function ServicePageTemplate({ data }: { data: ServicePageData })
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: (i % 3) * 0.06 }}
-                    className="break-inside-avoid overflow-hidden rounded-xl"
+                    className="break-inside-avoid overflow-hidden rounded-xl cursor-pointer group"
+                    onClick={() => setLightboxIdx(i)}
                   >
                     <img
                       src={img}
                       alt={`${data.name} work ${i + 1}`}
-                      className="w-full h-auto object-cover hover:scale-[1.02] transition-transform duration-500"
+                      className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
                       loading="lazy"
                     />
                   </motion.div>
@@ -206,6 +288,17 @@ export default function ServicePageTemplate({ data }: { data: ServicePageData })
           )}
         </div>
       </section>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightboxIdx !== null && data.galleryImages && (
+          <Lightbox
+            images={data.galleryImages}
+            startIndex={lightboxIdx}
+            onClose={() => setLightboxIdx(null)}
+          />
+        )}
+      </AnimatePresence>
 
       <ContactSection />
     </div>

@@ -1,11 +1,12 @@
 /* ============================================================
-   ServicePages — All 6 individual service pages
+   ServicePages — All 7 individual service pages
    Routes: /services/automotive-marketing
            /services/event-coverage
            /services/social-media-content
            /services/photography
            /services/brand-strategy
            /services/website-redesign
+           /services/headshots
    ============================================================ */
 
 import ServicePageTemplate from "@/components/ServicePageTemplate";
@@ -41,6 +42,7 @@ export function AutomotiveMarketingPage() {
         galleryImages: [
           ...LEXUS_HENDERSON.gallery.slice(0, 6),
           ...LEXUS_LAS_VEGAS.gallery.slice(0, 6),
+          ...CENTENNIAL_SUBARU.gallery.slice(0, 4),
         ],
         relatedProjects: [
           { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
@@ -222,6 +224,7 @@ export function HeadshotsPage() {
 }
 
 // ─── WEBSITE REDESIGN ────────────────────────────────────────
+// NOTE: Gallery/video intentionally omitted — content to be added later by client
 export function WebsiteRedesignPage() {
   return (
     <ServicePageTemplate
@@ -238,12 +241,6 @@ export function WebsiteRedesignPage() {
           { title: "BRAND-ALIGNED AESTHETICS", desc: "Custom design that reflects your brand identity — not a generic template. Every layout, color, and font choice is intentional." },
           { title: "PERFORMANCE OPTIMIZED", desc: "Fast load times, clean code, and SEO-ready structure that helps your site rank and perform across all devices." },
           { title: "CONTENT INTEGRATION", desc: "We integrate your existing photo and video content into the site design so your media assets work harder for your brand." },
-        ],
-        heroVideo: HERO_VIDEOS.websiteVideo,
-        galleryImages: [
-          ...LEXUS_HENDERSON.gallery.slice(0, 4),
-          ...LEXUS_LAS_VEGAS.gallery.slice(0, 4),
-          ...WONDR_NATION.gallery.slice(0, 4),
         ],
         relatedProjects: [
           { slug: "lexus-of-henderson", title: "LEXUS OF HENDERSON", category: "AUTOMOTIVE • MARKETING", image: LEXUS_HENDERSON.hero },
