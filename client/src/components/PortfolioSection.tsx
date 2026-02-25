@@ -2,7 +2,7 @@
    PortfolioSection — Unusually-inspired
    Style: Light background, category filter pills, masonry-style image grid
           with rounded corners, hover overlay, lightbox
-   Wedding removed. Categories: ALL, AUTOMOTIVE, EVENTS, LIFESTYLE
+   Categories: ALL, AUTOMOTIVE, EVENTS, LIFESTYLE
    ============================================================ */
 
 import { motion, useInView, AnimatePresence } from "framer-motion";

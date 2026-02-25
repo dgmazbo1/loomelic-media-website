@@ -2,7 +2,7 @@
    ProjectsSection — Unusually-inspired
    Style: Dark background, "SELECTED WORK" huge text left + year right,
           2-column grid of rounded project cards (dark bg, title+category top, image fills card)
-   Wedding removed. Each card links to /projects/:slug
+   Each card links to /projects/:slug
    ============================================================ */
 
 import { motion, useInView } from "framer-motion";

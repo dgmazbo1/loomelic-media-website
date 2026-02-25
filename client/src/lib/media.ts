@@ -24,12 +24,9 @@ export const HERO_VIDEOS = {
   lexusRoll: `${CDN}/68121368e0a8987c5085430c_Lexus%20Roll%20-transcode.mp4`,
   droneFiller: `${CDN}/681213a24b5acca7eb0ae3a2_Drone%20Filler%20Video-transcode.mp4`,
   centennialDrone: `${CDN}/6812134f958f1b9dc72071a6_Centennial%20Short%20Drone-transcode.mp4`,
-  weddingVideo: `${CDN}/681213b4cace38e5bb0578bb_Wedding%20Video-transcode.mp4`,
   websiteVideo: `${CDN}/68121656a7fe3207b100aedd_Website%20Video-transcode.mp4`,
-  janelWedding: `${CDN}/68121aad019a10b4b2381b42_JANEL%20WEDDING%20WEBSITE-transcode.mp4`,
   socialMediaAds: `${CDN}/681218fd0fe9c2affb464045_Social%20Media%20Ads-transcode.mp4`,
   headlight: `${CDN}/6812132f971b76e21f931206_Headlight-transcode.mp4`,
-  weddingWalk: `${CDN}/6812138d7b00140c93c91adf_Wedding%20Walk-transcode.mp4`,
   // Additional from services page
   apartments: `${CDN}%2F687284a181428b13e91694a0_Apartments-transcode.mp4`,
   gxShowroom: `${CDN}%2F687285f95fbd331e87bb061a_GX%20-transcode.mp4`,
@@ -37,7 +34,6 @@ export const HERO_VIDEOS = {
   subaruOTT: `${CDN}%2F6872938233838b796124c751_Subaru%20OTT-transcode.mp4`,
   konaIce: `${CDN}%2F6873f9675d62de2be6873de2_Kona%20Ice%20BigFoot-transcode.mp4`,
   rollers: `${CDN}%2F68753a37cde336ddfaa8d59a_ROLLERS-transcode.mp4`,
-  websiteWedding: `${CDN}%2F687210f777f454c5d9aa3026_Website%20Wedding%201-transcode.mp4`,
   madisonTalkingHead: `${CDN}%2F6872124bac082d1646d06eee_Madison%20Talking%20head-transcode.mp4`,
   lexusService: `${CDN}%2F687214ba5e2249e85fee075b_Lexus%20Service-transcode.mp4`,
 };
@@ -47,12 +43,9 @@ export const VIDEO_POSTERS = {
   lexusRoll: `${CDN}/68121368e0a8987c5085430c_Lexus%20Roll%20-poster-00001.jpg`,
   droneFiller: `${CDN}/681213a24b5acca7eb0ae3a2_Drone%20Filler%20Video-poster-00001.jpg`,
   centennialDrone: `${CDN}/6812134f958f1b9dc72071a6_Centennial%20Short%20Drone-poster-00001.jpg`,
-  weddingVideo: `${CDN}/681213b4cace38e5bb0578bb_Wedding%20Video-poster-00001.jpg`,
   websiteVideo: `${CDN}/68121656a7fe3207b100aedd_Website%20Video-poster-00001.jpg`,
-  janelWedding: `${CDN}/68121aad019a10b4b2381b42_JANEL%20WEDDING%20WEBSITE-poster-00001.jpg`,
   socialMediaAds: `${CDN}/681218fd0fe9c2affb464045_Social%20Media%20Ads-poster-00001.jpg`,
   headlight: `${CDN}/6812132f971b76e21f931206_Headlight-poster-00001.jpg`,
-  weddingWalk: `${CDN}/6812138d7b00140c93c91adf_Wedding%20Walk-poster-00001.jpg`,
 };
 
 // ─── HERO GRID IMAGES (homepage collage) ─────────────────────
@@ -126,8 +119,8 @@ export const RAIDERS_BLAST = {
   ],
 };
 
-// ─── PROJECT: JANEL & NEHIAMIA WEDDING ───────────────────────
-export const JANEL_WEDDING = {
+// ─── PROJECT: JANEL & NEHIAMIA (EVENT COVERAGE) ─────────────
+export const JANEL_NEHIAMIA = {
   hero: `${CDN2}/68120d19e5f450bdf4a66bd0_6811d7a56bbd1cf3c09b01c6_gettingready_clarke-184_websize.jpg`,
   gallery: [
     `${CDN}/687217e2630a6b55522d38d6_DSC_8511-Enhanced-NR-2.jpg`,
@@ -248,21 +241,6 @@ export const PORTFOLIO_GALLERY = [
   `${CDN}/683295abfe90bfcea8855a10_DJI_0824-Enhanced-NR.jpg`,
   `${CDN}/683295ac127062351df068fd_DSC_6577.jpg`,
   `${CDN}/683295ac71146b427478e3e3_DSC_4539.jpg`,
-  // Wedding
-  `${CDN}/687217e2630a6b55522d38d6_DSC_8511-Enhanced-NR-2.jpg`,
-  `${CDN}/687217e2b6e2f0969c11bc1f_DSC_7846-Enhanced-NR-2.jpg`,
-  `${CDN}/687217e33cc55a2903bc74da_DSC_3242.jpg`,
-  `${CDN}/687217e348edde385b9177e5_DSC_9501.jpg`,
-  `${CDN}/687217e356017ecb7bab6dd6_DSC_2415.jpg`,
-  `${CDN}/687217e3c5aeb965c2a2fd52_DSC_3573-Enhanced-NR.jpg`,
-  `${CDN}/687217e451e99e1783b16011_DSC_3334.jpg`,
-  `${CDN}/687217e477f454c5d9ac5a21_DSC_3489.jpg`,
-  `${CDN}/687217e4b5fc5858798a9b03_DSC_5454-Enhanced-NR-2.jpg`,
-  `${CDN}/687217e4b6e2f0969c11c20e_DSC_7856-2.jpg`,
-  `${CDN}/687217e4f48c8590a9a53e28_DSC_0343.jpg`,
-  `${CDN}/687217e55e2249e85feefc83_DSC_5856.jpg`,
-  `${CDN}/687217e5f3bc7d4c5ad3201e_DSC_8782-3.jpg`,
-  `${CDN}/687219cdc41a80753e06733c_DSC02712.jpg`,
   // Subaru
   `${CDN2}/6874068d0f75c23f27620b84_DSC_3490.jpg`,
   `${CDN2}/6874068d1b8e7d38baa51635_DSC_3496.jpg`,
@@ -299,6 +277,5 @@ export const PORTFOLIO_GALLERY = [
 export const SERVICES_IMAGES = {
   socialMedia: `${CDN}/681218fd0fe9c2affb464045_Social%20Media%20Ads-poster-00001.jpg`,
   photoshoot: `${CDN}/68131b429db2eeff3506c6b5_Business-(1%20of%201)_(8).jpg`,
-  wedding: `${CDN}/681213b4cace38e5bb0578bb_Wedding%20Video-poster-00001.jpg`,
   automotive: `${CDN}/68121368e0a8987c5085430c_Lexus%20Roll%20-poster-00001.jpg`,
 };

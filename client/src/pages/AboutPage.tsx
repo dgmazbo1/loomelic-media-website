@@ -73,7 +73,7 @@ export default function AboutPage() {
             <div className="space-y-6">
               <AnimFade delay={0.1}>
                 <p className="font-body text-base sm:text-lg text-[oklch(0.2_0_0)] leading-relaxed">
-                  Loomelic Media is a Las Vegas–based production company built to help brands look premium, consistent, and unmistakably professional—on every platform, every time. We create high-end photo and video for weddings, corporate events, real estate, and lifestyle, with a specialty in automotive content that makes inventory, people, and dealership culture stand out.
+                  Loomelic Media is a Las Vegas–based production company built to help brands look premium, consistent, and unmistakably professional—on every platform, every time. We create high-end photo and video for corporate events, real estate, and lifestyle, with a specialty in automotive content that makes inventory, people, and dealership culture stand out.
                 </p>
               </AnimFade>
 
@@ -91,7 +91,7 @@ export default function AboutPage() {
 
               <AnimFade delay={0.25}>
                 <p className="font-body text-base sm:text-lg text-[oklch(0.2_0_0)] leading-relaxed">
-                  We're known for clean visuals, fast turnaround, and a sharp understanding of what brands actually need: content that looks like it belongs at the top of the market. Whether you're a couple planning your wedding, a business launching a campaign, or a dealership managing inventory and promotions at scale, Loomelic Media delivers visuals that match the level you want to be seen at.
+                  We're known for clean visuals, fast turnaround, and a sharp understanding of what brands actually need: content that looks like it belongs at the top of the market. Whether you're a business launching a campaign, or a dealership managing inventory and promotions at scale, Loomelic Media delivers visuals that match the level you want to be seen at.
                 </p>
               </AnimFade>
 

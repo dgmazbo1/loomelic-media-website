@@ -9,7 +9,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { HERO_VIDEOS } from "@/lib/media";
 
-const marqueeText = ["CINEMATIC", "AUTOMOTIVE", "WEDDINGS", "SOCIAL MEDIA", "EVENTS", "PHOTOGRAPHY", "DRONE", "BRANDING"];
+const marqueeText = ["CINEMATIC", "AUTOMOTIVE", "EVENTS", "SOCIAL MEDIA", "PHOTOGRAPHY", "BRANDING", "BRAND STRATEGY", "WEBSITE DESIGN"];
 
 export default function ShowreelSection() {
   const ref = useRef(null);

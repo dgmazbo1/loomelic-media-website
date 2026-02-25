@@ -3,7 +3,7 @@
    Style: Dark background, "CREATIVE SOLUTIONS" huge heading,
           numbered list (01,02...) with huge service name + description
    Services: Automotive Marketing, Event Coverage, Social Media Content,
-             Photography, Brand Strategy (no Drone/Wedding)
+             Photography, Brand Strategy, Website Redesign
    Each row links to its individual service page
    ============================================================ */
 
