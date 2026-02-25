@@ -53,7 +53,7 @@ export default function ContactSection() {
           </AnimFade>
           <AnimFade delay={0.2}>
             <button
-              onClick={() => { const el = document.getElementById("contact-form"); if (el) { const top = el.getBoundingClientRect().top + window.scrollY - 80; window.scrollTo({ top, behavior: "smooth" }); } }}
+              onClick={() => { const el = document.getElementById("contact-form"); if (el) { let top = 0; let node: HTMLElement | null = el; while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; } window.scrollTo({ top: Math.max(0, top - 80), behavior: "smooth" }); } }}
               className="btn-pill-light text-xs"
             >
               GET IN TOUCH +
@@ -182,7 +182,7 @@ export default function ContactSection() {
             <nav className="flex flex-wrap gap-x-6 gap-y-2">
               {["PROJECTS", "SERVICES", "ABOUT", "PORTFOLIO", "CONTACT"].map((link) => (
                 <button key={link}
-                  onClick={() => { const el = document.getElementById(link.toLowerCase()); if (el) { const top = el.getBoundingClientRect().top + window.scrollY - 80; window.scrollTo({ top, behavior: "smooth" }); } }}
+                  onClick={() => { const el = document.getElementById(link.toLowerCase()); if (el) { let top = 0; let node: HTMLElement | null = el; while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; } window.scrollTo({ top: Math.max(0, top - 80), behavior: "smooth" }); } }}
                   className="font-body text-[0.65rem] tracking-[0.15em] text-white/35 hover:text-white transition-colors">
                   {link}
                 </button>

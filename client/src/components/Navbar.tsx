@@ -40,11 +40,12 @@ export default function Navbar() {
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
-    if (el) {
-      const navHeight = 80; // fixed navbar height
-      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
+    if (!el) return;
+    // Walk absolute offsetTop chain — reliable regardless of current scroll position
+    let top = 0;
+    let node: HTMLElement | null = el;
+    while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; }
+    window.scrollTo({ top: Math.max(0, top - 80), behavior: "smooth" });
   };
 
   const handleNavClick = (href: string) => {
@@ -81,18 +82,20 @@ export default function Navbar() {
             onClick={goHome}
             className="flex-shrink-0 z-10 overflow-hidden"
             aria-label="Go to home"
-            style={{ height: "52px" }}
+            style={{ height: "64px" }}
           >
-            {/* Logo is 9:16 portrait (1080x1920). At w-[220px], full height = ~391px.
-                Logo text sits at ~45%-58% of image height = ~176px-227px from top.
-                We shift up by ~170px to center the text in the 52px container. */}
+            {/* Logo is 9:16 portrait (1080x1920).
+                At w-[140px], full height = 140 * (1920/1080) = ~249px.
+                Logo text (LOOMELIC + MEDIA) spans ~42%-62% = 104px-154px from top.
+                Text block height = ~50px. Container = 64px.
+                Shift up by ~97px to center text in 64px container. */}
             <img
               src={LOGO_TRANSPARENT}
               alt="Loomelic Media"
-              className="w-[180px] sm:w-[220px] h-auto"
+              className="w-[130px] sm:w-[150px] h-auto"
               style={{
                 filter: "brightness(0) invert(1)",
-                marginTop: "-170px",
+                marginTop: "-97px",
               }}
             />
           </button>
