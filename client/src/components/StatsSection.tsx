@@ -99,7 +99,7 @@ export default function StatsSection() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <div className="font-display text-[clamp(3rem,8vw,5.5rem)] leading-none text-[oklch(0.07_0_0)]">
-                    +<CountUp to={50} />
+                    +<CountUp to={125} />
                   </div>
                   <div className="w-8 h-px bg-[oklch(0.07_0_0)/20] my-3" />
                   <p className="font-body text-sm font-semibold text-[oklch(0.07_0_0)]">Successful Projects<br />Completed</p>

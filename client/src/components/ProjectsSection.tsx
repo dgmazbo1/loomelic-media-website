@@ -34,7 +34,7 @@ export const PROJECTS = [
     slug: "las-vegas-raiders-tour",
     title: "LAS VEGAS RAIDERS TOUR",
     category: "EVENTS • VIDEOGRAPHY",
-    image: RAIDERS_BLAST.hero,
+    image: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/RmajYjEDnrnlYrjq.jpg",
   },
   {
     slug: "centennial-subaru",

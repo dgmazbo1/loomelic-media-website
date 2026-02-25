@@ -73,9 +73,8 @@ export function RaidersPage() {
         services: ["Event Coverage", "Videography", "Photography"],
         description:
           "Full event coverage for the Las Vegas Raiders Tour — The Blast, capturing the energy, excitement, and key moments of this high-profile event. Our team provided comprehensive photo and video documentation of the tour, delivering cinematic content that showcased the Raiders brand and fan experience.",
-        heroImage: RAIDERS_BLAST.hero,
-        gallery: RAIDERS_BLAST.gallery,
-        videoSrc: HERO_VIDEOS.websiteVideo,
+        heroImage: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/RmajYjEDnrnlYrjq.jpg",
+        gallery: [],
       }}
     />
   );

@@ -50,7 +50,7 @@ export default function HeroSection() {
           className="section-label mb-6 sm:mb-8"
         >
           <span>✦</span>
-          <span>LAS VEGAS VIDEO PRODUCTION</span>
+          <span>A Las Vegas Production Company</span>
         </motion.div>
 
         {/* Wordmark — logo image */}

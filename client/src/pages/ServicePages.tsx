@@ -84,13 +84,13 @@ export function EventCoveragePage() {
           { title: "HIGHLIGHT REELS", desc: "Cinematic event recap videos edited for social media, internal use, or promotional purposes." },
           { title: "SAME-DAY EDITS", desc: "Fast-turnaround edited content available for immediate social media posting during or after your event." },
         ],
-        heroImage: RAIDERS_BLAST.hero,
+        heroImage: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/RmajYjEDnrnlYrjq.jpg",
         galleryImages: [
           ...RAIDERS_BLAST.gallery,
           ...WONDR_NATION.gallery,
         ],
         relatedProjects: [
-          { slug: "las-vegas-raiders-tour", title: "LAS VEGAS RAIDERS TOUR", category: "EVENTS \u2022 VIDEOGRAPHY", image: RAIDERS_BLAST.hero },
+          { slug: "las-vegas-raiders-tour", title: "LAS VEGAS RAIDERS TOUR", category: "EVENTS \u2022 VIDEOGRAPHY", image: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/RmajYjEDnrnlYrjq.jpg" },
           { slug: "wondr-nation-g2e", title: "WONDR NATION G2E", category: "EVENTS \u2022 PHOTOGRAPHY", image: WONDR_NATION.hero },
         ],
       }}

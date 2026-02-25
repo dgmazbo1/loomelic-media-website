@@ -7,6 +7,8 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
+import AllProjectsPage from "./pages/AllProjectsPage";
+import AllServicesPage from "./pages/AllServicesPage";
 
 // Service pages
 import {
@@ -48,6 +50,12 @@ function Router() {
 
         {/* About / Our Story */}
         <Route path="/about" component={AboutPage} />
+
+        {/* All projects listing */}
+        <Route path="/projects" component={AllProjectsPage} />
+
+        {/* All services listing */}
+        <Route path="/services" component={AllServicesPage} />
 
         {/* Service pages */}
         <Route path="/services/automotive-marketing" component={AutomotiveMarketingPage} />
