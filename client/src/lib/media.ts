@@ -290,5 +290,10 @@ export const HEADSHOTS = {
     `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/lAmGrwnaAjITGwmR.jpg`,
     // ABC Hyundai team headshot
     `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/sIRnqOlBsoEsukYP.jpg`,
+    // Additional headshots
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/GCHcBtjEzIfQIACp.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/uoUVOXCqCZqYDytJ.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/QueGBbhYElPuWzZH.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/fJMHjOSkORDjNnPQ.jpg`,
   ],
 };
