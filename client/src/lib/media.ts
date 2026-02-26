@@ -74,19 +74,7 @@ export const LEXUS_HENDERSON = {
 // ─── PROJECT: LEXUS OF LAS VEGAS ─────────────────────────────
 export const LEXUS_LAS_VEGAS = {
   hero: `${CDN2}/6812085aeb6ad37e23b9c704_6811d7a56bbd1cf3c09b01d9_DSC_6614-Enhanced-NR.jpg`,
-  gallery: [
-    `${CDN}/683295aa77455fd18ed12b73_DJI_0617-Enhanced-NR.jpg`,
-    `${CDN}/683295aa9f42323ca94d08a9_DSC_6623-Enhanced-NR.jpg`,
-    `${CDN}/683295aacc777d1c83931cba_DSC_9646.jpg`,
-    `${CDN}/683295aacc777d1c83931cbf_DSC_2071.jpg`,
-    `${CDN}/683295abdd31e21371824e82_DSC_6643-Enhanced-NR.jpg`,
-    `${CDN}/683295abfe90bfcea8855a10_DJI_0824-Enhanced-NR.jpg`,
-    `${CDN}/683295ac127062351df068fd_DSC_6577.jpg`,
-    `${CDN}/683295ac71146b427478e3e3_DSC_4539.jpg`,
-    `${CDN}/683295ad92b6ed77ec7fefed_DSC_9262.jpg`,
-    `${CDN}/683295ad9c216dd188f8dc25_DSC_5224-2.jpg`,
-    `${CDN}/683295adc6e3217f182b7da6_DSC_4428.jpg`,
-  ],
+  gallery: [],
 };
 
 // ─── PROJECT: LAS VEGAS RAIDERS TOUR — THE BLAST ─────────────
