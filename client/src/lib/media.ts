@@ -129,7 +129,7 @@ export const JANEL_NEHIAMIA = {
 
 // ─── PROJECT: CENTENNIAL SUBARU ──────────────────────────────
 export const CENTENNIAL_SUBARU = {
-  hero: `${CDN2}/6813628a0b4005120d310b5d_6811d7a56bbd1cf3c09b01c0_DSC_2417.jpg`,
+  hero: `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/RHOFQHNWUSYjEkJb.jpg`,
   gallery: [],
 };
 
