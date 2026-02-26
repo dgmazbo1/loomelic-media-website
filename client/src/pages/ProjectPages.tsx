@@ -12,6 +12,7 @@ import ProjectPageTemplate from "@/components/ProjectPageTemplate";
 import {
   LEXUS_HENDERSON,
   LEXUS_LAS_VEGAS,
+  RAIDERS_BLAST,
   CENTENNIAL_SUBARU,
   WONDR_NATION,
   BOB_MARLEY,
@@ -119,7 +120,7 @@ export function RaidersPage() {
         description:
           "Full event coverage for the Las Vegas Raiders Tour — The Blast, capturing the energy, excitement, and key moments of this high-profile event. Our team provided comprehensive photo and video documentation of the tour, delivering cinematic content that showcased the Raiders brand and fan experience.",
         heroImage: "https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/RmajYjEDnrnlYrjq.jpg",
-        gallery: [],
+        gallery: RAIDERS_BLAST.gallery,
         feedback: {
           quote: "The team from Loomelic captured everything we needed — the atmosphere, the energy, the brand moments. They were professional, fast, and delivered content that we were proud to share across all of our channels.",
           name: "Event Coordinator",
