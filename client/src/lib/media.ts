@@ -93,8 +93,6 @@ export const LEXUS_LAS_VEGAS = {
 export const RAIDERS_BLAST = {
   hero: `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/RmajYjEDnrnlYrjq.jpg`,
   gallery: [
-    `${CDN2}/6816d35fcef286fbced5fea0_DSC_7189.jpg`,
-    `${CDN2}/6816ff27559555013558548d_sneakpeekLTMVIP-51.jpg`,
     `${CDN2}/681fdcc330b5138a487f2319_DSC_7822-2.jpg`,
     `${CDN2}/681fdd0c027084bef77377c7_DSC_7810-Enhanced-NR.jpg`,
     `${CDN2}/681fdd0c027084bef7737808_DSC_7679-Enhanced-NR.jpg`,
