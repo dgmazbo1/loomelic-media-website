@@ -130,26 +130,7 @@ export const JANEL_NEHIAMIA = {
 // ─── PROJECT: CENTENNIAL SUBARU ──────────────────────────────
 export const CENTENNIAL_SUBARU = {
   hero: `${CDN2}/6813628a0b4005120d310b5d_6811d7a56bbd1cf3c09b01c0_DSC_2417.jpg`,
-  gallery: [
-    `${CDN2}/6874068d0f75c23f27620b84_DSC_3490.jpg`,
-    `${CDN2}/6874068d1b8e7d38baa51635_DSC_3496.jpg`,
-    `${CDN2}/6874068d1dd2d8c3fb5ee392_DSC_3518.jpg`,
-    `${CDN2}/6874068d2d7c87c9edbcadbc_DSC_3373.jpg`,
-    `${CDN2}/6874068d3560b97ce9641999_DSC_3388.jpg`,
-    `${CDN2}/6874068d43503dc9544c5101_DSC_3529.jpg`,
-    `${CDN2}/6874068d4b7b7ce577b80587_DSC_3434.jpg`,
-    `${CDN2}/6874068d4ce42286637bcb69_DSC_3472.jpg`,
-    `${CDN2}/6874068d4d934452956c996e_DSC_3514.jpg`,
-    `${CDN2}/6874068d4d934452956c9977_DSC_3339.jpg`,
-    `${CDN2}/6874068d604dfcd2a65c6a5d_DSC_3334-2.jpg`,
-    `${CDN2}/6874068d60c51c129c5e2def_DSC_3435.jpg`,
-    `${CDN2}/6874068d682c0263eed8f0f5_DSC_3382.jpg`,
-    `${CDN2}/6874068d7695e3a04cd995a8_DSC_3489.jpg`,
-    `${CDN2}/6874068d7695e3a04cd995b2_DSC_3341.jpg`,
-    `${CDN2}/6874068d91a3d65e29fb4abe_DSC_3516.jpg`,
-    `${CDN2}/6874068dc6cb5aeb2e82e0a0_DSC_3399.jpg`,
-    `${CDN2}/6873ff7c8c0e440e2d35acf2_DSC_3489.jpg`,
-  ],
+  gallery: [],
 };
 
 // ─── PROJECT: JW OFFROAD ─────────────────────────────────────
@@ -203,6 +184,15 @@ export const BOB_MARLEY = {
     `${CDN2}/6874068d7695e3a04cd995b2_DSC_3341.jpg`,
     `${CDN2}/6874068d91a3d65e29fb4abe_DSC_3516.jpg`,
     `${CDN2}/6874068dc6cb5aeb2e82e0a0_DSC_3399.jpg`,
+    `${CDN2}/6874068d0f75c23f27620b84_DSC_3490.jpg`,
+    `${CDN2}/6874068d1b8e7d38baa51635_DSC_3496.jpg`,
+    `${CDN2}/6874068d1dd2d8c3fb5ee392_DSC_3518.jpg`,
+    `${CDN2}/6874068d2d7c87c9edbcadbc_DSC_3373.jpg`,
+    `${CDN2}/6874068d3560b97ce9641999_DSC_3388.jpg`,
+    `${CDN2}/6874068d43503dc9544c5101_DSC_3529.jpg`,
+    `${CDN2}/6874068d4b7b7ce577b80587_DSC_3434.jpg`,
+    `${CDN2}/6874068d4ce42286637bcb69_DSC_3472.jpg`,
+    `${CDN2}/6874068d7695e3a04cd995a8_DSC_3489.jpg`,
   ],
 };
 
