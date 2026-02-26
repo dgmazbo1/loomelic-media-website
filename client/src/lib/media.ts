@@ -170,9 +170,8 @@ export const WONDR_NATION = {
 
 // ─── PROJECT: BOB MARLEY HOPE ROAD ─────────────────────────
 export const BOB_MARLEY = {
-  hero: `${CDN}/68170136336e9ad678bc2c4c_LTMDay1Tour-06.jpg`,
+  hero: `${CDN2}/6873ff7c8c0e440e2d35acf2_DSC_3489.jpg`,
   gallery: [
-    `${CDN}/68170136336e9ad678bc2c4c_LTMDay1Tour-06.jpg`,
     `${CDN2}/6873ff7c8c0e440e2d35acf2_DSC_3489.jpg`,
     `${CDN2}/6816d3add512ef0eed1696ad_DSC_6149-Enhanced-NR.jpg`,
     `${CDN2}/681fdccdd64bddb9a532638a_DSC_7634.jpg`,
