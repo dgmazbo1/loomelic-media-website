@@ -173,8 +173,6 @@ export const BOB_MARLEY = {
   hero: `${CDN2}/6873ff7c8c0e440e2d35acf2_DSC_3489.jpg`,
   gallery: [
     `${CDN2}/6873ff7c8c0e440e2d35acf2_DSC_3489.jpg`,
-    `${CDN2}/6816d3add512ef0eed1696ad_DSC_6149-Enhanced-NR.jpg`,
-    `${CDN2}/681fdccdd64bddb9a532638a_DSC_7634.jpg`,
     `${CDN2}/6874068d4d934452956c9977_DSC_3339.jpg`,
     `${CDN2}/6874068d4d934452956c996e_DSC_3514.jpg`,
     `${CDN2}/6874068d604dfcd2a65c6a5d_DSC_3334-2.jpg`,
