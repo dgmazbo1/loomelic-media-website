@@ -67,27 +67,7 @@ export const DESIGN_WORK = [
 // ─── PROJECT: LEXUS OF HENDERSON ─────────────────────────────
 export const LEXUS_HENDERSON = {
   hero: `${CDN2}/6811ef300aaf9dc73228ee1e_6811d7a56bbd1cf3c09b01f3_Timeline%201_01_00_12_14-2.jpg`,
-  gallery: [
-    `${CDN2}/681fdd0c027084bef77377c7_DSC_7810-Enhanced-NR.jpg`,
-    `${CDN2}/681fdd0c027084bef7737808_DSC_7679-Enhanced-NR.jpg`,
-    `${CDN2}/681fdd0c0a46bb29bb7d1413_DSC_7846-Enhanced-NR.jpg`,
-    `${CDN2}/681fdd0c2e5b8c350c236a85_DSC_7668-Enhanced-NR.jpg`,
-    `${CDN2}/681fdd0c5369da715966f6b3_DSC_7634-2.jpg`,
-    `${CDN2}/681fdd0c741fe7cccdf14ed6_DSC_7729-Enhanced-NR-2.jpg`,
-    `${CDN2}/681fdd0c85b83fc21fdf296c_DSC_7587.jpg`,
-    `${CDN2}/681fdd0c85b83fc21fdf2975_DSC_7707.jpg`,
-    `${CDN2}/681fdd0c8b86b2331197fe9d_DSC_7762-Enhanced-NR.jpg`,
-    `${CDN2}/681fdd0ca86fdf2e60c62187_DSC_7822.jpg`,
-    `${CDN2}/681fdd0cb945782e0d366968_DSC_7765.jpg`,
-    `${CDN2}/681fdd0cc518eee5abfca9b9_DSC_7878-Enhanced-NR.jpg`,
-    `${CDN2}/681fdd0cd12fe777347ed773_DSC_7769.jpg`,
-    `${CDN2}/681fdd0cd12fe777347ed776_DSC_7832.jpg`,
-    `${CDN2}/681fdd0cd42d54a9b78a9e38_DSC_7856.jpg`,
-    `${CDN2}/681fdd0cd42d54a9b78a9e3c_DSC_7717-Enhanced-NR.jpg`,
-    `${CDN2}/681fdd0cda7f3a484289a16c_DSC_7690-Enhanced-NR.jpg`,
-    `${CDN2}/681fdd0ce00afadb49678f92_DSC_7616.jpg`,
-    `${CDN2}/681fdcc330b5138a487f2319_DSC_7822-2.jpg`,
-  ],
+  gallery: [],
   vimeoIds: ["1080433801", "1080433724", "1080433986", "1080434019"],
 };
 
@@ -111,10 +91,29 @@ export const LEXUS_LAS_VEGAS = {
 
 // ─── PROJECT: LAS VEGAS RAIDERS TOUR — THE BLAST ─────────────
 export const RAIDERS_BLAST = {
-  hero: `${CDN}/68170136336e9ad678bc2c4c_LTMDay1Tour-06.jpg`,
+  hero: `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/RmajYjEDnrnlYrjq.jpg`,
   gallery: [
     `${CDN2}/6816d35fcef286fbced5fea0_DSC_7189.jpg`,
     `${CDN2}/6816ff27559555013558548d_sneakpeekLTMVIP-51.jpg`,
+    `${CDN2}/681fdcc330b5138a487f2319_DSC_7822-2.jpg`,
+    `${CDN2}/681fdd0c027084bef77377c7_DSC_7810-Enhanced-NR.jpg`,
+    `${CDN2}/681fdd0c027084bef7737808_DSC_7679-Enhanced-NR.jpg`,
+    `${CDN2}/681fdd0c0a46bb29bb7d1413_DSC_7846-Enhanced-NR.jpg`,
+    `${CDN2}/681fdd0c2e5b8c350c236a85_DSC_7668-Enhanced-NR.jpg`,
+    `${CDN2}/681fdd0c5369da715966f6b3_DSC_7634-2.jpg`,
+    `${CDN2}/681fdd0c741fe7cccdf14ed6_DSC_7729-Enhanced-NR-2.jpg`,
+    `${CDN2}/681fdd0c85b83fc21fdf296c_DSC_7587.jpg`,
+    `${CDN2}/681fdd0c85b83fc21fdf2975_DSC_7707.jpg`,
+    `${CDN2}/681fdd0c8b86b2331197fe9d_DSC_7762-Enhanced-NR.jpg`,
+    `${CDN2}/681fdd0ca86fdf2e60c62187_DSC_7822.jpg`,
+    `${CDN2}/681fdd0cb945782e0d366968_DSC_7765.jpg`,
+    `${CDN2}/681fdd0cc518eee5abfca9b9_DSC_7878-Enhanced-NR.jpg`,
+    `${CDN2}/681fdd0cd12fe777347ed773_DSC_7769.jpg`,
+    `${CDN2}/681fdd0cd12fe777347ed776_DSC_7832.jpg`,
+    `${CDN2}/681fdd0cd42d54a9b78a9e38_DSC_7856.jpg`,
+    `${CDN2}/681fdd0cd42d54a9b78a9e3c_DSC_7717-Enhanced-NR.jpg`,
+    `${CDN2}/681fdd0cda7f3a484289a16c_DSC_7690-Enhanced-NR.jpg`,
+    `${CDN2}/681fdd0ce00afadb49678f92_DSC_7616.jpg`,
     `${CDN2}/681fdcc330b5138a487f2319_DSC_7822-2.jpg`,
   ],
 };
