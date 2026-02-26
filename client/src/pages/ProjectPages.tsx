@@ -16,6 +16,7 @@ import {
   CENTENNIAL_SUBARU,
   WONDR_NATION,
   BOB_MARLEY,
+  SPORTS_ILLUSTRATED,
   HERO_VIDEOS,
 } from "@/lib/media";
 
@@ -272,6 +273,49 @@ export function BobMarleyPage() {
             metric: "Social Reach",
             value: "Viral",
             label: "Select images shared widely across social media, generating organic reach beyond the initial campaign.",
+          },
+        ],
+      }}
+    />
+  );
+}
+
+// ─── SPORTS ILLUSTRATED — SPORTSPERSON OF THE YEAR 2026 ─────
+export function SportsIllustratedPage() {
+  return (
+    <ProjectPageTemplate
+      data={{
+        slug: "sports-illustrated-sportsperson-2026",
+        title: "SPORTS ILLUSTRATED: SPORTSPERSON OF THE YEAR 2026",
+        category: "EVENTS • PHOTOGRAPHY",
+        year: "2026",
+        client: "The Blast — Sports Illustrated",
+        services: ["Event Photography", "Red Carpet Coverage", "Editorial Photography"],
+        description:
+          "Loomelic Media was on the ground for Sports Illustrated's Sportsperson of the Year 2026, held in Las Vegas. Over the course of one evening, our team covered the red carpet in full — photographing athletes, celebrities, and media personalities as they arrived for one of sports media's most prestigious annual events.\n\nWorking alongside The Blast, we conducted red carpet interviews and captured 100 images across the evening, delivering editorial-quality content that documented the energy, fashion, and star power of the night. From wide establishing shots to tight portrait moments, every frame was crafted to meet the high standards of a Sports Illustrated production.",
+        heroImage: SPORTS_ILLUSTRATED.hero,
+        gallery: SPORTS_ILLUSTRATED.gallery,
+        feedback: {
+          quote: "Loomelic showed up ready. The red carpet was fast-paced, the talent kept moving, and they captured every key moment without missing a beat. The images were clean, sharp, and delivered on time — exactly what we needed for a night like this.",
+          name: "Production Team",
+          title: "Red Carpet Producer",
+          company: "The Blast",
+        },
+        outcomes: [
+          {
+            metric: "Event Duration",
+            value: "1 Night",
+            label: "Full red carpet and event coverage delivered in a single high-energy evening shoot.",
+          },
+          {
+            metric: "Images Delivered",
+            value: "100",
+            label: "Editorial-quality photographs capturing athletes, celebrities, and key brand moments.",
+          },
+          {
+            metric: "Coverage",
+            value: "Red Carpet",
+            label: "Exclusive red carpet access with athlete interviews conducted alongside The Blast.",
           },
         ],
       }}

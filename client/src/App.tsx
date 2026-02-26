@@ -29,6 +29,7 @@ import {
   CentennialSubaruPage,
   WondrNationPage,
   BobMarleyPage,
+  SportsIllustratedPage,
 } from "./pages/ProjectPages";
 
 /** Scrolls to the top of the page on every route change — fixes the "scroll to bottom" bug */
@@ -73,6 +74,7 @@ function Router() {
         <Route path="/projects/centennial-subaru" component={CentennialSubaruPage} />
         <Route path="/projects/wondr-nation-g2e" component={WondrNationPage} />
         <Route path="/projects/bob-marley-hope-road" component={BobMarleyPage} />
+        <Route path="/projects/sports-illustrated-sportsperson-2026" component={SportsIllustratedPage} />
 
         {/* 404 */}
         <Route path="/404" component={NotFound} />

@@ -15,6 +15,7 @@ import {
   LEXUS_LAS_VEGAS,
   WONDR_NATION,
   BOB_MARLEY,
+  SPORTS_ILLUSTRATED,
 } from "@/lib/media";
 
 export const PROJECTS = [
@@ -53,6 +54,12 @@ export const PROJECTS = [
     title: "BOB MARLEY HOPE ROAD",
     category: "EVENTS • EDITORIAL PHOTOGRAPHY",
     image: BOB_MARLEY.hero,
+  },
+  {
+    slug: "sports-illustrated-sportsperson-2026",
+    title: "SPORTS ILLUSTRATED: SPORTSPERSON OF THE YEAR 2026",
+    category: "EVENTS • PHOTOGRAPHY",
+    image: SPORTS_ILLUSTRATED.hero,
   },
 ];
 

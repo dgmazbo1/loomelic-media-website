@@ -193,6 +193,28 @@ export const BOB_MARLEY = {
   ],
 };
 
+// ─── PROJECT: SPORTS ILLUSTRATED — SPORTSPERSON OF THE YEAR 2026 ───
+export const SPORTS_ILLUSTRATED = {
+  hero: `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/feKRCsFXCnKHPHNW.jpg`,
+  gallery: [
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/feKRCsFXCnKHPHNW.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/ufaYfPvLInLpqvhK.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/xnmhIgKfkrfSrEBh.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/lSXcVbWVBfNRIrkv.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/aZBShlhJpdQPYMBk.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/KWEleuUwjKdscsfE.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/WJjDsAyomvVmJDeu.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/nJeQjxhLPAkTEMLZ.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/HeCegqLCEYiUgdSU.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/KznMffLDPmtdjUhQ.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/gsHgAEHqnxbRucqV.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/PbtazAybgxyJTUQd.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/rXIHjdqcfrpLxpMh.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/dytPjcjViusiJxlo.jpg`,
+    `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/HNbsfRzhIbdGOqPy.jpg`,
+  ],
+};
+
 // ─── PORTFOLIO GALLERY (all photos) ──────────────────────────
 export const PORTFOLIO_GALLERY = [
   // Lexus Henderson
