@@ -1,18 +1,18 @@
 /* ============================================================
-   AboutSection — Unusually-inspired
-   Style: Light (off-white) background, huge bold statement text,
-          CTA buttons, body text, client logos grid (white rounded cards), Vimeo embed
+   AboutSection — Dealer-acquisition rebuild
+   Design: Light background, "TRUSTED BY" strip (brand names),
+           dealer-focused copy, showreel embed
    ============================================================ */
-
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useLocation } from "wouter";
 
-const CLIENT_LOGOS_TEXT = [
+const TRUSTED_BY = [
   "LEXUS OF LAS VEGAS",
   "LEXUS OF HENDERSON",
   "LAS VEGAS RAIDERS",
   "CENTENNIAL SUBARU",
-  "M&MM UNITED",
+  "SPORTS ILLUSTRATED",
 ];
 
 const VIMEO_ID = "925584368";
@@ -34,27 +34,20 @@ function AnimFade({ children, className = "", delay = 0 }: { children: React.Rea
 }
 
 export default function AboutSection() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    let top = 0;
-    let node: HTMLElement | null = el;
-    while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; }
-    window.scrollTo({ top: Math.max(0, top - 80), behavior: "smooth" });
-  };
+  const [, navigate] = useLocation();
 
   return (
     <section id="about" className="section-light text-[oklch(0.07_0_0)]">
-      {/* Partners strip */}
+      {/* Trusted By strip */}
       <div className="border-b border-[oklch(0_0_0/0.07)] py-10 sm:py-14">
         <div className="container">
           <AnimFade>
             <p className="section-label text-[oklch(0.07_0_0)/50] mb-8">
-              <span>✦</span><span>GLOBAL PARTNERS:</span>
+              <span>✦</span><span>TRUSTED BY:</span>
             </p>
           </AnimFade>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-            {CLIENT_LOGOS_TEXT.map((name, i) => (
+            {TRUSTED_BY.map((name, i) => (
               <motion.div
                 key={name}
                 initial={{ opacity: 0, y: 20 }}
@@ -80,7 +73,7 @@ export default function AboutSection() {
             <AnimFade className="mb-4 sm:mb-6">
               <div className="overflow-hidden">
                 <div className="flex gap-6 animate-marquee">
-                  {["DRIVEN BY DESIGN —", "DRIVEN BY DESIGN —", "DRIVEN BY DESIGN —", "DRIVEN BY DESIGN —"].map((t, i) => (
+                  {["DEALER CONTENT SYSTEMS —", "DEALER CONTENT SYSTEMS —", "DEALER CONTENT SYSTEMS —", "DEALER CONTENT SYSTEMS —"].map((t, i) => (
                     <span key={i} className="section-label text-[oklch(0.07_0_0)/40] shrink-0">
                       <span>✦</span><span>{t}</span>
                     </span>
@@ -90,23 +83,25 @@ export default function AboutSection() {
             </AnimFade>
             <AnimFade delay={0.1}>
               <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-[oklch(0.07_0_0)]">
-                WE CREATE<br />
-                <span className="text-[oklch(0.78_0_0)]">CINEMATIC</span><br />
-                EXPERIENCES
+                CONTENT BUILT<br />
+                <span className="text-[oklch(0.78_0_0)]">FOR DEALERS</span>
               </h2>
             </AnimFade>
           </div>
 
           {/* Right: CTA buttons */}
           <AnimFade delay={0.2} className="flex flex-row lg:flex-col gap-3 pt-2 lg:pt-8">
-            <button onClick={() => scrollTo("projects")} className="btn-pill-dark text-xs">
-              OUR STORY +
+            <button
+              onClick={() => navigate("/projects")}
+              className="btn-pill-dark text-xs"
+            >
+              OUR WORK +
             </button>
             <button
-              onClick={() => scrollTo("contact")}
+              onClick={() => { navigate("/#contact"); setTimeout(() => { const el = document.getElementById("contact"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 100); }}
               className="btn-pill-outline !text-[oklch(0.07_0_0)] !border-[oklch(0_0_0/0.2)] hover:!bg-[oklch(0.07_0_0)] hover:!text-white text-xs"
             >
-              CONTACT US ↗
+              BOOK A CALL ↗
             </button>
           </AnimFade>
         </div>
@@ -114,13 +109,10 @@ export default function AboutSection() {
         {/* Body text */}
         <AnimFade delay={0.15} className="max-w-2xl mb-16 sm:mb-20">
           <p className="font-body text-base sm:text-lg text-[oklch(0.35_0_0)] leading-relaxed">
-            By combining cinematic storytelling, precision photography, and strategic digital content,
-            we transform brands into visual experiences that captivate audiences. Based in Las Vegas,
-            serving automotive dealerships, luxury brands, corporate events, and brand activations across the Southwest.
+            Loomelic Media builds monthly content systems for automotive dealerships — inventory photography, walkaround videos, social reels, event coverage, and staff headshots. Based in Las Vegas, serving dealerships across Nevada and beyond.
           </p>
           <p className="font-body text-sm text-[oklch(0.5_0_0)] mt-4 leading-relaxed">
-            Led by <strong className="text-[oklch(0.07_0_0)]">Denham Gallimore</strong> — videographer,
-            photographer, and creative director with a passion for crafting stories that move people.
+            Led by <strong className="text-[oklch(0.07_0_0)]">Denham Gallimore</strong> — videographer, photographer, and creative director with a focus on dealership content that moves inventory and builds brand trust.
           </p>
         </AnimFade>
 

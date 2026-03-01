@@ -1,13 +1,13 @@
 /* ============================================================
-   AboutPage — Our Story
-   Style: Alternating dark/light sections, Unusually-inspired
-   Large bold display text, clean body copy, full-width layout
+   AboutPage — Dealer-acquisition rebuild
+   Design: Dealer-focused story, values, FAQ, CTA
    ============================================================ */
-
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Link } from "wouter";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import { useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
+import ContactSection from "@/components/ContactSection";
+import { ChevronDown } from "lucide-react";
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -25,7 +25,76 @@ function AnimFade({ children, className = "", delay = 0 }: { children: React.Rea
   );
 }
 
+const VALUES = [
+  { num: "01", title: "CLEAN VISUALS", body: "Every frame is composed with intention. No filler, no fluff — only imagery that earns its place in your brand story." },
+  { num: "02", title: "FAST TURNAROUND", body: "We operate on dealership timelines and event deadlines. Same-day social delivery, rapid post-production, and reliable delivery windows." },
+  { num: "03", title: "BRAND CONSISTENCY", body: "Your content should look the same quality across every platform. We build systems, not one-offs, so your marketing scales." },
+  { num: "04", title: "STRUCTURED CREATIVE", body: "Twenty years of corporate execution behind the camera. We bring process, reporting, and accountability to every production." },
+  { num: "05", title: "PREMIUM POSITIONING", body: "We work with brands that want to be seen at the top of their market — and we produce content that earns that position." },
+  { num: "06", title: "REAL PARTNERSHIP", body: "From single shoots to ongoing monthly retainers, we integrate with your team and become a reliable extension of your marketing operation." },
+];
+
+const FAQS = [
+  {
+    q: "How quickly do you deliver photos after a shoot?",
+    a: "Standard delivery is 24–48 hours for inventory photography. Event coverage is typically 48–72 hours. Rush delivery is available on request.",
+  },
+  {
+    q: "Do you offer monthly retainer packages for dealerships?",
+    a: "Yes. Our most popular option is a monthly retainer that includes inventory photography, social reels, and event coverage on a recurring schedule. We build a content calendar around your lot cycle and upcoming events.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: "We're based in Las Vegas, NV and primarily serve dealerships and businesses in Las Vegas, Henderson, and Southern Nevada. We also travel for larger productions — contact us to discuss.",
+  },
+  {
+    q: "Can you handle multiple vehicles in a single session?",
+    a: "Absolutely. We're set up for high-volume inventory shoots — we can photograph an entire lot in a single session with consistent quality across every vehicle.",
+  },
+  {
+    q: "Do you work with OEM brand guidelines?",
+    a: "Yes. We're familiar with Lexus, Subaru, and other OEM visual standards and can shoot to match manufacturer requirements for certified programs and co-op submissions.",
+  },
+  {
+    q: "What's the best way to get started?",
+    a: "The fastest way is to fill out the contact form below or call us directly at 702-827-4110. We'll schedule a 30-minute discovery call to understand your needs and put together a content plan.",
+  },
+];
+
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-b border-white/10">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-4 py-6 text-left group"
+      >
+        <span className="font-body text-sm sm:text-base text-white/80 group-hover:text-white transition-colors leading-snug">{q}</span>
+        <ChevronDown
+          size={18}
+          className={`text-white/40 shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="font-body text-sm text-white/55 leading-relaxed pb-6 max-w-2xl">{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function AboutPage() {
+  const [, navigate] = useLocation();
+
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />
@@ -40,13 +109,13 @@ export default function AboutPage() {
           </AnimFade>
           <AnimFade delay={0.1}>
             <h1 className="font-display text-[clamp(4rem,12vw,11rem)] leading-[0.88] text-white mb-8">
-              BUILT TO<br />
-              <span className="text-outline-white">MAKE BRANDS</span><br />
-              LOOK PREMIUM
+              BUILT FOR<br />
+              <span className="text-outline-white">DEALERSHIPS</span><br />
+              THAT WANT MORE
             </h1>
           </AnimFade>
           <AnimFade delay={0.2}>
-            <p className="font-body text-white/50 text-sm tracking-widest uppercase mb-0">
+            <p className="font-body text-white/50 text-sm tracking-widest uppercase">
               Las Vegas · Henderson · Southern Nevada
             </p>
           </AnimFade>
@@ -63,9 +132,9 @@ export default function AboutPage() {
               <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.92] text-[oklch(0.07_0_0)] sticky top-28">
                 SOUTHERN<br />
                 NEVADA'S<br />
-                <span className="text-[oklch(0.78_0_0)]">PREMIER</span><br />
-                PRODUCTION<br />
-                COMPANY
+                <span className="text-[oklch(0.78_0_0)]">DEALER</span><br />
+                CONTENT<br />
+                PARTNER
               </h2>
             </AnimFade>
 
@@ -73,36 +142,42 @@ export default function AboutPage() {
             <div className="space-y-6">
               <AnimFade delay={0.1}>
                 <p className="font-body text-base sm:text-lg text-[oklch(0.2_0_0)] leading-relaxed">
-                  Loomelic Media is a Las Vegas–based production company built to help brands look premium, consistent, and unmistakably professional—on every platform, every time. We create high-end photo and video for corporate events, real estate, and lifestyle, with a specialty in automotive content that makes inventory, people, and dealership culture stand out.
+                  Loomelic Media is a Las Vegas–based production company built to help dealerships look premium, consistent, and unmistakably professional — on every platform, every time. We create high-end photo and video for inventory, events, and dealership culture, with a specialty in automotive content that makes your lot, your people, and your brand stand out.
                 </p>
               </AnimFade>
 
               <AnimFade delay={0.15}>
                 <p className="font-body text-base sm:text-lg text-[oklch(0.2_0_0)] leading-relaxed">
-                  I've been in love with photography since I was young, and after 20 years in the corporate world, I started Loomelic Media to combine creative craft with real-world execution. That means our work isn't just "good looking"—it's organized, on-brand, and designed to perform.
+                  Founded by Denham Gallimore — photographer, videographer, and creative director with 20 years of corporate execution behind the lens. After two decades in business operations, Denham started Loomelic Media to combine creative craft with real-world structure. That means our work isn't just "good looking" — it's organized, on-brand, and designed to perform.
                 </p>
               </AnimFade>
 
               <AnimFade delay={0.2}>
                 <p className="font-body text-base sm:text-lg text-[oklch(0.2_0_0)] leading-relaxed">
-                  From cinematic walkarounds and event coverage to headshots, social media content systems, and polished reporting, we bring structure to the creative so your marketing stays consistent and scalable.
+                  From cinematic walkarounds and event coverage to headshots, social media content systems, and drone visuals, we bring structure to the creative so your marketing stays consistent and scalable — whether you're managing 50 vehicles a month or 500.
                 </p>
               </AnimFade>
 
               <AnimFade delay={0.25}>
                 <p className="font-body text-base sm:text-lg text-[oklch(0.2_0_0)] leading-relaxed">
-                  We're known for clean visuals, fast turnaround, and a sharp understanding of what brands actually need: content that looks like it belongs at the top of the market. Whether you're a business launching a campaign, or a dealership managing inventory and promotions at scale, Loomelic Media delivers visuals that match the level you want to be seen at.
+                  We're known for clean visuals, fast turnaround, and a sharp understanding of what dealerships actually need: content that looks like it belongs at the top of the market. Whether you're a single-point dealer or a multi-rooftop group, Loomelic Media delivers visuals that match the level you want to be seen at.
                 </p>
               </AnimFade>
 
               <AnimFade delay={0.3}>
                 <div className="pt-4 flex flex-wrap gap-3">
-                  <Link href="/contact" className="btn-pill-dark text-xs">
-                    GET IN TOUCH +
-                  </Link>
-                  <Link href="/services/automotive-marketing" className="btn-pill-outline !text-[oklch(0.07_0_0)] !border-[oklch(0_0_0/0.2)] hover:!bg-[oklch(0.07_0_0)] hover:!text-white text-xs">
+                  <button
+                    onClick={() => { navigate("/#contact"); setTimeout(() => { const el = document.getElementById("contact"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 100); }}
+                    className="btn-pill-dark text-xs"
+                  >
+                    BOOK A DEALER CALL +
+                  </button>
+                  <button
+                    onClick={() => navigate("/services")}
+                    className="btn-pill-outline !text-[oklch(0.07_0_0)] !border-[oklch(0_0_0/0.2)] hover:!bg-[oklch(0.07_0_0)] hover:!text-white text-xs"
+                  >
                     VIEW SERVICES ↗
-                  </Link>
+                  </button>
                 </div>
               </AnimFade>
             </div>
@@ -126,38 +201,7 @@ export default function AboutPage() {
           </AnimFade>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10">
-            {[
-              {
-                num: "01",
-                title: "CLEAN VISUALS",
-                body: "Every frame is composed with intention. No filler, no fluff — only imagery that earns its place in your brand story."
-              },
-              {
-                num: "02",
-                title: "FAST TURNAROUND",
-                body: "We operate on dealership timelines and event deadlines. Same-day social delivery, rapid post-production, and reliable delivery windows."
-              },
-              {
-                num: "03",
-                title: "BRAND CONSISTENCY",
-                body: "Your content should look the same quality across every platform. We build systems, not one-offs, so your marketing scales."
-              },
-              {
-                num: "04",
-                title: "STRUCTURED CREATIVE",
-                body: "Twenty years of corporate execution behind the camera. We bring process, reporting, and accountability to every production."
-              },
-              {
-                num: "05",
-                title: "PREMIUM POSITIONING",
-                body: "We work with brands that want to be seen at the top of their market — and we produce content that earns that position."
-              },
-              {
-                num: "06",
-                title: "REAL PARTNERSHIP",
-                body: "From single shoots to ongoing monthly retainers, we integrate with your team and become a reliable extension of your marketing operation."
-              },
-            ].map((item, i) => (
+            {VALUES.map((item, i) => (
               <motion.div
                 key={item.num}
                 initial={{ opacity: 0, y: 24 }}
@@ -175,7 +219,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Clients — light */}
+      {/* Trusted By — light */}
       <section className="section-light text-[oklch(0.07_0_0)]">
         <div className="container py-16 sm:py-24">
           <AnimFade>
@@ -189,7 +233,7 @@ export default function AboutPage() {
               "LEXUS OF HENDERSON",
               "LAS VEGAS RAIDERS",
               "CENTENNIAL SUBARU",
-              "M&MM UNITED",
+              "SPORTS ILLUSTRATED",
             ].map((name, i) => (
               <motion.div
                 key={name}
@@ -213,45 +257,36 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA — dark */}
+      {/* FAQ — dark */}
       <section className="section-dark">
-        <div className="container py-20 sm:py-28">
+        <div className="container py-16 sm:py-24">
           <AnimFade>
-            <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-white mb-8">
-              LET'S<br />
-              <span className="text-outline-white">BUILD</span><br />
-              TOGETHER
+            <p className="section-label text-white/40 mb-6">
+              <span>✦</span><span>FREQUENTLY ASKED —</span>
+            </p>
+            <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] text-white mb-12">
+              DEALER<br />
+              <span className="text-[oklch(0.45_0_0)]">FAQ</span>
             </h2>
           </AnimFade>
-          <AnimFade delay={0.15}>
-            <p className="font-body text-white/60 text-base sm:text-lg max-w-xl mb-10">
-              Ready to produce content that matches the level you want to be seen at? Let's talk about your project.
-            </p>
-          </AnimFade>
-          <AnimFade delay={0.2}>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/#contact" className="btn-pill-light text-sm">
-                START A PROJECT +
-              </Link>
-              <Link href="/#projects" className="btn-pill-outline text-sm">
-                VIEW OUR WORK ↗
-              </Link>
-            </div>
-          </AnimFade>
+
+          <div className="max-w-3xl">
+            {FAQS.map((faq, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+              >
+                <FAQItem q={faq.q} a={faq.a} />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[oklch(0.04_0_0)] border-t border-white/5 py-8">
-        <div className="container flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-body text-xs text-white/25 tracking-widest">
-            © 2026 LOOMELIC MEDIA · LAS VEGAS, NV
-          </p>
-          <Link href="/" className="font-body text-xs text-white/25 hover:text-white/60 transition-colors tracking-widest">
-            ← BACK TO HOME
-          </Link>
-        </div>
-      </footer>
+      <ContactSection />
     </div>
   );
 }

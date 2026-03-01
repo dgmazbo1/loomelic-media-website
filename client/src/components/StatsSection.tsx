@@ -1,34 +1,32 @@
 /* ============================================================
-   StatsSection — Unusually-inspired
-   Style: Light background, "CHOOSE EXCELLENCE" huge left-aligned text,
-          GET IN TOUCH pill right, left: video/image, right: 2 stat boxes stacked
+   ProofSection (was StatsSection) — Dealer-acquisition rebuild
+   Design: Light background, credibility statements instead of
+           placeholder metrics, video left + proof cards right
    ============================================================ */
-
-import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
-import { useRef, useEffect } from "react";
-
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { useLocation } from "wouter";
+import { CheckCircle } from "lucide-react";
 import { HERO_VIDEOS } from "@/lib/media";
 
-function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) => Math.round(v));
-  const inView = useInView(ref, { once: true });
-
-  useEffect(() => {
-    if (inView) {
-      const controls = animate(count, to, { duration: 2, ease: "easeOut" });
-      return controls.stop;
-    }
-  }, [inView, count, to]);
-
-  return (
-    <span ref={ref}>
-      <motion.span>{rounded}</motion.span>
-      {suffix}
-    </span>
-  );
-}
+const PROOF_POINTS = [
+  {
+    headline: "Monthly Retainer Dealership Clients",
+    body: "We build ongoing content systems — not one-off shoots. Dealers on retainer get consistent inventory photography, social content, and event coverage every month.",
+  },
+  {
+    headline: "Consistent Content Cadence Built for Dealer Timelines",
+    body: "New inventory drops, sales events, and seasonal campaigns move fast. Our workflow is designed around dealership schedules — fast turnaround, no bottlenecks.",
+  },
+  {
+    headline: "Systems for Inventory, Events, and People",
+    body: "From lot photography to staff headshots to event coverage, we handle every content category a dealership needs — under one roof, with one consistent look.",
+  },
+  {
+    headline: "Las Vegas-Based. Serving Nevada and Beyond.",
+    body: "We're local, which means faster response times, on-site flexibility, and a team that understands the Southern Nevada market.",
+  },
+];
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -47,14 +45,7 @@ function AnimFade({ children, className = "", delay = 0 }: { children: React.Rea
 }
 
 export default function StatsSection() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    let top = 0;
-    let node: HTMLElement | null = el;
-    while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; }
-    window.scrollTo({ top: Math.max(0, top - 80), behavior: "smooth" });
-  };
+  const [, navigate] = useLocation();
 
   return (
     <section className="section-light text-[oklch(0.07_0_0)]">
@@ -62,22 +53,28 @@ export default function StatsSection() {
         {/* Header row */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 sm:mb-16">
           <AnimFade>
+            <p className="section-label text-[oklch(0.07_0_0)]/40 mb-4">
+              <span>✦</span><span>WHY DEALERS CHOOSE US —</span>
+            </p>
             <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-[oklch(0.07_0_0)]">
-              CHOOSE<br />
-              <span className="text-[oklch(0.78_0_0)]">EXCELLENCE</span>
+              BUILT FOR<br />
+              <span className="text-[oklch(0.78_0_0)]">DEALERSHIPS</span>
             </h2>
           </AnimFade>
           <AnimFade delay={0.15}>
-            <button onClick={() => scrollTo("contact")} className="btn-pill-dark text-xs self-start sm:self-end mb-2">
-              GET IN TOUCH +
+            <button
+              onClick={() => { navigate("/#contact"); setTimeout(() => { const el = document.getElementById("contact"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 100); }}
+              className="btn-pill-dark text-xs self-start sm:self-end mb-2"
+            >
+              BOOK A CALL +
             </button>
           </AnimFade>
         </div>
 
-        {/* Content: image left + stats right */}
+        {/* Content: video left + proof points right */}
         <div className="grid md:grid-cols-[1fr_1fr] gap-4 sm:gap-6">
-          {/* Left: image/video */}
-          <AnimFade delay={0.1} className="relative rounded-2xl overflow-hidden bg-[oklch(0.12_0_0)] aspect-[4/3] md:aspect-auto md:min-h-[400px]">
+          {/* Left: video */}
+          <AnimFade delay={0.1} className="relative rounded-2xl overflow-hidden bg-[oklch(0.12_0_0)] aspect-[4/3] md:aspect-auto md:min-h-[420px]">
             <video
               autoPlay
               muted
@@ -85,6 +82,7 @@ export default function StatsSection() {
               playsInline
               className="w-full h-full object-cover"
               src={HERO_VIDEOS.lexusRoll}
+              aria-hidden="true"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-5 left-5">
@@ -92,41 +90,17 @@ export default function StatsSection() {
             </div>
           </AnimFade>
 
-          {/* Right: stat boxes */}
-          <div className="flex flex-col gap-4 sm:gap-6">
-            {/* Stat 1 */}
-            <AnimFade delay={0.15} className="card-light p-7 sm:p-9 flex-1">
-              <div className="flex items-start justify-between gap-4">
+          {/* Right: proof points */}
+          <div className="flex flex-col gap-4">
+            {PROOF_POINTS.map((pt, i) => (
+              <AnimFade key={i} delay={0.12 + i * 0.07} className="card-light p-5 sm:p-6 flex gap-4 items-start">
+                <CheckCircle size={18} className="text-[oklch(0.07_0_0)]/40 shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-display text-[clamp(3rem,8vw,5.5rem)] leading-none text-[oklch(0.07_0_0)]">
-                    +<CountUp to={125} />
-                  </div>
-                  <div className="w-8 h-px bg-[oklch(0.07_0_0)/20] my-3" />
-                  <p className="font-body text-sm font-semibold text-[oklch(0.07_0_0)]">Successful Projects<br />Completed</p>
+                  <p className="font-body text-sm font-semibold text-[oklch(0.07_0_0)] mb-1">{pt.headline}</p>
+                  <p className="font-body text-xs text-[oklch(0.45_0_0)] leading-relaxed">{pt.body}</p>
                 </div>
-                <span className="text-[oklch(0.87_0_0)] text-2xl mt-1">✦</span>
-              </div>
-              <p className="font-body text-xs text-[oklch(0.5_0_0)] leading-relaxed mt-4">
-                From luxury automotive campaigns to high-energy event coverage, we've delivered exceptional results for clients across Las Vegas and beyond.
-              </p>
-            </AnimFade>
-
-            {/* Stat 2 */}
-            <AnimFade delay={0.2} className="card-light p-7 sm:p-9 flex-1">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="font-display text-[clamp(3rem,8vw,5.5rem)] leading-none text-[oklch(0.07_0_0)]">
-                    <CountUp to={98} suffix="%" />
-                  </div>
-                  <div className="w-8 h-px bg-[oklch(0.07_0_0)/20] my-3" />
-                  <p className="font-body text-sm font-semibold text-[oklch(0.07_0_0)]">Customer<br />Satisfaction Rate</p>
-                </div>
-                <span className="text-[oklch(0.87_0_0)] text-2xl mt-1">✦</span>
-              </div>
-              <p className="font-body text-xs text-[oklch(0.5_0_0)] leading-relaxed mt-4">
-                We measure success by the impact we create. Our clients trust us to deliver solutions that exceed expectations every single time.
-              </p>
-            </AnimFade>
+              </AnimFade>
+            ))}
           </div>
         </div>
       </div>

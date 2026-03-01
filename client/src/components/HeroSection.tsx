@@ -1,32 +1,30 @@
 /* ============================================================
-   HeroSection — Unusually-inspired
-   Style: Full-screen black bg, huge LOOMELIC wordmark (Barlow Condensed 800 italic),
-          subtitle below, social icons bottom row, scrolling category marquee
-   Background: Autoplay muted video (Lexus roll) with dark overlay
+   HeroSection — Dealer-acquisition rebuild
+   Design: Dark cinematic background, dealer-focused headline,
+           outcome-driven subhead, dual CTA, trust line
    ============================================================ */
-
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
 import { Instagram, Youtube } from "lucide-react";
-
 import { LOGO_TRANSPARENT, HERO_VIDEOS } from "@/lib/media";
-const HERO_VIDEO = HERO_VIDEOS.lexusRoll;
 
 const categories = [
-  "CINEMATIC", "AUTOMOTIVE", "EVENTS", "SOCIAL MEDIA", "PHOTOGRAPHY", "BRANDING"
+  "INVENTORY PHOTOGRAPHY", "WALKAROUND VIDEOS", "SOCIAL REELS", "EVENTS", "HEADSHOTS", "DRONE VISUALS"
 ];
 
 export default function HeroSection() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    let top = 0;
-    let node: HTMLElement | null = el;
-    while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; }
-    window.scrollTo({ top: Math.max(0, top - 80), behavior: "smooth" });
+  const [, navigate] = useLocation();
+
+  const scrollToContact = () => {
+    const el = document.getElementById("contact");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden section-dark">
+    <section
+      className="relative min-h-screen flex flex-col overflow-hidden section-dark"
+      aria-label="Hero"
+    >
       {/* Background video */}
       <div className="absolute inset-0 z-0">
         <video
@@ -34,69 +32,79 @@ export default function HeroSection() {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-25"
-          src={HERO_VIDEO}
+          className="w-full h-full object-cover opacity-30"
+          src={HERO_VIDEOS.lexusRoll}
+          aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.07_0_0)]/60 via-[oklch(0.07_0_0)]/40 to-[oklch(0.07_0_0)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.07_0_0)]/70 via-[oklch(0.07_0_0)]/50 to-[oklch(0.07_0_0)]" aria-hidden="true" />
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-4 pt-24 pb-8">
-        {/* Label */}
-        <motion.div
+      <div className="relative z-10 flex-1 flex flex-col justify-end px-5 sm:px-10 lg:px-16 pb-12 sm:pb-20 pt-32">
+        <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="section-label mb-6 sm:mb-8"
+          className="section-label mb-6"
         >
           <span>✦</span>
           <span>A Las Vegas Production Company</span>
-        </motion.div>
-
-        {/* Wordmark — logo image */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mb-6 sm:mb-8 flex items-center justify-center"
-        >
-          <img
-            src={LOGO_TRANSPARENT}
-            alt="Loomelic Media"
-            className="w-[280px] sm:w-[380px] md:w-[480px] lg:w-[580px] xl:w-[680px] h-auto"
-            style={{ display: "block", filter: "brightness(0) invert(1)" }}
-          />
-        </motion.div>
-
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-          className="font-body text-sm sm:text-base text-white/50 tracking-widest uppercase text-center mb-10 sm:mb-12"
-        >
-          Designing Your Visual World
         </motion.p>
 
-        {/* CTA buttons */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display text-[clamp(3.2rem,10vw,9.5rem)] leading-[0.88] text-white mb-6 max-w-5xl"
+        >
+          CONTENT THAT<br />
+          <span className="text-outline-white">MOVES</span><br />
+          INVENTORY
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="font-body text-white/60 text-sm sm:text-base max-w-lg leading-relaxed mb-8"
+        >
+          Monthly content systems built for dealerships — inventory photography, walkaround videos, social reels, event coverage, and staff headshots. Fast turnaround. Consistent look.
+        </motion.p>
+
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.75 }}
-          className="flex flex-wrap items-center justify-center gap-3"
+          transition={{ duration: 0.7, delay: 0.65 }}
+          className="flex flex-wrap items-center gap-3 mb-5"
         >
-          <button onClick={() => scrollTo("projects")} className="btn-pill-light text-xs py-3 px-6">
-            OUR STORY +
+          <button
+            onClick={scrollToContact}
+            className="btn-pill-light text-xs py-3 px-7 font-semibold tracking-widest"
+            aria-label="Book a dealer strategy call"
+          >
+            BOOK A DEALER CALL
           </button>
-          <button onClick={() => scrollTo("contact")} className="btn-pill-outline text-xs py-3 px-6">
-            CONTACT US ↗
+          <button
+            onClick={() => navigate("/projects")}
+            className="text-xs py-3 px-7 font-semibold tracking-widest rounded-full border border-white/30 text-white/80 hover:border-white hover:text-white transition-all duration-200"
+            aria-label="View dealer work and case studies"
+          >
+            VIEW DEALER WORK
           </button>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.85 }}
+          className="font-body text-xs text-white/35 tracking-widest mb-10"
+        >
+          Trusted by dealerships and brands in Nevada.
+        </motion.p>
       </div>
 
-      {/* Bottom row: social icons + category label */}
-      <div className="relative z-10 flex items-center justify-between px-5 sm:px-10 pb-6 sm:pb-8">
-        {/* Social icons */}
+      {/* Bottom row */}
+      <div className="relative z-10 flex items-center justify-between px-5 sm:px-10 pb-5">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -107,6 +115,7 @@ export default function HeroSection() {
             href="https://www.instagram.com/loomelicmedia"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Loomelic Media on Instagram"
             className="w-9 h-9 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-all"
           >
             <Instagram size={15} />
@@ -115,27 +124,17 @@ export default function HeroSection() {
             href="https://www.youtube.com/@loomelicmedia"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Loomelic Media on YouTube"
             className="w-9 h-9 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-all"
           >
             <Youtube size={15} />
           </a>
         </motion.div>
 
-        {/* Category label center */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.1 }}
-          className="section-label hidden sm:flex"
-        >
-          VISUAL IDENTITY
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
           className="section-label"
         >
           <span>SCROLL</span>

@@ -1,13 +1,13 @@
 /* ============================================================
-   ContactSection + Footer — Unusually-inspired
-   Style: Dark "LET'S WORK TOGETHER" CTA banner, then light contact form,
-          minimal footer with logo, nav links, social icons
+   ContactSection + Footer — Dealer-acquisition rebuild
+   Design: Dark "READY TO GROW?" CTA banner, then dealer funnel form
+           with dealership name + role fields, validation, success state
    ============================================================ */
-
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Instagram, Youtube, Phone, Mail, MapPin } from "lucide-react";
 import { LOGO_TRANSPARENT } from "@/lib/media";
+import { useLocation } from "wouter";
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -25,13 +25,43 @@ function AnimFade({ children, className = "", delay = 0 }: { children: React.Rea
   );
 }
 
+const inputClass = "w-full bg-[oklch(0.07_0_0/0.04)] border border-[oklch(0_0_0/0.1)] rounded-xl px-4 py-3 font-body text-sm text-[oklch(0.07_0_0)] placeholder:text-[oklch(0.6_0_0)] focus:outline-none focus:border-[oklch(0.07_0_0)] transition-colors";
+const labelClass = "font-body text-[0.65rem] tracking-widest text-[oklch(0.5_0_0)] uppercase block mb-2";
+
 export default function ContactSection() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", service: "", message: "" });
+  const [, navigate] = useLocation();
+  const [form, setForm] = useState({
+    name: "",
+    dealership: "",
+    role: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.name.trim()) e.name = "Name is required";
+    if (!form.email.trim()) e.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = "Enter a valid email";
+    if (!form.message.trim()) e.message = "Message is required";
+    return e;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const errs = validate();
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    setErrors({});
     setSubmitted(true);
+  };
+
+  const scrollToForm = () => {
+    const el = document.getElementById("contact-form");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -41,22 +71,19 @@ export default function ContactSection() {
         <div className="container py-16 sm:py-24 lg:py-32">
           <AnimFade>
             <p className="section-label text-white/40 mb-6">
-              <span>✦</span><span>READY TO START? —</span>
+              <span>✦</span><span>READY TO GROW? —</span>
             </p>
           </AnimFade>
           <AnimFade delay={0.1}>
             <h2 className="font-display text-[clamp(4rem,14vw,13rem)] leading-[0.85] text-white mb-8 sm:mb-12">
               LET'S<br />
-              WORK<br />
-              <span className="text-[oklch(0.4_0_0)]">TOGETHER</span>
+              BUILD YOUR<br />
+              <span className="text-[oklch(0.4_0_0)]">CONTENT SYSTEM</span>
             </h2>
           </AnimFade>
           <AnimFade delay={0.2}>
-            <button
-              onClick={() => { const el = document.getElementById("contact-form"); if (el) { let top = 0; let node: HTMLElement | null = el; while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; } window.scrollTo({ top: Math.max(0, top - 80), behavior: "smooth" }); } }}
-              className="btn-pill-light text-xs"
-            >
-              GET IN TOUCH +
+            <button onClick={scrollToForm} className="btn-pill-light text-xs">
+              BOOK A DEALER CALL +
             </button>
           </AnimFade>
         </div>
@@ -71,10 +98,13 @@ export default function ContactSection() {
               <p className="section-label text-[oklch(0.07_0_0)/40] mb-6">
                 <span>✦</span><span>CONTACT US —</span>
               </p>
-              <h3 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] text-[oklch(0.07_0_0)] mb-8">
-                REACH<br />
-                <span className="text-[oklch(0.78_0_0)]">OUT</span>
+              <h3 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] text-[oklch(0.07_0_0)] mb-4">
+                BOOK A<br />
+                <span className="text-[oklch(0.78_0_0)]">DEALER CALL</span>
               </h3>
+              <p className="font-body text-sm text-[oklch(0.45_0_0)] leading-relaxed mb-8 max-w-xs">
+                Tell us about your dealership and what content you need. We'll put together a plan and get back to you within 24 hours.
+              </p>
               <div className="space-y-5 mb-10">
                 <a href="tel:+17028274110" className="flex items-center gap-3 group">
                   <div className="w-9 h-9 rounded-full bg-[oklch(0.07_0_0/0.06)] flex items-center justify-center group-hover:bg-[oklch(0.07_0_0)] transition-colors">
@@ -99,11 +129,11 @@ export default function ContactSection() {
                 </div>
               </div>
               <div className="flex gap-3">
-                <a href="https://www.instagram.com/loomelicmedia" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.instagram.com/loomelicmedia" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
                   className="w-10 h-10 rounded-full border border-[oklch(0_0_0/0.15)] flex items-center justify-center text-[oklch(0.35_0_0)] hover:bg-[oklch(0.07_0_0)] hover:text-white hover:border-[oklch(0.07_0_0)] transition-all">
                   <Instagram size={15} />
                 </a>
-                <a href="https://www.youtube.com/@loomelicmedia" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.youtube.com/@loomelicmedia" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
                   className="w-10 h-10 rounded-full border border-[oklch(0_0_0/0.15)] flex items-center justify-center text-[oklch(0.35_0_0)] hover:bg-[oklch(0.07_0_0)] hover:text-white hover:border-[oklch(0.07_0_0)] transition-all">
                   <Youtube size={15} />
                 </a>
@@ -118,56 +148,90 @@ export default function ContactSection() {
                     <span className="text-white text-lg">✓</span>
                   </div>
                   <h4 className="font-display text-4xl text-[oklch(0.07_0_0)] mb-3">MESSAGE SENT!</h4>
-                  <p className="font-body text-sm text-[oklch(0.45_0_0)]">We'll get back to you within 24 hours.</p>
-                  <button onClick={() => setSubmitted(false)} className="btn-pill-dark text-xs mt-6">SEND ANOTHER +</button>
+                  <p className="font-body text-sm text-[oklch(0.45_0_0)] mb-2">We'll review your request and get back to you within 24 hours.</p>
+                  <p className="font-body text-xs text-[oklch(0.55_0_0)]">In the meantime, check out our recent dealer work below.</p>
+                  <div className="flex gap-3 mt-6">
+                    <button onClick={() => setSubmitted(false)} className="btn-pill-dark text-xs">SEND ANOTHER +</button>
+                    <button onClick={() => navigate("/projects")} className="btn-pill-outline !text-[oklch(0.07_0_0)] !border-[oklch(0_0_0/0.2)] hover:!bg-[oklch(0.07_0_0)] hover:!text-white text-xs">VIEW OUR WORK</button>
+                  </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                  {/* Row 1: Name + Dealership */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="font-body text-[0.65rem] tracking-widest text-[oklch(0.5_0_0)] uppercase block mb-2">Name *</label>
+                      <label className={labelClass}>Your Name *</label>
                       <input type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        placeholder="Your name"
-                        className="w-full bg-[oklch(0.07_0_0/0.04)] border border-[oklch(0_0_0/0.1)] rounded-xl px-4 py-3 font-body text-sm text-[oklch(0.07_0_0)] placeholder:text-[oklch(0.6_0_0)] focus:outline-none focus:border-[oklch(0.07_0_0)] transition-colors" />
+                        placeholder="First and last name"
+                        className={`${inputClass} ${errors.name ? "border-red-400" : ""}`} />
+                      {errors.name && <p className="font-body text-xs text-red-500 mt-1">{errors.name}</p>}
                     </div>
                     <div>
-                      <label className="font-body text-[0.65rem] tracking-widest text-[oklch(0.5_0_0)] uppercase block mb-2">Email *</label>
-                      <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        placeholder="your@email.com"
-                        className="w-full bg-[oklch(0.07_0_0/0.04)] border border-[oklch(0_0_0/0.1)] rounded-xl px-4 py-3 font-body text-sm text-[oklch(0.07_0_0)] placeholder:text-[oklch(0.6_0_0)] focus:outline-none focus:border-[oklch(0.07_0_0)] transition-colors" />
+                      <label className={labelClass}>Dealership Name</label>
+                      <input type="text" value={form.dealership} onChange={(e) => setForm({ ...form, dealership: e.target.value })}
+                        placeholder="e.g. Lexus of Henderson"
+                        className={inputClass} />
                     </div>
                   </div>
+
+                  {/* Row 2: Role + Email */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="font-body text-[0.65rem] tracking-widest text-[oklch(0.5_0_0)] uppercase block mb-2">Phone</label>
-                      <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        placeholder="Your phone number"
-                        className="w-full bg-[oklch(0.07_0_0/0.04)] border border-[oklch(0_0_0/0.1)] rounded-xl px-4 py-3 font-body text-sm text-[oklch(0.07_0_0)] placeholder:text-[oklch(0.6_0_0)] focus:outline-none focus:border-[oklch(0.07_0_0)] transition-colors" />
-                    </div>
-                    <div>
-                      <label className="font-body text-[0.65rem] tracking-widest text-[oklch(0.5_0_0)] uppercase block mb-2">Service</label>
-                      <select value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })}
-                        className="w-full bg-[oklch(0.07_0_0/0.04)] border border-[oklch(0_0_0/0.1)] rounded-xl px-4 py-3 font-body text-sm text-[oklch(0.07_0_0)] focus:outline-none focus:border-[oklch(0.07_0_0)] transition-colors">
-                        <option value="">Select a service...</option>
-                        <option>Automotive Marketing</option>
-                        <option>Event Coverage</option>
-                        <option>Social Media Content</option>
-                        <option>Photography</option>
-                        <option>Brand Strategy</option>
-                        <option>Website Redesign</option>
-                        <option>Headshots + Team Photography</option>
+                      <label className={labelClass}>Your Role</label>
+                      <select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} className={inputClass}>
+                        <option value="">Select your role...</option>
+                        <option>General Manager</option>
+                        <option>Marketing Manager / Director</option>
+                        <option>Internet / BDC Manager</option>
+                        <option>Owner / Principal</option>
+                        <option>Sales Manager</option>
                         <option>Other</option>
                       </select>
                     </div>
+                    <div>
+                      <label className={labelClass}>Email *</label>
+                      <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        placeholder="your@email.com"
+                        className={`${inputClass} ${errors.email ? "border-red-400" : ""}`} />
+                      {errors.email && <p className="font-body text-xs text-red-500 mt-1">{errors.email}</p>}
+                    </div>
                   </div>
+
+                  {/* Row 3: Phone + Service */}
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className={labelClass}>Phone</label>
+                      <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        placeholder="Best number to reach you"
+                        className={inputClass} />
+                    </div>
+                    <div>
+                      <label className={labelClass}>Service Needed</label>
+                      <select value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })} className={inputClass}>
+                        <option value="">Select a service...</option>
+                        <option>Inventory Photography</option>
+                        <option>Walkaround + Delivery Videos</option>
+                        <option>Short-Form Social Reels</option>
+                        <option>Dealership Event Coverage</option>
+                        <option>Staff Headshots + Team Branding</option>
+                        <option>Drone + Exterior Visuals</option>
+                        <option>Monthly Retainer Package</option>
+                        <option>Other / Not Sure Yet</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Message */}
                   <div>
-                    <label className="font-body text-[0.65rem] tracking-widest text-[oklch(0.5_0_0)] uppercase block mb-2">Message *</label>
+                    <label className={labelClass}>Tell Us About Your Needs *</label>
                     <textarea required rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      placeholder="Tell us about your project..."
-                      className="w-full bg-[oklch(0.07_0_0/0.04)] border border-[oklch(0_0_0/0.1)] rounded-xl px-4 py-3 font-body text-sm text-[oklch(0.07_0_0)] placeholder:text-[oklch(0.6_0_0)] focus:outline-none focus:border-[oklch(0.07_0_0)] transition-colors resize-none" />
+                      placeholder="How many vehicles per month? Any upcoming events? What's your biggest content challenge right now?"
+                      className={`${inputClass} resize-none ${errors.message ? "border-red-400" : ""}`} />
+                    {errors.message && <p className="font-body text-xs text-red-500 mt-1">{errors.message}</p>}
                   </div>
+
                   <button type="submit" className="btn-pill-dark text-xs w-full sm:w-auto">
-                    SEND MESSAGE →
+                    SEND REQUEST →
                   </button>
                 </form>
               )}
@@ -183,22 +247,34 @@ export default function ContactSection() {
             <div className="overflow-hidden" style={{ height: "40px" }}>
               <img src={LOGO_TRANSPARENT} alt="Loomelic Media" className="w-[130px] h-auto" style={{ filter: "brightness(0) invert(1)", marginTop: "-97px" }} />
             </div>
-            <nav className="flex flex-wrap gap-x-6 gap-y-2">
-              {["PROJECTS", "SERVICES", "PORTFOLIO", "CONTACT"].map((link) => (
-                <button key={link}
-                  onClick={() => { const el = document.getElementById(link.toLowerCase()); if (el) { let top = 0; let node: HTMLElement | null = el; while (node) { top += node.offsetTop; node = node.offsetParent as HTMLElement | null; } window.scrollTo({ top: Math.max(0, top - 80), behavior: "smooth" }); } }}
-                  className="font-body text-[0.65rem] tracking-[0.15em] text-white/35 hover:text-white transition-colors">
-                  {link}
-                </button>
+            <nav className="flex flex-wrap gap-x-6 gap-y-2" aria-label="Footer navigation">
+              {[
+                { label: "PROJECTS", href: "/projects" },
+                { label: "SERVICES", href: "/services" },
+                { label: "PORTFOLIO", href: "#portfolio" },
+                { label: "ABOUT", href: "/about" },
+                { label: "CONTACT", href: "#contact" },
+              ].map((link) => (
+                link.href.startsWith("#") ? (
+                  <button key={link.label}
+                    onClick={() => { const el = document.getElementById(link.href.slice(1)); if (el) el.scrollIntoView({ behavior: "smooth" }); }}
+                    className="font-body text-[0.65rem] tracking-[0.15em] text-white/35 hover:text-white transition-colors">
+                    {link.label}
+                  </button>
+                ) : (
+                  <a key={link.label} href={link.href}
+                    className="font-body text-[0.65rem] tracking-[0.15em] text-white/35 hover:text-white transition-colors">
+                    {link.label}
+                  </a>
+                )
               ))}
-              <a href="/about" className="font-body text-[0.65rem] tracking-[0.15em] text-white/35 hover:text-white transition-colors">OUR STORY</a>
             </nav>
             <div className="flex gap-3">
-              <a href="https://www.instagram.com/loomelicmedia" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.instagram.com/loomelicmedia" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
                 className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all">
                 <Instagram size={13} />
               </a>
-              <a href="https://www.youtube.com/@loomelicmedia" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.youtube.com/@loomelicmedia" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
                 className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all">
                 <Youtube size={13} />
               </a>
@@ -206,7 +282,7 @@ export default function ContactSection() {
           </div>
           <div className="pt-6 border-t border-white/6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <p className="font-body text-[0.6rem] text-white/25 tracking-widest">© 2026 LOOMELIC MEDIA LLC. ALL RIGHTS RESERVED.</p>
-            <p className="font-body text-[0.6rem] text-white/20 tracking-widest">LAS VEGAS · HENDERSON · SOUTH FLORIDA</p>
+            <p className="font-body text-[0.6rem] text-white/20 tracking-widest">LAS VEGAS · HENDERSON · SOUTHERN NEVADA</p>
           </div>
         </div>
       </footer>

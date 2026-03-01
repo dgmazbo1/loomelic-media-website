@@ -1,17 +1,14 @@
 /* ============================================================
-   ServicesSection — Unusually-inspired
-   Style: Dark background, "CREATIVE SOLUTIONS" huge heading,
-          numbered list (01,02...) with huge service name + description
-   Services: Automotive Marketing, Event Coverage, Social Media Content,
-             Photography, Brand Strategy, Website Redesign
-   Each row links to its individual service page
+   ServicesSection — Dealer-acquisition rebuild
+   Design: Dark background, 6 service cards with outcome sentence,
+           3 bullet deliverables, best-for one-liner, link to /services
    ============================================================ */
-
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLocation } from "wouter";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Camera, Video, Users, Calendar, Aperture, Plane } from "lucide-react";
 
+// Keep SERVICES exported for AllServicesPage compatibility
 export const SERVICES = [
   {
     num: "01",
@@ -64,6 +61,87 @@ export const SERVICES = [
   },
 ];
 
+const DEALER_SERVICES = [
+  {
+    num: "01",
+    slug: "automotive-marketing",
+    icon: Camera,
+    name: "INVENTORY\nPHOTOGRAPHY",
+    outcome: "Make every vehicle on your lot look showroom-ready online.",
+    deliverables: [
+      "Exterior + interior shots per vehicle",
+      "Consistent white-sky or lifestyle backgrounds",
+      "Web-optimized files delivered within 24–48 hours",
+    ],
+    bestFor: "New and used inventory teams needing fast, consistent output.",
+  },
+  {
+    num: "02",
+    slug: "social-media-content",
+    icon: Video,
+    name: "SHORT-FORM\nSOCIAL REELS",
+    outcome: "Stop the scroll and drive showroom traffic with vertical video.",
+    deliverables: [
+      "Instagram Reels, TikTok, and YouTube Shorts",
+      "On-brand captions and hashtag strategy",
+      "Monthly content calendar and scheduling support",
+    ],
+    bestFor: "Dealers who want consistent social presence without managing it in-house.",
+  },
+  {
+    num: "03",
+    slug: "automotive-marketing",
+    icon: Aperture,
+    name: "WALKAROUND +\nDELIVERY VIDEOS",
+    outcome: "Build buyer confidence before they ever step on the lot.",
+    deliverables: [
+      "Feature-focused vehicle walkaround videos",
+      "Customer delivery moment captures",
+      "Branded intro/outro and dealership logo overlay",
+    ],
+    bestFor: "Sales teams who want to close more deals from online leads.",
+  },
+  {
+    num: "04",
+    slug: "event-coverage",
+    icon: Calendar,
+    name: "DEALERSHIP EVENTS\n+ ACTIVATIONS",
+    outcome: "Turn every dealership event into lasting brand content.",
+    deliverables: [
+      "Full event photo and video coverage",
+      "Same-day social media content delivery",
+      "Highlight reel for website and paid ads",
+    ],
+    bestFor: "Dealers running sales events, community drives, or manufacturer activations.",
+  },
+  {
+    num: "05",
+    slug: "headshots",
+    icon: Users,
+    name: "STAFF HEADSHOTS\n+ TEAM BRANDING",
+    outcome: "Give your team a professional image that matches your brand.",
+    deliverables: [
+      "Individual and group headshots on-site",
+      "Consistent lighting and background setup",
+      "Retouched files for website, email, and social",
+    ],
+    bestFor: "Dealerships updating their website, hiring pages, or OEM requirements.",
+  },
+  {
+    num: "06",
+    slug: "automotive-marketing",
+    icon: Plane,
+    name: "DRONE + EXTERIOR\nVISUALS",
+    outcome: "Show the full scale and location of your dealership from above.",
+    deliverables: [
+      "FAA-compliant aerial photography and video",
+      "Lot overview and surrounding area shots",
+      "Cinematic flyover for ads and website hero",
+    ],
+    bestFor: "Dealers with large lots, prime locations, or new facility openings.",
+  },
+];
+
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -82,7 +160,6 @@ function AnimFade({ children, className = "", delay = 0 }: { children: React.Rea
 
 export default function ServicesSection() {
   const [, navigate] = useLocation();
-
   return (
     <section id="services" className="section-dark">
       <div className="container py-16 sm:py-24 lg:py-32">
@@ -91,13 +168,13 @@ export default function ServicesSection() {
           <div>
             <AnimFade>
               <p className="section-label text-white/40 mb-4">
-                <span>✦</span><span>OUR SERVICES —</span>
+                <span>✦</span><span>DEALER SERVICES —</span>
               </p>
             </AnimFade>
             <AnimFade delay={0.1}>
               <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-white">
-                CREATIVE<br />
-                <span className="text-[oklch(0.45_0_0)]">SOLUTIONS</span>
+                WHAT WE<br />
+                <span className="text-[oklch(0.45_0_0)]">DELIVER</span>
               </h2>
             </AnimFade>
           </div>
@@ -111,43 +188,63 @@ export default function ServicesSection() {
           </AnimFade>
         </div>
 
-        {/* Service rows */}
-        <div className="border-t border-white/8">
-          {SERVICES.map((svc, i) => (
-            <motion.div
-              key={svc.num}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.07 }}
-              onClick={() => navigate(`/services/${svc.slug}`)}
-              className="grid grid-cols-[3rem_1fr_auto] md:grid-cols-[4rem_1fr_1fr_auto] items-start gap-4 md:gap-8 py-6 sm:py-8 border-b border-white/8 group cursor-pointer transition-all duration-300 hover:bg-white/[0.025] rounded-xl px-3"
-            >
-              {/* Number */}
-              <span className="font-body text-xs text-white/25 pt-3 tracking-widest">({svc.num})</span>
+        {/* Service cards grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          {DEALER_SERVICES.map((svc, i) => {
+            const Icon = svc.icon;
+            return (
+              <motion.div
+                key={svc.num}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.08 }}
+                className="group relative bg-white/[0.03] border border-white/8 rounded-2xl p-6 sm:p-7 hover:bg-white/[0.06] hover:border-white/15 transition-all duration-300 flex flex-col"
+              >
+                {/* Number + Icon */}
+                <div className="flex items-center justify-between mb-5">
+                  <span className="font-body text-xs text-white/20 tracking-widest">({svc.num})</span>
+                  <div className="w-9 h-9 rounded-full bg-white/8 flex items-center justify-center text-white/40 group-hover:text-white/70 transition-colors">
+                    <Icon size={16} />
+                  </div>
+                </div>
 
-              {/* Service name */}
-              <div>
-                <h3 className="font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.9] text-white group-hover:text-lime transition-colors duration-300 whitespace-pre-line">
+                {/* Service name */}
+                <h3 className="font-display text-[clamp(1.6rem,3vw,2.4rem)] leading-[0.92] text-white mb-3 whitespace-pre-line">
                   {svc.name}
                 </h3>
-                {/* Mobile description */}
-                <p className="md:hidden font-body text-xs text-white/40 leading-relaxed mt-3">
-                  {svc.desc}
+
+                {/* Outcome */}
+                <p className="font-body text-sm text-white/55 leading-relaxed mb-5">
+                  {svc.outcome}
                 </p>
-              </div>
 
-              {/* Description — desktop only */}
-              <p className="hidden md:block font-body text-sm text-white/45 leading-relaxed pt-3 group-hover:text-white/65 transition-colors duration-300">
-                {svc.desc}
-              </p>
+                {/* Deliverables */}
+                <ul className="space-y-2 mb-5 flex-1">
+                  {svc.deliverables.map((d, j) => (
+                    <li key={j} className="flex items-start gap-2 font-body text-xs text-white/40">
+                      <span className="text-lime mt-0.5 shrink-0">—</span>
+                      <span>{d}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              {/* Arrow */}
-              <div className="pt-3 text-white/20 group-hover:text-lime transition-colors duration-300">
-                <ArrowRight size={20} />
-              </div>
-            </motion.div>
-          ))}
+                {/* Best for */}
+                <p className="font-body text-[0.68rem] text-white/30 italic mb-5 border-t border-white/8 pt-4">
+                  Best for: {svc.bestFor}
+                </p>
+
+                {/* CTA */}
+                <button
+                  onClick={() => navigate(`/services/${svc.slug}`)}
+                  className="flex items-center gap-2 font-body text-xs text-white/50 hover:text-white transition-colors group/btn"
+                >
+                  <span className="tracking-widest">SEE DETAILS</span>
+                  <ArrowRight size={13} className="group-hover/btn:translate-x-1 transition-transform" />
+                </button>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

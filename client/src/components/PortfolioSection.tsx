@@ -111,11 +111,11 @@ export default function PortfolioSection() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10 sm:mb-14">
           <div>
             <AnimFade>
-              <p className="section-label text-[oklch(0.07_0_0)/40] mb-4"><span>✦</span><span>OUR WORK —</span></p>
+              <p className="section-label text-[oklch(0.07_0_0)/40] mb-4"><span>✦</span><span>PORTFOLIO —</span></p>
             </AnimFade>
             <AnimFade delay={0.1}>
               <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-[oklch(0.07_0_0)]">
-                PHOTO<br /><span className="text-[oklch(0.78_0_0)]">GALLERY</span>
+                DEALER<br /><span className="text-[oklch(0.78_0_0)]">CONTENT</span>
               </h2>
             </AnimFade>
           </div>
