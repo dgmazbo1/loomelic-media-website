@@ -141,25 +141,19 @@ export default function AboutPage() {
             <div className="space-y-6">
               <AnimFade delay={0.1}>
                 <p className="font-body text-base sm:text-lg text-[oklch(0.2_0_0)] leading-relaxed">
-                  Loomelic Media is a Las Vegas–based production company built to help dealerships look premium, consistent, and unmistakably professional — on every platform, every time. We create high-end photo and video for inventory, events, and dealership culture, with a specialty in automotive content that makes your lot, your people, and your brand stand out.
+                  Loomelic Media is a Las Vegas–based production company creating high-end photo and video that helps dealerships and brands look premium, consistent, and unmistakably professional across every platform. We specialize in automotive content — inventory, dealership culture, events, headshots, and drone — plus large convention and event coverage for clients who need polished visuals on tight timelines.
                 </p>
               </AnimFade>
 
               <AnimFade delay={0.15}>
                 <p className="font-body text-base sm:text-lg text-[oklch(0.2_0_0)] leading-relaxed">
-                  Founded by Denham Gallimore — photographer, videographer, and creative director with 20 years of corporate execution behind the lens. After two decades in business operations, Denham started Loomelic Media to combine creative craft with real-world structure. That means our work isn't just "good looking" — it's organized, on-brand, and designed to perform.
+                  Founded by Denham Gallimore, a South Florida native with 20 years of corporate experience, Loomelic Media started as a hobby through off-roading and working with major off-road brands. Denham spent years consulting with Fortune 500 companies in the tech world before leaving the corporate space in 2024 to build the company full-time. In January 2026, we launched our South Florida division to better support clients across both regions.
                 </p>
               </AnimFade>
 
               <AnimFade delay={0.2}>
                 <p className="font-body text-base sm:text-lg text-[oklch(0.2_0_0)] leading-relaxed">
-                  From cinematic walkarounds and event coverage to headshots, social media content systems, and drone visuals, we bring structure to the creative so your marketing stays consistent and scalable — whether you're managing 50 vehicles a month or 500.
-                </p>
-              </AnimFade>
-
-              <AnimFade delay={0.25}>
-                <p className="font-body text-base sm:text-lg text-[oklch(0.2_0_0)] leading-relaxed">
-                  We're known for clean visuals, fast turnaround, and a sharp understanding of what dealerships actually need: content that looks like it belongs at the top of the market. Whether you're a single-point dealer or a multi-rooftop group, Loomelic Media delivers visuals that match the level you want to be seen at.
+                  Our focus is simple: clean visuals, strong creative direction, fast turnaround, and a structured process that keeps your marketing on-brand and scalable — whether you're moving 50 vehicles a month or 500.
                 </p>
               </AnimFade>
 
