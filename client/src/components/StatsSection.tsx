@@ -24,7 +24,7 @@ const PROOF_POINTS = [
   },
   {
     headline: "Las Vegas-Based. Serving Nevada and Beyond.",
-    body: "We're local, which means faster response times, on-site flexibility, and a team that understands the Southern Nevada market.",
+    body: "We're local, which means faster response times, on-site flexibility, and a team that understands the Las Vegas market.",
   },
 ];
 

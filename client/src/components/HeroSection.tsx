@@ -68,7 +68,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="font-body text-white/60 text-sm sm:text-base max-w-lg leading-relaxed mb-8"
         >
-          Photo, video, and web production for automotive dealerships, events, headshots, and brands — Las Vegas, Southern Nevada, and South Florida.
+          Photo, video, and web production for automotive dealerships, events, headshots, and brands — Las Vegas and South Florida.
         </motion.p>
 
         <motion.div
@@ -99,7 +99,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.85 }}
           className="font-body text-xs text-white/35 tracking-widest mb-10"
         >
-          Serving Las Vegas, Southern Nevada, and South Florida.
+          Serving Las Vegas and South Florida.
         </motion.p>
       </div>
 

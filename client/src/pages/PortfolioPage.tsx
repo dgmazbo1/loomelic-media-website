@@ -161,7 +161,7 @@ export default function PortfolioPage() {
           transition={{ duration: 0.7, delay: 0.35 }}
           className="font-body text-white/50 text-sm sm:text-base max-w-xl leading-relaxed mt-4"
         >
-          Photography and video across automotive, events, headshots, and brand content — Las Vegas, Southern Nevada, and South Florida.
+          Photography and video across automotive, events, headshots, and brand content — Las Vegas and South Florida.
         </motion.p>
       </section>
 

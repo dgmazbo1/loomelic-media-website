@@ -109,7 +109,7 @@ export default function AboutSection() {
         {/* Body text */}
         <AnimFade delay={0.15} className="max-w-2xl mb-16 sm:mb-20">
           <p className="font-body text-base sm:text-lg text-[oklch(0.35_0_0)] leading-relaxed">
-            Loomelic Media is a Las Vegas production company creating photo, video, and web content for automotive dealerships, events, brands, and professionals — serving Las Vegas, Southern Nevada, and South Florida.
+            Loomelic Media is a Las Vegas production company creating photo, video, and web content for automotive dealerships, events, brands, and professionals — serving Las Vegas and South Florida.
           </p>
           <p className="font-body text-sm text-[oklch(0.5_0_0)] mt-4 leading-relaxed">
             Led by <strong className="text-[oklch(0.07_0_0)]">Denham Gallimore</strong> — videographer, photographer, and creative director with a focus on dealership content that moves inventory and builds brand trust.

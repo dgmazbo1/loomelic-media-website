@@ -106,7 +106,7 @@ export function DealerServicesPage() {
           </AnimFade>
           <AnimFade delay={0.1}>
             <div className="grid sm:grid-cols-3 gap-4 max-w-2xl">
-              {["Las Vegas, NV", "Henderson, NV", "Southern Nevada"].map((loc) => (
+              {["Las Vegas, NV", "South Florida"].map((loc) => (
                 <div key={loc} className="px-5 py-3.5 border border-white/10 rounded-xl">
                   <p className="font-body text-xs text-white/50 tracking-widest uppercase">{loc}</p>
                 </div>

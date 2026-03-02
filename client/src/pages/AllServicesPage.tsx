@@ -169,9 +169,9 @@ export default function AllServicesPage() {
           <div className="grid sm:grid-cols-2 gap-8">
             <AnimFade delay={0.1}>
               <div className="p-8 border border-[oklch(0_0_0/0.08)] rounded-2xl">
-                <h3 className="font-display-normal text-[oklch(0.07_0_0)] text-xl tracking-widest uppercase mb-3">Las Vegas / Southern Nevada</h3>
+                <h3 className="font-display-normal text-[oklch(0.07_0_0)] text-xl tracking-widest uppercase mb-3">Las Vegas</h3>
                 <p className="font-body text-sm text-[oklch(0.45_0_0)] leading-relaxed mb-4">
-                  Our home base. We serve dealerships, event venues, businesses, and professionals across Las Vegas, Henderson, Summerlin, and the greater Southern Nevada area.
+                  Our home base. We serve dealerships, event venues, businesses, and professionals across Las Vegas and surrounding areas.
                 </p>
                 <p className="font-body text-xs text-[oklch(0.6_0_0)] tracking-widest uppercase">5940 S Rainbow Blvd #4058 · Las Vegas, NV 89117</p>
               </div>

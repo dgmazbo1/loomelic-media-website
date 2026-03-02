@@ -1,7 +1,7 @@
 /* ============================================================
    ContactPage — /contact
    Real contact page with form, inline validation, success state
-   Dual market: Las Vegas / Southern Nevada + South Florida
+   Dual market: Las Vegas + South Florida
    ============================================================ */
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -257,7 +257,7 @@ export default function ContactPage() {
                 <div>
                   <p className="font-body text-xs text-white/40 tracking-widest uppercase mb-1">Locations</p>
                   <p className="font-body text-sm text-white leading-relaxed">
-                    Las Vegas / Southern Nevada<br />
+                    Las Vegas<br />
                     <span className="text-white/60">5940 S Rainbow Blvd #4058<br />Las Vegas, NV 89117</span>
                   </p>
                   <p className="font-body text-sm text-white mt-3 leading-relaxed">

@@ -282,7 +282,7 @@ export default function ContactSection() {
           </div>
           <div className="pt-6 border-t border-white/6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <p className="font-body text-[0.6rem] text-white/25 tracking-widest">© 2026 LOOMELIC MEDIA LLC. ALL RIGHTS RESERVED.</p>
-            <p className="font-body text-[0.6rem] text-white/20 tracking-widest">LAS VEGAS · HENDERSON · SOUTHERN NEVADA</p>
+            <p className="font-body text-[0.6rem] text-white/20 tracking-widest">LAS VEGAS · HENDERSON</p>
           </div>
         </div>
       </footer>

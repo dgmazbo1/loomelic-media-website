@@ -45,7 +45,7 @@ const FAQS = [
   },
   {
     q: "What areas do you serve?",
-    a: "We're based in Las Vegas, NV and serve clients across Las Vegas, Henderson, and Southern Nevada. We also operate in South Florida, serving Miami, Fort Lauderdale, Boca Raton, and surrounding areas. We travel for larger productions — contact us to discuss.",
+    a: "We're based in Las Vegas, NV and serve clients across the greater Las Vegas area. We also operate in South Florida, serving Miami, Fort Lauderdale, Boca Raton, and surrounding areas. We travel for larger productions — contact us to discuss.",
   },
   {
     q: "Can you handle multiple vehicles in a single session?",
@@ -116,7 +116,7 @@ export default function AboutPage() {
           </AnimFade>
           <AnimFade delay={0.2}>
             <p className="font-body text-white/50 text-sm tracking-widest uppercase">
-              Las Vegas · Henderson · Southern Nevada
+              Las Vegas · Henderson
             </p>
           </AnimFade>
         </div>
@@ -250,7 +250,7 @@ export default function AboutPage() {
           </div>
           <AnimFade delay={0.2}>
             <p className="font-body text-sm text-[oklch(0.5_0_0)] max-w-xl">
-              We work with dealership groups, event organizers, lifestyle brands, and businesses across Las Vegas, Henderson, and Southern Nevada.
+              We work with dealership groups, event organizers, lifestyle brands, and businesses across Las Vegas.
             </p>
           </AnimFade>
         </div>
