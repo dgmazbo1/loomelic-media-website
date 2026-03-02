@@ -130,10 +130,9 @@ export default function AboutPage() {
             {/* Left: big pull quote */}
             <AnimFade>
               <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.92] text-[oklch(0.07_0_0)] sticky top-28">
-                SOUTHERN<br />
-                NEVADA'S<br />
-                <span className="text-[oklch(0.78_0_0)]">DEALER</span><br />
-                CONTENT<br />
+                SOUTHERN NEVADA<br />
+                <span className="text-[oklch(0.78_0_0)]">&amp; SOUTH FL</span><br />
+                DEALER CONTENT<br />
                 PARTNER
               </h2>
             </AnimFade>
