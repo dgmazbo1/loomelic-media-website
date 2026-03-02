@@ -97,7 +97,6 @@ export default function Navbar() {
 
           {/* Desktop nav — pill group */}
           <div className="hidden lg:flex items-center gap-1 bg-[oklch(1_0_0/0.06)] backdrop-blur-sm border border-[oklch(1_0_0/0.08)] rounded-full px-2 py-1.5">
-            <button onClick={() => goTo("/projects")} className={`px-4 py-1.5 rounded-full text-[0.7rem] font-semibold tracking-[0.12em] transition-all duration-200 ${location === "/projects" ? "text-white bg-white/15" : "text-white/70 hover:text-white hover:bg-white/10"}`}>PROJECTS</button>
             {/* Services dropdown */}
             <div className="relative" onMouseEnter={handleServicesMouseEnter} onMouseLeave={handleServicesMouseLeave}>
               <button onClick={() => goTo("/services")} className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-[0.7rem] font-semibold tracking-[0.12em] transition-all duration-200 ${location.startsWith("/services") ? "text-white bg-white/15" : "text-white/70 hover:text-white hover:bg-white/10"}`}>
@@ -113,8 +112,8 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </div>
+            <button onClick={() => goTo("/projects")} className={`px-4 py-1.5 rounded-full text-[0.7rem] font-semibold tracking-[0.12em] transition-all duration-200 ${location === "/projects" ? "text-white bg-white/15" : "text-white/70 hover:text-white hover:bg-white/10"}`}>PROJECTS</button>
             <button onClick={() => goTo("/about")} className={`px-4 py-1.5 rounded-full text-[0.7rem] font-semibold tracking-[0.12em] transition-all duration-200 ${location === "/about" ? "text-white bg-white/15" : "text-white/70 hover:text-white hover:bg-white/10"}`}>OUR STORY</button>
-            <button onClick={() => goTo("/portfolio")} className={`px-4 py-1.5 rounded-full text-[0.7rem] font-semibold tracking-[0.12em] transition-all duration-200 ${location === "/portfolio" ? "text-white bg-white/15" : "text-white/70 hover:text-white hover:bg-white/10"}`}>PORTFOLIO</button>
             <button onClick={() => goTo("/contact")} className={`px-4 py-1.5 rounded-full text-[0.7rem] font-semibold tracking-[0.12em] transition-all duration-200 ${location === "/contact" ? "text-white bg-white/15" : "text-white/70 hover:text-white hover:bg-white/10"}`}>CONTACT</button>
           </div>
 
@@ -167,7 +166,7 @@ export default function Navbar() {
 
             {/* Nav links */}
             <div className="flex-1 flex flex-col justify-center px-8 gap-1 overflow-y-auto">
-              {[{ label: "PROJECTS", href: "/projects" }, { label: "OUR STORY", href: "/about" }, { label: "PORTFOLIO", href: "/portfolio" }, { label: "CONTACT", href: "/contact" }].map((link, i) => (
+              {[{ label: "PROJECTS", href: "/projects" }, { label: "OUR STORY", href: "/about" }, { label: "CONTACT", href: "/contact" }].map((link, i) => (
                 <motion.button key={link.label} initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.4, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }} onClick={() => goTo(link.href)} className="text-left py-4 border-b border-white/6 group">
                   <span className="font-display-normal text-5xl sm:text-7xl text-white/90 group-hover:text-lime transition-colors duration-200">{link.label}</span>
                 </motion.button>
