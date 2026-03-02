@@ -98,7 +98,7 @@ export default function AboutSection() {
               OUR WORK +
             </button>
             <button
-              onClick={() => { navigate("/#contact"); setTimeout(() => { const el = document.getElementById("contact"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 100); }}
+              onClick={() => navigate("/contact")}
               className="btn-pill-outline !text-[oklch(0.07_0_0)] !border-[oklch(0_0_0/0.2)] hover:!bg-[oklch(0.07_0_0)] hover:!text-white text-xs"
             >
               BOOK A CALL ↗
@@ -109,7 +109,7 @@ export default function AboutSection() {
         {/* Body text */}
         <AnimFade delay={0.15} className="max-w-2xl mb-16 sm:mb-20">
           <p className="font-body text-base sm:text-lg text-[oklch(0.35_0_0)] leading-relaxed">
-            Loomelic Media builds monthly content systems for automotive dealerships — inventory photography, walkaround videos, social reels, event coverage, and staff headshots. Based in Las Vegas, serving dealerships across Nevada and beyond.
+            Loomelic Media is a Las Vegas production company creating photo, video, and web content for automotive dealerships, events, brands, and professionals — serving Las Vegas, Southern Nevada, and South Florida.
           </p>
           <p className="font-body text-sm text-[oklch(0.5_0_0)] mt-4 leading-relaxed">
             Led by <strong className="text-[oklch(0.07_0_0)]">Denham Gallimore</strong> — videographer, photographer, and creative director with a focus on dealership content that moves inventory and builds brand trust.

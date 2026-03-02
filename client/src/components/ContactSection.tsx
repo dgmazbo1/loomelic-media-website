@@ -83,7 +83,7 @@ export default function ContactSection() {
           </AnimFade>
           <AnimFade delay={0.2}>
             <button onClick={scrollToForm} className="btn-pill-light text-xs">
-              BOOK A DEALER CALL +
+              GET IN TOUCH +
             </button>
           </AnimFade>
         </div>
@@ -99,11 +99,11 @@ export default function ContactSection() {
                 <span>✦</span><span>CONTACT US —</span>
               </p>
               <h3 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] text-[oklch(0.07_0_0)] mb-4">
-                BOOK A<br />
-                <span className="text-[oklch(0.78_0_0)]">DEALER CALL</span>
+                LET'S<br />
+                <span className="text-[oklch(0.78_0_0)]">TALK</span>
               </h3>
               <p className="font-body text-sm text-[oklch(0.45_0_0)] leading-relaxed mb-8 max-w-xs">
-                Tell us about your dealership and what content you need. We'll put together a plan and get back to you within 24 hours.
+                Tell us about your project and what you need. We'll put together a plan and get back to you within 24 hours.
               </p>
               <div className="space-y-5 mb-10">
                 <a href="tel:+17028274110" className="flex items-center gap-3 group">
@@ -251,9 +251,9 @@ export default function ContactSection() {
               {[
                 { label: "PROJECTS", href: "/projects" },
                 { label: "SERVICES", href: "/services" },
-                { label: "PORTFOLIO", href: "#portfolio" },
+                { label: "PORTFOLIO", href: "/portfolio" },
                 { label: "ABOUT", href: "/about" },
-                { label: "CONTACT", href: "#contact" },
+                { label: "CONTACT", href: "/contact" },
               ].map((link) => (
                 link.href.startsWith("#") ? (
                   <button key={link.label}

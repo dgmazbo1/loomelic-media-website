@@ -63,7 +63,13 @@ export default function StatsSection() {
           </AnimFade>
           <AnimFade delay={0.15}>
             <button
-              onClick={() => { navigate("/#contact"); setTimeout(() => { const el = document.getElementById("contact"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 100); }}
+              onClick={() => {
+                navigate("/");
+                setTimeout(() => {
+                  const el = document.getElementById("contact");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                }, 100);
+              }}
               className="btn-pill-dark text-xs self-start sm:self-end mb-2"
             >
               BOOK A CALL +

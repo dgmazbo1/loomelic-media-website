@@ -9,7 +9,7 @@ import { Instagram, Youtube } from "lucide-react";
 import { LOGO_TRANSPARENT, HERO_VIDEOS } from "@/lib/media";
 
 const categories = [
-  "INVENTORY PHOTOGRAPHY", "WALKAROUND VIDEOS", "SOCIAL REELS", "EVENTS", "HEADSHOTS", "DRONE VISUALS"
+  "AUTOMOTIVE", "EVENTS", "HEADSHOTS", "WEBSITES", "BRAND CONTENT", "LAS VEGAS", "SOUTH FLORIDA"
 ];
 
 export default function HeroSection() {
@@ -57,9 +57,9 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-[clamp(3.2rem,10vw,9.5rem)] leading-[0.88] text-white mb-6 max-w-5xl"
         >
-          CONTENT THAT<br />
-          <span className="text-outline-white">MOVES</span><br />
-          INVENTORY
+          VISUAL CONTENT<br />
+          <span className="text-outline-white">BUILT TO</span><br />
+          PERFORM
         </motion.h1>
 
         <motion.p
@@ -68,7 +68,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="font-body text-white/60 text-sm sm:text-base max-w-lg leading-relaxed mb-8"
         >
-          Monthly content systems built for dealerships — inventory photography, walkaround videos, social reels, event coverage, and staff headshots. Fast turnaround. Consistent look.
+          Photo, video, and web production for automotive dealerships, events, headshots, and brands — Las Vegas, Southern Nevada, and South Florida.
         </motion.p>
 
         <motion.div
@@ -78,18 +78,18 @@ export default function HeroSection() {
           className="flex flex-wrap items-center gap-3 mb-5"
         >
           <button
-            onClick={scrollToContact}
+            onClick={() => navigate("/contact")}
             className="btn-pill-light text-xs py-3 px-7 font-semibold tracking-widest"
-            aria-label="Book a dealer strategy call"
+            aria-label="Get in touch"
           >
-            BOOK A DEALER CALL
+            GET IN TOUCH
           </button>
           <button
             onClick={() => navigate("/projects")}
             className="text-xs py-3 px-7 font-semibold tracking-widest rounded-full border border-white/30 text-white/80 hover:border-white hover:text-white transition-all duration-200"
-            aria-label="View dealer work and case studies"
+            aria-label="View our work"
           >
-            VIEW DEALER WORK
+            VIEW OUR WORK
           </button>
         </motion.div>
 
@@ -99,7 +99,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.85 }}
           className="font-body text-xs text-white/35 tracking-widest mb-10"
         >
-          Trusted by dealerships and brands in Nevada.
+          Serving Las Vegas, Southern Nevada, and South Florida.
         </motion.p>
       </div>
 

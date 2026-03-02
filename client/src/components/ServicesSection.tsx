@@ -61,84 +61,42 @@ export const SERVICES = [
   },
 ];
 
-const DEALER_SERVICES = [
+const MULTI_SERVICES = [
   {
     num: "01",
-    slug: "automotive-marketing",
+    slug: "/services/dealer",
     icon: Camera,
-    name: "INVENTORY\nPHOTOGRAPHY",
-    outcome: "Make every vehicle on your lot look showroom-ready online.",
-    deliverables: [
-      "Exterior + interior shots per vehicle",
-      "Consistent white-sky or lifestyle backgrounds",
-      "Web-optimized files delivered within 24–48 hours",
-    ],
-    bestFor: "New and used inventory teams needing fast, consistent output.",
+    name: "DEALER\nSERVICES",
+    outcome: "Content systems built for automotive dealerships.",
+    deliverables: ["Inventory photography", "Walkaround videos", "Social reels & event coverage"],
+    bestFor: "Single-point dealers to multi-rooftop groups.",
   },
   {
     num: "02",
-    slug: "social-media-content",
-    icon: Video,
-    name: "SHORT-FORM\nSOCIAL REELS",
-    outcome: "Stop the scroll and drive showroom traffic with vertical video.",
-    deliverables: [
-      "Instagram Reels, TikTok, and YouTube Shorts",
-      "On-brand captions and hashtag strategy",
-      "Monthly content calendar and scheduling support",
-    ],
-    bestFor: "Dealers who want consistent social presence without managing it in-house.",
+    slug: "/services/events",
+    icon: Calendar,
+    name: "EVENT\nCOVERAGE",
+    outcome: "Full-service photo & video for any event.",
+    deliverables: ["Photo coverage", "Highlight films", "Same-day selects & recap reels"],
+    bestFor: "Corporate events, concerts, brand activations.",
   },
   {
     num: "03",
-    slug: "automotive-marketing",
-    icon: Aperture,
-    name: "WALKAROUND +\nDELIVERY VIDEOS",
-    outcome: "Build buyer confidence before they ever step on the lot.",
-    deliverables: [
-      "Feature-focused vehicle walkaround videos",
-      "Customer delivery moment captures",
-      "Branded intro/outro and dealership logo overlay",
-    ],
-    bestFor: "Sales teams who want to close more deals from online leads.",
+    slug: "/services/headshots",
+    icon: Users,
+    name: "HEADSHOTS",
+    outcome: "Professional portraits for teams of any size.",
+    deliverables: ["On-site studio setup", "Professional retouching", "Organized galleries"],
+    bestFor: "Executive teams, sales departments, corporate groups.",
   },
   {
     num: "04",
-    slug: "event-coverage",
-    icon: Calendar,
-    name: "DEALERSHIP EVENTS\n+ ACTIVATIONS",
-    outcome: "Turn every dealership event into lasting brand content.",
-    deliverables: [
-      "Full event photo and video coverage",
-      "Same-day social media content delivery",
-      "Highlight reel for website and paid ads",
-    ],
-    bestFor: "Dealers running sales events, community drives, or manufacturer activations.",
-  },
-  {
-    num: "05",
-    slug: "headshots",
-    icon: Users,
-    name: "STAFF HEADSHOTS\n+ TEAM BRANDING",
-    outcome: "Give your team a professional image that matches your brand.",
-    deliverables: [
-      "Individual and group headshots on-site",
-      "Consistent lighting and background setup",
-      "Retouched files for website, email, and social",
-    ],
-    bestFor: "Dealerships updating their website, hiring pages, or OEM requirements.",
-  },
-  {
-    num: "06",
-    slug: "automotive-marketing",
-    icon: Plane,
-    name: "DRONE + EXTERIOR\nVISUALS",
-    outcome: "Show the full scale and location of your dealership from above.",
-    deliverables: [
-      "FAA-compliant aerial photography and video",
-      "Lot overview and surrounding area shots",
-      "Cinematic flyover for ads and website hero",
-    ],
-    bestFor: "Dealers with large lots, prime locations, or new facility openings.",
+    slug: "/services/websites",
+    icon: Video,
+    name: "WEBSITE\nBUILDING",
+    outcome: "Modern, mobile-first websites built to convert.",
+    deliverables: ["Custom design & build", "SEO foundation", "Lead forms & optimization"],
+    bestFor: "Businesses, dealerships, personal brands.",
   },
 ];
 
@@ -168,13 +126,13 @@ export default function ServicesSection() {
           <div>
             <AnimFade>
               <p className="section-label text-white/40 mb-4">
-                <span>✦</span><span>DEALER SERVICES —</span>
+                <span>✦</span><span>SERVICES —</span>
               </p>
             </AnimFade>
             <AnimFade delay={0.1}>
               <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-white">
                 WHAT WE<br />
-                <span className="text-[oklch(0.45_0_0)]">DELIVER</span>
+                <span className="text-outline-white">DO</span>
               </h2>
             </AnimFade>
           </div>
@@ -190,7 +148,7 @@ export default function ServicesSection() {
 
         {/* Service cards grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {DEALER_SERVICES.map((svc, i) => {
+          {MULTI_SERVICES.map((svc, i) => {
             const Icon = svc.icon;
             return (
               <motion.div
@@ -236,7 +194,7 @@ export default function ServicesSection() {
 
                 {/* CTA */}
                 <button
-                  onClick={() => navigate(`/services/${svc.slug}`)}
+                  onClick={() => navigate(svc.slug)}
                   className="flex items-center gap-2 font-body text-xs text-white/50 hover:text-white transition-colors group/btn"
                 >
                   <span className="tracking-widest">SEE DETAILS</span>

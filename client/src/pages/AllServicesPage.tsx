@@ -1,124 +1,63 @@
 /* ============================================================
    AllServicesPage — /services
-   Dealer-acquisition rebuild: hero, 4-step process, service cards
-   with deliverables and best-for lines, CTA
+   Multi-vertical overview: dealer, events, headshots, websites
+   4-step process + service cards linking to subpages
    ============================================================ */
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLocation } from "wouter";
-import { ArrowLeft, ArrowRight, Camera, Video, Users, Calendar, Aperture, Plane, Globe, Palette } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ContactSection from "@/components/ContactSection";
 
 const SERVICES = [
   {
-    slug: "automotive-marketing",
-    icon: Camera,
-    name: "INVENTORY\nPHOTOGRAPHY",
-    tagline: "Make every vehicle look showroom-ready online.",
-    deliverables: ["Exterior + interior shots per vehicle", "White-sky or lifestyle backgrounds", "Web-optimized files in 24–48 hours"],
-    bestFor: "New and used inventory teams needing fast, consistent output.",
+    number: "01",
+    title: "Dealer Services",
+    slug: "/services/dealer",
+    tagline: "Content systems for automotive dealerships",
+    deliverables: ["Inventory photography", "Walkaround videos", "Social reels", "Event & activation coverage"],
+    bestFor: "Single-point dealers to multi-rooftop groups",
   },
   {
-    slug: "social-media-content",
-    icon: Video,
-    name: "SHORT-FORM\nSOCIAL REELS",
-    tagline: "Stop the scroll and drive showroom traffic.",
-    deliverables: ["Instagram Reels, TikTok, YouTube Shorts", "On-brand captions and hashtag strategy", "Monthly content calendar"],
-    bestFor: "Dealers who want consistent social presence without managing it in-house.",
+    number: "02",
+    title: "Event Coverage",
+    slug: "/services/events",
+    tagline: "Full-service photo & video for any event",
+    deliverables: ["Photo coverage", "Highlight films", "Same-day selects", "Recap reels"],
+    bestFor: "Corporate events, concerts, brand activations",
   },
   {
-    slug: "automotive-marketing",
-    icon: Aperture,
-    name: "WALKAROUND +\nDELIVERY VIDEOS",
-    tagline: "Build buyer confidence before they step on the lot.",
-    deliverables: ["Feature-focused vehicle walkaround videos", "Customer delivery moment captures", "Branded intro/outro overlay"],
-    bestFor: "Sales teams who want to close more deals from online leads.",
+    number: "03",
+    title: "Headshots",
+    slug: "/services/headshots",
+    tagline: "Professional portraits for teams of any size",
+    deliverables: ["On-site studio setup", "Professional retouching", "Organized galleries", "Scheduling coordination"],
+    bestFor: "Executive teams, sales departments, corporate groups",
   },
   {
-    slug: "event-coverage",
-    icon: Calendar,
-    name: "DEALERSHIP EVENTS\n+ ACTIVATIONS",
-    tagline: "Turn every event into lasting brand content.",
-    deliverables: ["Full event photo and video coverage", "Same-day social media delivery", "Highlight reel for website and ads"],
-    bestFor: "Dealers running sales events, community drives, or manufacturer activations.",
-  },
-  {
-    slug: "headshots",
-    icon: Users,
-    name: "STAFF HEADSHOTS\n+ TEAM BRANDING",
-    tagline: "Give your team a professional image that matches your brand.",
-    deliverables: ["Individual and group headshots on-site", "Consistent lighting and background", "Retouched files for web, email, social"],
-    bestFor: "Dealerships updating their website, hiring pages, or OEM requirements.",
-  },
-  {
-    slug: "automotive-marketing",
-    icon: Plane,
-    name: "DRONE + EXTERIOR\nVISUALS",
-    tagline: "Show the full scale of your dealership from above.",
-    deliverables: ["FAA-compliant aerial photography and video", "Lot overview and surrounding area shots", "Cinematic flyover for ads and web hero"],
-    bestFor: "Dealers with large lots, prime locations, or new facility openings.",
-  },
-  {
-    slug: "photography",
-    icon: Aperture,
-    name: "COMMERCIAL\nPHOTOGRAPHY",
-    tagline: "Every frame composed to tell your brand's story.",
-    deliverables: ["Product, lifestyle, and portrait photography", "High-resolution files for print and digital", "Full retouching and color grading"],
-    bestFor: "Brands needing polished imagery for ads, websites, and press.",
-  },
-  {
-    slug: "brand-strategy",
-    icon: Palette,
-    name: "BRAND\nSTRATEGY",
-    tagline: "Position your brand for sustained growth.",
-    deliverables: ["Visual identity and content strategy", "Digital marketing guidance", "Brand guidelines and asset library"],
-    bestFor: "Dealers and brands building a long-term content presence.",
-  },
-  {
-    slug: "website-redesign",
-    icon: Globe,
-    name: "WEBSITE\nREDESIGN",
-    tagline: "Modern, mobile-first sites that convert visitors into customers.",
-    deliverables: ["Custom design and development", "Mobile-first, fast-loading build", "Inventory integration and lead forms"],
-    bestFor: "Dealers with outdated sites that don't reflect their brand quality.",
+    number: "04",
+    title: "Website Building",
+    slug: "/services/websites",
+    tagline: "Modern, mobile-first websites built to convert",
+    deliverables: ["Custom design", "Performant build", "SEO foundation", "Lead forms & optimization"],
+    bestFor: "Businesses, dealerships, personal brands",
   },
 ];
 
 const PROCESS_STEPS = [
-  {
-    num: "01",
-    title: "Discovery Call",
-    desc: "We learn about your dealership, current content gaps, inventory volume, and goals. 30 minutes — no obligation.",
-  },
-  {
-    num: "02",
-    title: "Content Plan",
-    desc: "We put together a custom content plan with recommended services, deliverables, and pricing based on your needs.",
-  },
-  {
-    num: "03",
-    title: "On-Site Shoot",
-    desc: "We come to your lot, showroom, or event. Our team handles setup, direction, and capture — you stay focused on selling.",
-  },
-  {
-    num: "04",
-    title: "Delivery + Ongoing",
-    desc: "Files delivered within 24–48 hours. Monthly retainer clients get a dedicated content calendar and priority scheduling.",
-  },
+  { step: "01", title: "Discovery Call", desc: "We learn your goals, timeline, and what success looks like for your project — no generic intake forms." },
+  { step: "02", title: "Proposal & Scope", desc: "A clear scope of work with deliverables, timeline, and pricing. No surprises." },
+  { step: "03", title: "Production", desc: "We show up, shoot, and produce — on time and on brand. You stay focused on your business." },
+  { step: "04", title: "Delivery & Review", desc: "Organized, labeled deliverables. One round of revisions included. Ongoing support available." },
 ];
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={className}
-    >
+    <motion.div ref={ref} initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }} className={className}>
       {children}
     </motion.div>
   );
@@ -132,142 +71,140 @@ export default function AllServicesPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="section-black pt-32 pb-16 sm:pb-24">
+      <section className="section-dark pt-32 pb-16 sm:pt-40 sm:pb-20">
         <div className="container">
-          <motion.button
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            onClick={() => navigate("/")}
-            className="flex items-center gap-2 text-white/40 hover:text-white transition-colors mb-10 font-body text-xs tracking-widest"
-          >
-            <ArrowLeft size={14} /> BACK TO HOME
-          </motion.button>
+          <AnimFade>
+            <p className="section-label text-white/40 mb-6"><span>✦</span><span>SERVICES</span></p>
+          </AnimFade>
+          <AnimFade delay={0.1}>
+            <h1 className="font-display text-[clamp(3rem,9vw,8rem)] leading-[0.88] text-white mb-6 max-w-4xl">
+              VISUAL CONTENT<br />
+              <span className="text-outline-white">FOR EVERY</span><br />
+              INDUSTRY
+            </h1>
+          </AnimFade>
+          <AnimFade delay={0.2}>
+            <p className="font-body text-white/55 text-sm sm:text-base max-w-xl leading-relaxed">
+              From automotive dealerships to corporate events, executive headshots to full website builds — Loomelic Media covers every visual content need across Las Vegas and South Florida.
+            </p>
+          </AnimFade>
+        </div>
+      </section>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="section-label text-white/40 mb-4"
-          >
-            <span>✦</span><span>DEALER CONTENT SYSTEMS —</span>
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.88] text-white mb-6"
-          >
-            CONTENT THAT<br />
-            <span className="text-[oklch(0.4_0_0)]">MOVES INVENTORY</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35 }}
-            className="font-body text-white/55 text-sm sm:text-base max-w-xl leading-relaxed"
-          >
-            Monthly content systems built for Nevada dealerships — inventory photography, walkaround videos, social reels, event coverage, and staff headshots. Fast turnaround. Consistent look.
-          </motion.p>
+      {/* Service cards */}
+      <section className="section-light text-[oklch(0.07_0_0)]">
+        <div className="container py-16 sm:py-24">
+          <AnimFade>
+            <p className="section-label text-[oklch(0.07_0_0)/40] mb-10"><span>✦</span><span>WHAT WE DO</span></p>
+          </AnimFade>
+          <div className="grid sm:grid-cols-2 gap-px bg-[oklch(0_0_0/0.08)]">
+            {SERVICES.map((svc, i) => (
+              <motion.button
+                key={svc.slug}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: i * 0.08 }}
+                onClick={() => navigate(svc.slug)}
+                className="group text-left bg-[oklch(0.97_0_0)] hover:bg-white p-8 sm:p-10 transition-colors duration-200"
+              >
+                <div className="flex items-start justify-between mb-6">
+                  <span className="font-display text-[oklch(0.85_0_0)] text-5xl">{svc.number}</span>
+                  <span className="flex items-center gap-1.5 font-body text-[0.65rem] text-[oklch(0.55_0_0)] tracking-widest uppercase group-hover:text-[oklch(0.07_0_0)] transition-colors">
+                    VIEW SERVICE <ArrowRight size={11} />
+                  </span>
+                </div>
+                <h2 className="font-display-normal text-[oklch(0.07_0_0)] text-2xl sm:text-3xl tracking-tight mb-2">{svc.title.toUpperCase()}</h2>
+                <p className="font-body text-sm text-[oklch(0.45_0_0)] mb-6">{svc.tagline}</p>
+                <ul className="flex flex-col gap-1.5 mb-6">
+                  {svc.deliverables.map((d) => (
+                    <li key={d} className="font-body text-xs text-[oklch(0.4_0_0)] flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-[oklch(0.7_0_0)] shrink-0" />
+                      {d}
+                    </li>
+                  ))}
+                </ul>
+                <p className="font-body text-[0.65rem] text-[oklch(0.55_0_0)] tracking-widest uppercase">BEST FOR: {svc.bestFor}</p>
+              </motion.button>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* 4-Step Process */}
-      <section className="section-dark border-t border-white/8">
+      <section className="section-dark">
         <div className="container py-16 sm:py-24">
           <AnimFade>
-            <p className="section-label text-white/40 mb-4">
-              <span>✦</span><span>HOW IT WORKS —</span>
-            </p>
-            <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] text-white mb-12">
-              4 STEPS TO<br />
-              <span className="text-[oklch(0.45_0_0)]">BETTER CONTENT</span>
+            <p className="section-label text-white/40 mb-6"><span>✦</span><span>HOW IT WORKS</span></p>
+          </AnimFade>
+          <AnimFade delay={0.1}>
+            <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] text-white mb-12 max-w-2xl">
+              OUR<br />PROCESS
             </h2>
           </AnimFade>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {PROCESS_STEPS.map((step, i) => (
               <motion.div
-                key={step.num}
-                initial={{ opacity: 0, y: 30 }}
+                key={step.step}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="bg-white/[0.03] border border-white/8 rounded-2xl p-6"
+                transition={{ duration: 0.55, delay: i * 0.1 }}
               >
-                <span className="font-display text-[clamp(2.5rem,5vw,4rem)] leading-none text-white/10 block mb-4">{step.num}</span>
-                <h3 className="font-display text-xl text-white mb-3">{step.title}</h3>
-                <p className="font-body text-xs text-white/45 leading-relaxed">{step.desc}</p>
+                <div className="font-display text-[oklch(0.3_0_0)] text-5xl mb-5">{step.step}</div>
+                <h3 className="font-display-normal text-white text-sm tracking-widest uppercase mb-3">{step.title}</h3>
+                <p className="font-body text-sm text-white/50 leading-relaxed">{step.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Service cards */}
-      <section className="section-black pb-24">
-        <div className="container">
-          <AnimFade className="mb-12">
-            <p className="section-label text-white/40 mb-4">
-              <span>✦</span><span>ALL SERVICES —</span>
-            </p>
-            <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] text-white">
-              WHAT WE<br />
-              <span className="text-[oklch(0.4_0_0)]">DELIVER</span>
+      {/* Local markets */}
+      <section className="section-light text-[oklch(0.07_0_0)]">
+        <div className="container py-16 sm:py-24">
+          <AnimFade>
+            <p className="section-label text-[oklch(0.07_0_0)/40] mb-6"><span>✦</span><span>WHERE WE WORK</span></p>
+          </AnimFade>
+          <div className="grid sm:grid-cols-2 gap-8">
+            <AnimFade delay={0.1}>
+              <div className="p-8 border border-[oklch(0_0_0/0.08)] rounded-2xl">
+                <h3 className="font-display-normal text-[oklch(0.07_0_0)] text-xl tracking-widest uppercase mb-3">Las Vegas / Southern Nevada</h3>
+                <p className="font-body text-sm text-[oklch(0.45_0_0)] leading-relaxed mb-4">
+                  Our home base. We serve dealerships, event venues, businesses, and professionals across Las Vegas, Henderson, Summerlin, and the greater Southern Nevada area.
+                </p>
+                <p className="font-body text-xs text-[oklch(0.6_0_0)] tracking-widest uppercase">5940 S Rainbow Blvd #4058 · Las Vegas, NV 89117</p>
+              </div>
+            </AnimFade>
+            <AnimFade delay={0.15}>
+              <div className="p-8 border border-[oklch(0_0_0/0.08)] rounded-2xl">
+                <h3 className="font-display-normal text-[oklch(0.07_0_0)] text-xl tracking-widest uppercase mb-3">South Florida</h3>
+                <p className="font-body text-sm text-[oklch(0.45_0_0)] leading-relaxed mb-4">
+                  Serving Miami, Fort Lauderdale, Boca Raton, and surrounding areas — the same quality, consistency, and turnaround times you'd expect from our Las Vegas operation.
+                </p>
+                <p className="font-body text-xs text-[oklch(0.6_0_0)] tracking-widest uppercase">Miami · Fort Lauderdale · Boca Raton</p>
+              </div>
+            </AnimFade>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-dark">
+        <div className="container py-16 sm:py-24">
+          <AnimFade>
+            <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] text-white mb-8 max-w-2xl">
+              NOT SURE<br />WHICH SERVICE?
             </h2>
           </AnimFade>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {SERVICES.map((svc, i) => {
-              const Icon = svc.icon;
-              return (
-                <motion.div
-                  key={`${svc.slug}-${i}`}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.07 }}
-                  className="group bg-white/[0.03] border border-white/8 rounded-2xl p-6 sm:p-7 hover:bg-white/[0.06] hover:border-white/15 transition-all duration-300 flex flex-col"
-                >
-                  <div className="flex items-center justify-between mb-5">
-                    <span className="font-body text-xs text-white/20 tracking-widest">({String(i + 1).padStart(2, "0")})</span>
-                    <div className="w-9 h-9 rounded-full bg-white/8 flex items-center justify-center text-white/40 group-hover:text-white/70 transition-colors">
-                      <Icon size={16} />
-                    </div>
-                  </div>
-
-                  <h3 className="font-display text-[clamp(1.6rem,3vw,2.4rem)] leading-[0.92] text-white mb-3 whitespace-pre-line">
-                    {svc.name}
-                  </h3>
-
-                  <p className="font-body text-sm text-white/55 leading-relaxed mb-5">{svc.tagline}</p>
-
-                  <ul className="space-y-2 mb-5 flex-1">
-                    {svc.deliverables.map((d, j) => (
-                      <li key={j} className="flex items-start gap-2 font-body text-xs text-white/40">
-                        <span className="text-lime mt-0.5 shrink-0">—</span>
-                        <span>{d}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <p className="font-body text-[0.68rem] text-white/30 italic mb-5 border-t border-white/8 pt-4">
-                    Best for: {svc.bestFor}
-                  </p>
-
-                  <button
-                    onClick={() => navigate(`/services/${svc.slug}`)}
-                    className="flex items-center gap-2 font-body text-xs text-white/50 hover:text-white transition-colors group/btn"
-                  >
-                    <span className="tracking-widest">SEE DETAILS</span>
-                    <ArrowRight size={13} className="group-hover/btn:translate-x-1 transition-transform" />
-                  </button>
-                </motion.div>
-              );
-            })}
-          </div>
+          <AnimFade delay={0.1}>
+            <p className="font-body text-white/55 text-sm sm:text-base max-w-md leading-relaxed mb-8">
+              Tell us about your project and we'll recommend the right approach — no commitment required.
+            </p>
+            <button onClick={() => navigate("/contact")} className="btn-pill-light text-xs py-3.5 px-8">
+              TALK TO US +
+            </button>
+          </AnimFade>
         </div>
       </section>
 

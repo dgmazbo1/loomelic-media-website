@@ -40,12 +40,12 @@ const FAQS = [
     a: "Standard delivery is 24–48 hours for inventory photography. Event coverage is typically 48–72 hours. Rush delivery is available on request.",
   },
   {
-    q: "Do you offer monthly retainer packages for dealerships?",
-    a: "Yes. Our most popular option is a monthly retainer that includes inventory photography, social reels, and event coverage on a recurring schedule. We build a content calendar around your lot cycle and upcoming events.",
+    q: "Do you offer monthly retainer packages?",
+    a: "Yes. Our most popular option is a monthly retainer that includes photography, video, and social content on a recurring schedule. For dealerships, we build a content calendar around your lot cycle and upcoming events. For other businesses, we tailor the scope to your needs.",
   },
   {
     q: "What areas do you serve?",
-    a: "We're based in Las Vegas, NV and primarily serve dealerships and businesses in Las Vegas, Henderson, and Southern Nevada. We also travel for larger productions — contact us to discuss.",
+    a: "We're based in Las Vegas, NV and serve clients across Las Vegas, Henderson, and Southern Nevada. We also operate in South Florida, serving Miami, Fort Lauderdale, Boca Raton, and surrounding areas. We travel for larger productions — contact us to discuss.",
   },
   {
     q: "Can you handle multiple vehicles in a single session?",
@@ -167,10 +167,10 @@ export default function AboutPage() {
               <AnimFade delay={0.3}>
                 <div className="pt-4 flex flex-wrap gap-3">
                   <button
-                    onClick={() => { navigate("/#contact"); setTimeout(() => { const el = document.getElementById("contact"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 100); }}
+                    onClick={() => navigate("/contact")}
                     className="btn-pill-dark text-xs"
                   >
-                    BOOK A DEALER CALL +
+                    GET IN TOUCH +
                   </button>
                   <button
                     onClick={() => navigate("/services")}

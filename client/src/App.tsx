@@ -9,6 +9,9 @@ import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
 import AllProjectsPage from "./pages/AllProjectsPage";
 import AllServicesPage from "./pages/AllServicesPage";
+import ContactPage from "./pages/ContactPage";
+import PortfolioPage from "./pages/PortfolioPage";
+import { DealerServicesPage, EventCoverageSubpage, HeadshotsSubpage, WebsiteBuildingPage } from "./pages/ServiceSubpages";
 
 // Service pages
 import {
@@ -58,7 +61,15 @@ function Router() {
         {/* All services listing */}
         <Route path="/services" component={AllServicesPage} />
 
-        {/* Service pages */}
+        {/* Contact & Portfolio */}
+        <Route path="/contact" component={ContactPage} />
+        <Route path="/portfolio" component={PortfolioPage} />
+        {/* Service subpages */}
+        <Route path="/services/dealer" component={DealerServicesPage} />
+        <Route path="/services/events" component={EventCoverageSubpage} />
+        <Route path="/services/headshots" component={HeadshotsSubpage} />
+        <Route path="/services/websites" component={WebsiteBuildingPage} />
+        {/* Legacy service pages */}
         <Route path="/services/automotive-marketing" component={AutomotiveMarketingPage} />
         <Route path="/services/event-coverage" component={EventCoveragePage} />
         <Route path="/services/social-media-content" component={SocialMediaContentPage} />
