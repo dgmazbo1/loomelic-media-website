@@ -11,7 +11,12 @@ import { useLocation } from "wouter";
 import { LOGO_TRANSPARENT } from "@/lib/media";
 
 const SERVICE_ITEMS = [
-  { label: "Dealer Services", href: "/services/dealer" },
+  { label: "Dealer Services", href: "/services/dealer", isGroup: true },
+  { label: "↳ Inventory Photography", href: "/services/dealer/01-inventory-photography", sub: true },
+  { label: "↳ Short-Form Reels", href: "/services/dealer/02-short-form-reels", sub: true },
+  { label: "↳ Walkaround Videos", href: "/services/dealer/03-walkaround-videos", sub: true },
+  { label: "↳ Dealership Events", href: "/services/dealer/04-dealership-events", sub: true },
+  { label: "↳ Intro Videos for CRM", href: "/services/dealer/05-crm-intro-videos", sub: true },
   { label: "Event Coverage", href: "/services/events" },
   { label: "Headshots", href: "/services/headshots" },
   { label: "Website Building", href: "/services/websites" },
@@ -104,9 +109,9 @@ export default function Navbar() {
               </button>
               <AnimatePresence>
                 {dropdownOpen && (
-                  <motion.div initial={{ opacity: 0, y: 8, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.97 }} transition={{ duration: 0.18 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-52 bg-[oklch(0.1_0_0)] border border-white/10 rounded-2xl overflow-hidden shadow-2xl" onMouseEnter={handleServicesMouseEnter} onMouseLeave={handleServicesMouseLeave}>
+                  <motion.div initial={{ opacity: 0, y: 8, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 8, scale: 0.97 }} transition={{ duration: 0.18 }} className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-[oklch(0.1_0_0)] border border-white/10 rounded-2xl overflow-hidden shadow-2xl" onMouseEnter={handleServicesMouseEnter} onMouseLeave={handleServicesMouseLeave}>
                     {SERVICE_ITEMS.map((item) => (
-                      <button key={item.href} onClick={() => goTo(item.href)} className={`w-full text-left px-5 py-3.5 text-[0.72rem] font-semibold tracking-[0.1em] transition-colors duration-150 border-b border-white/5 last:border-0 ${location === item.href ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/8"}`}>{item.label.toUpperCase()}</button>
+                      <button key={item.href} onClick={() => goTo(item.href)} className={`w-full text-left border-b border-white/5 last:border-0 transition-colors duration-150 ${'sub' in item && item.sub ? 'px-6 py-2 text-[0.65rem] tracking-[0.08em]' : 'px-5 py-3.5 text-[0.72rem] tracking-[0.1em]'} font-semibold ${'isGroup' in item && item.isGroup ? 'text-white/80 hover:text-white hover:bg-white/8' : 'sub' in item && item.sub ? 'text-white/40 hover:text-white/70 hover:bg-white/5' : 'text-white/60 hover:text-white hover:bg-white/8'} ${location === item.href || location.startsWith(item.href + '/') ? 'text-white bg-white/10' : ''}`}>{item.label.toUpperCase()}</button>
                     ))}
                   </motion.div>
                 )}

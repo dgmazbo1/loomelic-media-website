@@ -11,7 +11,15 @@ import AllProjectsPage from "./pages/AllProjectsPage";
 import AllServicesPage from "./pages/AllServicesPage";
 import ContactPage from "./pages/ContactPage";
 import PortfolioPage from "./pages/PortfolioPage";
-import { DealerServicesPage, EventCoverageSubpage, HeadshotsSubpage, WebsiteBuildingPage } from "./pages/ServiceSubpages";
+import { EventCoverageSubpage, HeadshotsSubpage, WebsiteBuildingPage } from "./pages/ServiceSubpages";
+import {
+  DealerServicesOverview,
+  DealerInventoryPhotographyPage,
+  DealerShortFormReelsPage,
+  DealerWalkaroundVideosPage,
+  DealerEventsPage,
+  DealerCRMIntroVideosPage,
+} from "./pages/DealerServicePages";
 
 // Service pages
 import {
@@ -64,8 +72,13 @@ function Router() {
         {/* Contact & Portfolio */}
         <Route path="/contact" component={ContactPage} />
         <Route path="/portfolio" component={PortfolioPage} />
-        {/* Service subpages */}
-        <Route path="/services/dealer" component={DealerServicesPage} />
+        {/* Dealer service subpages */}
+        <Route path="/services/dealer" component={DealerServicesOverview} />
+        <Route path="/services/dealer/01-inventory-photography" component={DealerInventoryPhotographyPage} />
+        <Route path="/services/dealer/02-short-form-reels" component={DealerShortFormReelsPage} />
+        <Route path="/services/dealer/03-walkaround-videos" component={DealerWalkaroundVideosPage} />
+        <Route path="/services/dealer/04-dealership-events" component={DealerEventsPage} />
+        <Route path="/services/dealer/05-crm-intro-videos" component={DealerCRMIntroVideosPage} />
         <Route path="/services/events" component={EventCoverageSubpage} />
         <Route path="/services/headshots" component={HeadshotsSubpage} />
         <Route path="/services/websites" component={WebsiteBuildingPage} />
