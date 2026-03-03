@@ -12,6 +12,7 @@ import { ArrowLeft, X, ChevronLeft, ChevronRight, TrendingUp, Quote } from "luci
 import { useState } from "react";
 import Navbar from "./Navbar";
 import ContactSection from "./ContactSection";
+import { trpc } from "@/lib/trpc";
 
 export interface ProjectOutcome {
   metric: string;
@@ -101,6 +102,16 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
   const [, navigate] = useLocation();
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
 
+  // Fetch DB-managed media — overrides hardcoded props when available
+  const { data: dbMedia } = trpc.media.getProjectMedia.useQuery({ slug: data.slug });
+
+  // Merge: DB takes priority over hardcoded props
+  const heroImage = dbMedia?.heroImageUrl ?? data.heroImage;
+  const gallery = dbMedia && dbMedia.gallery.length > 0
+    ? dbMedia.gallery.map(img => img.url)
+    : data.gallery;
+  const dbVideos = dbMedia?.videos ?? [];
+
   const hasFeedbackSection = data.feedback || (data.outcomes && data.outcomes.length > 0);
 
   return (
@@ -111,7 +122,7 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
       <section className="relative min-h-[75vh] flex flex-col justify-end overflow-hidden section-dark pt-24">
         <div className="absolute inset-0 z-0">
           <img
-            src={data.heroImage}
+            src={heroImage}
             alt={data.title}
             className="w-full h-full object-cover opacity-40"
           />
@@ -227,14 +238,36 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
             </div>
           )}
 
+          {/* DB Videos (from admin panel) */}
+          {dbVideos.length > 0 && (
+            <div className="mb-16">
+              <p className="section-label text-[oklch(0.6_0_0)] mb-8">
+                <span>✦</span><span>VIDEO CONTENT —</span>
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {dbVideos.map((v) => (
+                  <div key={v.id} className="rounded-2xl overflow-hidden aspect-video bg-[oklch(0.1_0_0)]">
+                    <iframe
+                      src={v.embedUrl}
+                      className="w-full h-full"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      title={v.label ?? "Video"}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Photo Gallery */}
-          {data.gallery.length > 0 && (
+          {gallery.length > 0 && (
             <div>
               <p className="section-label text-[oklch(0.6_0_0)] mb-8">
-                <span>✦</span><span>PHOTO GALLERY — {data.gallery.length} IMAGES</span>
+                <span>✦</span><span>PHOTO GALLERY — {gallery.length} IMAGES</span>
               </p>
               <div className="columns-2 md:columns-3 gap-3 space-y-3">
-                {data.gallery.map((img, i) => (
+                {gallery.map((img, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
@@ -245,7 +278,7 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
                     onClick={() => setLightboxIdx(i)}
                   >
                     <img
-                      src={img}
+                      src={typeof img === 'string' ? img : img}
                       alt={`${data.title} ${i + 1}`}
                       className="w-full h-auto object-cover group-hover:scale-[1.03] transition-transform duration-500"
                       loading="lazy"
@@ -357,7 +390,7 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
       <AnimatePresence>
         {lightboxIdx !== null && (
           <Lightbox
-            images={data.gallery}
+            images={gallery}
             startIndex={lightboxIdx}
             onClose={() => setLightboxIdx(null)}
           />

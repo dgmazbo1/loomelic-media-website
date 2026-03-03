@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import AdminPage from "./pages/AdminPage";
 import AboutPage from "./pages/AboutPage";
 import AllProjectsPage from "./pages/AllProjectsPage";
 import AllServicesPage from "./pages/AllServicesPage";
@@ -51,12 +52,15 @@ function ScrollToTop() {
   }, [location]);
   return null;
 }
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <>
       <ScrollToTop />
       <Switch>
+        {/* Admin panel */}
+        <Route path="/admin" component={AdminPage} />
+
         {/* Home */}
         <Route path="/" component={Home} />
 
