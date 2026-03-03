@@ -1,0 +1,15 @@
+{
+  "query": "SELECT id, slug, name FROM projects ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute SELECT id, slug, name FROM projects ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "slug": "lexus-of-henderson",
+      "name": "Lexus of Henderson"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\tname\n1\tlexus-of-henderson\tLexus of Henderson\n",
+  "stderr": "",
+  "execution_time_ms": 196
+}

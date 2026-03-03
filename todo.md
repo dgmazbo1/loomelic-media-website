@@ -3,3 +3,4 @@
 - [x] Fix admin sign-in: after OAuth login, redirect back to /admin instead of homepage
 - [x] Fix admin role assignment: ensure site owner is automatically granted admin role on first login
 - [x] Add "Sign In" button on /admin that preserves /admin as the return path after OAuth
+- [x] Fix admin upload error: "project doesn't exist" when uploading photos

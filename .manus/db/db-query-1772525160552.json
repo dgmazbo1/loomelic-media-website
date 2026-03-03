@@ -1,0 +1,9 @@
+{
+  "query": "\nINSERT INTO projects (slug, name, createdAt, updatedAt)\nVALUES\n  ('lexus-of-henderson', 'Lexus of Henderson', NOW(), NOW()),\n  ('lexus-of-las-vegas', 'Lexus of Las Vegas', NOW(), NOW()),\n  ('las-vegas-raiders-tour', 'Las Vegas Raiders Tour', NOW(), NOW()),\n  ('centennial-subaru', 'Centennial Subaru', NOW(), NOW()),\n  ('wondr-nation-g2e', 'Wondr Nation G2E', NOW(), NOW()),\n  ('bob-marley-hope-road', 'Bob Marley Hope Road', NOW(), NOW()),\n  ('sports-illustrated-sportsperson-2026', 'Sports Illustrated 2026', NOW(), NOW())\nON DUPLICATE KEY UPDATE name = VALUES(name);\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute \nINSERT INTO projects (slug, name, createdAt, updatedAt)\nVALUES\n  ('lexus-of-henderson', 'Lexus of Henderson', NOW(), NOW()),\n  ('lexus-of-las-vegas', 'Lexus of Las Vegas', NOW(), NOW()),\n  ('las-vegas-raiders-tour', 'Las Vegas Raiders Tour', NOW(), NOW()),\n  ('centennial-subaru', 'Centennial Subaru', NOW(), NOW()),\n  ('wondr-nation-g2e', 'Wondr Nation G2E', NOW(), NOW()),\n  ('bob-marley-hope-road', 'Bob Marley Hope Road', NOW(), NOW()),\n  ('sports-illustrated-sportsperson-2026', 'Sports Illustrated 2026', NOW(), NOW())\nON DUPLICATE KEY UPDATE name = VALUES(name);\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 64
+}

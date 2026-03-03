@@ -1,0 +1,45 @@
+{
+  "query": "SELECT id, slug, name FROM projects ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute SELECT id, slug, name FROM projects ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "slug": "lexus-of-henderson",
+      "name": "Lexus of Henderson"
+    },
+    {
+      "id": "3",
+      "slug": "lexus-of-las-vegas",
+      "name": "Lexus of Las Vegas"
+    },
+    {
+      "id": "4",
+      "slug": "las-vegas-raiders-tour",
+      "name": "Las Vegas Raiders Tour"
+    },
+    {
+      "id": "5",
+      "slug": "centennial-subaru",
+      "name": "Centennial Subaru"
+    },
+    {
+      "id": "6",
+      "slug": "wondr-nation-g2e",
+      "name": "Wondr Nation G2E"
+    },
+    {
+      "id": "7",
+      "slug": "bob-marley-hope-road",
+      "name": "Bob Marley Hope Road"
+    },
+    {
+      "id": "8",
+      "slug": "sports-illustrated-sportsperson-2026",
+      "name": "Sports Illustrated 2026"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\tname\n1\tlexus-of-henderson\tLexus of Henderson\n3\tlexus-of-las-vegas\tLexus of Las Vegas\n4\tlas-vegas-raiders-tour\tLas Vegas Raiders Tour\n5\tcentennial-subaru\tCentennial Subaru\n6\twondr-nation-g2e\tWondr Nation G2E\n7\tbob-marley-hope-road\tBob Marley Hope Road\n8\tsports-illustrated-sportsperson-2026\tSports Illustrated 2026\n",
+  "stderr": "",
+  "execution_time_ms": 57
+}

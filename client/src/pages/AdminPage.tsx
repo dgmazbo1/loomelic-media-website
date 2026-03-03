@@ -7,7 +7,7 @@
    - Hero image picker (upload or promote from gallery)
    - Video manager: add/edit/delete embed URLs
    ============================================================ */
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
@@ -171,20 +171,30 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
 
   // Ensure project row exists
   const ensureMut = trpc.admin.ensureProject.useMutation();
+  const [seeding, setSeeding] = useState(false);
+  const [seeded, setSeeded] = useState(false);
 
   const { data, isLoading, refetch } = trpc.admin.getProject.useQuery(
     { slug },
     {
       retry: false,
+      // Retry once after a short delay to catch the case where ensureProject just ran
+      retryDelay: 500,
     }
   );
 
   // If project not found in DB, seed it then refetch
-  const [seeded, setSeeded] = useState(false);
-  if (!data && !isLoading && !seeded) {
-    setSeeded(true);
-    ensureMut.mutateAsync({ slug, name }).then(() => refetch()).catch(() => {});
-  }
+  // Use useEffect to avoid calling setState during render
+  useEffect(() => {
+    if (!data && !isLoading && !seeded && !seeding) {
+      setSeeding(true);
+      setSeeded(true);
+      ensureMut.mutateAsync({ slug, name })
+        .then(() => refetch())
+        .catch((err) => { console.error("ensureProject failed", err); })
+        .finally(() => setSeeding(false));
+    }
+  }, [data, isLoading, seeded, seeding, slug, name, ensureMut, refetch]);
 
   const uploadGallery = trpc.admin.uploadGalleryImage.useMutation({
     onSuccess: () => { utils.admin.getProject.invalidate({ slug }); toast.success("Photo uploaded"); },
@@ -273,10 +283,13 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
     }
   }, [slug, uploadHero]);
 
-  if (isLoading) {
+  if (isLoading || seeding) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+          {seeding && <p className="text-white/30 text-xs">Setting up project...</p>}
+        </div>
       </div>
     );
   }
