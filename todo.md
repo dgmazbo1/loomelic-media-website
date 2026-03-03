@@ -1,2 +1,5 @@
 - [x] Add Findlay Nissan, Ascent Automotive Group, Lexus Western Area, The Blast to Trusted By strip
 - [x] Convert Trusted By strip to auto-scrolling marquee
+- [x] Fix admin sign-in: after OAuth login, redirect back to /admin instead of homepage
+- [x] Fix admin role assignment: ensure site owner is automatically granted admin role on first login
+- [x] Add "Sign In" button on /admin that preserves /admin as the return path after OAuth

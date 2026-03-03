@@ -440,11 +440,18 @@ export default function AdminPage() {
     return (
       <div className="min-h-screen bg-[oklch(0.07_0_0)] flex items-center justify-center">
         <div className="text-center space-y-4">
+          <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto">
+            <Image size={28} className="text-white/30" />
+          </div>
           <h1 className="text-2xl font-bold text-white">Admin Access Required</h1>
-          <p className="text-white/50 text-sm">You must be logged in to access the admin panel.</p>
-          <a href={getLoginUrl()} className="inline-flex items-center gap-2 bg-white text-black font-semibold text-sm px-6 py-3 rounded-full hover:bg-white/90 transition-colors">
+          <p className="text-white/50 text-sm">Sign in with your Manus account to manage media.</p>
+          {/* Pass /admin as returnPath so OAuth redirects back here after login */}
+          <a href={getLoginUrl("/admin")} className="inline-flex items-center gap-2 bg-white text-black font-semibold text-sm px-6 py-3 rounded-full hover:bg-white/90 transition-colors">
             Sign In with Manus
           </a>
+          <div>
+            <a href="/" className="text-xs text-white/30 hover:text-white/50 transition-colors">← Back to site</a>
+          </div>
         </div>
       </div>
     );
@@ -456,7 +463,11 @@ export default function AdminPage() {
         <div className="text-center space-y-4">
           <h1 className="text-2xl font-bold text-white">Access Denied</h1>
           <p className="text-white/50 text-sm">Your account does not have admin privileges.</p>
-          <button onClick={logout} className="text-sm text-white/40 hover:text-white/60 underline">Sign out</button>
+          <p className="text-white/30 text-xs max-w-xs mx-auto">Only the site owner can access this panel. If you are the owner, please sign out and sign in again to refresh your permissions.</p>
+          <div className="flex flex-col gap-2 items-center">
+            <button onClick={logout} className="text-sm text-white/40 hover:text-white/60 underline">Sign out</button>
+            <a href="/" className="text-xs text-white/30 hover:text-white/50 transition-colors">← Back to site</a>
+          </div>
         </div>
       </div>
     );
