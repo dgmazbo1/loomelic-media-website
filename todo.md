@@ -4,3 +4,4 @@
 - [x] Fix admin role assignment: ensure site owner is automatically granted admin role on first login
 - [x] Add "Sign In" button on /admin that preserves /admin as the return path after OAuth
 - [x] Fix admin upload error: "project doesn't exist" when uploading photos
+- [x] Add "Publish Changes" button to admin panel sidebar UI

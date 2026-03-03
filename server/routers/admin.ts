@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { protectedProcedure, router } from "../_core/trpc";
+import { notifyOwner } from "../_core/notification";
 import {
   getAllProjects,
   getProjectBySlug,
@@ -168,6 +169,22 @@ export const adminRouter = router({
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input }) => {
       await deleteProjectVideo(input.id);
+      return { success: true };
+    }),
+
+  /**
+   * Request a site publish — notifies the owner and returns a deep-link
+   * to the Manus Management UI Publish button.
+   * (The Manus platform does not expose a programmatic publish API;
+   *  the owner must click Publish in the UI to deploy.)
+   */
+  requestPublish: adminProcedure
+    .mutation(async () => {
+      const now = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles", dateStyle: "medium", timeStyle: "short" });
+      await notifyOwner({
+        title: "🚀 Publish Requested",
+        content: `A publish was requested from the Admin Panel at ${now} (PT). Please click the Publish button in the Manus Management UI to deploy the latest changes to the live site.`,
+      }).catch(() => {}); // non-fatal
       return { success: true };
     }),
 });

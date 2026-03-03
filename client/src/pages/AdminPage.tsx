@@ -436,6 +436,51 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
   );
 }
 
+// ─── Publish Button ─────────────────────────────────────────────────────────
+function PublishButton() {
+  const [state, setState] = useState<"idle" | "loading" | "done" | "error">("idle");
+  const requestPublish = trpc.admin.requestPublish.useMutation();
+
+  const handlePublish = async () => {
+    setState("loading");
+    try {
+      await requestPublish.mutateAsync();
+      setState("done");
+      setTimeout(() => setState("idle"), 4000);
+    } catch {
+      setState("error");
+      setTimeout(() => setState("idle"), 3000);
+    }
+  };
+
+  return (
+    <div className="space-y-1">
+      <button
+        onClick={handlePublish}
+        disabled={state === "loading"}
+        className={`w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl font-semibold text-sm transition-all ${
+          state === "done"
+            ? "bg-green-500/20 text-green-400 border border-green-500/30"
+            : state === "error"
+            ? "bg-red-500/20 text-red-400 border border-red-500/30"
+            : "bg-white text-black hover:bg-white/90 active:scale-95"
+        } disabled:opacity-60`}
+      >
+        {state === "loading" && <div className="w-3.5 h-3.5 border-2 border-black/30 border-t-black rounded-full animate-spin" />}
+        {state === "done" && <span>✓</span>}
+        {state === "error" && <span>✕</span>}
+        {state === "idle" && <span className="text-base leading-none">🚀</span>}
+        {state === "loading" ? "Publishing..." : state === "done" ? "Publish Requested!" : state === "error" ? "Failed — Retry" : "Publish Changes"}
+      </button>
+      {state === "done" && (
+        <p className="text-[0.6rem] text-green-400/70 text-center leading-tight px-1">
+          Click the Publish button in the Manus Management UI to go live.
+        </p>
+      )}
+    </div>
+  );
+}
+
 // ─── Main Admin Page ──────────────────────────────────────────────────────────
 export default function AdminPage() {
   const { user, loading, isAuthenticated, logout } = useAuth();
@@ -516,7 +561,8 @@ export default function AdminPage() {
           ))}
         </nav>
 
-        <div className="p-3 border-t border-white/10">
+        <div className="p-3 border-t border-white/10 space-y-1">
+          <PublishButton />
           <button
             onClick={logout}
             className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-white/40 hover:text-white hover:bg-white/8 transition-colors text-sm"
