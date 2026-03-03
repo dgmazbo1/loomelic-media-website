@@ -4,6 +4,7 @@ import { protectedProcedure, router } from "../_core/trpc";
 import { notifyOwner } from "../_core/notification";
 import {
   getAllProjects,
+  getAllProjectsWithStatus,
   getProjectBySlug,
   upsertProject,
   updateProjectHero,
@@ -33,6 +34,11 @@ export const adminRouter = router({
   /** List all projects */
   listProjects: adminProcedure.query(async () => {
     return getAllProjects();
+  }),
+
+  /** List all projects with hero/gallery/video status counts */
+  listProjectsWithStatus: adminProcedure.query(async () => {
+    return getAllProjectsWithStatus();
   }),
 
   /** Get a single project with its gallery and videos */

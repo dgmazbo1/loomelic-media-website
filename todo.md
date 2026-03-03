@@ -5,3 +5,4 @@
 - [x] Add "Sign In" button on /admin that preserves /admin as the return path after OAuth
 - [x] Fix admin upload error: "project doesn't exist" when uploading photos
 - [x] Add "Publish Changes" button to admin panel sidebar UI
+- [x] Admin panel: show per-project status (hero image, gallery count, video count) in sidebar

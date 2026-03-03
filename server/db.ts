@@ -97,6 +97,33 @@ export async function getAllProjects() {
   return db.select().from(projects).orderBy(asc(projects.name));
 }
 
+/** Returns all projects with gallery + video counts in a single round-trip */
+export async function getAllProjectsWithStatus() {
+  const db = await getDb();
+  if (!db) return [];
+
+  const allProjects = await db.select().from(projects).orderBy(asc(projects.name));
+  if (allProjects.length === 0) return [];
+
+  // Fetch counts for all projects in parallel
+  const statusList = await Promise.all(
+    allProjects.map(async (p) => {
+      const [gallery, videos] = await Promise.all([
+        db.select().from(galleryImages).where(eq(galleryImages.projectId, p.id)),
+        db.select().from(projectVideos).where(eq(projectVideos.projectId, p.id)),
+      ]);
+      return {
+        ...p,
+        galleryCount: gallery.length,
+        videoCount: videos.length,
+        hasHero: !!p.heroImageUrl,
+      };
+    })
+  );
+
+  return statusList;
+}
+
 export async function getProjectBySlug(slug: string) {
   const db = await getDb();
   if (!db) return undefined;

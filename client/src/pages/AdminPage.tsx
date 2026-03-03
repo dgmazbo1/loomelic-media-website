@@ -486,6 +486,12 @@ export default function AdminPage() {
   const { user, loading, isAuthenticated, logout } = useAuth();
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
 
+  // Must be called unconditionally before any early returns (Rules of Hooks)
+  const { data: projectStatuses, refetch: refetchStatuses } = trpc.admin.listProjectsWithStatus.useQuery(
+    undefined,
+    { refetchOnWindowFocus: false, enabled: isAuthenticated && user?.role === "admin" }
+  );
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[oklch(0.07_0_0)] flex items-center justify-center">
@@ -533,10 +539,15 @@ export default function AdminPage() {
 
   const selectedProject = SITE_PROJECTS.find(p => p.slug === selectedSlug);
 
+  // Build a quick lookup map by slug
+  const statusBySlug = Object.fromEntries(
+    (projectStatuses ?? []).map(s => [s.slug, s])
+  );
+
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)] flex">
       {/* Sidebar */}
-      <aside className="w-64 shrink-0 bg-[oklch(0.1_0_0)] border-r border-white/10 flex flex-col">
+      <aside className="w-72 shrink-0 bg-[oklch(0.1_0_0)] border-r border-white/10 flex flex-col">
         <div className="p-5 border-b border-white/10">
           <div className="flex items-center gap-2 mb-1">
             <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">
@@ -547,18 +558,72 @@ export default function AdminPage() {
           <p className="text-white/30 text-[0.65rem]">Media Management</p>
         </div>
 
-        <nav className="flex-1 overflow-y-auto p-3 space-y-1">
-          <p className="text-white/30 text-[0.6rem] font-semibold tracking-widest uppercase px-2 py-1.5">Projects</p>
-          {SITE_PROJECTS.map(p => (
-            <button
-              key={p.slug}
-              onClick={() => setSelectedSlug(p.slug)}
-              className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left transition-colors text-sm ${selectedSlug === p.slug ? "bg-white/15 text-white" : "text-white/50 hover:text-white hover:bg-white/8"}`}
-            >
-              <span className="truncate">{p.name}</span>
-              {selectedSlug === p.slug && <ChevronRight size={14} className="shrink-0 text-white/40" />}
-            </button>
-          ))}
+        <nav className="flex-1 overflow-y-auto p-3 space-y-0.5">
+          <div className="flex items-center justify-between px-2 py-1.5">
+            <p className="text-white/30 text-[0.6rem] font-semibold tracking-widest uppercase">Projects</p>
+            {/* Overall readiness summary */}
+            {projectStatuses && (
+              <span className="text-[0.6rem] text-white/25">
+                {projectStatuses.filter(p => p.hasHero).length}/{projectStatuses.length} ready
+              </span>
+            )}
+          </div>
+          {SITE_PROJECTS.map(p => {
+            const status = statusBySlug[p.slug];
+            const isSelected = selectedSlug === p.slug;
+            const hasHero = status?.hasHero ?? false;
+            const galleryCount = status?.galleryCount ?? 0;
+            const videoCount = status?.videoCount ?? 0;
+            const isComplete = hasHero && galleryCount > 0;
+
+            return (
+              <button
+                key={p.slug}
+                onClick={() => { setSelectedSlug(p.slug); refetchStatuses(); }}
+                className={`w-full flex flex-col px-3 py-2.5 rounded-xl text-left transition-colors ${
+                  isSelected ? "bg-white/15 text-white" : "text-white/50 hover:text-white hover:bg-white/8"
+                }`}
+              >
+                {/* Project name row */}
+                <div className="flex items-center justify-between w-full">
+                  <span className="truncate text-sm font-medium">{p.name}</span>
+                  <div className="flex items-center gap-1 shrink-0 ml-2">
+                    {isComplete ? (
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-400" title="Ready" />
+                    ) : (
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400" title="Needs attention" />
+                    )}
+                    {isSelected && <ChevronRight size={12} className="text-white/40" />}
+                  </div>
+                </div>
+                {/* Status badges row */}
+                <div className="flex items-center gap-1.5 mt-1">
+                  {/* Hero badge */}
+                  <span className={`text-[0.55rem] px-1.5 py-0.5 rounded font-semibold tracking-wide ${
+                    hasHero
+                      ? "bg-green-500/15 text-green-400"
+                      : "bg-amber-500/15 text-amber-400"
+                  }`}>
+                    {hasHero ? "✓ HERO" : "! HERO"}
+                  </span>
+                  {/* Gallery count badge */}
+                  <span className={`text-[0.55rem] px-1.5 py-0.5 rounded font-semibold tracking-wide ${
+                    galleryCount > 0
+                      ? "bg-blue-500/15 text-blue-400"
+                      : "bg-white/8 text-white/25"
+                  }`}>
+                    {galleryCount} PHOTO{galleryCount !== 1 ? "S" : ""}
+                  </span>
+                  {/* Video count badge — only show if there are videos */}
+                  {videoCount > 0 && (
+                    <span className="text-[0.55rem] px-1.5 py-0.5 rounded font-semibold tracking-wide bg-purple-500/15 text-purple-400">
+                      {videoCount} VID
+                    </span>
+                  )}
+                </div>
+              </button>
+            );
+          })}
         </nav>
 
         <div className="p-3 border-t border-white/10 space-y-1">
