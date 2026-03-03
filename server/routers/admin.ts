@@ -7,6 +7,8 @@ import {
   getAllProjectsWithStatus,
   getProjectBySlug,
   upsertProject,
+  createProject,
+  deleteProject,
   updateProjectHero,
   getGalleryImages,
   addGalleryImage,
@@ -40,6 +42,29 @@ export const adminRouter = router({
   listProjectsWithStatus: adminProcedure.query(async () => {
     return getAllProjectsWithStatus();
   }),
+
+  /** Create a new project */
+  createProject: adminProcedure
+    .input(z.object({
+      name: z.string().min(1, "Name is required").max(100),
+      slug: z.string().min(1).max(100).regex(/^[a-z0-9-]+$/, "Slug must be lowercase letters, numbers and hyphens only"),
+    }))
+    .mutation(async ({ input }) => {
+      try {
+        return await createProject(input.slug, input.name);
+      } catch (err: unknown) {
+        const msg = err instanceof Error ? err.message : "Failed to create project";
+        throw new TRPCError({ code: "BAD_REQUEST", message: msg });
+      }
+    }),
+
+  /** Delete a project and all its media */
+  deleteProject: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      await deleteProject(input.id);
+      return { success: true };
+    }),
 
   /** Get a single project with its gallery and videos */
   getProject: adminProcedure

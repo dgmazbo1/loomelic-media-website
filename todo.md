@@ -6,3 +6,6 @@
 - [x] Fix admin upload error: "project doesn't exist" when uploading photos
 - [x] Add "Publish Changes" button to admin panel sidebar UI
 - [x] Admin panel: show per-project status (hero image, gallery count, video count) in sidebar
+- [x] Admin panel: drag-and-drop gallery image reordering
+- [x] Admin panel: create new project from sidebar
+- [x] Admin panel: delete project from sidebar

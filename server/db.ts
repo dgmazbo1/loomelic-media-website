@@ -141,6 +141,26 @@ export async function upsertProject(data: InsertProject) {
   return result[0];
 }
 
+export async function createProject(slug: string, name: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  // Check for duplicate slug
+  const existing = await db.select().from(projects).where(eq(projects.slug, slug)).limit(1);
+  if (existing.length > 0) throw new Error(`A project with slug "${slug}" already exists`);
+  await db.insert(projects).values({ slug, name });
+  const result = await db.select().from(projects).where(eq(projects.slug, slug)).limit(1);
+  return result[0];
+}
+
+export async function deleteProject(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  // Cascade: delete gallery images and videos first
+  await db.delete(galleryImages).where(eq(galleryImages.projectId, id));
+  await db.delete(projectVideos).where(eq(projectVideos.projectId, id));
+  await db.delete(projects).where(eq(projects.id, id));
+}
+
 export async function updateProjectHero(slug: string, heroImageUrl: string, heroImageKey: string) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
