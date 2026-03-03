@@ -1,0 +1,2 @@
+- [x] Add Findlay Nissan, Ascent Automotive Group, Lexus Western Area, The Blast to Trusted By strip
+- [x] Convert Trusted By strip to auto-scrolling marquee

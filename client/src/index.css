@@ -310,6 +310,10 @@
   animation: marquee-reverse 30s linear infinite;
 }
 
+.animate-marquee-scroll {
+  animation: marquee 35s linear infinite;
+}
+
 /* ─── CONTAINER ─────────────────────────────────────────────── */
 @layer components {
   .container {

@@ -13,6 +13,10 @@ const TRUSTED_BY = [
   "LAS VEGAS RAIDERS",
   "CENTENNIAL SUBARU",
   "SPORTS ILLUSTRATED",
+  "FINDLAY NISSAN",
+  "ASCENT AUTOMOTIVE GROUP",
+  "LEXUS WESTERN AREA",
+  "THE BLAST",
 ];
 
 const VIMEO_ID = "925584368";
@@ -38,28 +42,36 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="section-light text-[oklch(0.07_0_0)]">
-      {/* Trusted By strip */}
-      <div className="border-b border-[oklch(0_0_0/0.07)] py-10 sm:py-14">
-        <div className="container">
-          <AnimFade>
-            <p className="section-label text-[oklch(0.07_0_0)/50] mb-8">
-              <span>✦</span><span>TRUSTED BY:</span>
-            </p>
-          </AnimFade>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-            {TRUSTED_BY.map((name, i) => (
-              <motion.div
-                key={name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="card-light flex items-center justify-center p-5 sm:p-6 min-h-[80px]"
+      {/* Trusted By strip — auto-scrolling marquee */}
+      <div className="border-b border-[oklch(0_0_0/0.07)] py-10 sm:py-14 overflow-hidden">
+        <div className="container mb-6">
+          <p className="section-label text-[oklch(0.07_0_0)/50]">
+            <span>✦</span><span>TRUSTED BY:</span>
+          </p>
+        </div>
+        <div className="relative flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex gap-4 animate-marquee-scroll shrink-0">
+            {[...TRUSTED_BY, ...TRUSTED_BY].map((name, i) => (
+              <div
+                key={i}
+                className="card-light flex items-center justify-center px-8 py-5 min-w-[180px] shrink-0"
               >
-                <span className="font-display-normal text-[0.65rem] sm:text-xs text-center text-[oklch(0.07_0_0)] leading-tight">
+                <span className="font-display-normal text-[0.65rem] sm:text-xs text-center text-[oklch(0.07_0_0)] leading-tight whitespace-nowrap">
                   {name}
                 </span>
-              </motion.div>
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-4 animate-marquee-scroll shrink-0" aria-hidden="true">
+            {[...TRUSTED_BY, ...TRUSTED_BY].map((name, i) => (
+              <div
+                key={i}
+                className="card-light flex items-center justify-center px-8 py-5 min-w-[180px] shrink-0"
+              >
+                <span className="font-display-normal text-[0.65rem] sm:text-xs text-center text-[oklch(0.07_0_0)] leading-tight whitespace-nowrap">
+                  {name}
+                </span>
+              </div>
             ))}
           </div>
         </div>
