@@ -9,3 +9,5 @@
 - [x] Admin panel: drag-and-drop gallery image reordering
 - [x] Admin panel: create new project from sidebar
 - [x] Admin panel: delete project from sidebar
+- [x] Bulk upload: multi-file selection with parallel S3 uploads and per-file progress tracking
+- [x] Bulk upload: live thumbnail preview grid showing each image as it finishes uploading

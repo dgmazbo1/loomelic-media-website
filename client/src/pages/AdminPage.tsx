@@ -190,12 +190,168 @@ function VideoRow({
   );
 }
 
+// ─── Upload Queue Item ──────────────────────────────────────────────────────
+type UploadItem = {
+  id: string;           // local uuid
+  file: File;
+  previewUrl: string;   // object URL for thumbnail
+  status: "pending" | "uploading" | "done" | "error";
+  error?: string;
+};
+
+// ─── Bulk Upload Drop Zone ───────────────────────────────────────────────────
+function BulkUploadZone({
+  onFilesSelected,
+  disabled,
+}: {
+  onFilesSelected: (files: File[]) => void;
+  disabled?: boolean;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [dragging, setDragging] = useState(false);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setDragging(false);
+    if (disabled) return;
+    const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith("image/"));
+    if (files.length) onFilesSelected(files);
+  }, [disabled, onFilesSelected]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    if (files.length) onFilesSelected(files);
+    e.target.value = "";
+  };
+
+  return (
+    <div
+      onDragOver={(e) => { e.preventDefault(); if (!disabled) setDragging(true); }}
+      onDragLeave={() => setDragging(false)}
+      onDrop={handleDrop}
+      onClick={() => !disabled && inputRef.current?.click()}
+      className={`border-2 border-dashed rounded-2xl p-10 flex flex-col items-center justify-center gap-3 cursor-pointer transition-all ${
+        dragging
+          ? "border-blue-400/60 bg-blue-500/10 scale-[1.01]"
+          : disabled
+          ? "border-white/10 opacity-50 cursor-not-allowed"
+          : "border-white/20 hover:border-white/40 hover:bg-white/3"
+      }`}
+    >
+      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${
+        dragging ? "bg-blue-500/20" : "bg-white/5"
+      }`}>
+        <Upload size={22} className={dragging ? "text-blue-400" : "text-white/30"} />
+      </div>
+      <div className="text-center">
+        <p className={`text-sm font-medium ${ dragging ? "text-blue-300" : "text-white/50" }`}>
+          {dragging ? "Drop to upload" : "Drop photos here or click to browse"}
+        </p>
+        <p className="text-white/20 text-xs mt-1">JPG, PNG, WEBP · Select multiple files at once</p>
+      </div>
+      <input ref={inputRef} type="file" accept="image/*" multiple className="hidden" onChange={handleChange} />
+    </div>
+  );
+}
+
+// ─── Upload Queue Panel ───────────────────────────────────────────────────────
+function UploadQueuePanel({
+  items,
+  onDismiss,
+}: {
+  items: UploadItem[];
+  onDismiss: () => void;
+}) {
+  if (items.length === 0) return null;
+
+  const done = items.filter(i => i.status === "done").length;
+  const errors = items.filter(i => i.status === "error").length;
+  const total = items.length;
+  const allFinished = items.every(i => i.status === "done" || i.status === "error");
+  const progress = Math.round((done / total) * 100);
+
+  return (
+    <div className="mb-6 rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+        <div className="flex items-center gap-3">
+          <span className="text-white/70 text-xs font-semibold">
+            {allFinished
+              ? errors > 0
+                ? `Upload complete — ${errors} failed`
+                : `All ${total} photos uploaded`
+              : `Uploading ${done}/${total}…`}
+          </span>
+          {errors > 0 && (
+            <span className="flex items-center gap-1 text-[0.6rem] text-red-400 bg-red-500/15 px-2 py-0.5 rounded-full">
+              <AlertTriangle size={10} /> {errors} error{errors !== 1 ? "s" : ""}
+            </span>
+          )}
+        </div>
+        {allFinished && (
+          <button onClick={onDismiss} className="p-1 rounded-lg text-white/30 hover:text-white hover:bg-white/10 transition-colors">
+            <X size={14} />
+          </button>
+        )}
+      </div>
+
+      {/* Overall progress bar */}
+      {!allFinished && (
+        <div className="h-1 bg-white/10">
+          <div
+            className="h-full bg-blue-500 transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      )}
+
+      {/* Per-file thumbnail grid */}
+      <div className="p-4 grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+        {items.map(item => (
+          <div key={item.id} className="relative aspect-square rounded-lg overflow-hidden bg-white/5">
+            <img src={item.previewUrl} alt={item.file.name} className="w-full h-full object-cover" />
+            {/* Status overlay */}
+            <div className={`absolute inset-0 flex items-center justify-center transition-all ${
+              item.status === "uploading" ? "bg-black/40" :
+              item.status === "done" ? "bg-black/0" :
+              item.status === "error" ? "bg-red-900/50" :
+              "bg-black/30"
+            }`}>
+              {item.status === "uploading" && (
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              )}
+              {item.status === "done" && (
+                <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
+                  <Check size={11} className="text-white" />
+                </div>
+              )}
+              {item.status === "error" && (
+                <div className="w-5 h-5 rounded-full bg-red-500 flex items-center justify-center" title={item.error}>
+                  <X size={11} className="text-white" />
+                </div>
+              )}
+              {item.status === "pending" && (
+                <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-white/60" />
+                </div>
+              )}
+            </div>
+            {/* Filename tooltip */}
+            <div className="absolute bottom-0 left-0 right-0 bg-black/60 px-1 py-0.5 truncate text-[0.5rem] text-white/50">
+              {item.file.name}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ─── Project Editor ───────────────────────────────────────────────────────────
 function ProjectEditor({ slug, name }: { slug: string; name: string }) {
   const utils = trpc.useUtils();
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const heroInputRef = useRef<HTMLInputElement>(null);
-  const [uploading, setUploading] = useState(false);
+  const [uploadQueue, setUploadQueue] = useState<UploadItem[]>([]);
   const [newVideoUrl, setNewVideoUrl] = useState("");
   const [newVideoLabel, setNewVideoLabel] = useState("");
   const [addingVideo, setAddingVideo] = useState(false);
@@ -227,10 +383,7 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
     }
   }, [data, isLoading, seeded, seeding, slug, name, ensureMut, refetch]);
 
-  const uploadGallery = trpc.admin.uploadGalleryImage.useMutation({
-    onSuccess: () => { utils.admin.getProject.invalidate({ slug }); toast.success("Photo uploaded"); },
-    onError: (e) => toast.error(e.message),
-  });
+  const uploadGalleryMut = trpc.admin.uploadGalleryImage.useMutation();
 
   const uploadHero = trpc.admin.uploadHeroImage.useMutation({
     onSuccess: () => { utils.admin.getProject.invalidate({ slug }); toast.success("Hero image updated"); },
@@ -262,18 +415,56 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
     onError: (e) => toast.error(e.message),
   });
 
-  const handleGalleryUpload = useCallback(async (files: FileList | null) => {
-    if (!files || files.length === 0) return;
-    setUploading(true);
-    try {
-      for (const file of Array.from(files)) {
-        const base64 = await fileToBase64(file);
-        await uploadGallery.mutateAsync({ slug, filename: file.name, mimeType: file.type, base64 });
+  // ── Bulk upload handler ──────────────────────────────────────────────────────
+  // Enqueues all selected files, then fires parallel uploads (max 3 concurrent)
+  const handleBulkUpload = useCallback(async (files: File[]) => {
+    if (!files.length) return;
+
+    // Build queue items with local preview URLs
+    const items: UploadItem[] = files.map(file => ({
+      id: Math.random().toString(36).slice(2),
+      file,
+      previewUrl: URL.createObjectURL(file),
+      status: "pending" as const,
+    }));
+
+    setUploadQueue(prev => [...prev, ...items]);
+
+    // Upload with concurrency limit of 3
+    const CONCURRENCY = 3;
+    let index = 0;
+
+    const uploadNext = async (): Promise<void> => {
+      if (index >= items.length) return;
+      const item = items[index++];
+
+      // Mark as uploading
+      setUploadQueue(prev => prev.map(i => i.id === item.id ? { ...i, status: "uploading" } : i));
+
+      try {
+        const base64 = await fileToBase64(item.file);
+        await uploadGalleryMut.mutateAsync({
+          slug,
+          filename: item.file.name,
+          mimeType: item.file.type,
+          base64,
+        });
+        setUploadQueue(prev => prev.map(i => i.id === item.id ? { ...i, status: "done" } : i));
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : "Upload failed";
+        setUploadQueue(prev => prev.map(i => i.id === item.id ? { ...i, status: "error", error: msg } : i));
       }
-    } finally {
-      setUploading(false);
-    }
-  }, [slug, uploadGallery]);
+
+      // Chain next upload
+      await uploadNext();
+    };
+
+    // Kick off CONCURRENCY parallel chains
+    await Promise.all(Array.from({ length: Math.min(CONCURRENCY, items.length) }, uploadNext));
+
+    // Refresh gallery after all done
+    utils.admin.getProject.invalidate({ slug });
+  }, [slug, uploadGalleryMut, utils]);
 
   const handleHeroUpload = useCallback(async (files: FileList | null) => {
     if (!files || files.length === 0) return;
@@ -375,32 +566,38 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
             <Image size={14} className="text-blue-400" /> Gallery ({gallery.length} photos)
           </h3>
           <button
-            onClick={() => fileInputRef.current?.click()}
-            disabled={uploading}
+            onClick={() => {
+              // Trigger a hidden file input via BulkUploadZone's internal ref isn't accessible here,
+              // so we open a temporary input
+              const input = document.createElement("input");
+              input.type = "file";
+              input.accept = "image/*";
+              input.multiple = true;
+              input.onchange = () => {
+                const files = Array.from(input.files ?? []);
+                if (files.length) handleBulkUpload(files);
+              };
+              input.click();
+            }}
+            disabled={uploadQueue.some(i => i.status === "uploading" || i.status === "pending")}
             className="flex items-center gap-1.5 text-xs text-white/60 hover:text-white bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
           >
-            {uploading ? (
-              <><div className="w-3 h-3 border border-white/40 border-t-white rounded-full animate-spin" /> Uploading...</>
-            ) : (
-              <><Upload size={12} /> Add Photos</>
-            )}
+            <Upload size={12} /> Add Photos
           </button>
-          <input ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={e => handleGalleryUpload(e.target.files)} />
         </div>
 
-        {localGallery.length === 0 ? (
-          <div
-            onClick={() => fileInputRef.current?.click()}
-            className="border-2 border-dashed border-white/20 rounded-2xl p-12 flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-white/40 transition-colors"
-          >
-            <Upload size={32} className="text-white/20" />
-            <p className="text-white/30 text-sm">Click to upload photos</p>
-            <p className="text-white/20 text-xs">Supports JPG, PNG, WEBP — multiple files at once</p>
-          </div>
+        {/* Live upload queue panel */}
+        <UploadQueuePanel
+          items={uploadQueue}
+          onDismiss={() => setUploadQueue([])}
+        />
+
+        {localGallery.length === 0 && uploadQueue.length === 0 ? (
+          <BulkUploadZone onFilesSelected={handleBulkUpload} />
         ) : (
           <>
             <p className="text-white/20 text-[0.65rem] mb-2 flex items-center gap-1">
-              <GripVertical size={11} className="inline" /> Hover over a photo and drag the grip handle to reorder
+              <GripVertical size={11} className="inline" /> Drag the grip handle to reorder
             </p>
             <DndContext
               sensors={sensors}
@@ -422,13 +619,29 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
                       isHero={heroUrl === img.url}
                     />
                   ))}
-                  {/* Upload tile */}
+                  {/* Bulk-upload tile at the end of the grid */}
                   <div
-                    onClick={() => fileInputRef.current?.click()}
-                    className="aspect-square rounded-xl border-2 border-dashed border-white/20 hover:border-white/40 flex flex-col items-center justify-center gap-1 cursor-pointer transition-colors"
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith("image/"));
+                      if (files.length) handleBulkUpload(files);
+                    }}
+                    onClick={() => {
+                      const input = document.createElement("input");
+                      input.type = "file";
+                      input.accept = "image/*";
+                      input.multiple = true;
+                      input.onchange = () => {
+                        const files = Array.from(input.files ?? []);
+                        if (files.length) handleBulkUpload(files);
+                      };
+                      input.click();
+                    }}
+                    className="aspect-square rounded-xl border-2 border-dashed border-white/20 hover:border-blue-400/40 hover:bg-blue-500/5 flex flex-col items-center justify-center gap-1 cursor-pointer transition-colors"
                   >
                     <Plus size={20} className="text-white/30" />
-                    <span className="text-white/20 text-[0.6rem]">Add</span>
+                    <span className="text-white/20 text-[0.6rem]">Add More</span>
                   </div>
                 </div>
               </SortableContext>
