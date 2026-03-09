@@ -37,6 +37,8 @@ import {
 import DealerPortal from "./pages/DealerPortal";
 import VendorPortal from "./pages/VendorPortal";
 import AdminCRM from "./pages/AdminCRM";
+import VendorSign from "./pages/VendorSign";
+import AdminCreateContract from "./pages/AdminCreateContract";
 
 import {
   LexusHendersonPage,
@@ -69,6 +71,8 @@ function Router() {
         {/* Portals */}
         <Route path="/dealer" component={DealerPortal} />
         <Route path="/vendor" component={VendorPortal} />
+        <Route path="/vendor/sign/:token" component={VendorSign} />
+        <Route path="/admin/contracts/new" component={AdminCreateContract} />
 
         {/* Home */}
         <Route path="/" component={Home} />

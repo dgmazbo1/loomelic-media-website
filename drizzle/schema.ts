@@ -260,38 +260,135 @@ export type VendorJob = typeof vendorJobs.$inferSelect;
 /**
  * Contracts — both contractor agreements (expense) and client contracts (revenue)
  */
+/**
+ * Contractor agreements — when Loomelic hires vendors/contractors.
+ * These do NOT count as revenue.
+ * Token-based access: contractor receives /vendor/sign/:token link.
+ */
 export const contracts = mysqlTable("contracts", {
   id: int("id").autoincrement().primaryKey(),
-  contractType: mysqlEnum("contractType", ["contractor", "client"]).notNull(),
-  status: mysqlEnum("status", [
-    "draft", "sent", "signed", "completed", "cancelled", "expired"
-  ]).default("draft").notNull(),
-  /** Signing token for the public /contract/sign/:token page */
-  signingToken: varchar("signingToken", { length: 128 }).unique(),
-  // Parties
-  vendorId: int("vendorId"),
-  dealerId: int("dealerId"),
-  clientName: varchar("clientName", { length: 256 }),
-  clientEmail: varchar("clientEmail", { length: 320 }),
-  contractorRole: varchar("contractorRole", { length: 128 }),
-  // Event details
-  eventDate: varchar("eventDate", { length: 32 }),
-  eventCity: varchar("eventCity", { length: 128 }),
-  equipmentDetails: text("equipmentDetails"),
-  equipmentSummary: text("equipmentSummary"),
-  // Financial
-  amount: int("amount"),
-  isRevenue: int("isRevenue").default(0).notNull(),
-  // Content
-  contractBody: text("contractBody"),
+  contractorName: varchar("contractorName", { length: 255 }).notNull(),
+  contractorEmail: varchar("contractorEmail", { length: 320 }).notNull(),
+  contractorRole: varchar("contractorRole", { length: 100 }),
+  projectName: varchar("projectName", { length: 255 }),
+  projectLocation: varchar("projectLocation", { length: 255 }),
+  totalFee: varchar("totalFee", { length: 20 }),
+  deposit: varchar("deposit", { length: 20 }),
+  finalPayment: varchar("finalPayment", { length: 20 }),
+  paymentMethod: varchar("paymentMethod", { length: 100 }),
+  checkinDate: varchar("checkinDate", { length: 50 }),
+  checkoutDate: varchar("checkoutDate", { length: 50 }),
+  airbnbAddress: text("airbnbAddress"),
+  eventCity: varchar("eventCity", { length: 255 }),
+  equipment: text("equipment"), // JSON string
+  contractorSignature: text("contractorSignature"),
+  companySignature: text("companySignature"),
+  ndaSignature: text("ndaSignature"),
+  pdfData: text("pdfData"), // Base64 PDF
+  w9FormId: int("w9FormId"),
+  insuranceCertificateUrl: text("insuranceCertificateUrl"),
+  insuranceCertificateFileName: varchar("insuranceCertificateFileName", { length: 255 }),
+  insuranceUploadedAt: timestamp("insuranceUploadedAt"),
+  token: varchar("token", { length: 64 }).notNull().unique(), // Signing token
+  status: mysqlEnum("status", ["draft", "sent", "signed"]).default("draft"),
+  sentAt: timestamp("sentAt"),
   signedAt: timestamp("signedAt"),
-  signatureData: text("signatureData"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
 
 export type Contract = typeof contracts.$inferSelect;
 export type InsertContract = typeof contracts.$inferInsert;
+
+/**
+ * W-9 tax forms — one per contractor per tax year.
+ */
+export const w9Forms = mysqlTable("w9_forms", {
+  id: int("id").autoincrement().primaryKey(),
+  contractorEmail: varchar("contractorEmail", { length: 320 }).notNull(),
+  taxYear: int("taxYear").notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  businessName: varchar("businessName", { length: 255 }),
+  taxClassification: mysqlEnum("taxClassification", [
+    "individual", "c_corp", "s_corp", "partnership", "trust_estate", "llc", "other"
+  ]).notNull(),
+  llcTaxClassification: varchar("llcTaxClassification", { length: 50 }),
+  otherTaxClassification: varchar("otherTaxClassification", { length: 100 }),
+  exemptPayeeCode: varchar("exemptPayeeCode", { length: 10 }),
+  exemptFATCACode: varchar("exemptFATCACode", { length: 10 }),
+  address: text("address").notNull(),
+  city: varchar("city", { length: 255 }).notNull(),
+  state: varchar("state", { length: 2 }).notNull(),
+  zipCode: varchar("zipCode", { length: 10 }).notNull(),
+  accountNumbers: text("accountNumbers"),
+  ssn: varchar("ssn", { length: 11 }),
+  ein: varchar("ein", { length: 10 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type W9Form = typeof w9Forms.$inferSelect;
+export type InsertW9Form = typeof w9Forms.$inferInsert;
+
+/**
+ * Contract templates — reusable presets for common contractor types.
+ */
+export const contractTemplates = mysqlTable("contract_templates", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  description: text("description"),
+  contractorRole: varchar("contractorRole", { length: 100 }),
+  projectName: varchar("projectName", { length: 255 }),
+  projectLocation: varchar("projectLocation", { length: 255 }),
+  totalFee: varchar("totalFee", { length: 20 }),
+  deposit: varchar("deposit", { length: 20 }),
+  finalPayment: varchar("finalPayment", { length: 20 }),
+  paymentMethod: varchar("paymentMethod", { length: 100 }),
+  equipment: text("equipment"),
+  createdBy: int("createdBy").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ContractTemplate = typeof contractTemplates.$inferSelect;
+export type InsertContractTemplate = typeof contractTemplates.$inferInsert;
+
+/**
+ * Client contracts — when clients hire Loomelic Media.
+ * These COUNT as revenue.
+ */
+export const clientContracts = mysqlTable("client_contracts", {
+  id: int("id").autoincrement().primaryKey(),
+  clientName: varchar("clientName", { length: 255 }).notNull(),
+  clientCompany: varchar("clientCompany", { length: 255 }),
+  clientEmail: varchar("clientEmail", { length: 320 }).notNull(),
+  clientPhone: varchar("clientPhone", { length: 20 }),
+  projectName: varchar("projectName", { length: 255 }).notNull(),
+  projectType: varchar("projectType", { length: 100 }),
+  projectLocation: varchar("projectLocation", { length: 255 }),
+  projectStartDate: varchar("projectStartDate", { length: 50 }),
+  projectEndDate: varchar("projectEndDate", { length: 50 }),
+  projectDescription: text("projectDescription"),
+  deliverables: text("deliverables"), // JSON string
+  totalValue: varchar("totalValue", { length: 20 }),
+  depositAmount: varchar("depositAmount", { length: 20 }),
+  depositDueDate: varchar("depositDueDate", { length: 50 }),
+  finalPaymentAmount: varchar("finalPaymentAmount", { length: 20 }),
+  finalPaymentDueDate: varchar("finalPaymentDueDate", { length: 50 }),
+  paymentTerms: text("paymentTerms"),
+  token: varchar("token", { length: 64 }).notNull().unique(),
+  status: mysqlEnum("status", ["draft", "sent", "signed"]).default("draft"),
+  clientSignature: text("clientSignature"),
+  companySignature: text("companySignature"),
+  pdfData: text("pdfData"),
+  sentAt: timestamp("sentAt"),
+  signedAt: timestamp("signedAt"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type ClientContract = typeof clientContracts.$inferSelect;
+export type InsertClientContract = typeof clientContracts.$inferInsert;
 
 /**
  * CRM contacts — general contacts not tied to dealer or vendor onboarding

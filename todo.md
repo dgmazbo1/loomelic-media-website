@@ -21,3 +21,10 @@
 - [x] Admin panel: CRM navigation buttons linking to each CRM section
 - [x] Role-based access: dealer role, vendor role, admin role gating
 - [x] Add Dealer Portal and Vendor Portal buttons to homepage and navbar
+- [x] Contract system: port contracts, w9Forms, contractTemplates, clientContracts tables to schema
+- [x] Contract system: port contractDb.ts helpers into server/db.ts
+- [x] Contract system: create server/routers/contracts.ts with all contract procedures (no email)
+- [x] Contract system: 7-step slide form in admin panel (AdminCreateContract page)
+- [x] Contract system: vendor signing page at /vendor/sign/:token (token-based, no login required)
+- [x] Contract system: Admin CRM Contracts tab to view/manage all contracts
+- [x] Contract system: vendor token auth - /vendor?token=... shows contractor dashboard with their contracts

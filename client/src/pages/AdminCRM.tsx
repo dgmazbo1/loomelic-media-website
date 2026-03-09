@@ -14,7 +14,7 @@ import {
   Building2, Mail, Phone, MapPin, BarChart3, Shield, Trash2,
   CheckCircle2, Clock, XCircle, Edit3, ArrowLeft
 } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 
 // ─── Tab definitions ──────────────────────────────────────────────────────────
 const TABS = [
@@ -599,11 +599,12 @@ function DealsTab() {
 
 // ─── Contracts Tab ────────────────────────────────────────────────────────────
 function ContractsTab() {
-  
+  const [, navigate] = useLocation();
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState({ contractType: "client" as const, clientName: "", clientEmail: "", contractorRole: "", eventDate: "", eventCity: "", amount: "" });
 
   const { data: contracts, isLoading, refetch } = trpc.crm.listContracts.useQuery();
+  const { data: fullContracts } = trpc.contract.getAllContracts.useQuery();
   const createMutation = trpc.crm.createContract.useMutation({
     onSuccess: (d) => { toast.success(`Contract created — Signing token: ${d.signingToken}`); setShowCreate(false); refetch(); },
     onError: (e) => toast.error("Error: " + e.message),
@@ -618,11 +619,54 @@ function ContractsTab() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-bold text-white">Contracts ({contracts?.length ?? 0})</h2>
-        <Button onClick={() => setShowCreate(!showCreate)} size="sm" className="bg-[oklch(0.85_0.23_110)] text-black font-bold">
-          <Plus className="w-4 h-4 mr-1" /> New Contract
-        </Button>
+        <h2 className="text-lg font-bold text-white">Contracts ({(contracts?.length ?? 0) + (fullContracts?.length ?? 0)})</h2>
+        <div className="flex gap-2">
+          <Button onClick={() => navigate("/admin/contracts/new")} size="sm" className="bg-white text-black font-bold hover:bg-white/90">
+            <FileText className="w-4 h-4 mr-1" /> Full Contract Form
+          </Button>
+          <Button onClick={() => setShowCreate(!showCreate)} size="sm" className="bg-[oklch(0.85_0.23_110)] text-black font-bold">
+            <Plus className="w-4 h-4 mr-1" /> Quick Contract
+          </Button>
+        </div>
       </div>
+      {/* Full contractor contracts from the contract system */}
+      {fullContracts && fullContracts.length > 0 && (
+        <div className="space-y-2">
+          <p className="text-xs text-zinc-500 uppercase tracking-wider font-semibold">Contractor Agreements</p>
+          {fullContracts.map(c => (
+            <Card key={c.id} className="bg-zinc-900 border-zinc-800">
+              <CardContent className="pt-3 pb-3">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-semibold text-white text-sm">{c.contractorName}</h3>
+                      <span className="text-xs text-zinc-500">{c.contractorRole}</span>
+                    </div>
+                    <div className="flex flex-wrap gap-3 text-xs text-zinc-500 mt-0.5">
+                      {c.projectName && <span>{c.projectName}</span>}
+                      {c.totalFee && <span className="font-semibold text-[oklch(0.85_0.23_110)]">${c.totalFee}</span>}
+                      {c.contractorEmail && <span>{c.contractorEmail}</span>}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                      c.status === "signed" ? "bg-green-500/20 text-green-300" :
+                      c.status === "draft" ? "bg-zinc-700 text-zinc-400" :
+                      "bg-yellow-500/20 text-yellow-300"
+                    }`}>{c.status}</span>
+                    {c.token && (
+                      <Button size="sm" variant="ghost" className="text-xs text-zinc-400 hover:text-white h-7 px-2"
+                        onClick={() => { navigator.clipboard.writeText(`${window.location.origin}/vendor/sign/${c.token}`); toast.success("Signing link copied!"); }}>
+                        <Copy className="w-3 h-3 mr-1" /> Link
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
       {showCreate && (
         <Card className="bg-zinc-800 border-zinc-700">
           <CardContent className="pt-4 pb-4 space-y-3">
