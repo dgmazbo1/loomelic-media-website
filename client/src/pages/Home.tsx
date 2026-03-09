@@ -12,6 +12,7 @@ import StatsSection from "@/components/StatsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import ContactSection from "@/components/ContactSection";
+import PortalsSection from "@/components/PortalsSection";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
       <StatsSection />
       <ProjectsSection />
       <PortfolioSection />
+      <PortalsSection />
       <ContactSection />
     </div>
   );

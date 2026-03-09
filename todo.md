@@ -20,3 +20,4 @@
 - [x] Main site: Dealer Portal and Vendor Portal entry buttons on homepage
 - [x] Admin panel: CRM navigation buttons linking to each CRM section
 - [x] Role-based access: dealer role, vendor role, admin role gating
+- [x] Add Dealer Portal and Vendor Portal buttons to homepage and navbar
