@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { TRPCError } from "@trpc/server";
-import { protectedProcedure, router } from "../_core/trpc";
+import { publicProcedure, router } from "../_core/trpc";
 import { notifyOwner } from "../_core/notification";
 import {
   getAllProjects,
@@ -22,13 +21,8 @@ import {
 import { storagePut } from "../storage";
 import { nanoid } from "nanoid";
 
-/** Guard: only admin users can call these procedures */
-const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
-  if (ctx.user.role !== "admin") {
-    throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
-  }
-  return next({ ctx });
-});
+/** No auth required — admin panel is open access */
+const adminProcedure = publicProcedure;
 
 export const adminRouter = router({
   // ─── Projects ──────────────────────────────────────────────────────────────

@@ -746,7 +746,7 @@ function PublishButton() {
 
 // ─── Main Admin Page ──────────────────────────────────────────────────────────
 export default function AdminPage() {
-  const { user, loading, isAuthenticated, logout } = useAuth();
+  const { logout } = useAuth();
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [showNewProject, setShowNewProject] = useState(false);
   const [newName, setNewName] = useState("");
@@ -754,10 +754,10 @@ export default function AdminPage() {
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
   const utils = trpc.useUtils();
 
-  // Must be called unconditionally before any early returns (Rules of Hooks)
+  // Query runs unconditionally — no auth required
   const { data: projectStatuses, refetch: refetchStatuses } = trpc.admin.listProjectsWithStatus.useQuery(
     undefined,
-    { refetchOnWindowFocus: false, enabled: isAuthenticated && user?.role === "admin" }
+    { refetchOnWindowFocus: false }
   );
 
   const createProjectMut = trpc.admin.createProject.useMutation({
@@ -791,51 +791,6 @@ export default function AdminPage() {
     setNewName(val);
     setNewSlug(val.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""));
   };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[oklch(0.07_0_0)] flex items-center justify-center">
-        <div className="w-10 h-10 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-[oklch(0.07_0_0)] flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mx-auto">
-            <Image size={28} className="text-white/30" />
-          </div>
-          <h1 className="text-2xl font-bold text-white">Admin Access Required</h1>
-          <p className="text-white/50 text-sm">Sign in with your Manus account to manage media.</p>
-          {/* Pass /admin as returnPath so OAuth redirects back here after login */}
-          <a href={getLoginUrl("/admin")} className="inline-flex items-center gap-2 bg-white text-black font-semibold text-sm px-6 py-3 rounded-full hover:bg-white/90 transition-colors">
-            Sign In with Manus
-          </a>
-          <div>
-            <a href="/" className="text-xs text-white/30 hover:text-white/50 transition-colors">← Back to site</a>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (user?.role !== "admin") {
-    return (
-      <div className="min-h-screen bg-[oklch(0.07_0_0)] flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold text-white">Access Denied</h1>
-          <p className="text-white/50 text-sm">Your account does not have admin privileges.</p>
-          <p className="text-white/30 text-xs max-w-xs mx-auto">Only the site owner can access this panel. If you are the owner, please sign out and sign in again to refresh your permissions.</p>
-          <div className="flex flex-col gap-2 items-center">
-            <button onClick={logout} className="text-sm text-white/40 hover:text-white/60 underline">Sign out</button>
-            <a href="/" className="text-xs text-white/30 hover:text-white/50 transition-colors">← Back to site</a>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   // Use DB-driven project list (falls back to empty while loading)
   const projects = projectStatuses ?? [];
