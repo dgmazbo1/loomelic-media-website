@@ -34,6 +34,10 @@ import {
 } from "./pages/ServicePages";
 
 // Project detail pages
+import DealerPortal from "./pages/DealerPortal";
+import VendorPortal from "./pages/VendorPortal";
+import AdminCRM from "./pages/AdminCRM";
+
 import {
   LexusHendersonPage,
   LexusLasVegasPage,
@@ -60,6 +64,11 @@ function Router() {
       <Switch>
         {/* Admin panel */}
         <Route path="/admin" component={AdminPage} />
+        <Route path="/admin/crm" component={AdminCRM} />
+
+        {/* Portals */}
+        <Route path="/dealer" component={DealerPortal} />
+        <Route path="/vendor" component={VendorPortal} />
 
         {/* Home */}
         <Route path="/" component={Home} />

@@ -220,3 +220,404 @@ export async function deleteProjectVideo(id: number) {
   if (!db) throw new Error("Database not available");
   await db.delete(projectVideos).where(eq(projectVideos.id, id));
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ENTERPRISE CRM HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+
+import {
+  dealers, dealerContacts, dealerMonthlyInputs, dealerPlatformAccess,
+  dealerCompliance, dealerFiles, dealerComments,
+  vendors, vendorJobs,
+  crmContacts, crmDeals, crmTasks, crmIncidents, contracts,
+  InsertDealer, InsertVendor,
+} from "../drizzle/schema";
+import { desc } from "drizzle-orm";
+
+// ─── Dealers ─────────────────────────────────────────────────────────────────
+
+export async function getAllDealers() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(dealers).orderBy(desc(dealers.createdAt));
+}
+
+export async function getDealerById(id: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const [dealer] = await db.select().from(dealers).where(eq(dealers.id, id));
+  return dealer ?? null;
+}
+
+export async function getDealerByToken(token: string) {
+  const db = await getDb();
+  if (!db) return null;
+  const [dealer] = await db.select().from(dealers).where(eq(dealers.token, token));
+  return dealer ?? null;
+}
+
+export async function createDealer(data: { token: string; storeName?: string; status?: "invited" }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(dealers).values({ ...data, status: "invited" });
+  return (result as { insertId: number }).insertId;
+}
+
+export async function updateDealer(id: number, data: Partial<InsertDealer>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(dealers).set(data).where(eq(dealers.id, id));
+}
+
+export async function updateDealerByToken(token: string, data: Partial<InsertDealer>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(dealers).set(data).where(eq(dealers.token, token));
+}
+
+export async function getDealerContacts(dealerId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(dealerContacts).where(eq(dealerContacts.dealerId, dealerId));
+}
+
+export async function replaceDealerContacts(dealerId: number, contacts: Array<{
+  contactType?: string; name?: string; title?: string;
+  email?: string; phone?: string; preferredMethod?: string;
+}>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(dealerContacts).where(eq(dealerContacts.dealerId, dealerId));
+  if (contacts.length > 0) {
+    await db.insert(dealerContacts).values(contacts.map(c => ({ ...c, dealerId })));
+  }
+}
+
+export async function getDealerMonthlyInputs(dealerId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(dealerMonthlyInputs).where(eq(dealerMonthlyInputs.dealerId, dealerId));
+}
+
+export async function replaceDealerMonthlyInputs(dealerId: number, inputs: Array<{
+  inputType: "special" | "campaign" | "promotion" | "event";
+  title?: string; description?: string; startDate?: string; endDate?: string;
+}>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(dealerMonthlyInputs).where(eq(dealerMonthlyInputs.dealerId, dealerId));
+  if (inputs.length > 0) {
+    await db.insert(dealerMonthlyInputs).values(inputs.map(i => ({ ...i, dealerId })));
+  }
+}
+
+export async function getDealerPlatformAccess(dealerId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(dealerPlatformAccess).where(eq(dealerPlatformAccess.dealerId, dealerId));
+}
+
+export async function replaceDealerPlatformAccess(dealerId: number, platforms: Array<{
+  platform?: string; username?: string; notes?: string;
+}>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(dealerPlatformAccess).where(eq(dealerPlatformAccess.dealerId, dealerId));
+  if (platforms.length > 0) {
+    await db.insert(dealerPlatformAccess).values(platforms.map(p => ({ ...p, dealerId })));
+  }
+}
+
+export async function getDealerCompliance(dealerId: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const [row] = await db.select().from(dealerCompliance).where(eq(dealerCompliance.dealerId, dealerId));
+  return row ?? null;
+}
+
+export async function upsertDealerCompliance(dealerId: number, data: {
+  oemRestrictions?: string; brandGuidelines?: string; additionalRestrictions?: string;
+  acknowledgedDeliverables?: number; acknowledgedPolicies?: number;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const existing = await getDealerCompliance(dealerId);
+  if (existing) {
+    await db.update(dealerCompliance).set(data).where(eq(dealerCompliance.dealerId, dealerId));
+  } else {
+    await db.insert(dealerCompliance).values({ ...data, dealerId });
+  }
+}
+
+export async function getDealerFiles(dealerId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(dealerFiles).where(eq(dealerFiles.dealerId, dealerId));
+}
+
+export async function addDealerFile(data: {
+  dealerId: number; filename?: string; fileKey: string; url: string;
+  mimeType?: string; sizeBytes?: number;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(dealerFiles).values(data);
+}
+
+export async function getDealerComments(dealerId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(dealerComments).where(eq(dealerComments.dealerId, dealerId)).orderBy(desc(dealerComments.createdAt));
+}
+
+export async function addDealerComment(data: {
+  dealerId: number; authorName?: string; authorRole?: string;
+  content: string; isAdminComment: number;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(dealerComments).values(data);
+}
+
+// ─── Vendors ─────────────────────────────────────────────────────────────────
+
+export async function getAllVendors() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(vendors).orderBy(desc(vendors.createdAt));
+}
+
+export async function getVendorById(id: number) {
+  const db = await getDb();
+  if (!db) return null;
+  const [vendor] = await db.select().from(vendors).where(eq(vendors.id, id));
+  return vendor ?? null;
+}
+
+export async function getVendorByToken(token: string) {
+  const db = await getDb();
+  if (!db) return null;
+  const [vendor] = await db.select().from(vendors).where(eq(vendors.token, token));
+  return vendor ?? null;
+}
+
+export async function createVendor(data: { token: string; name?: string; email?: string; role?: InsertVendor["role"] }) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(vendors).values({ ...data, status: "invited", role: data.role ?? "photographer" });
+  return (result as { insertId: number }).insertId;
+}
+
+export async function updateVendor(id: number, data: Partial<InsertVendor>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(vendors).set(data).where(eq(vendors.id, id));
+}
+
+export async function updateVendorByToken(token: string, data: Partial<InsertVendor>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(vendors).set(data).where(eq(vendors.token, token));
+}
+
+export async function getVendorJobs(vendorId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(vendorJobs).where(eq(vendorJobs.vendorId, vendorId)).orderBy(desc(vendorJobs.createdAt));
+}
+
+export async function createVendorJob(data: {
+  vendorId: number; title: string; description?: string;
+  eventDate?: string; eventCity?: string; deliverablesDue?: string; notes?: string;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(vendorJobs).values({ ...data, status: "pending" });
+  return (result as { insertId: number }).insertId;
+}
+
+export async function updateVendorJobStatus(id: number, status: "pending" | "confirmed" | "in_progress" | "completed" | "cancelled") {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(vendorJobs).set({ status }).where(eq(vendorJobs.id, id));
+}
+
+// ─── CRM Contacts ─────────────────────────────────────────────────────────────
+
+export async function getAllCrmContacts() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(crmContacts).orderBy(desc(crmContacts.createdAt));
+}
+
+export async function createCrmContact(data: {
+  name: string; email?: string; phone?: string; company?: string;
+  title?: string; contactType?: "lead" | "client" | "partner" | "vendor" | "other"; notes?: string;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(crmContacts).values({ ...data, contactType: data.contactType ?? "lead" });
+  return (result as { insertId: number }).insertId;
+}
+
+export async function updateCrmContact(id: number, data: Partial<typeof crmContacts.$inferInsert>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(crmContacts).set(data).where(eq(crmContacts.id, id));
+}
+
+export async function deleteCrmContact(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(crmContacts).where(eq(crmContacts.id, id));
+}
+
+// ─── CRM Deals ────────────────────────────────────────────────────────────────
+
+export async function getAllCrmDeals() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(crmDeals).orderBy(desc(crmDeals.createdAt));
+}
+
+export async function createCrmDeal(data: {
+  title: string; contactId?: number; dealerId?: number;
+  stage?: "lead" | "qualified" | "proposal" | "negotiation" | "closed_won" | "closed_lost";
+  value?: number; notes?: string; expectedCloseDate?: string;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(crmDeals).values({ ...data, stage: data.stage ?? "lead" });
+  return (result as { insertId: number }).insertId;
+}
+
+export async function updateCrmDeal(id: number, data: Partial<typeof crmDeals.$inferInsert>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(crmDeals).set(data).where(eq(crmDeals.id, id));
+}
+
+export async function deleteCrmDeal(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(crmDeals).where(eq(crmDeals.id, id));
+}
+
+// ─── CRM Tasks ────────────────────────────────────────────────────────────────
+
+export async function getAllCrmTasks() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(crmTasks).orderBy(desc(crmTasks.createdAt));
+}
+
+export async function createCrmTask(data: {
+  title: string; description?: string; assignedTo?: string;
+  priority?: "low" | "medium" | "high" | "urgent"; dueDate?: string;
+  dealerId?: number; vendorId?: number;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(crmTasks).values({ ...data, priority: data.priority ?? "medium", status: "open" });
+  return (result as { insertId: number }).insertId;
+}
+
+export async function updateCrmTask(id: number, data: Partial<typeof crmTasks.$inferInsert>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(crmTasks).set(data).where(eq(crmTasks.id, id));
+}
+
+export async function deleteCrmTask(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(crmTasks).where(eq(crmTasks.id, id));
+}
+
+// ─── CRM Incidents ────────────────────────────────────────────────────────────
+
+export async function getAllCrmIncidents() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(crmIncidents).orderBy(desc(crmIncidents.createdAt));
+}
+
+export async function createCrmIncident(data: {
+  title: string; description?: string;
+  severity?: "low" | "medium" | "high" | "critical";
+  reportedBy?: string; dealerId?: number; vendorId?: number;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(crmIncidents).values({ ...data, severity: data.severity ?? "medium", status: "open" });
+  return (result as { insertId: number }).insertId;
+}
+
+export async function updateCrmIncident(id: number, data: Partial<typeof crmIncidents.$inferInsert>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(crmIncidents).set(data).where(eq(crmIncidents.id, id));
+}
+
+// ─── Contracts ────────────────────────────────────────────────────────────────
+
+export async function getAllContracts() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(contracts).orderBy(desc(contracts.createdAt));
+}
+
+export async function createContract(data: {
+  contractType: "contractor" | "client"; signingToken: string;
+  clientName?: string; clientEmail?: string; contractorRole?: string;
+  eventDate?: string; eventCity?: string; equipmentDetails?: string;
+  amount?: number; isRevenue: number; vendorId?: number; dealerId?: number;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(contracts).values({ ...data, status: "draft" });
+  return (result as { insertId: number }).insertId;
+}
+
+export async function updateContractStatus(id: number, status: "draft" | "sent" | "signed" | "completed" | "cancelled" | "expired") {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(contracts).set({ status }).where(eq(contracts.id, id));
+}
+
+// ─── CRM Stats ────────────────────────────────────────────────────────────────
+
+export async function getCrmStats() {
+  const db = await getDb();
+  if (!db) return { totalContacts: 0, activeDeals: 0, openTasks: 0, openIncidents: 0, totalRevenue: 0, totalContracts: 0 };
+
+  const [allContacts, allDeals, allTasks, allIncidents, allContracts, allDealers, allVendors] = await Promise.all([
+    db.select().from(crmContacts),
+    db.select().from(crmDeals),
+    db.select().from(crmTasks),
+    db.select().from(crmIncidents),
+    db.select().from(contracts),
+    db.select().from(dealers),
+    db.select().from(vendors),
+  ]);
+
+  const openTasks = allTasks.filter((t: { status: string }) => t.status === "open" || t.status === "in_progress").length;
+  const openIncidents = allIncidents.filter((i: { status: string }) => i.status === "open" || i.status === "investigating").length;
+  const activeDeals = allDeals.filter((d: { stage: string }) => d.stage !== "closed_won" && d.stage !== "closed_lost").length;
+  const totalRevenue = allContracts
+    .filter((c: { isRevenue: number; status: string }) => c.isRevenue === 1 && c.status === "signed")
+    .reduce((sum: number, c: { amount: number | null }) => sum + (c.amount ?? 0), 0);
+
+  return {
+    totalContacts: allContacts.length,
+    activeDeals,
+    openTasks,
+    openIncidents,
+    totalRevenue,
+    totalContracts: allContracts.length,
+    totalDealers: allDealers.length,
+    activeDealers: allDealers.filter((d: { status: string }) => d.status === "active").length,
+    totalVendors: allVendors.length,
+    activeVendors: allVendors.filter((v: { status: string }) => v.status === "active").length,
+  };
+}

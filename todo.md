@@ -11,3 +11,12 @@
 - [x] Admin panel: delete project from sidebar
 - [x] Bulk upload: multi-file selection with parallel S3 uploads and per-file progress tracking
 - [x] Bulk upload: live thumbnail preview grid showing each image as it finishes uploading
+
+## Enterprise Portals
+- [x] Extend DB schema: dealers, vendors, onboarding_submissions, crm_contacts, crm_deals, vendor_jobs, contracts tables
+- [x] Dealer Portal: /dealer route with login, onboarding wizard (7 steps), dashboard, documents, status tracker
+- [x] Vendor Portal: /vendor route with login, jobs board, contracts, deliverables, schedule
+- [x] Admin CRM: /admin/crm section with Dealers, Vendors, Contracts, Tasks, Incidents, Analytics, Reminders, Settings
+- [x] Main site: Dealer Portal and Vendor Portal entry buttons on homepage
+- [x] Admin panel: CRM navigation buttons linking to each CRM section
+- [x] Role-based access: dealer role, vendor role, admin role gating
