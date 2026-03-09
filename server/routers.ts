@@ -8,6 +8,8 @@ import { dealerRouter } from "./routers/dealer";
 import { vendorRouter } from "./routers/vendor";
 import { crmRouter } from "./routers/crm";
 import { contractsRouter } from "./routers/contracts";
+import { dealerAdminRouter } from "./routers/dealerAdmin";
+import { vendorAdminRouter } from "./routers/vendorAdmin";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -29,6 +31,8 @@ export const appRouter = router({
   vendor: vendorRouter,
   crm: crmRouter,
   contract: contractsRouter,
+  dealerAdmin: dealerAdminRouter,
+  vendorAdmin: vendorAdminRouter,
 });
 
 export type AppRouter = typeof appRouter;

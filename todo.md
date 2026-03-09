@@ -28,3 +28,21 @@
 - [x] Contract system: vendor signing page at /vendor/sign/:token (token-based, no login required)
 - [x] Contract system: Admin CRM Contracts tab to view/manage all contracts
 - [x] Contract system: vendor token auth - /vendor?token=... shows contractor dashboard with their contracts
+
+- [x] Dealer Portal Admin: /dealer/admin - full admin panel matching reference design (black + yellow-green theme)
+- [x] Dealer Portal Admin: Dashboard with stats cards (Total Dealers, In Progress, Submitted, Open Incidents)
+- [x] Dealer Portal Admin: Dealers management section (list, search, filter, new dealer, detail view)
+- [x] Dealer Portal Admin: Tasks section (list, create, status filter)
+- [x] Dealer Portal Admin: Incidents section (list, create, manage)
+- [x] Dealer Portal Admin: Reminders section
+- [x] Dealer Portal Admin: Analytics section (stats, status distribution, SLA performance)
+- [x] Dealer Portal Admin: Settings section
+- [x] Vendor Portal Admin: /vendor/admin - full admin panel matching reference design
+- [x] Vendor Portal Admin: Dashboard with stats cards (Total Vendors, Active Contracts, Open Jobs, Incidents)
+- [x] Vendor Portal Admin: Vendors management section (list, search, filter, invite vendor)
+- [x] Vendor Portal Admin: Contracts section (list, create, manage)
+- [x] Vendor Portal Admin: Jobs section (list, assign, manage)
+- [x] Vendor Portal Admin: Tasks section
+- [x] Vendor Portal Admin: Analytics section
+- [x] Vendor Portal Admin: Settings section
+- [x] Shared: PortalAdminLayout component with black/yellow-green sidebar navigation

@@ -547,8 +547,17 @@ export default function DealerPortal() {
             <h1 className="text-2xl font-black text-white">Dealer Onboarding</h1>
             <p className="text-zinc-400 text-sm">{dealer.storeName ?? "Welcome"} — Step {step} of {STEPS.length}</p>
           </div>
-          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-semibold ${statusCfg.color}`}>
-            {statusCfg.icon} {statusCfg.label}
+          <div className="flex items-center gap-2">
+            <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-semibold ${statusCfg.color}`}>
+              {statusCfg.icon} {statusCfg.label}
+            </div>
+            <a
+              href="/dealer/admin"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[oklch(0.85_0.23_110)] text-black text-xs font-bold hover:bg-[oklch(0.9_0.23_110)] transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              Admin
+            </a>
           </div>
         </div>
 

@@ -36,6 +36,8 @@ import {
 // Project detail pages
 import DealerPortal from "./pages/DealerPortal";
 import VendorPortal from "./pages/VendorPortal";
+import DealerAdmin from "./pages/DealerAdmin";
+import VendorAdmin from "./pages/VendorAdmin";
 import AdminCRM from "./pages/AdminCRM";
 import VendorSign from "./pages/VendorSign";
 import AdminCreateContract from "./pages/AdminCreateContract";
@@ -70,7 +72,9 @@ function Router() {
 
         {/* Portals */}
         <Route path="/dealer" component={DealerPortal} />
+        <Route path="/dealer/admin" component={DealerAdmin} />
         <Route path="/vendor" component={VendorPortal} />
+        <Route path="/vendor/admin" component={VendorAdmin} />
         <Route path="/vendor/sign/:token" component={VendorSign} />
         <Route path="/admin/contracts/new" component={AdminCreateContract} />
 

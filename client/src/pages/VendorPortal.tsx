@@ -252,14 +252,23 @@ export default function VendorPortal() {
     <div className="min-h-screen bg-[oklch(0.07_0_0)] p-4 sm:p-6">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-6">
-          <div className="w-12 h-12 rounded-full bg-[oklch(0.85_0.23_110)] flex items-center justify-center text-black font-black text-lg">
-            {vendor.name?.[0]?.toUpperCase() ?? "V"}
+        <div className="flex items-center justify-between gap-4 mb-6">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-[oklch(0.85_0.23_110)] flex items-center justify-center text-black font-black text-lg">
+              {vendor.name?.[0]?.toUpperCase() ?? "V"}
+            </div>
+            <div>
+              <h1 className="text-2xl font-black text-white">{vendor.name ?? "Vendor"}</h1>
+              <p className="text-zinc-400 text-sm capitalize">{vendor.role?.replace("_", " ")} · Loomelic Media</p>
+            </div>
           </div>
-          <div>
-            <h1 className="text-2xl font-black text-white">{vendor.name ?? "Vendor"}</h1>
-            <p className="text-zinc-400 text-sm capitalize">{vendor.role?.replace("_", " ")} · Loomelic Media</p>
-          </div>
+          <a
+            href="/vendor/admin"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[oklch(0.85_0.23_110)] text-black text-xs font-bold hover:bg-[oklch(0.9_0.23_110)] transition-colors flex-shrink-0"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Admin Panel
+          </a>
         </div>
 
         {/* Stats */}
