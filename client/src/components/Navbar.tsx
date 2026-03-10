@@ -127,11 +127,11 @@ export default function Navbar() {
             {/* Portal quick-access buttons */}
             <div className="hidden lg:flex items-center gap-2">
               <button
-                onClick={() => goTo("/dealer")}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.65rem] font-bold tracking-[0.1em] bg-blue-500/15 border border-blue-500/30 text-blue-300 hover:bg-blue-500/25 hover:text-blue-200 transition-all duration-200"
+                onClick={() => goTo("/crm")}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.65rem] font-bold tracking-[0.1em] bg-yellow-500/15 border border-yellow-500/30 text-yellow-300 hover:bg-yellow-500/25 hover:text-yellow-200 transition-all duration-200"
               >
                 <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                DEALER PORTAL
+                DEALER CRM
               </button>
               <button
                 onClick={() => goTo("/vendor")}
@@ -218,13 +218,13 @@ export default function Navbar() {
             <div className="px-8 py-6 border-t border-white/8 flex flex-col gap-3">
               <p className="font-body text-xs text-white/30 tracking-widest uppercase mb-1">Client Portals</p>
               <button
-                onClick={() => goTo("/dealer")}
-                className="flex items-center gap-3 w-full px-5 py-3.5 rounded-2xl bg-blue-500/10 border border-blue-500/25 text-blue-300 hover:bg-blue-500/20 transition-all duration-200"
+                onClick={() => goTo("/crm")}
+                className="flex items-center gap-3 w-full px-5 py-3.5 rounded-2xl bg-yellow-500/10 border border-yellow-500/25 text-yellow-300 hover:bg-yellow-500/20 transition-all duration-200"
               >
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
                 <div className="text-left">
-                  <p className="font-bold text-sm tracking-wide">Dealer Portal</p>
-                  <p className="text-xs text-blue-400/70">Onboarding & project status</p>
+                  <p className="font-bold text-sm tracking-wide">Dealer CRM</p>
+                  <p className="text-xs text-yellow-400/70">Contacts, pipeline & proposals</p>
                 </div>
               </button>
               <button

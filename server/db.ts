@@ -230,6 +230,7 @@ import {
   dealerCompliance, dealerFiles, dealerComments,
   vendors, vendorJobs,
   crmContacts, crmDeals, crmTasks, crmIncidents, contracts,
+  crmProposals,
   InsertDealer, InsertVendor,
 } from "../drizzle/schema";
 import { desc } from "drizzle-orm";
@@ -453,7 +454,8 @@ export async function getAllCrmContacts() {
 export async function createCrmContact(data: {
   name: string; email?: string; phone?: string; company?: string;
   title?: string; contactType?: "lead" | "client" | "partner" | "vendor" | "other";
-  status?: "prospect" | "active" | "inactive" | "churned"; notes?: string;
+  status?: "prospect" | "active" | "inactive" | "churned";
+  leadTemp?: "hot" | "warm" | "cold"; quickNotes?: string; notes?: string;
 }) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
@@ -621,4 +623,40 @@ export async function getCrmStats() {
     totalVendors: allVendors.length,
     activeVendors: allVendors.filter((v: { status: string }) => v.status === "active").length,
   };
+}
+
+
+// ─── CRM Proposals ──────────────────────────────────────────────────────────
+
+export async function getAllCrmProposals() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(crmProposals).orderBy(desc(crmProposals.createdAt));
+}
+
+export async function createCrmProposal(data: {
+  title: string; contactId?: number; dealId?: number;
+  services?: string; totalValue?: number;
+  status?: "draft" | "sent" | "viewed" | "accepted" | "declined" | "expired";
+  validUntil?: string; notes?: string;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(crmProposals).values({
+    ...data,
+    status: data.status ?? "draft",
+  });
+  return (result as { insertId: number }).insertId;
+}
+
+export async function updateCrmProposal(id: number, data: Partial<typeof crmProposals.$inferInsert>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(crmProposals).set(data).where(eq(crmProposals.id, id));
+}
+
+export async function deleteCrmProposal(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(crmProposals).where(eq(crmProposals.id, id));
 }

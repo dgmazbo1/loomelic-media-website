@@ -55,3 +55,17 @@
 - [x] CRM: Enhance ContactsTab with status badge, edit inline, and link to interactions
 - [x] CRM: Enhance DealsTab with Kanban-style pipeline view (Lead → Qualified → Proposal → Negotiation → Closed Won/Lost)
 - [x] CRM: Add CRM section to main /admin sidebar with sub-tabs (Contacts, Deals, Interactions)
+
+## CRM Dashboard at /crm
+- [x] Add crmProposals table to schema (title, contactId, dealId, services, totalValue, status, sentAt, viewedAt, signedAt)
+- [x] Add leadTemp field to crmContacts (hot/warm/cold)
+- [x] Add quickNotes field to crmContacts for inline quick notes
+- [x] Add lastContactedAt field to crmContacts for day tab filtering
+- [x] Build CRM Dashboard page at /crm with dealer cards, lead temp tags, quick notes, day tab filters
+- [x] Build pipeline view section showing deals across stages with drag-style visual
+- [x] Build proposals section with create/list/send/track proposals
+- [x] Add tRPC procedures for proposals CRUD
+- [x] Wire DEALER PORTAL nav button to /crm
+- [x] Match black/white/yellow Loomelic brand aesthetic throughout
+- [x] Write vitest tests for new CRM dashboard procedures
+- [x] CRITICAL: Preserve ALL existing data — schema changes are additive only, no drops or renames

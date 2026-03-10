@@ -1,0 +1,15 @@
+Screenshot 1: Homepage - DEALER CRM button (yellow) and VENDOR PORTAL button (purple) visible in navbar. 
+Screenshot 2: CRM Dashboard at /crm - Shows:
+- Top bar with Loomelic logo, DEALER CRM title, search bar, ADMIN button
+- 5 summary cards: Total Contacts (7), Active Deals (3), Pipeline Value ($13,500), Hot Leads (0), Proposals Sent (0)
+- Tab navigation: Contacts (active/yellow), Pipeline, Proposals, Activity
+- Day filters: Today, 7 Days, 30 Days, All (selected)
+- Yellow ADD button
+- 7 dealer contact cards in a 4-column grid with:
+  - Name, company, email/phone
+  - Lead temp tag (Warm) with dropdown on hover
+  - Status badges (Client/Active, Lead/Prospect, Other/Inactive)
+  - Last contact timestamp
+  - Quick notes area
+  - Action footer: CALL, EMAIL, MEET
+- Black/yellow brand aesthetic matches perfectly

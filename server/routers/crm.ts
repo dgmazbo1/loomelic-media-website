@@ -7,10 +7,11 @@ import {
   getAllCrmIncidents, createCrmIncident, updateCrmIncident,
   getAllContracts, createContract, updateContractStatus,
   getCrmStats,
+  getAllCrmProposals, createCrmProposal, updateCrmProposal, deleteCrmProposal,
 } from "../db";
 import { nanoid } from "nanoid";
 import { getDb } from "../db";
-import { crmInteractions } from "../../drizzle/schema";
+import { crmInteractions, crmContacts } from "../../drizzle/schema";
 import { eq, desc } from "drizzle-orm";
 
 // All CRM procedures are public (admin panel has no auth requirement)
@@ -31,6 +32,8 @@ export const crmRouter = router({
       title: z.string().optional(),
       contactType: z.enum(["lead", "client", "partner", "vendor", "other"]).optional(),
       status: z.enum(["prospect", "active", "inactive", "churned"]).optional(),
+      leadTemp: z.enum(["hot", "warm", "cold"]).optional(),
+      quickNotes: z.string().optional(),
       notes: z.string().optional(),
     }))
     .mutation(async ({ input }) => {
@@ -48,6 +51,8 @@ export const crmRouter = router({
       title: z.string().optional(),
       contactType: z.enum(["lead", "client", "partner", "vendor", "other"]).optional(),
       status: z.enum(["prospect", "active", "inactive", "churned"]).optional(),
+      leadTemp: z.enum(["hot", "warm", "cold"]).optional(),
+      quickNotes: z.string().optional(),
       notes: z.string().optional(),
     }))
     .mutation(async ({ input }) => {
@@ -264,6 +269,78 @@ export const crmRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database unavailable");
       await db.delete(crmInteractions).where(eq(crmInteractions.id, input.id));
+      return { success: true };
+    }),
+
+  // ─── Quick Contact Updates ────────────────────────────────────────────────
+
+  updateContactLeadTemp: adminProcedure
+    .input(z.object({ id: z.number(), leadTemp: z.enum(["hot", "warm", "cold"]) }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database unavailable");
+      await db.update(crmContacts).set({ leadTemp: input.leadTemp }).where(eq(crmContacts.id, input.id));
+      return { success: true };
+    }),
+
+  updateContactQuickNotes: adminProcedure
+    .input(z.object({ id: z.number(), quickNotes: z.string() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database unavailable");
+      await db.update(crmContacts).set({ quickNotes: input.quickNotes }).where(eq(crmContacts.id, input.id));
+      return { success: true };
+    }),
+
+  updateContactLastContacted: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database unavailable");
+      await db.update(crmContacts).set({ lastContactedAt: new Date() }).where(eq(crmContacts.id, input.id));
+      return { success: true };
+    }),
+
+  // ─── Proposals ───────────────────────────────────────────────────────────
+
+  listProposals: adminProcedure.query(async () => getAllCrmProposals()),
+
+  createProposal: adminProcedure
+    .input(z.object({
+      title: z.string().min(1),
+      contactId: z.number().optional(),
+      dealId: z.number().optional(),
+      services: z.string().optional(),
+      totalValue: z.number().optional(),
+      status: z.enum(["draft", "sent", "viewed", "accepted", "declined", "expired"]).optional(),
+      validUntil: z.string().optional(),
+      notes: z.string().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const id = await createCrmProposal(input);
+      return { id };
+    }),
+
+  updateProposal: adminProcedure
+    .input(z.object({
+      id: z.number(),
+      title: z.string().optional(),
+      services: z.string().optional(),
+      totalValue: z.number().optional(),
+      status: z.enum(["draft", "sent", "viewed", "accepted", "declined", "expired"]).optional(),
+      validUntil: z.string().optional(),
+      notes: z.string().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const { id, ...data } = input;
+      await updateCrmProposal(id, data);
+      return { success: true };
+    }),
+
+  deleteProposal: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      await deleteCrmProposal(input.id);
       return { success: true };
     }),
 

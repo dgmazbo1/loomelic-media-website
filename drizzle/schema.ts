@@ -402,6 +402,9 @@ export const crmContacts = mysqlTable("crm_contacts", {
   title: varchar("title", { length: 128 }),
   contactType: mysqlEnum("contactType", ["lead", "client", "partner", "vendor", "other"]).default("lead").notNull(),
   status: mysqlEnum("status", ["prospect", "active", "inactive", "churned"]).default("prospect"),
+  leadTemp: mysqlEnum("leadTemp", ["hot", "warm", "cold"]).default("warm"),
+  quickNotes: text("quickNotes"),
+  lastContactedAt: timestamp("lastContactedAt"),
   notes: text("notes"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
@@ -487,3 +490,26 @@ export const crmInteractions = mysqlTable("crm_interactions", {
 });
 export type CrmInteraction = typeof crmInteractions.$inferSelect;
 export type InsertCrmInteraction = typeof crmInteractions.$inferInsert;
+
+
+/**
+ * CRM proposals — generated proposals sent to dealer contacts
+ */
+export const crmProposals = mysqlTable("crm_proposals", {
+  id: int("id").autoincrement().primaryKey(),
+  contactId: int("contactId"),
+  dealId: int("dealId"),
+  title: varchar("title", { length: 256 }).notNull(),
+  services: text("services"),
+  totalValue: int("totalValue"),
+  status: mysqlEnum("status", ["draft", "sent", "viewed", "accepted", "declined", "expired"]).default("draft").notNull(),
+  validUntil: varchar("validUntil", { length: 32 }),
+  sentAt: timestamp("sentAt"),
+  viewedAt: timestamp("viewedAt"),
+  signedAt: timestamp("signedAt"),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+export type CrmProposal = typeof crmProposals.$inferSelect;
+export type InsertCrmProposal = typeof crmProposals.$inferInsert;
