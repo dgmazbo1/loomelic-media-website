@@ -1,24 +1,36 @@
 /* ============================================================
-   HeroSection — Dealer-acquisition rebuild
-   Design: Dark cinematic background, dealer-focused headline,
-           outcome-driven subhead, dual CTA, trust line
+   HeroSection — Enterprise platform evolution
+   Preserves: cinematic video bg, Barlow Condensed display,
+              pill CTAs, lime accent, bottom marquee
+   Adds: enterprise positioning statement, client type badges
    ============================================================ */
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
-import { Instagram, Youtube } from "lucide-react";
+import { Instagram, Youtube, ArrowRight } from "lucide-react";
 import { LOGO_TRANSPARENT, HERO_VIDEOS } from "@/lib/media";
 
-const categories = [
-  "AUTOMOTIVE", "EVENTS", "HEADSHOTS", "WEBSITES", "BRAND CONTENT", "LAS VEGAS", "SOUTH FLORIDA"
+const CLIENT_TYPES = [
+  "DEALERSHIPS",
+  "DEALER GROUPS",
+  "EVENTS",
+  "BRANDS",
+  "ENTERPRISE",
+];
+
+const MARQUEE_ITEMS = [
+  "AUTOMOTIVE",
+  "EVENTS",
+  "HEADSHOTS",
+  "WEBSITES",
+  "BRAND CONTENT",
+  "CRM VIDEO",
+  "DRONE",
+  "LAS VEGAS",
+  "SOUTH FLORIDA",
 ];
 
 export default function HeroSection() {
   const [, navigate] = useLocation();
-
-  const scrollToContact = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <section
@@ -36,11 +48,15 @@ export default function HeroSection() {
           src={HERO_VIDEOS.lexusRoll}
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.07_0_0)]/70 via-[oklch(0.07_0_0)]/50 to-[oklch(0.07_0_0)]" aria-hidden="true" />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-[oklch(0.07_0_0)]/70 via-[oklch(0.07_0_0)]/50 to-[oklch(0.07_0_0)]"
+          aria-hidden="true"
+        />
       </div>
 
       {/* Main content */}
       <div className="relative z-10 flex-1 flex flex-col justify-end px-5 sm:px-10 lg:px-16 pb-12 sm:pb-20 pt-32">
+        {/* Enterprise positioning label */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -48,59 +64,72 @@ export default function HeroSection() {
           className="section-label mb-6"
         >
           <span>✦</span>
-          <span>A Las Vegas Production Company</span>
+          <span>Premium Content Operations Partner</span>
         </motion.p>
 
+        {/* Headline — enterprise-forward */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-[clamp(3.2rem,10vw,9.5rem)] leading-[0.88] text-white mb-6 max-w-5xl"
         >
-          VISUAL CONTENT<br />
-          <span className="text-outline-white">BUILT TO</span><br />
-          PERFORM
+          CONTENT SYSTEMS<br />
+          <span className="text-outline-white">BUILT FOR</span><br />
+          DEALERSHIPS
         </motion.h1>
 
+        {/* Enterprise subhead */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="font-body text-white/60 text-sm sm:text-base max-w-lg leading-relaxed mb-8"
         >
-          Photo, video, and web production for automotive dealerships, events, headshots, and brands — Las Vegas and South Florida.
+          Structured photo, video, and web production for automotive
+          dealerships, dealer groups, events, and brands. Monthly retainers.
+          Multi-rooftop support. Las Vegas and South Florida.
         </motion.p>
 
+        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.65 }}
-          className="flex flex-wrap items-center gap-3 mb-5"
+          className="flex flex-wrap items-center gap-3 mb-6"
         >
           <button
             onClick={() => navigate("/contact")}
             className="btn-pill-light text-xs py-3 px-7 font-semibold tracking-widest"
-            aria-label="Get in touch"
+            aria-label="Book a discovery call"
           >
-            GET IN TOUCH
+            BOOK A DISCOVERY CALL
           </button>
           <button
-            onClick={() => navigate("/projects")}
-            className="text-xs py-3 px-7 font-semibold tracking-widest rounded-full border border-white/30 text-white/80 hover:border-white hover:text-white transition-all duration-200"
-            aria-label="View our work"
+            onClick={() => navigate("/case-studies")}
+            className="text-xs py-3 px-7 font-semibold tracking-widest rounded-full border border-white/30 text-white/80 hover:border-white hover:text-white transition-all duration-200 flex items-center gap-2"
+            aria-label="View case studies"
           >
-            VIEW OUR WORK
+            VIEW CASE STUDIES <ArrowRight size={13} />
           </button>
         </motion.div>
 
-        <motion.p
+        {/* Client type badges */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.85 }}
-          className="font-body text-xs text-white/35 tracking-widest mb-10"
+          className="flex flex-wrap gap-2 mb-10"
         >
-          Serving Las Vegas and South Florida.
-        </motion.p>
+          {CLIENT_TYPES.map((type) => (
+            <span
+              key={type}
+              className="inline-flex items-center px-3 py-1 rounded-full bg-white/[0.04] border border-white/8 font-body text-[0.6rem] tracking-[0.12em] text-white/35"
+            >
+              {type}
+            </span>
+          ))}
+        </motion.div>
       </div>
 
       {/* Bottom row */}
@@ -141,15 +170,20 @@ export default function HeroSection() {
           <motion.span
             animate={{ y: [0, 4, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          >↓</motion.span>
+          >
+            ↓
+          </motion.span>
         </motion.div>
       </div>
 
       {/* Scrolling category marquee */}
       <div className="relative z-10 border-t border-white/8 py-3 overflow-hidden">
         <div className="animate-marquee">
-          {[...categories, ...categories].map((cat, i) => (
-            <span key={i} className="font-display-normal text-sm text-white/20 px-6 shrink-0">
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((cat, i) => (
+            <span
+              key={i}
+              className="font-display-normal text-sm text-white/20 px-6 shrink-0"
+            >
               {cat} <span className="text-lime mx-2">✦</span>
             </span>
           ))}

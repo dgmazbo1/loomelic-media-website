@@ -65,7 +65,7 @@ const PROPOSAL_STATUS_COLORS: Record<string, string> = {
 };
 
 /* ─── Helpers ─────────────────────────────────────────────── */
-function isWithinDays(dateStr: string | null | undefined, days: number): boolean {
+function isWithinDays(dateStr: string | Date | null | undefined, days: number): boolean {
   if (!dateStr) return false;
   const d = new Date(dateStr);
   const now = new Date();
@@ -126,9 +126,9 @@ export default function CRMDashboard() {
   const filteredContacts = useMemo(() => {
     let list = contacts.data ?? [];
     // Day filter
-    if (dayFilter === "today") list = list.filter(c => isWithinDays(c.lastContactedAt as string, 1) || isWithinDays(c.createdAt as string, 1));
-    else if (dayFilter === "7d") list = list.filter(c => isWithinDays(c.lastContactedAt as string, 7) || isWithinDays(c.createdAt as string, 7));
-    else if (dayFilter === "30d") list = list.filter(c => isWithinDays(c.lastContactedAt as string, 30) || isWithinDays(c.createdAt as string, 30));
+    if (dayFilter === "today") list = list.filter(c => isWithinDays(c.lastContactedAt, 1) || isWithinDays(c.createdAt, 1));
+    else if (dayFilter === "7d") list = list.filter(c => isWithinDays(c.lastContactedAt, 7) || isWithinDays(c.createdAt, 7));
+    else if (dayFilter === "30d") list = list.filter(c => isWithinDays(c.lastContactedAt, 30) || isWithinDays(c.createdAt, 30));
     // Search
     if (search) {
       const q = search.toLowerCase();
@@ -281,14 +281,14 @@ export default function CRMDashboard() {
           <PipelineView
             deals={deals.data ?? []}
             contacts={contacts.data ?? []}
-            onUpdateStage={(id, stage) => updateDeal.mutate({ id, stage })}
+            onUpdateStage={(id, stage) => updateDeal.mutate({ id, stage: stage as "lead" | "qualified" | "proposal" | "negotiation" | "closed_won" | "closed_lost" })}
           />
         )}
         {activeTab === "proposals" && (
           <ProposalsView
             proposals={proposals.data ?? []}
             contacts={contacts.data ?? []}
-            onUpdateStatus={(id, status) => updateProposal.mutate({ id, status })}
+            onUpdateStatus={(id, status) => updateProposal.mutate({ id, status: status as "draft" | "sent" | "viewed" | "accepted" | "declined" | "expired" })}
             onDelete={(id) => deleteProposal.mutate({ id })}
           />
         )}

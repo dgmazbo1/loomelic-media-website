@@ -33,6 +33,11 @@ import {
   HeadshotsPage,
 } from "./pages/ServicePages";
 
+// Enterprise pages
+import SolutionsPage from "./pages/SolutionsPage";
+import CaseStudies from "./pages/CaseStudies";
+import ProcessPage from "./pages/ProcessPage";
+
 // Project detail pages
 import DealerPortal from "./pages/DealerPortal";
 import VendorPortal from "./pages/VendorPortal";
@@ -87,6 +92,15 @@ function Router() {
         {/* Home */}
         <Route path="/" component={Home} />
 
+        {/* Enterprise pages */}
+        <Route path="/solutions" component={SolutionsPage} />
+        <Route path="/solutions/dealers" component={SolutionsPage} />
+        <Route path="/solutions/dealer-groups" component={SolutionsPage} />
+        <Route path="/solutions/events" component={SolutionsPage} />
+        <Route path="/solutions/brands" component={SolutionsPage} />
+        <Route path="/case-studies" component={CaseStudies} />
+        <Route path="/process" component={ProcessPage} />
+
         {/* About / Our Story */}
         <Route path="/about" component={AboutPage} />
 
@@ -118,14 +132,22 @@ function Router() {
         <Route path="/services/website-redesign" component={WebsiteRedesignPage} />
         <Route path="/services/headshots" component={HeadshotsPage} />
 
-        {/* Project detail pages */}
+        {/* Project detail pages — also serve as case study detail */}
         <Route path="/projects/lexus-of-henderson" component={LexusHendersonPage} />
         <Route path="/projects/lexus-of-las-vegas" component={LexusLasVegasPage} />
         <Route path="/projects/las-vegas-raiders-tour" component={RaidersPage} />
+        <Route path="/projects/las-vegas-raiders-the-blast" component={RaidersPage} />
         <Route path="/projects/centennial-subaru" component={CentennialSubaruPage} />
         <Route path="/projects/wondr-nation-g2e" component={WondrNationPage} />
+        <Route path="/projects/wondr-nation-g2e-2025" component={WondrNationPage} />
         <Route path="/projects/bob-marley-hope-road" component={BobMarleyPage} />
         <Route path="/projects/sports-illustrated-sportsperson-2026" component={SportsIllustratedPage} />
+        <Route path="/projects/sports-illustrated-spoty-2026" component={SportsIllustratedPage} />
+        <Route path="/projects/janel-and-nehiamia" component={() => {
+          const [, navigate] = useLocation();
+          useEffect(() => { navigate("/projects"); }, []);
+          return null;
+        }} />
 
         {/* 404 */}
         <Route path="/404" component={NotFound} />

@@ -1,0 +1,39 @@
+Enterprise Upgrade Visual Verification - March 9, 2026
+
+HOMEPAGE (/)
+- Hero section: Black cinematic background, "CONTENT SYSTEMS / BUILT FOR / DEALERSHIPS" in Barlow Condensed
+- "BUILT FOR" uses text-outline-white (stroke effect) - looks correct
+- Enterprise positioning label: "PREMIUM CONTENT OPERATIONS PARTNER" with diamond icon
+- CTAs: "BOOK A DISCOVERY CALL" (pill-light) and "VIEW CASE STUDIES" (outline pill)
+- Client type badges: DEALERSHIPS, DEALER GROUPS, EVENTS, BRANDS, ENTERPRISE
+- Marquee at bottom with service categories
+- Video background loads (200 OK from CDN) but may not autoplay in headless browser - expected
+- All existing sections preserved: About, Services, Stats, Projects, Portfolio, Portals, Contact
+- New sections added: SolutionsOverview, HowItWorks, CaseStudiesPreview
+
+SOLUTIONS (/solutions)
+- Page header: "CONTENT SOLUTIONS" with outline text
+- 4 solution tabs: Single-Point Dealers, Multi-Rooftop Groups, Corporate & Private, Brands & Professionals
+- Each solution has detailed service list, "GET A PROPOSAL" CTA
+- Bottom CTA: "BOOK A DISCOVERY CALL"
+- Dark background, brand-consistent typography
+
+CASE STUDIES (/case-studies)
+- Page header: "OUR WORK" with outline text
+- Filter tabs: ALL, AUTOMOTIVE, EVENTS, BRAND, NATIONAL
+- 9 case study cards with hero images from CDN
+- Cards show: tags, client name, description, "VIEW CASE STUDY" button
+- 3-column grid layout
+- Bottom CTA: "BOOK A DISCOVERY CALL"
+
+PROCESS (/process)
+- Page header: "HOW WE WORK" with outline text
+- 4-step process: Discovery Call, Custom Proposal, Onboarding, Ongoing Delivery
+- Each step has: number, title, subtitle, description, bullet points, summary
+- Bottom CTA: "BOOK YOUR DISCOVERY CALL"
+
+NAVBAR
+- Enterprise mega-menu navigation: SOLUTIONS (dropdown), SERVICES (dropdown), CASE STUDIES, PROCESS, ABOUT, CONTACT
+- Right side: DEALER CRM (yellow), VENDOR (purple), BOOK A CALL (white pill)
+- Hamburger menu for mobile
+- Glass morphism background preserved

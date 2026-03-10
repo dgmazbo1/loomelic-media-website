@@ -13,3 +13,13 @@ Screenshot 2: CRM Dashboard at /crm - Shows:
   - Quick notes area
   - Action footer: CALL, EMAIL, MEET
 - Black/yellow brand aesthetic matches perfectly
+
+Enterprise upgrade screenshot (March 10, 2026):
+- Homepage hero: "CONTENT SYSTEMS BUILT FOR DEALERSHIPS" with text-outline-white effect
+- "Premium Content Operations Partner" label visible
+- Enterprise CTAs: "BOOK A DISCOVERY CALL" and "VIEW CASE STUDIES"
+- Client type badges: DEALERSHIPS, DEALER GROUPS, EVENTS, BRANDS, ENTERPRISE
+- Navbar: SOLUTIONS, SERVICES, CASE STUDIES, PROCESS, ABOUT, CONTACT
+- Portal buttons preserved: DEALER CRM (yellow), VENDOR (purple), BOOK A CALL (white)
+- Brand aesthetic preserved: dark bg, Barlow Condensed display, DM Sans body
+- All new routes verified: /solutions, /case-studies, /process → 200

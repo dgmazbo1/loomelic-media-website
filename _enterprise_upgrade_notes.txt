@@ -1,0 +1,38 @@
+ENTERPRISE UPGRADE SCOPE ANALYSIS
+==================================
+
+CORE CONSTRAINT: Preserve Loomelic premium brand identity. No generic SaaS look.
+
+FOUR MAJOR WORKSTREAMS:
+
+1. PUBLIC WEBSITE EVOLUTION
+   - New nav: Home, Solutions, Services, Case Studies, Portfolio, Process, Portals, About, Contact
+   - Solutions mega-menu: Dealerships, Dealer Groups, Enterprise/Regional, Events, Headshots, Website Design, CRM Video
+   - Services mega-menu: Inventory Photography, Walkaround Videos, Social Reels, Event Coverage, Headshots, Website Building, CRM Video, Drone
+   - Homepage: hero + enterprise positioning + client segmentation + solutions overview + how it works + metrics + case studies + portals preview + process + CTA
+   - Enterprise contact form with company fields
+   - SEO metadata
+
+2. CASE STUDIES (6+ structured pages)
+   - Lexus of Las Vegas, Lexus of Henderson, Centennial Subaru, Wondr Nation, Raiders Tour, Bob Marley Hope Road
+   - Each: overview, challenge, scope, deliverables, workflow, media types, cadence, metrics, testimonial, gallery, video, related solutions, CTA
+
+3. PORTALS (3 distinct secure areas)
+   A. Dealer Portal: onboarding, project status, asset gallery, revisions, content calendar, reporting, multi-location
+   B. Vendor Portal: assignments, availability, schedule, upload deliverables, QA feedback, contracts, payout tracking
+   C. CRM Dashboard: video libraries (intro, walkaround, delivery), staff assets, search/filter, campaign collections
+
+4. ADMIN / OPERATIONS HUB
+   A. Executive Overview: health, production totals, overdue, readiness, publish queue, alerts
+   B. Accounts/Clients: list, locations, service plans, contacts, SLA
+   C. Projects/Productions: table, statuses, deadlines, team, deliverables, revisions, publish readiness
+   D. Asset Management: photos, videos, heroes, metadata, tags, alt text, archive, version control
+   E. Portal Management: dealer users, vendor users, CRM access, invites, disable/revoke, activity logs
+   F. Reporting: monthly summaries, content volume, turnaround, completion rates, approval timing
+   G. RBAC: Super Admin, Internal Admin, Account Manager, Producer, Editor, Dealer Client Admin/Viewer, Vendor, Executive Read Only
+
+SECURITY: Auth on all protected routes, RBAC, session expiration, invite-based onboarding, audit logs, no public admin
+
+PUBLISH GOVERNANCE: Readiness bar, checklist, blocked publish until hero/video/thumbnails/metadata/alt/QA/approval complete
+
+EXISTING ASSETS TO PRESERVE: All current data, all current styling, all current components

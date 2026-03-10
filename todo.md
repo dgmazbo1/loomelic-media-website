@@ -69,3 +69,58 @@
 - [x] Match black/white/yellow Loomelic brand aesthetic throughout
 - [x] Write vitest tests for new CRM dashboard procedures
 - [x] CRITICAL: Preserve ALL existing data — schema changes are additive only, no drops or renames
+
+## Enterprise Platform Upgrade — Phase 1: Public Site Evolution
+- [x] Nav: Rebuild Navbar with Solutions mega-menu (Dealerships, Dealer Groups, Enterprise/Regional, Events, Headshots, Website Design, CRM Video)
+- [x] Nav: Rebuild Services mega-menu (Inventory Photography, Walkaround Videos, Social Reels, Event Coverage, Headshots, Website Building, CRM Video, Drone)
+- [x] Nav: Add Case Studies, Process, Portals nav items
+- [x] Homepage: Reposition hero for enterprise buyers — keep cinematic video bg, add enterprise positioning statement
+- [x] Homepage: Add client category segmentation section (Dealerships, Dealer Groups, Events, Brands)
+- [x] Homepage: Add solutions overview section
+- [x] Homepage: Add "How Loomelic Works" process section
+- [x] Homepage: Enhance proof/metrics section with enterprise credibility
+- [x] Homepage: Add featured case studies section
+- [x] Homepage: Keep portals preview section
+- [x] Homepage: Add structured workflow/process section
+- [x] Homepage: Upgrade CTA for discovery/strategy call
+
+## Enterprise Platform Upgrade — Phase 2: Case Studies
+- [x] Build CaseStudyTemplate component with structured sections (overview, challenge, scope, deliverables, workflow, media types, metrics, testimonial, gallery, video, CTA)
+- [x] Create case study: Lexus of Las Vegas
+- [x] Create case study: Lexus of Henderson
+- [x] Create case study: Centennial Subaru
+- [x] Create case study: Wondr Nation G2E
+- [x] Create case study: Las Vegas Raiders Tour
+- [x] Create case study: Bob Marley Hope Road
+- [x] Create case study: Sports Illustrated
+- [x] Add /case-studies listing page
+- [x] Route all case studies under /case-studies/:slug
+
+## Enterprise Platform Upgrade — Phase 3: Solutions & Process Pages
+- [x] Build SolutionPageTemplate for solution verticals
+- [x] Create /solutions page with all 4 verticals (Dealer, Dealer Group, Events, Brand)
+- [x] Build /process page (How We Work — onboarding, execution, reporting, optimization)
+
+## Enterprise Platform Upgrade — Phase 4: Contact & Enterprise Trust
+- [ ] Upgrade contact form with enterprise fields (company type, locations, monthly needs, timeline, pain points, reporting cadence)
+- [ ] Add enterprise trust content blocks (onboarding process, reporting cadence, turnaround model, security posture, asset management)
+
+## Enterprise Platform Upgrade — Phase 5: Admin Security & RBAC
+- [ ] Add auth guards on /admin, /dealer/admin, /vendor/admin routes (redirect to login if not authenticated)
+- [ ] Add role-based route protection (admin-only routes blocked for non-admin users)
+- [ ] Add noindex meta tags to admin/portal routes
+- [ ] Add session expiration handling
+
+## Enterprise Platform Upgrade — Phase 6: Admin Operations Hub
+- [ ] Build Executive Overview dashboard (account health, production totals, overdue tasks, readiness, publish queue, alerts)
+- [ ] Enhance Accounts/Clients section (locations, service plans, SLA settings)
+- [ ] Enhance Projects section (deadlines, team assignments, deliverable checklists, revision status)
+- [ ] Add Asset Management section (metadata, tags, alt text, archive status)
+- [ ] Add Portal Management section (manage users, invites, disable/revoke, activity logs)
+- [ ] Add Reporting section (monthly summaries, content volume, turnaround metrics)
+
+## Enterprise Platform Upgrade — Phase 7: Publish Governance
+- [ ] Add readiness checklist to projects (hero image, video, thumbnails, metadata, alt text, QA, client approval)
+- [ ] Add readiness progress bar visual
+- [ ] Block publish button until all requirements met
+- [ ] Add rollback snapshot storage

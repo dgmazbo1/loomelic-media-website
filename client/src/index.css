@@ -287,6 +287,16 @@
   color: oklch(0.92 0.28 142);
 }
 
+/* ─── TEXT OUTLINE ──────────────────────────────────────────── */
+.text-outline-white {
+  color: transparent;
+  -webkit-text-stroke: 1.5px oklch(0.96 0 0);
+}
+.text-outline-dark {
+  color: transparent;
+  -webkit-text-stroke: 1.5px oklch(0.07 0 0);
+}
+
 /* ─── MARQUEE ANIMATION ─────────────────────────────────────── */
 @keyframes marquee {
   0% { transform: translateX(0); }
