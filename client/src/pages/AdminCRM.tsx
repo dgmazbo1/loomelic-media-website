@@ -15,6 +15,7 @@ import {
   CheckCircle2, Clock, XCircle, Edit3, ArrowLeft
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import AdminCRMModule from "./AdminCRMModule";
 
 // ─── Tab definitions ──────────────────────────────────────────────────────────
 const TABS = [
@@ -26,6 +27,7 @@ const TABS = [
   { id: "tasks", label: "Tasks", icon: CheckSquare },
   { id: "incidents", label: "Incidents", icon: AlertTriangle },
   { id: "contracts", label: "Contracts", icon: FileText },
+  { id: "interactions", label: "Interactions", icon: Phone },
 ];
 
 const DEALER_STATUS_COLORS: Record<string, string> = {
@@ -796,6 +798,7 @@ export default function AdminCRM() {
         {activeTab === "tasks" && <TasksTab />}
         {activeTab === "incidents" && <IncidentsTab />}
         {activeTab === "contracts" && <ContractsTab />}
+        {activeTab === "interactions" && <AdminCRMModule />}
       </div>
     </div>
   );

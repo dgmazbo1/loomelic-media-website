@@ -46,3 +46,12 @@
 - [x] Vendor Portal Admin: Analytics section
 - [x] Vendor Portal Admin: Settings section
 - [x] Shared: PortalAdminLayout component with black/yellow-green sidebar navigation
+
+## Dealer CRM Module
+- [x] CRM: Add crmInteractions table (call/email/meeting log per contact) to schema
+- [x] CRM: Add status field to crmContacts (active, inactive, prospect, churned)
+- [x] CRM: Add probability field to crmDeals
+- [x] CRM: Build InteractionsTab in AdminCRM with create/list/delete per contact
+- [x] CRM: Enhance ContactsTab with status badge, edit inline, and link to interactions
+- [x] CRM: Enhance DealsTab with Kanban-style pipeline view (Lead → Qualified → Proposal → Negotiation → Closed Won/Lost)
+- [x] CRM: Add CRM section to main /admin sidebar with sub-tabs (Contacts, Deals, Interactions)

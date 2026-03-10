@@ -452,11 +452,12 @@ export async function getAllCrmContacts() {
 
 export async function createCrmContact(data: {
   name: string; email?: string; phone?: string; company?: string;
-  title?: string; contactType?: "lead" | "client" | "partner" | "vendor" | "other"; notes?: string;
+  title?: string; contactType?: "lead" | "client" | "partner" | "vendor" | "other";
+  status?: "prospect" | "active" | "inactive" | "churned"; notes?: string;
 }) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
-  const [result] = await db.insert(crmContacts).values({ ...data, contactType: data.contactType ?? "lead" });
+  const [result] = await db.insert(crmContacts).values({ ...data, contactType: data.contactType ?? "lead", status: data.status ?? "prospect" });
   return (result as { insertId: number }).insertId;
 }
 
@@ -483,11 +484,11 @@ export async function getAllCrmDeals() {
 export async function createCrmDeal(data: {
   title: string; contactId?: number; dealerId?: number;
   stage?: "lead" | "qualified" | "proposal" | "negotiation" | "closed_won" | "closed_lost";
-  value?: number; notes?: string; expectedCloseDate?: string;
+  value?: number; probability?: number; notes?: string; expectedCloseDate?: string;
 }) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
-  const [result] = await db.insert(crmDeals).values({ ...data, stage: data.stage ?? "lead" });
+  const [result] = await db.insert(crmDeals).values({ ...data, stage: data.stage ?? "lead", probability: data.probability ?? 50 });
   return (result as { insertId: number }).insertId;
 }
 

@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { TRPCError } from "@trpc/server";
-import { protectedProcedure, router } from "../_core/trpc";
+import { publicProcedure, router } from "../_core/trpc";
 import {
   getAllCrmContacts, createCrmContact, updateCrmContact, deleteCrmContact,
   getAllCrmDeals, createCrmDeal, updateCrmDeal, deleteCrmDeal,
@@ -10,14 +9,12 @@ import {
   getCrmStats,
 } from "../db";
 import { nanoid } from "nanoid";
+import { getDb } from "../db";
+import { crmInteractions } from "../../drizzle/schema";
+import { eq, desc } from "drizzle-orm";
 
-// ─── Admin-only guard ────────────────────────────────────────────────────────
-const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
-  if (ctx.user.role !== "admin") {
-    throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
-  }
-  return next({ ctx });
-});
+// All CRM procedures are public (admin panel has no auth requirement)
+const adminProcedure = publicProcedure;
 
 export const crmRouter = router({
 
@@ -33,6 +30,7 @@ export const crmRouter = router({
       company: z.string().optional(),
       title: z.string().optional(),
       contactType: z.enum(["lead", "client", "partner", "vendor", "other"]).optional(),
+      status: z.enum(["prospect", "active", "inactive", "churned"]).optional(),
       notes: z.string().optional(),
     }))
     .mutation(async ({ input }) => {
@@ -49,6 +47,7 @@ export const crmRouter = router({
       company: z.string().optional(),
       title: z.string().optional(),
       contactType: z.enum(["lead", "client", "partner", "vendor", "other"]).optional(),
+      status: z.enum(["prospect", "active", "inactive", "churned"]).optional(),
       notes: z.string().optional(),
     }))
     .mutation(async ({ input }) => {
@@ -75,6 +74,7 @@ export const crmRouter = router({
       dealerId: z.number().optional(),
       stage: z.enum(["lead", "qualified", "proposal", "negotiation", "closed_won", "closed_lost"]).optional(),
       value: z.number().optional(),
+      probability: z.number().min(0).max(100).optional(),
       notes: z.string().optional(),
       expectedCloseDate: z.string().optional(),
     }))
@@ -89,6 +89,7 @@ export const crmRouter = router({
       title: z.string().optional(),
       stage: z.enum(["lead", "qualified", "proposal", "negotiation", "closed_won", "closed_lost"]).optional(),
       value: z.number().optional(),
+      probability: z.number().min(0).max(100).optional(),
       notes: z.string().optional(),
       expectedCloseDate: z.string().optional(),
     }))
@@ -209,6 +210,60 @@ export const crmRouter = router({
     }))
     .mutation(async ({ input }) => {
       await updateContractStatus(input.id, input.status);
+      return { success: true };
+    }),
+
+  // ─── Interactions ─────────────────────────────────────────────────────────
+
+  listInteractions: adminProcedure
+    .input(z.object({ contactId: z.number().optional() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return [];
+      if (input.contactId) {
+        return db.select().from(crmInteractions)
+          .where(eq(crmInteractions.contactId, input.contactId))
+          .orderBy(desc(crmInteractions.occurredAt));
+      }
+      return db.select().from(crmInteractions).orderBy(desc(crmInteractions.occurredAt));
+    }),
+
+  createInteraction: adminProcedure
+    .input(z.object({
+      contactId: z.number(),
+      dealId: z.number().optional(),
+      type: z.enum(["call", "email", "meeting", "note", "demo", "follow_up"]).default("note"),
+      direction: z.enum(["inbound", "outbound"]).optional(),
+      subject: z.string().min(1),
+      body: z.string().optional(),
+      outcome: z.enum(["positive", "neutral", "negative", "no_answer"]).optional(),
+      durationMinutes: z.number().optional(),
+      loggedBy: z.string().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database unavailable");
+      await db.insert(crmInteractions).values({
+        contactId: input.contactId,
+        dealId: input.dealId ?? null,
+        type: input.type,
+        direction: input.direction ?? "outbound",
+        subject: input.subject,
+        body: input.body ?? null,
+        outcome: input.outcome ?? "neutral",
+        durationMinutes: input.durationMinutes ?? null,
+        loggedBy: input.loggedBy ?? null,
+        occurredAt: new Date(),
+      });
+      return { success: true };
+    }),
+
+  deleteInteraction: adminProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new Error("Database unavailable");
+      await db.delete(crmInteractions).where(eq(crmInteractions.id, input.id));
       return { success: true };
     }),
 

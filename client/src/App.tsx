@@ -39,6 +39,7 @@ import VendorPortal from "./pages/VendorPortal";
 import DealerAdmin from "./pages/DealerAdmin";
 import VendorAdmin from "./pages/VendorAdmin";
 import AdminCRM from "./pages/AdminCRM";
+import AdminCRMModule from "./pages/AdminCRMModule";
 import VendorSign from "./pages/VendorSign";
 import AdminCreateContract from "./pages/AdminCreateContract";
 
@@ -69,6 +70,7 @@ function Router() {
         {/* Admin panel */}
         <Route path="/admin" component={AdminPage} />
         <Route path="/admin/crm" component={AdminCRM} />
+        <Route path="/admin/crm/dealer" component={AdminCRMModule} />
 
         {/* Portals */}
         <Route path="/dealer" component={DealerPortal} />

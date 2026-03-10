@@ -401,11 +401,11 @@ export const crmContacts = mysqlTable("crm_contacts", {
   company: varchar("company", { length: 256 }),
   title: varchar("title", { length: 128 }),
   contactType: mysqlEnum("contactType", ["lead", "client", "partner", "vendor", "other"]).default("lead").notNull(),
+  status: mysqlEnum("status", ["prospect", "active", "inactive", "churned"]).default("prospect"),
   notes: text("notes"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
-
 export type CrmContact = typeof crmContacts.$inferSelect;
 
 /**
@@ -420,13 +420,13 @@ export const crmDeals = mysqlTable("crm_deals", {
     "lead", "qualified", "proposal", "negotiation", "closed_won", "closed_lost"
   ]).default("lead").notNull(),
   value: int("value"),
+  probability: int("probability").default(50),
   notes: text("notes"),
   expectedCloseDate: varchar("expectedCloseDate", { length: 32 }),
   closedAt: timestamp("closedAt"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
 });
-
 export type CrmDeal = typeof crmDeals.$inferSelect;
 
 /**
@@ -466,3 +466,24 @@ export const crmIncidents = mysqlTable("crm_incidents", {
 });
 
 export type CrmIncident = typeof crmIncidents.$inferSelect;
+
+/**
+ * CRM interactions — call/email/meeting/note log per contact
+ * Tracks every touchpoint with a contact across the sales lifecycle.
+ */
+export const crmInteractions = mysqlTable("crm_interactions", {
+  id: int("id").autoincrement().primaryKey(),
+  contactId: int("contactId").notNull(),
+  dealId: int("dealId"),
+  type: mysqlEnum("type", ["call", "email", "meeting", "note", "demo", "follow_up"]).default("note").notNull(),
+  direction: mysqlEnum("direction", ["inbound", "outbound"]).default("outbound"),
+  subject: varchar("subject", { length: 256 }).notNull(),
+  body: text("body"),
+  outcome: mysqlEnum("outcome", ["positive", "neutral", "negative", "no_answer"]).default("neutral"),
+  durationMinutes: int("durationMinutes"),
+  loggedBy: varchar("loggedBy", { length: 256 }),
+  occurredAt: timestamp("occurredAt").defaultNow().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type CrmInteraction = typeof crmInteractions.$inferSelect;
+export type InsertCrmInteraction = typeof crmInteractions.$inferInsert;
