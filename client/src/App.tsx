@@ -33,12 +33,12 @@ import {
   HeadshotsPage,
 } from "./pages/ServicePages";
 
-// Enterprise pages — SolutionsPage now serves all /services/* verticals too
+// Enterprise pages
 import SolutionsPage from "./pages/SolutionsPage";
 import CaseStudies from "./pages/CaseStudies";
 import ProcessPage from "./pages/ProcessPage";
 
-// Portal + admin pages
+// Project detail pages
 import DealerPortal from "./pages/DealerPortal";
 import VendorPortal from "./pages/VendorPortal";
 import DealerAdmin from "./pages/DealerAdmin";
@@ -59,7 +59,7 @@ import {
   SportsIllustratedPage,
 } from "./pages/ProjectPages";
 
-/** Scrolls to the top of the page on every route change */
+/** Scrolls to the top of the page on every route change — fixes the "scroll to bottom" bug */
 function ScrollToTop() {
   const [location] = useLocation();
   useEffect(() => {
@@ -67,15 +67,8 @@ function ScrollToTop() {
   }, [location]);
   return null;
 }
-
-/** Redirect component — navigates to target on mount */
-function Redirect({ to }: { to: string }) {
-  const [, navigate] = useLocation();
-  useEffect(() => { navigate(to, { replace: true }); }, []);
-  return null;
-}
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <>
       <ScrollToTop />
@@ -99,56 +92,18 @@ function Router() {
         {/* Home */}
         <Route path="/" component={Home} />
 
-        {/* ─── SERVICES — all verticals use SolutionsPage layout ─── */}
-        {/* Main services index */}
-        <Route path="/services" component={AllServicesPage} />
-
-        {/* Dealer Services group — use SolutionsPage with slug-based scroll */}
-        <Route path="/services/dealer" component={DealerServicesOverview} />
-        <Route path="/services/dealerships" component={SolutionsPage} />
-        <Route path="/services/dealer-groups" component={SolutionsPage} />
-        <Route path="/services/enterprise" component={SolutionsPage} />
-        <Route path="/services/crm-video" component={SolutionsPage} />
-
-        {/* Standalone services */}
-        <Route path="/services/events" component={EventCoverageSubpage} />
-        <Route path="/services/headshots" component={HeadshotsSubpage} />
-        <Route path="/services/websites" component={WebsiteBuildingPage} />
-        <Route path="/services/brand" component={BrandStrategyPage} />
-
-        {/* Dealer sub-service detail pages */}
-        <Route path="/services/dealer/01-inventory-photography" component={DealerInventoryPhotographyPage} />
-        <Route path="/services/dealer/02-short-form-reels" component={DealerShortFormReelsPage} />
-        <Route path="/services/dealer/03-walkaround-videos" component={DealerWalkaroundVideosPage} />
-        <Route path="/services/dealer/04-dealership-events" component={DealerEventsPage} />
-        <Route path="/services/dealer/05-crm-intro-videos" component={DealerCRMIntroVideosPage} />
-
-        {/* Legacy service page redirects (keep URLs alive) */}
-        <Route path="/services/automotive-marketing" component={AutomotiveMarketingPage} />
-        <Route path="/services/event-coverage" component={EventCoveragePage} />
-        <Route path="/services/social-media-content" component={SocialMediaContentPage} />
-        <Route path="/services/photography" component={PhotographyPage} />
-        <Route path="/services/brand-strategy" component={BrandStrategyPage} />
-        <Route path="/services/website-redesign" component={WebsiteRedesignPage} />
-
-        {/* ─── PORTFOLIO (replaces Case Studies) ─── */}
-        <Route path="/portfolio" component={CaseStudies} />
-        {/* Legacy /case-studies redirect */}
-        <Route path="/case-studies" component={() => <Redirect to="/portfolio" />} />
-
-        {/* ─── SOLUTIONS — kept alive as redirects to /services/* ─── */}
-        <Route path="/solutions" component={() => <Redirect to="/services" />} />
-        <Route path="/solutions/dealerships" component={() => <Redirect to="/services/dealerships" />} />
-        <Route path="/solutions/dealers" component={() => <Redirect to="/services/dealerships" />} />
-        <Route path="/solutions/dealer-groups" component={() => <Redirect to="/services/dealer-groups" />} />
-        <Route path="/solutions/enterprise" component={() => <Redirect to="/services/enterprise" />} />
-        <Route path="/solutions/events" component={() => <Redirect to="/services/events" />} />
-        <Route path="/solutions/headshots" component={() => <Redirect to="/services/headshots" />} />
-        <Route path="/solutions/websites" component={() => <Redirect to="/services/websites" />} />
-        <Route path="/solutions/crm-video" component={() => <Redirect to="/services/crm-video" />} />
-        <Route path="/solutions/brands" component={() => <Redirect to="/services/brand" />} />
-
-        {/* Process */}
+        {/* Enterprise pages */}
+        <Route path="/solutions" component={SolutionsPage} />
+        <Route path="/solutions/dealerships" component={SolutionsPage} />
+        <Route path="/solutions/dealers" component={SolutionsPage} />
+        <Route path="/solutions/dealer-groups" component={SolutionsPage} />
+        <Route path="/solutions/enterprise" component={SolutionsPage} />
+        <Route path="/solutions/events" component={SolutionsPage} />
+        <Route path="/solutions/headshots" component={SolutionsPage} />
+        <Route path="/solutions/websites" component={SolutionsPage} />
+        <Route path="/solutions/crm-video" component={SolutionsPage} />
+        <Route path="/solutions/brands" component={SolutionsPage} />
+        <Route path="/case-studies" component={CaseStudies} />
         <Route path="/process" component={ProcessPage} />
 
         {/* About / Our Story */}
@@ -157,11 +112,32 @@ function Router() {
         {/* All projects listing */}
         <Route path="/projects" component={AllProjectsPage} />
 
-        {/* Contact & Portfolio gallery */}
-        <Route path="/contact" component={ContactPage} />
-        <Route path="/portfolio/gallery" component={PortfolioPage} />
+        {/* All services listing */}
+        <Route path="/services" component={AllServicesPage} />
 
-        {/* Project detail pages */}
+        {/* Contact & Portfolio */}
+        <Route path="/contact" component={ContactPage} />
+        <Route path="/portfolio" component={PortfolioPage} />
+        {/* Dealer service subpages */}
+        <Route path="/services/dealer" component={DealerServicesOverview} />
+        <Route path="/services/dealer/01-inventory-photography" component={DealerInventoryPhotographyPage} />
+        <Route path="/services/dealer/02-short-form-reels" component={DealerShortFormReelsPage} />
+        <Route path="/services/dealer/03-walkaround-videos" component={DealerWalkaroundVideosPage} />
+        <Route path="/services/dealer/04-dealership-events" component={DealerEventsPage} />
+        <Route path="/services/dealer/05-crm-intro-videos" component={DealerCRMIntroVideosPage} />
+        <Route path="/services/events" component={EventCoverageSubpage} />
+        <Route path="/services/headshots" component={HeadshotsSubpage} />
+        <Route path="/services/websites" component={WebsiteBuildingPage} />
+        {/* Legacy service pages */}
+        <Route path="/services/automotive-marketing" component={AutomotiveMarketingPage} />
+        <Route path="/services/event-coverage" component={EventCoveragePage} />
+        <Route path="/services/social-media-content" component={SocialMediaContentPage} />
+        <Route path="/services/photography" component={PhotographyPage} />
+        <Route path="/services/brand-strategy" component={BrandStrategyPage} />
+        <Route path="/services/website-redesign" component={WebsiteRedesignPage} />
+        <Route path="/services/headshots" component={HeadshotsPage} />
+
+        {/* Project detail pages — also serve as case study detail */}
         <Route path="/projects/lexus-of-henderson" component={LexusHendersonPage} />
         <Route path="/projects/lexus-of-las-vegas" component={LexusLasVegasPage} />
         <Route path="/projects/las-vegas-raiders-tour" component={RaidersPage} />
@@ -172,7 +148,11 @@ function Router() {
         <Route path="/projects/bob-marley-hope-road" component={BobMarleyPage} />
         <Route path="/projects/sports-illustrated-sportsperson-2026" component={SportsIllustratedPage} />
         <Route path="/projects/sports-illustrated-spoty-2026" component={SportsIllustratedPage} />
-        <Route path="/projects/janel-and-nehiamia" component={() => <Redirect to="/portfolio" />} />
+        <Route path="/projects/janel-and-nehiamia" component={() => {
+          const [, navigate] = useLocation();
+          useEffect(() => { navigate("/projects"); }, []);
+          return null;
+        }} />
 
         {/* 404 */}
         <Route path="/404" component={NotFound} />
