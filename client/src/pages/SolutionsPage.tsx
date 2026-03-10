@@ -1,15 +1,34 @@
 /* ============================================================
    SolutionsPage — Enterprise solutions landing page
-   Full page with hero + 4 solution detail sections
+   Handles all /solutions/* sub-routes:
+     /solutions                 → full overview
+     /solutions/dealerships     → scroll to dealers section
+     /solutions/dealer-groups   → scroll to dealer-groups section
+     /solutions/enterprise      → scroll to enterprise section
+     /solutions/events          → scroll to events section
+     /solutions/headshots       → scroll to headshots section
+     /solutions/websites        → scroll to websites section
+     /solutions/crm-video       → scroll to crm-video section
    ============================================================ */
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useLocation } from "wouter";
-import { Building2, Users, Calendar, Briefcase, ArrowRight, CheckCircle } from "lucide-react";
+import {
+  Building2, Users, Globe, Calendar, Camera, Monitor, Video,
+  ArrowRight, CheckCircle,
+} from "lucide-react";
 import Navbar from "@/components/Navbar";
-import { HERO_VIDEOS, LEXUS_HENDERSON, RAIDERS_BLAST } from "@/lib/media";
+import { HERO_VIDEOS, LEXUS_HENDERSON, RAIDERS_BLAST, HERO_GRID_IMAGES } from "@/lib/media";
 
-function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+function AnimFade({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
@@ -27,7 +46,7 @@ function AnimFade({ children, className = "", delay = 0 }: { children: React.Rea
 
 const SOLUTION_SECTIONS = [
   {
-    id: "dealers",
+    id: "dealerships",
     icon: Building2,
     label: "SINGLE-POINT DEALERS",
     title: "DEALER CONTENT\nSYSTEMS",
@@ -67,9 +86,29 @@ const SOLUTION_SECTIONS = [
     video: HERO_VIDEOS.centennialDrone,
   },
   {
+    id: "enterprise",
+    icon: Globe,
+    label: "ENTERPRISE / REGIONAL",
+    title: "ENTERPRISE\nPROGRAMS",
+    desc: "Regional and national content programs for OEM-aligned dealer networks, captive finance groups, and automotive brands that require standardized production at scale.",
+    features: [
+      "OEM-aligned brand standards compliance",
+      "Regional coordinator and dedicated team",
+      "Standardized production across all markets",
+      "Centralized asset management and delivery",
+      "Quarterly strategy reviews and reporting",
+      "National campaign execution",
+      "White-label production available",
+      "Custom SLA and turnaround agreements",
+    ],
+    bestFor: "Regional dealer networks, OEM programs, and national automotive brands.",
+    image: HERO_GRID_IMAGES[0],
+    video: HERO_VIDEOS.droneFiller,
+  },
+  {
     id: "events",
     icon: Calendar,
-    label: "CORPORATE & PRIVATE",
+    label: "EVENTS & ACTIVATIONS",
     title: "EVENT\nCOVERAGE",
     desc: "Full-service photo and video coverage for corporate events, brand activations, concerts, and private gatherings. Multi-camera setups, same-day selects, and fast turnaround.",
     features: [
@@ -87,29 +126,103 @@ const SOLUTION_SECTIONS = [
     video: HERO_VIDEOS.droneFiller,
   },
   {
-    id: "brands",
-    icon: Briefcase,
-    label: "BRANDS & PROFESSIONALS",
-    title: "BRAND\nCONTENT",
-    desc: "Visual identity development, content strategy, website builds, and ongoing content production for brands that need to look premium and convert visitors into customers.",
+    id: "headshots",
+    icon: Camera,
+    label: "HEADSHOTS & TEAM BRANDING",
+    title: "HEADSHOTS &\nPORTRAITS",
+    desc: "Professional headshots, team portraits, and personal branding photography for dealership staff, executives, sales teams, and professionals. Studio-quality results on location.",
     features: [
-      "Brand photography and visual identity",
-      "Website design, build, and optimization",
-      "Content strategy and editorial calendar",
-      "Social media content production",
-      "Professional headshots and portraits",
-      "Product and commercial photography",
-      "Video production and editing",
-      "SEO foundation and lead optimization",
+      "Individual executive and staff headshots",
+      "Team group photography",
+      "Personal branding portrait sessions",
+      "Dealership staff photo days",
+      "LinkedIn and social profile optimization",
+      "Same-day preview selects",
+      "Retouched final deliverables",
+      "Digital and print-ready formats",
     ],
-    bestFor: "Businesses, personal brands, and professionals who need premium visual content.",
-    image: RAIDERS_BLAST.hero,
+    bestFor: "Dealership sales teams, executives, professionals, and personal brands.",
+    image: HERO_GRID_IMAGES[1],
+    video: HERO_VIDEOS.headlight,
+  },
+  {
+    id: "websites",
+    icon: Monitor,
+    label: "WEBSITE DESIGN",
+    title: "PREMIUM WEB\nEXPERIENCES",
+    desc: "Custom website design and development for dealerships, dealer groups, and automotive brands. Built for performance, lead conversion, and premium visual presentation.",
+    features: [
+      "Custom design tailored to your brand",
+      "Mobile-first responsive layouts",
+      "Inventory integration and VDP pages",
+      "Lead capture and CTA optimization",
+      "SEO foundation and performance tuning",
+      "Google Analytics and tracking setup",
+      "Ongoing maintenance and updates",
+      "Fast turnaround — live in weeks, not months",
+    ],
+    bestFor: "Dealerships and brands that need a premium web presence that converts.",
+    image: HERO_GRID_IMAGES[2],
     video: HERO_VIDEOS.websiteVideo,
+  },
+  {
+    id: "crm-video",
+    icon: Video,
+    label: "CRM VIDEO SYSTEMS",
+    title: "CRM INTRO\nVIDEOS",
+    desc: "Personalized video content for dealership CRM systems. Custom intro videos for sales reps, service advisors, and finance managers — proven to increase response rates and appointment shows.",
+    features: [
+      "Individual rep intro videos",
+      "Service advisor and finance manager videos",
+      "CRM platform integration (VinSolutions, DealerSocket, etc.)",
+      "Script writing and coaching",
+      "Professional lighting and audio",
+      "Fast turnaround — same-week delivery",
+      "Batch production for full teams",
+      "Analytics and performance tracking",
+    ],
+    bestFor: "Dealerships using CRM video to increase lead response rates and appointment shows.",
+    image: HERO_GRID_IMAGES[3],
+    video: HERO_VIDEOS.madisonTalkingHead,
   },
 ];
 
+// Map URL slugs to section IDs (handles legacy slugs too)
+const SLUG_TO_ID: Record<string, string> = {
+  dealerships: "dealerships",
+  dealers: "dealerships",
+  "dealer-groups": "dealer-groups",
+  enterprise: "enterprise",
+  events: "events",
+  headshots: "headshots",
+  websites: "websites",
+  "crm-video": "crm-video",
+  brands: "dealerships", // legacy fallback
+};
+
 export default function SolutionsPage() {
-  const [, navigate] = useLocation();
+  const [location, navigate] = useLocation();
+
+  // Extract the slug from the URL path (e.g. /solutions/headshots → headshots)
+  const slug = location.replace(/^\/solutions\/?/, "").split("?")[0].split("#")[0].trim();
+  const targetId = slug ? SLUG_TO_ID[slug] ?? null : null;
+
+  // Scroll to the target section after mount
+  useEffect(() => {
+    if (!targetId) return;
+    const tryScroll = (attempts = 0) => {
+      const el = document.getElementById(targetId);
+      if (el) {
+        // Offset for fixed navbar (~80px)
+        const y = el.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      } else if (attempts < 10) {
+        setTimeout(() => tryScroll(attempts + 1), 150);
+      }
+    };
+    // Small delay to let the page render first
+    setTimeout(() => tryScroll(), 100);
+  }, [targetId]);
 
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)] overflow-x-hidden">
@@ -143,6 +256,14 @@ export default function SolutionsPage() {
                 <a
                   key={s.id}
                   href={`#${s.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const el = document.getElementById(s.id);
+                    if (el) {
+                      const y = el.getBoundingClientRect().top + window.scrollY - 90;
+                      window.scrollTo({ top: y, behavior: "smooth" });
+                    }
+                  }}
                   className="px-4 py-2 rounded-full bg-white/[0.04] border border-white/8 font-body text-xs tracking-widest text-white/40 hover:border-white/20 hover:text-white/60 transition-all"
                 >
                   {s.label}
@@ -164,7 +285,7 @@ export default function SolutionsPage() {
             className={isEven ? "section-light text-[oklch(0.07_0_0)]" : "section-dark"}
           >
             <div className="container py-16 sm:py-24 lg:py-32">
-              <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-start ${!isEven ? "" : ""}`}>
+              <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-start`}>
                 {/* Content side */}
                 <div className={isEven ? "order-1" : "order-1 lg:order-2"}>
                   <AnimFade>
@@ -174,11 +295,13 @@ export default function SolutionsPage() {
                           isEven ? "bg-[oklch(0.07_0_0)]/8" : "bg-white/8"
                         }`}
                       >
-                        <Icon size={18} className={isEven ? "text-[oklch(0.07_0_0)]/60" : "text-white/60"} />
+                        <Icon
+                          className={`w-5 h-5 ${isEven ? "text-[oklch(0.07_0_0)]" : "text-white"}`}
+                        />
                       </div>
                       <span
-                        className={`font-body text-[0.6rem] tracking-widest uppercase ${
-                          isEven ? "text-[oklch(0.5_0_0)]" : "text-white/40"
+                        className={`font-body text-xs tracking-widest ${
+                          isEven ? "text-[oklch(0.07_0_0)]/40" : "text-white/40"
                         }`}
                       >
                         {sol.label}
@@ -188,7 +311,7 @@ export default function SolutionsPage() {
 
                   <AnimFade delay={0.1}>
                     <h2
-                      className={`font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.88] mb-4 whitespace-pre-line ${
+                      className={`font-display text-[clamp(2.5rem,5vw,5rem)] leading-[0.88] mb-6 whitespace-pre-line ${
                         isEven ? "text-[oklch(0.07_0_0)]" : "text-white"
                       }`}
                     >
@@ -199,7 +322,7 @@ export default function SolutionsPage() {
                   <AnimFade delay={0.15}>
                     <p
                       className={`font-body text-sm leading-relaxed mb-8 max-w-lg ${
-                        isEven ? "text-[oklch(0.45_0_0)]" : "text-white/55"
+                        isEven ? "text-[oklch(0.07_0_0)]/60" : "text-white/50"
                       }`}
                     >
                       {sol.desc}
@@ -207,16 +330,17 @@ export default function SolutionsPage() {
                   </AnimFade>
 
                   <AnimFade delay={0.2}>
-                    <ul className="space-y-2.5 mb-8">
-                      {sol.features.map((f, j) => (
-                        <li key={j} className="flex items-start gap-2.5">
+                    <ul className="space-y-2 mb-8">
+                      {sol.features.map((f) => (
+                        <li key={f} className="flex items-start gap-3">
                           <CheckCircle
-                            size={14}
-                            className={`shrink-0 mt-0.5 ${isEven ? "text-[oklch(0.07_0_0)]/30" : "text-lime/60"}`}
+                            className={`w-4 h-4 mt-0.5 shrink-0 ${
+                              isEven ? "text-[oklch(0.07_0_0)]/40" : "text-white/40"
+                            }`}
                           />
                           <span
                             className={`font-body text-sm ${
-                              isEven ? "text-[oklch(0.35_0_0)]" : "text-white/45"
+                              isEven ? "text-[oklch(0.07_0_0)]/70" : "text-white/60"
                             }`}
                           >
                             {f}
@@ -227,38 +351,50 @@ export default function SolutionsPage() {
                   </AnimFade>
 
                   <AnimFade delay={0.25}>
-                    <p
-                      className={`font-body text-xs italic mb-6 ${
-                        isEven ? "text-[oklch(0.55_0_0)]" : "text-white/30"
+                    <div
+                      className={`text-xs font-body tracking-widest mb-8 ${
+                        isEven ? "text-[oklch(0.07_0_0)]/40" : "text-white/30"
                       }`}
                     >
-                      Best for: {sol.bestFor}
-                    </p>
+                      BEST FOR: {sol.bestFor}
+                    </div>
                   </AnimFade>
 
                   <AnimFade delay={0.3}>
                     <button
                       onClick={() => navigate("/contact")}
-                      className={isEven ? "btn-pill-dark text-xs" : "btn-pill-light text-xs"}
+                      className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-body text-xs tracking-widest transition-all ${
+                        isEven
+                          ? "bg-[oklch(0.07_0_0)] text-white hover:bg-[oklch(0.15_0_0)]"
+                          : "bg-white text-[oklch(0.07_0_0)] hover:bg-white/90"
+                      }`}
                     >
-                      GET A PROPOSAL →
+                      GET A PROPOSAL <ArrowRight className="w-3 h-3" />
                     </button>
                   </AnimFade>
                 </div>
 
-                {/* Media side */}
+                {/* Visual side */}
                 <div className={isEven ? "order-2" : "order-2 lg:order-1"}>
-                  <AnimFade delay={0.15}>
-                    <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
-                      <video
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="w-full h-full object-cover"
-                        src={sol.video}
-                        aria-hidden="true"
-                      />
+                  <AnimFade delay={0.1}>
+                    <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-black">
+                      {sol.video ? (
+                        <video
+                          src={sol.video}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          className="w-full h-full object-cover opacity-80"
+                          poster={sol.image}
+                        />
+                      ) : (
+                        <img
+                          src={sol.image}
+                          alt={sol.label}
+                          className="w-full h-full object-cover"
+                        />
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     </div>
                   </AnimFade>

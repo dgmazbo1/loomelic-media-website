@@ -94,9 +94,14 @@ function Router() {
 
         {/* Enterprise pages */}
         <Route path="/solutions" component={SolutionsPage} />
+        <Route path="/solutions/dealerships" component={SolutionsPage} />
         <Route path="/solutions/dealers" component={SolutionsPage} />
         <Route path="/solutions/dealer-groups" component={SolutionsPage} />
+        <Route path="/solutions/enterprise" component={SolutionsPage} />
         <Route path="/solutions/events" component={SolutionsPage} />
+        <Route path="/solutions/headshots" component={SolutionsPage} />
+        <Route path="/solutions/websites" component={SolutionsPage} />
+        <Route path="/solutions/crm-video" component={SolutionsPage} />
         <Route path="/solutions/brands" component={SolutionsPage} />
         <Route path="/case-studies" component={CaseStudies} />
         <Route path="/process" component={ProcessPage} />

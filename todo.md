@@ -124,3 +124,8 @@
 - [ ] Add readiness progress bar visual
 - [ ] Block publish button until all requirements met
 - [ ] Add rollback snapshot storage
+
+## Bug Fixes — Route 404s
+- [x] Fix /solutions/dealerships 404 — add route and page
+- [x] Fix /solutions/headshots 404 — add route and page
+- [x] Audit and fix all /solutions/* sub-routes (dealer-groups, enterprise, events, websites, crm-video)
