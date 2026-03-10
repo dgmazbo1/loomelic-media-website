@@ -56,7 +56,7 @@ export default function HeroSection() {
 
       {/* Main content */}
       <div className="relative z-10 flex-1 flex flex-col justify-end px-5 sm:px-10 lg:px-16 pb-12 sm:pb-20 pt-32">
-        {/* Enterprise positioning label */}
+        {/* Label */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -64,19 +64,18 @@ export default function HeroSection() {
           className="section-label mb-6"
         >
           <span>✦</span>
-          <span>Premium Content Operations Partner</span>
+          <span>Las Vegas &amp; South Florida</span>
         </motion.p>
 
-        {/* Headline — enterprise-forward */}
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-[clamp(3.2rem,10vw,9.5rem)] leading-[0.88] text-white mb-6 max-w-5xl"
         >
-          CONTENT SYSTEMS<br />
-          <span className="text-outline-white">BUILT FOR</span><br />
-          DEALERSHIPS
+          LOOMELIC<br />
+          <span className="text-outline-white">MEDIA</span>
         </motion.h1>
 
         {/* Enterprise subhead */}
@@ -106,11 +105,11 @@ export default function HeroSection() {
             BOOK A DISCOVERY CALL
           </button>
           <button
-            onClick={() => navigate("/case-studies")}
+            onClick={() => navigate("/portfolio")}
             className="text-xs py-3 px-7 font-semibold tracking-widest rounded-full border border-white/30 text-white/80 hover:border-white hover:text-white transition-all duration-200 flex items-center gap-2"
-            aria-label="View case studies"
+            aria-label="View portfolio"
           >
-            VIEW CASE STUDIES <ArrowRight size={13} />
+            VIEW PORTFOLIO <ArrowRight size={13} />
           </button>
         </motion.div>
 

@@ -1,51 +1,37 @@
 /* ============================================================
-   Navbar — Enterprise platform rebuild
-   Desktop: pill nav with Solutions + Services mega-dropdowns,
-            Case Studies, Process, Portals, About, Contact
+   Navbar — Loomelic Media
+   Desktop: pill nav with Services mega-dropdown (all verticals),
+            Portfolio, Process, About, Contact
    Mobile: full-screen overlay with accordion sections
    Preserves: pill group, dark glass, logo offset, lime accent
    ============================================================ */
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import { X, Menu, ChevronDown, ChevronRight, Building2, Users, Globe, Calendar, Camera, Monitor, Video, Plane, Briefcase, Lock } from "lucide-react";
+import { X, Menu, ChevronDown, Building2, Users, Globe, Calendar, Camera, Monitor, Video, Briefcase } from "lucide-react";
 import { useLocation } from "wouter";
 import { LOGO_TRANSPARENT } from "@/lib/media";
 
-/* ─── SOLUTIONS MENU ─────────────────────────────────────── */
-const SOLUTION_ITEMS = [
-  { label: "Dealerships", href: "/solutions/dealerships", icon: Building2, desc: "Single-rooftop content systems" },
-  { label: "Dealer Groups", href: "/solutions/dealer-groups", icon: Users, desc: "Multi-location support" },
-  { label: "Enterprise / Regional", href: "/solutions/enterprise", icon: Globe, desc: "Scalable regional programs" },
-  { label: "Events & Activations", href: "/solutions/events", icon: Calendar, desc: "Full-service event coverage" },
-  { label: "Headshots & Team Branding", href: "/solutions/headshots", icon: Camera, desc: "Professional team portraits" },
-  { label: "Website Design", href: "/solutions/websites", icon: Monitor, desc: "Premium web experiences" },
-  { label: "CRM Video Systems", href: "/solutions/crm-video", icon: Video, desc: "Sales enablement media" },
-];
-
 /* ─── SERVICES MENU ──────────────────────────────────────── */
 const SERVICE_ITEMS = [
-  { label: "Dealer Services", href: "/services/dealer", isGroup: true },
-  { label: "Inventory Photography", href: "/services/dealer/01-inventory-photography", sub: true },
-  { label: "Short-Form Reels", href: "/services/dealer/02-short-form-reels", sub: true },
-  { label: "Walkaround Videos", href: "/services/dealer/03-walkaround-videos", sub: true },
-  { label: "Dealership Events", href: "/services/dealer/04-dealership-events", sub: true },
-  { label: "CRM Intro Videos", href: "/services/dealer/05-crm-intro-videos", sub: true },
-  { label: "Event Coverage", href: "/services/events" },
-  { label: "Headshots", href: "/services/headshots" },
-  { label: "Website Building", href: "/services/websites" },
-  { label: "Drone & Exterior Visuals", href: "/services/drone" },
+  // Dealer Services group
+  { label: "DEALER SERVICES", href: "/services/dealer", isGroup: true, icon: Building2, desc: "Full content operations for dealerships" },
+  { label: "Dealerships", href: "/services/dealerships", icon: Building2, desc: "Single-rooftop content systems", sub: true },
+  { label: "Dealer Groups", href: "/services/dealer-groups", icon: Users, desc: "Multi-location support", sub: true },
+  { label: "Enterprise / Regional", href: "/services/enterprise", icon: Globe, desc: "Scalable regional programs", sub: true },
+  { label: "CRM Video Systems", href: "/services/crm-video", icon: Video, desc: "Sales enablement media", sub: true },
+  // Standalone services
+  { label: "EVENT COVERAGE", href: "/services/events", icon: Calendar, desc: "Corporate & private events", isGroup: true },
+  { label: "PREMIUM WEB SERVICES", href: "/services/websites", icon: Monitor, desc: "Custom dealership websites", isGroup: true },
+  { label: "HEADSHOTS & TEAM BRANDING", href: "/services/headshots", icon: Camera, desc: "Professional team portraits", isGroup: true },
+  { label: "BRAND CONTENT", href: "/services/brand", icon: Briefcase, desc: "Visual identity & strategy", isGroup: true },
 ];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [mSolutionsOpen, setMSolutionsOpen] = useState(false);
   const [mServicesOpen, setMServicesOpen] = useState(false);
-  const [mPortalsOpen, setMPortalsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location, navigate] = useLocation();
-  const solTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const svcTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -60,14 +46,12 @@ export default function Navbar() {
   }, [menuOpen]);
 
   useEffect(() => {
-    setSolutionsOpen(false);
     setServicesOpen(false);
     setMenuOpen(false);
   }, [location]);
 
   const goTo = (href: string) => {
     setMenuOpen(false);
-    setSolutionsOpen(false);
     setServicesOpen(false);
     navigate(href);
   };
@@ -81,12 +65,8 @@ export default function Navbar() {
     }
   };
 
-  /* Hover handlers for Solutions */
-  const handleSolEnter = () => { if (solTimerRef.current) clearTimeout(solTimerRef.current); setSolutionsOpen(true); setServicesOpen(false); };
-  const handleSolLeave = () => { solTimerRef.current = setTimeout(() => setSolutionsOpen(false), 200); };
-
   /* Hover handlers for Services */
-  const handleSvcEnter = () => { if (svcTimerRef.current) clearTimeout(svcTimerRef.current); setServicesOpen(true); setSolutionsOpen(false); };
+  const handleSvcEnter = () => { if (svcTimerRef.current) clearTimeout(svcTimerRef.current); setServicesOpen(true); };
   const handleSvcLeave = () => { svcTimerRef.current = setTimeout(() => setServicesOpen(false), 200); };
 
   const pillBase = "px-3.5 py-1.5 rounded-full text-[0.68rem] font-semibold tracking-[0.1em] transition-all duration-200";
@@ -118,50 +98,6 @@ export default function Navbar() {
 
           {/* Desktop nav — pill group */}
           <div className="hidden xl:flex items-center gap-0.5 bg-[oklch(1_0_0/0.06)] backdrop-blur-sm border border-[oklch(1_0_0/0.08)] rounded-full px-2 py-1.5">
-            {/* Solutions dropdown */}
-            <div className="relative" onMouseEnter={handleSolEnter} onMouseLeave={handleSolLeave}>
-              <button
-                onClick={() => goTo("/solutions/dealerships")}
-                className={`flex items-center gap-1 ${pillBase} ${location.startsWith("/solutions") ? pillActive : pillIdle}`}
-              >
-                SOLUTIONS <ChevronDown size={11} className={`transition-transform duration-200 ${solutionsOpen ? "rotate-180" : ""}`} />
-              </button>
-              <AnimatePresence>
-                {solutionsOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.97 }}
-                    transition={{ duration: 0.18 }}
-                    className="absolute top-full left-0 mt-3 w-[320px] bg-[oklch(0.08_0_0)] border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
-                    onMouseEnter={handleSolEnter}
-                    onMouseLeave={handleSolLeave}
-                  >
-                    <div className="px-5 py-3 border-b border-white/6">
-                      <p className="font-body text-[0.6rem] tracking-[0.15em] text-white/30 uppercase">Solutions by vertical</p>
-                    </div>
-                    {SOLUTION_ITEMS.map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <button
-                          key={item.href}
-                          onClick={() => goTo(item.href)}
-                          className={`w-full text-left px-5 py-3 flex items-center gap-3 border-b border-white/5 last:border-0 transition-colors duration-150 hover:bg-white/6 ${location === item.href ? "bg-white/8" : ""}`}
-                        >
-                          <div className="w-8 h-8 rounded-lg bg-white/6 flex items-center justify-center shrink-0">
-                            <Icon size={14} className="text-white/50" />
-                          </div>
-                          <div>
-                            <p className="font-semibold text-[0.7rem] tracking-[0.08em] text-white/80">{item.label.toUpperCase()}</p>
-                            <p className="font-body text-[0.6rem] text-white/35 mt-0.5">{item.desc}</p>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
 
             {/* Services dropdown */}
             <div className="relative" onMouseEnter={handleSvcEnter} onMouseLeave={handleSvcLeave}>
@@ -178,35 +114,53 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.97 }}
                     transition={{ duration: 0.18 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-64 bg-[oklch(0.08_0_0)] border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+                    className="absolute top-full left-0 mt-3 w-[360px] bg-[oklch(0.08_0_0)] border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
                     onMouseEnter={handleSvcEnter}
                     onMouseLeave={handleSvcLeave}
                   >
-                    {SERVICE_ITEMS.map((item) => (
-                      <button
-                        key={item.href}
-                        onClick={() => goTo(item.href)}
-                        className={`w-full text-left border-b border-white/5 last:border-0 transition-colors duration-150 ${
-                          'sub' in item && item.sub
-                            ? 'px-6 py-2 text-[0.63rem] tracking-[0.08em]'
-                            : 'px-5 py-3 text-[0.7rem] tracking-[0.1em]'
-                        } font-semibold ${
-                          'isGroup' in item && item.isGroup
-                            ? 'text-white/80 hover:text-white hover:bg-white/8'
-                            : 'sub' in item && item.sub
-                              ? 'text-white/40 hover:text-white/70 hover:bg-white/5'
-                              : 'text-white/60 hover:text-white hover:bg-white/8'
-                        } ${location === item.href || location.startsWith(item.href + '/') ? 'text-white bg-white/10' : ''}`}
-                      >
-                        {'sub' in item && item.sub ? `↳ ${item.label.toUpperCase()}` : item.label.toUpperCase()}
-                      </button>
-                    ))}
+                    <div className="px-5 py-3 border-b border-white/6">
+                      <p className="font-body text-[0.6rem] tracking-[0.15em] text-white/30 uppercase">All Services</p>
+                    </div>
+                    {SERVICE_ITEMS.map((item) => {
+                      const Icon = item.icon;
+                      const isGroup = 'isGroup' in item && item.isGroup;
+                      const isSub = 'sub' in item && item.sub;
+                      return (
+                        <button
+                          key={item.href}
+                          onClick={() => goTo(item.href)}
+                          className={`w-full text-left border-b border-white/5 last:border-0 transition-colors duration-150 hover:bg-white/6 ${
+                            location === item.href || location.startsWith(item.href + '/') ? "bg-white/8" : ""
+                          } ${isSub ? "pl-12 pr-5 py-2.5" : "px-5 py-3"}`}
+                        >
+                          {isSub ? (
+                            <div className="flex items-center gap-2">
+                              <Icon size={12} className="text-white/25 shrink-0" />
+                              <div>
+                                <p className="font-semibold text-[0.63rem] tracking-[0.08em] text-white/55">{item.label.toUpperCase()}</p>
+                                <p className="font-body text-[0.58rem] text-white/25 mt-0.5">{item.desc}</p>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded-lg bg-white/6 flex items-center justify-center shrink-0">
+                                <Icon size={14} className="text-white/50" />
+                              </div>
+                              <div>
+                                <p className="font-semibold text-[0.7rem] tracking-[0.08em] text-white/80">{item.label}</p>
+                                <p className="font-body text-[0.6rem] text-white/35 mt-0.5">{item.desc}</p>
+                              </div>
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            <button onClick={() => goTo("/case-studies")} className={`${pillBase} ${location.startsWith("/case-studies") ? pillActive : pillIdle}`}>CASE STUDIES</button>
+            <button onClick={() => goTo("/portfolio")} className={`${pillBase} ${location.startsWith("/portfolio") || location.startsWith("/case-studies") ? pillActive : pillIdle}`}>PORTFOLIO</button>
             <button onClick={() => goTo("/process")} className={`${pillBase} ${location === "/process" ? pillActive : pillIdle}`}>PROCESS</button>
             <button onClick={() => goTo("/about")} className={`${pillBase} ${location === "/about" ? pillActive : pillIdle}`}>ABOUT</button>
             <button onClick={() => goTo("/contact")} className={`${pillBase} ${location === "/contact" ? pillActive : pillIdle}`}>CONTACT</button>
@@ -278,15 +232,16 @@ export default function Navbar() {
 
             {/* Nav links */}
             <div className="flex-1 flex flex-col px-8 gap-0 overflow-y-auto py-6">
-              {/* Solutions accordion */}
+              {/* Services accordion */}
               <MobileAccordion
-                label="SOLUTIONS"
-                open={mSolutionsOpen}
-                toggle={() => setMSolutionsOpen(!mSolutionsOpen)}
+                label="SERVICES"
+                open={mServicesOpen}
+                toggle={() => setMServicesOpen(!mServicesOpen)}
                 delay={0}
               >
-                {SOLUTION_ITEMS.map((item, i) => {
+                {SERVICE_ITEMS.map((item, i) => {
                   const Icon = item.icon;
+                  const isSub = 'sub' in item && item.sub;
                   return (
                     <motion.button
                       key={item.href}
@@ -294,41 +249,21 @@ export default function Navbar() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.04 }}
                       onClick={() => goTo(item.href)}
-                      className="flex items-center gap-3 text-left py-3 text-white/60 hover:text-white transition-colors"
+                      className={`flex items-center gap-3 text-left py-2.5 transition-colors ${
+                        isSub ? "pl-6 text-white/45 hover:text-white/70" : "text-white/70 hover:text-white"
+                      }`}
                     >
-                      <Icon size={14} className="text-white/30 shrink-0" />
-                      <span className="font-body text-sm tracking-widest uppercase">{item.label}</span>
+                      <Icon size={isSub ? 12 : 14} className="text-white/30 shrink-0" />
+                      <span className={`font-body tracking-widest uppercase ${isSub ? "text-xs" : "text-sm"}`}>{item.label}</span>
                     </motion.button>
                   );
                 })}
               </MobileAccordion>
 
-              {/* Services accordion */}
-              <MobileAccordion
-                label="SERVICES"
-                open={mServicesOpen}
-                toggle={() => setMServicesOpen(!mServicesOpen)}
-                delay={0.05}
-              >
-                {SERVICE_ITEMS.map((item, i) => (
-                  <motion.button
-                    key={item.href}
-                    initial={{ opacity: 0, x: -16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04 }}
-                    onClick={() => goTo(item.href)}
-                    className="text-left py-2.5 text-white/60 hover:text-white font-body text-sm tracking-widest uppercase transition-colors"
-                  >
-                    {'sub' in item && item.sub ? `↳ ${item.label}` : item.label}
-                  </motion.button>
-                ))}
-              </MobileAccordion>
-
               {/* Direct links */}
               {[
-                { label: "CASE STUDIES", href: "/case-studies" },
-                { label: "PROCESS", href: "/process" },
                 { label: "PORTFOLIO", href: "/portfolio" },
+                { label: "PROCESS", href: "/process" },
                 { label: "OUR STORY", href: "/about" },
                 { label: "CONTACT", href: "/contact" },
               ].map((link, i) => (
@@ -337,7 +272,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -30 }}
-                  transition={{ duration: 0.4, delay: 0.15 + i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.4, delay: 0.1 + i * 0.05, ease: [0.16, 1, 0.3, 1] }}
                   onClick={() => goTo(link.href)}
                   className="text-left py-4 border-b border-white/6 group"
                 >

@@ -127,7 +127,7 @@ export default function CaseStudies() {
         <div className="container">
           <AnimFade>
             <p className="section-label text-white/40 mb-6">
-              <span>✦</span><span>CASE STUDIES —</span>
+              <span>✦</span><span>PORTFOLIO —</span>
             </p>
           </AnimFade>
           <AnimFade delay={0.1}>
@@ -209,7 +209,7 @@ export default function CaseStudies() {
                     </h3>
 
                     <div className="flex items-center gap-2 font-body text-xs text-white/40 group-hover:text-white transition-colors">
-                      <span className="tracking-widest">VIEW CASE STUDY</span>
+                      <span className="tracking-widest">VIEW PROJECT</span>
                       <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
