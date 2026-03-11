@@ -156,3 +156,9 @@
 - [x] Fix VendorAdmin: all sidebar nav links returning 404
 - [x] Audit and fix all broken links across entire site
 - [x] Verify every button and nav item resolves to a valid route
+
+## Navbar Cleanup (Mar 11)
+- [x] Remove Solutions tab from desktop and mobile nav
+- [x] Remove Drone / Exterior Visuals from Services menu
+- [x] Convert Dealer Services into a flyout sub-menu under Services (not a flat list)
+- [x] Clean up Services mega-menu layout and hierarchy
