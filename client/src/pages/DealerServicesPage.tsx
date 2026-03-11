@@ -1,24 +1,24 @@
 /* ============================================================
-   SolutionsPage — Enterprise solutions landing page
-   Handles all /solutions/* sub-routes:
-     /solutions                 → full overview
-     /solutions/dealerships     → scroll to dealers section
-     /solutions/dealer-groups   → scroll to dealer-groups section
-     /solutions/enterprise      → scroll to enterprise section
-     /solutions/events          → scroll to events section
-     /solutions/headshots       → scroll to headshots section
-     /solutions/websites        → scroll to websites section
-     /solutions/crm-video       → scroll to crm-video section
+   DealerServicesPage — Dealer-specific verticals
+   Moved from SolutionsPage — exact same section format,
+   photos, videos, and content. No changes.
+   
+   Handles routes:
+     /services/dealer-services                → full overview
+     /services/dealer-services/dealerships    → scroll to dealerships
+     /services/dealer-services/dealer-groups  → scroll to dealer-groups
+     /services/dealer-services/headshots      → scroll to headshots
+     /services/dealer-services/crm-video      → scroll to crm-video
    ============================================================ */
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { useLocation } from "wouter";
 import {
-  Globe, Calendar, Monitor,
+  Building2, Users, Camera, Video,
   ArrowRight, CheckCircle,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import { HERO_VIDEOS, LEXUS_HENDERSON, RAIDERS_BLAST, HERO_GRID_IMAGES } from "@/lib/media";
+import { HERO_VIDEOS, LEXUS_HENDERSON, HERO_GRID_IMAGES } from "@/lib/media";
 
 function AnimFade({
   children,
@@ -44,81 +44,103 @@ function AnimFade({
   );
 }
 
-const SOLUTION_SECTIONS = [
+/* ─── SECTIONS — exact same data as was in SolutionsPage ─── */
+const DEALER_SECTIONS = [
   {
-    id: "enterprise",
-    icon: Globe,
-    label: "ENTERPRISE / REGIONAL",
-    title: "ENTERPRISE\nPROGRAMS",
-    desc: "Regional and national content programs for OEM-aligned dealer networks, captive finance groups, and automotive brands that require standardized production at scale.",
+    id: "dealerships",
+    icon: Building2,
+    label: "SINGLE-POINT DEALERS",
+    title: "DEALER CONTENT\nSYSTEMS",
+    desc: "Structured content operations built specifically for automotive dealerships. Monthly retainers with consistent turnaround — inventory photography, walkaround videos, social reels, event coverage, and staff headshots.",
     features: [
-      "OEM-aligned brand standards compliance",
-      "Regional coordinator and dedicated team",
-      "Standardized production across all markets",
-      "Centralized asset management and delivery",
-      "Quarterly strategy reviews and reporting",
-      "National campaign execution",
-      "White-label production available",
-      "Custom SLA and turnaround agreements",
+      "Lot & inventory photography (new + pre-owned)",
+      "Walkaround and delivery videos",
+      "Short-form social media reels",
+      "Dealership event coverage",
+      "Staff headshots and team photography",
+      "Drone and exterior visuals",
+      "CRM intro videos for sales teams",
+      "Monthly content calendar and scheduling",
     ],
-    bestFor: "Regional dealer networks, OEM programs, and national automotive brands.",
-    image: HERO_GRID_IMAGES[0],
-    video: HERO_VIDEOS.droneFiller,
+    bestFor: "Single-point dealerships looking for a consistent, reliable content partner.",
+    image: LEXUS_HENDERSON.hero,
+    video: HERO_VIDEOS.lexusRoll,
   },
   {
-    id: "events",
-    icon: Calendar,
-    label: "EVENTS & ACTIVATIONS",
-    title: "EVENT\nCOVERAGE",
-    desc: "Full-service photo and video coverage for corporate events, brand activations, concerts, and private gatherings. Multi-camera setups, same-day selects, and fast turnaround.",
+    id: "dealer-groups",
+    icon: Users,
+    label: "MULTI-ROOFTOP GROUPS",
+    title: "DEALER GROUP\nOPERATIONS",
+    desc: "Scaled content operations across multiple rooftops. Centralized creative direction with location-specific execution — one team, one brand standard, every location.",
     features: [
-      "Multi-camera photo and video coverage",
-      "Same-day selects and recap reels",
-      "Highlight films and sizzle reels",
-      "Speaker and panel documentation",
-      "VIP and backstage coverage",
-      "Social media content packages",
-      "Post-event galleries and delivery",
-      "On-site editing and live posting",
+      "Multi-location content coordination",
+      "Brand consistency system across rooftops",
+      "Centralized asset library and delivery",
+      "Group-level reporting and analytics",
+      "Dedicated account manager per group",
+      "Priority scheduling for seasonal campaigns",
+      "Cross-location event coverage",
+      "Scalable retainer pricing",
     ],
-    bestFor: "Corporate events, conferences, brand activations, concerts, and private gatherings.",
-    image: RAIDERS_BLAST.hero,
-    video: HERO_VIDEOS.droneFiller,
+    bestFor: "Dealer groups with 2–20+ rooftops that need consistent brand content at scale.",
+    image: LEXUS_HENDERSON.hero,
+    video: HERO_VIDEOS.centennialDrone,
   },
   {
-    id: "websites",
-    icon: Monitor,
-    label: "WEBSITE DESIGN",
-    title: "PREMIUM WEB\nEXPERIENCES",
-    desc: "Custom website design and development for dealerships, dealer groups, and automotive brands. Built for performance, lead conversion, and premium visual presentation.",
+    id: "headshots",
+    icon: Camera,
+    label: "HEADSHOTS & TEAM BRANDING",
+    title: "HEADSHOTS &\nPORTRAITS",
+    desc: "Professional headshots, team portraits, and personal branding photography for dealership staff, executives, sales teams, and professionals. Studio-quality results on location.",
     features: [
-      "Custom design tailored to your brand",
-      "Mobile-first responsive layouts",
-      "Inventory integration and VDP pages",
-      "Lead capture and CTA optimization",
-      "SEO foundation and performance tuning",
-      "Google Analytics and tracking setup",
-      "Ongoing maintenance and updates",
-      "Fast turnaround — live in weeks, not months",
+      "Individual executive and staff headshots",
+      "Team group photography",
+      "Personal branding portrait sessions",
+      "Dealership staff photo days",
+      "LinkedIn and social profile optimization",
+      "Same-day preview selects",
+      "Retouched final deliverables",
+      "Digital and print-ready formats",
     ],
-    bestFor: "Dealerships and brands that need a premium web presence that converts.",
-    image: HERO_GRID_IMAGES[2],
-    video: HERO_VIDEOS.websiteVideo,
+    bestFor: "Dealership sales teams, executives, professionals, and personal brands.",
+    image: HERO_GRID_IMAGES[1],
+    video: HERO_VIDEOS.headlight,
+  },
+  {
+    id: "crm-video",
+    icon: Video,
+    label: "CRM VIDEO SYSTEMS",
+    title: "CRM INTRO\nVIDEOS",
+    desc: "Personalized video content for dealership CRM systems. Custom intro videos for sales reps, service advisors, and finance managers — proven to increase response rates and appointment shows.",
+    features: [
+      "Individual rep intro videos",
+      "Service advisor and finance manager videos",
+      "CRM platform integration (VinSolutions, DealerSocket, etc.)",
+      "Script writing and coaching",
+      "Professional lighting and audio",
+      "Fast turnaround — same-week delivery",
+      "Batch production for full teams",
+      "Analytics and performance tracking",
+    ],
+    bestFor: "Dealerships using CRM video to increase lead response rates and appointment shows.",
+    image: HERO_GRID_IMAGES[3],
+    video: HERO_VIDEOS.madisonTalkingHead,
   },
 ];
 
 // Map URL slugs to section IDs
 const SLUG_TO_ID: Record<string, string> = {
-  enterprise: "enterprise",
-  events: "events",
-  websites: "websites",
+  dealerships: "dealerships",
+  "dealer-groups": "dealer-groups",
+  headshots: "headshots",
+  "crm-video": "crm-video",
 };
 
-export default function SolutionsPage() {
+export default function DealerServicesPage() {
   const [location, navigate] = useLocation();
 
-  // Extract the slug from the URL path (e.g. /solutions/headshots → headshots)
-  const slug = location.replace(/^\/solutions\/?/, "").split("?")[0].split("#")[0].trim();
+  // Extract the slug from the URL path (e.g. /services/dealer-services/headshots → headshots)
+  const slug = location.replace(/^\/services\/dealer-services\/?/, "").split("?")[0].split("#")[0].trim();
   const targetId = slug ? SLUG_TO_ID[slug] ?? null : null;
 
   // Scroll to the target section after mount
@@ -147,26 +169,26 @@ export default function SolutionsPage() {
         <div className="container">
           <AnimFade>
             <p className="section-label text-white/40 mb-6">
-              <span>✦</span><span>SOLUTIONS —</span>
+              <span>✦</span><span>DEALER SERVICES —</span>
             </p>
           </AnimFade>
           <AnimFade delay={0.1}>
             <h1 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-white mb-6">
-              CONTENT<br />
-              <span className="text-outline-white">SOLUTIONS</span>
+              DEALER<br />
+              <span className="text-outline-white">SERVICES</span>
             </h1>
           </AnimFade>
           <AnimFade delay={0.2}>
             <p className="font-body text-white/50 text-base sm:text-lg max-w-xl leading-relaxed mb-8">
-              Structured content operations for dealerships, dealer groups,
-              events, and brands. Choose the solution that fits your business.
+              Content operations built specifically for automotive dealerships and dealer groups.
+              Inventory photography, walkaround videos, headshots, CRM video, and more.
             </p>
           </AnimFade>
 
           {/* Quick nav */}
           <AnimFade delay={0.3}>
             <div className="flex flex-wrap gap-2">
-              {SOLUTION_SECTIONS.map((s) => (
+              {DEALER_SECTIONS.map((s) => (
                 <a
                   key={s.id}
                   href={`#${s.id}`}
@@ -188,8 +210,8 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      {/* Solution sections */}
-      {SOLUTION_SECTIONS.map((sol, idx) => {
+      {/* Dealer service sections — exact same rendering as SolutionsPage */}
+      {DEALER_SECTIONS.map((sol, idx) => {
         const Icon = sol.icon;
         const isEven = idx % 2 === 0;
         return (
@@ -324,13 +346,13 @@ export default function SolutionsPage() {
         <div className="container py-16 sm:py-24 text-center">
           <AnimFade>
             <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.88] text-white mb-6">
-              NOT SURE WHICH<br />
-              <span className="text-outline-white">SOLUTION?</span>
+              READY TO<br />
+              <span className="text-outline-white">GET STARTED?</span>
             </h2>
           </AnimFade>
           <AnimFade delay={0.1}>
             <p className="font-body text-white/50 text-sm max-w-md mx-auto mb-8">
-              Book a 30-minute discovery call. We'll learn about your business and recommend the right content solution.
+              Book a 30-minute discovery call. We'll learn about your dealership and recommend the right content package.
             </p>
           </AnimFade>
           <AnimFade delay={0.2}>

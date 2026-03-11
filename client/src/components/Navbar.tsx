@@ -11,27 +11,24 @@ import { X, Menu, ChevronDown, ChevronRight, Building2, Users, Globe, Calendar, 
 import { useLocation } from "wouter";
 import { LOGO_TRANSPARENT } from "@/lib/media";
 
-/* ─── SOLUTIONS MENU ─────────────────────────────────────── */
+/* ─── SOLUTIONS MENU (Enterprise / Regional, Events, Website Design) ─── */
 const SOLUTION_ITEMS = [
-  { label: "Dealerships", href: "/solutions/dealerships", icon: Building2, desc: "Single-rooftop content systems" },
-  { label: "Dealer Groups", href: "/solutions/dealer-groups", icon: Users, desc: "Multi-location support" },
   { label: "Enterprise / Regional", href: "/solutions/enterprise", icon: Globe, desc: "Scalable regional programs" },
   { label: "Events & Activations", href: "/solutions/events", icon: Calendar, desc: "Full-service event coverage" },
-  { label: "Headshots & Team Branding", href: "/solutions/headshots", icon: Camera, desc: "Professional team portraits" },
   { label: "Website Design", href: "/solutions/websites", icon: Monitor, desc: "Premium web experiences" },
-  { label: "CRM Video Systems", href: "/solutions/crm-video", icon: Video, desc: "Sales enablement media" },
 ];
 
 /* ─── SERVICES MENU ──────────────────────────────────────── */
 const SERVICE_ITEMS = [
-  { label: "Dealer Services", href: "/services/dealer", isGroup: true },
-  { label: "Inventory Photography", href: "/services/dealer/01-inventory-photography", sub: true },
-  { label: "Short-Form Reels", href: "/services/dealer/02-short-form-reels", sub: true },
-  { label: "Walkaround Videos", href: "/services/dealer/03-walkaround-videos", sub: true },
-  { label: "Dealership Events", href: "/services/dealer/04-dealership-events", sub: true },
-  { label: "CRM Intro Videos", href: "/services/dealer/05-crm-intro-videos", sub: true },
+  { label: "Dealer Services", href: "/services/dealer-services", isGroup: true },
+  { label: "Dealerships", href: "/services/dealer-services/dealerships", sub: true },
+  { label: "Dealer Groups", href: "/services/dealer-services/dealer-groups", sub: true },
+  { label: "Headshots & Team Branding", href: "/services/dealer-services/headshots", sub: true },
+  { label: "CRM Video Systems", href: "/services/dealer-services/crm-video", sub: true },
+  { label: "Inventory Photography", href: "/services/dealer/01-inventory-photography" },
+  { label: "Short-Form Reels", href: "/services/dealer/02-short-form-reels" },
+  { label: "Walkaround Videos", href: "/services/dealer/03-walkaround-videos" },
   { label: "Event Coverage", href: "/services/events" },
-  { label: "Headshots", href: "/services/headshots" },
   { label: "Website Building", href: "/services/websites" },
   { label: "Drone & Exterior Visuals", href: "/services/drone" },
 ];

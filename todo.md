@@ -129,3 +129,15 @@
 - [x] Fix /solutions/dealerships 404 — add route and page
 - [x] Fix /solutions/headshots 404 — add route and page
 - [x] Audit and fix all /solutions/* sub-routes (dealer-groups, enterprise, events, websites, crm-video)
+
+## Move Dealer Verticals to Services (Mar 10)
+- [x] Move Dealerships section from Solutions to Dealer Services under Services
+- [x] Move Dealer Groups section from Solutions to Dealer Services under Services
+- [x] Move Headshots section from Solutions to Dealer Services under Services
+- [x] Move CRM Video section from Solutions to Dealer Services under Services
+- [x] Keep Premium Web Services, Event Coverage, Enterprise/Regional, Website Design under Solutions
+- [x] Add Dealer Services sub-section in Services mega-menu in Navbar
+- [x] Remove moved items from Solutions mega-menu in Navbar
+- [x] Create /services/dealer-services page with exact same section format/photos/videos
+- [x] Add routes for /services/dealer-services/* paths
+- [x] Preserve all section content exactly as-is — no changes to text, photos, or videos

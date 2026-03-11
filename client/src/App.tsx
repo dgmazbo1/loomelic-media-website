@@ -37,6 +37,7 @@ import {
 import SolutionsPage from "./pages/SolutionsPage";
 import CaseStudies from "./pages/CaseStudies";
 import ProcessPage from "./pages/ProcessPage";
+import DealerServicesPage from "./pages/DealerServicesPage";
 
 // Project detail pages
 import DealerPortal from "./pages/DealerPortal";
@@ -92,17 +93,26 @@ function Router() {
         {/* Home */}
         <Route path="/" component={Home} />
 
-        {/* Enterprise pages */}
+        {/* Solutions pages (Enterprise, Events, Websites) */}
         <Route path="/solutions" component={SolutionsPage} />
-        <Route path="/solutions/dealerships" component={SolutionsPage} />
-        <Route path="/solutions/dealers" component={SolutionsPage} />
-        <Route path="/solutions/dealer-groups" component={SolutionsPage} />
         <Route path="/solutions/enterprise" component={SolutionsPage} />
         <Route path="/solutions/events" component={SolutionsPage} />
-        <Route path="/solutions/headshots" component={SolutionsPage} />
         <Route path="/solutions/websites" component={SolutionsPage} />
-        <Route path="/solutions/crm-video" component={SolutionsPage} />
-        <Route path="/solutions/brands" component={SolutionsPage} />
+
+        {/* Dealer Services pages (moved from Solutions) */}
+        <Route path="/services/dealer-services" component={DealerServicesPage} />
+        <Route path="/services/dealer-services/dealerships" component={DealerServicesPage} />
+        <Route path="/services/dealer-services/dealer-groups" component={DealerServicesPage} />
+        <Route path="/services/dealer-services/headshots" component={DealerServicesPage} />
+        <Route path="/services/dealer-services/crm-video" component={DealerServicesPage} />
+
+        {/* Legacy redirects for old /solutions/* dealer routes */}
+        <Route path="/solutions/dealerships">{() => { const [,n] = useLocation(); useEffect(() => { n("/services/dealer-services/dealerships"); }, []); return null; }}</Route>
+        <Route path="/solutions/dealer-groups">{() => { const [,n] = useLocation(); useEffect(() => { n("/services/dealer-services/dealer-groups"); }, []); return null; }}</Route>
+        <Route path="/solutions/headshots">{() => { const [,n] = useLocation(); useEffect(() => { n("/services/dealer-services/headshots"); }, []); return null; }}</Route>
+        <Route path="/solutions/crm-video">{() => { const [,n] = useLocation(); useEffect(() => { n("/services/dealer-services/crm-video"); }, []); return null; }}</Route>
+        <Route path="/solutions/brands">{() => { const [,n] = useLocation(); useEffect(() => { n("/services/dealer-services/dealerships"); }, []); return null; }}</Route>
+        <Route path="/solutions/dealers">{() => { const [,n] = useLocation(); useEffect(() => { n("/services/dealer-services/dealerships"); }, []); return null; }}</Route>
         <Route path="/case-studies" component={CaseStudies} />
         <Route path="/process" component={ProcessPage} />
 
