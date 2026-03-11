@@ -162,3 +162,7 @@
 - [x] Remove Drone / Exterior Visuals from Services menu
 - [x] Convert Dealer Services into a flyout sub-menu under Services (not a flat list)
 - [x] Clean up Services mega-menu layout and hierarchy
+
+## Navbar Portal Buttons Removal (Mar 11)
+- [x] Remove DEALER CRM (yellow) button from top navbar
+- [x] Remove VENDOR (purple) button from top navbar

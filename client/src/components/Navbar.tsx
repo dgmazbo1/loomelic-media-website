@@ -223,22 +223,7 @@ export default function Navbar() {
 
           {/* Right: Portal Buttons + CTA + Hamburger */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <div className="hidden xl:flex items-center gap-2">
-              <button
-                onClick={() => goTo("/crm")}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.63rem] font-bold tracking-[0.1em] bg-yellow-500/15 border border-yellow-500/30 text-yellow-300 hover:bg-yellow-500/25 hover:text-yellow-200 transition-all duration-200"
-              >
-                <Building2 size={12} />
-                DEALER CRM
-              </button>
-              <button
-                onClick={() => goTo("/vendor")}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.63rem] font-bold tracking-[0.1em] bg-purple-500/15 border border-purple-500/30 text-purple-300 hover:bg-purple-500/25 hover:text-purple-200 transition-all duration-200"
-              >
-                <Camera size={12} />
-                VENDOR
-              </button>
-            </div>
+
             <button
               onClick={() => goTo("/contact")}
               className="hidden sm:flex btn-pill-light text-xs py-2 px-5"
@@ -354,30 +339,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Portal buttons in mobile menu */}
-            <div className="px-8 py-5 border-t border-white/8 flex flex-col gap-3">
-              <p className="font-body text-[0.6rem] text-white/30 tracking-[0.15em] uppercase mb-1">Client Portals</p>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={() => goTo("/crm")}
-                  className="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-yellow-500/10 border border-yellow-500/25 text-yellow-300 hover:bg-yellow-500/20 transition-all duration-200"
-                >
-                  <Building2 size={16} className="shrink-0" />
-                  <div className="text-left">
-                    <p className="font-bold text-xs tracking-wide">Dealer CRM</p>
-                  </div>
-                </button>
-                <button
-                  onClick={() => goTo("/vendor")}
-                  className="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-purple-500/10 border border-purple-500/25 text-purple-300 hover:bg-purple-500/20 transition-all duration-200"
-                >
-                  <Camera size={16} className="shrink-0" />
-                  <div className="text-left">
-                    <p className="font-bold text-xs tracking-wide">Vendor Portal</p>
-                  </div>
-                </button>
-              </div>
-            </div>
+
 
             {/* Footer info */}
             <div className="px-8 py-5 border-t border-white/8">
