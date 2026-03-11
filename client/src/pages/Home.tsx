@@ -1,7 +1,7 @@
 /* ============================================================
    Home Page — Enterprise platform evolution
-   Section order: Hero → About (light) → SolutionsOverview (dark)
-                → Services (dark) → HowItWorks (light) → Stats (light)
+   Section order: Hero → About (light) → Services (dark)
+                → HowItWorks (light) → Stats (light)
                 → CaseStudiesPreview (black) → Projects (black)
                 → Portfolio (light) → Portals (dark)
                 → Contact CTA (dark) → Contact Form (light) → Footer (dark)
@@ -10,7 +10,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
-import SolutionsOverview from "@/components/SolutionsOverview";
 import ServicesSection from "@/components/ServicesSection";
 import HowItWorks from "@/components/HowItWorks";
 import StatsSection from "@/components/StatsSection";
@@ -26,7 +25,6 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <AboutSection />
-      <SolutionsOverview />
       <ServicesSection />
       <HowItWorks />
       <StatsSection />

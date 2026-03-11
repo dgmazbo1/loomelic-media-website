@@ -184,3 +184,6 @@
 - [x] Write vitest tests for dealerGrowth router and db helpers (all passing)
 - [x] Verify all CRM routes working: Overview, Pipeline, Add Target, Rapid Pitch, Settings
 - [x] Sidebar navigation working correctly for all CRM pages
+
+## Homepage Cleanup (Mar 11)
+- [x] Remove "Who We Serve" section from homepage (duplicates "What We Do")
