@@ -85,8 +85,21 @@ function Router() {
         {/* Portals */}
         <Route path="/dealer" component={DealerPortal} />
         <Route path="/dealer/admin" component={DealerAdmin} />
+        <Route path="/dealer/admin/dealers" component={DealerAdmin} />
+        <Route path="/dealer/admin/tasks" component={DealerAdmin} />
+        <Route path="/dealer/admin/incidents" component={DealerAdmin} />
+        <Route path="/dealer/admin/reminders" component={DealerAdmin} />
+        <Route path="/dealer/admin/analytics" component={DealerAdmin} />
+        <Route path="/dealer/admin/settings" component={DealerAdmin} />
         <Route path="/vendor" component={VendorPortal} />
         <Route path="/vendor/admin" component={VendorAdmin} />
+        <Route path="/vendor/admin/vendors" component={VendorAdmin} />
+        <Route path="/vendor/admin/contracts" component={VendorAdmin} />
+        <Route path="/vendor/admin/jobs" component={VendorAdmin} />
+        <Route path="/vendor/admin/tasks" component={VendorAdmin} />
+        <Route path="/vendor/admin/incidents" component={VendorAdmin} />
+        <Route path="/vendor/admin/analytics" component={VendorAdmin} />
+        <Route path="/vendor/admin/settings" component={VendorAdmin} />
         <Route path="/vendor/sign/:token" component={VendorSign} />
         <Route path="/admin/contracts/new" component={AdminCreateContract} />
 

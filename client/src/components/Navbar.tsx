@@ -203,7 +203,7 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            <button onClick={() => goTo("/case-studies")} className={`${pillBase} ${location.startsWith("/case-studies") || location.startsWith("/portfolio") ? pillActive : pillIdle}`}>PORTFOLIO</button>
+            <button onClick={() => goTo("/portfolio")} className={`${pillBase} ${location.startsWith("/case-studies") || location.startsWith("/portfolio") ? pillActive : pillIdle}`}>PORTFOLIO</button>
             <button onClick={() => goTo("/process")} className={`${pillBase} ${location === "/process" ? pillActive : pillIdle}`}>PROCESS</button>
             <button onClick={() => goTo("/about")} className={`${pillBase} ${location === "/about" ? pillActive : pillIdle}`}>ABOUT</button>
             <button onClick={() => goTo("/contact")} className={`${pillBase} ${location === "/contact" ? pillActive : pillIdle}`}>CONTACT</button>
@@ -323,9 +323,8 @@ export default function Navbar() {
 
               {/* Direct links */}
               {[
-                { label: "PORTFOLIO", href: "/case-studies" },
-                { label: "PROCESS", href: "/process" },
                 { label: "PORTFOLIO", href: "/portfolio" },
+                { label: "PROCESS", href: "/process" },
                 { label: "OUR STORY", href: "/about" },
                 { label: "CONTACT", href: "/contact" },
               ].map((link, i) => (

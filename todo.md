@@ -151,3 +151,8 @@
 - [x] Update "VIEW CASE STUDIES" hero CTA button to "VIEW PORTFOLIO"
 - [x] Move Inventory Photography, Short Form Reels, Walkaround Videos under Dealer Services (navbar + DealerServicesPage)
 - [x] Match visual style of existing Dealer Services sections for the 3 new items
+
+## Broken Links Audit & Fix (Mar 10)
+- [x] Fix VendorAdmin: all sidebar nav links returning 404
+- [x] Audit and fix all broken links across entire site
+- [x] Verify every button and nav item resolves to a valid route
