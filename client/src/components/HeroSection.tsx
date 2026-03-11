@@ -64,7 +64,7 @@ export default function HeroSection() {
           className="section-label mb-6"
         >
           <span>✦</span>
-          <span>Premium Content Operations Partner</span>
+          <span>A LAS VEGAS PRODUCTION COMPANY</span>
         </motion.p>
 
         {/* Headline — enterprise-forward */}
@@ -74,9 +74,9 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-[clamp(3.2rem,10vw,9.5rem)] leading-[0.88] text-white mb-6 max-w-5xl"
         >
-          CONTENT SYSTEMS<br />
-          <span className="text-outline-white">BUILT FOR</span><br />
-          DEALERSHIPS
+          VISUAL CONTENT<br />
+          <span className="text-outline-white">BUILT TO</span><br />
+          PERFORM
         </motion.h1>
 
         {/* Enterprise subhead */}
@@ -86,9 +86,8 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="font-body text-white/60 text-sm sm:text-base max-w-lg leading-relaxed mb-8"
         >
-          Structured photo, video, and web production for automotive
-          dealerships, dealer groups, events, and brands. Monthly retainers.
-          Multi-rooftop support. Las Vegas and South Florida.
+          Photo, video, and web production for automotive dealerships, events,
+          headshots, and brands — Las Vegas and South Florida.
         </motion.p>
 
         {/* CTAs */}

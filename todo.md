@@ -141,3 +141,7 @@
 - [x] Create /services/dealer-services page with exact same section format/photos/videos
 - [x] Add routes for /services/dealer-services/* paths
 - [x] Preserve all section content exactly as-is — no changes to text, photos, or videos
+
+## Nav Label Update (Mar 10)
+- [x] Rename "Case Studies" nav item to "Portfolio" in Navbar (desktop pill + mobile menu)
+- [x] Update hero headline to "VISUAL CONTENT BUILT TO PERFORM", label to "A LAS VEGAS PRODUCTION COMPANY", subtext to "Photo, video, and web production for automotive dealerships, events, headshots, and brands — Las Vegas and South Florida."

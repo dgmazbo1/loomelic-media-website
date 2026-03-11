@@ -1,7 +1,7 @@
 /* ============================================================
    Navbar — Enterprise platform rebuild
    Desktop: pill nav with Solutions + Services mega-dropdowns,
-            Case Studies, Process, Portals, About, Contact
+            Portfolio, Process, Portals, About, Contact
    Mobile: full-screen overlay with accordion sections
    Preserves: pill group, dark glass, logo offset, lime accent
    ============================================================ */
@@ -203,7 +203,7 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            <button onClick={() => goTo("/case-studies")} className={`${pillBase} ${location.startsWith("/case-studies") ? pillActive : pillIdle}`}>CASE STUDIES</button>
+            <button onClick={() => goTo("/case-studies")} className={`${pillBase} ${location.startsWith("/case-studies") || location.startsWith("/portfolio") ? pillActive : pillIdle}`}>PORTFOLIO</button>
             <button onClick={() => goTo("/process")} className={`${pillBase} ${location === "/process" ? pillActive : pillIdle}`}>PROCESS</button>
             <button onClick={() => goTo("/about")} className={`${pillBase} ${location === "/about" ? pillActive : pillIdle}`}>ABOUT</button>
             <button onClick={() => goTo("/contact")} className={`${pillBase} ${location === "/contact" ? pillActive : pillIdle}`}>CONTACT</button>
@@ -323,7 +323,7 @@ export default function Navbar() {
 
               {/* Direct links */}
               {[
-                { label: "CASE STUDIES", href: "/case-studies" },
+                { label: "PORTFOLIO", href: "/case-studies" },
                 { label: "PROCESS", href: "/process" },
                 { label: "PORTFOLIO", href: "/portfolio" },
                 { label: "OUR STORY", href: "/about" },
