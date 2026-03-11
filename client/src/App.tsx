@@ -105,6 +105,9 @@ function Router() {
         <Route path="/services/dealer-services/dealer-groups" component={DealerServicesPage} />
         <Route path="/services/dealer-services/headshots" component={DealerServicesPage} />
         <Route path="/services/dealer-services/crm-video" component={DealerServicesPage} />
+        <Route path="/services/dealer-services/inventory-photography" component={DealerServicesPage} />
+        <Route path="/services/dealer-services/short-form-reels" component={DealerServicesPage} />
+        <Route path="/services/dealer-services/walkaround-videos" component={DealerServicesPage} />
 
         {/* Legacy redirects for old /solutions/* dealer routes */}
         <Route path="/solutions/dealerships">{() => { const [,n] = useLocation(); useEffect(() => { n("/services/dealer-services/dealerships"); }, []); return null; }}</Route>

@@ -4,11 +4,14 @@
    photos, videos, and content. No changes.
    
    Handles routes:
-     /services/dealer-services                → full overview
-     /services/dealer-services/dealerships    → scroll to dealerships
-     /services/dealer-services/dealer-groups  → scroll to dealer-groups
-     /services/dealer-services/headshots      → scroll to headshots
-     /services/dealer-services/crm-video      → scroll to crm-video
+     /services/dealer-services                          → full overview
+     /services/dealer-services/dealerships              → scroll to dealerships
+     /services/dealer-services/dealer-groups            → scroll to dealer-groups
+     /services/dealer-services/headshots                → scroll to headshots
+     /services/dealer-services/crm-video                → scroll to crm-video
+     /services/dealer-services/inventory-photography    → scroll to inventory-photography
+     /services/dealer-services/short-form-reels         → scroll to short-form-reels
+     /services/dealer-services/walkaround-videos        → scroll to walkaround-videos
    ============================================================ */
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
@@ -126,6 +129,66 @@ const DEALER_SECTIONS = [
     image: HERO_GRID_IMAGES[3],
     video: HERO_VIDEOS.madisonTalkingHead,
   },
+  {
+    id: "inventory-photography",
+    icon: Camera,
+    label: "INVENTORY PHOTOGRAPHY",
+    title: "INVENTORY\nPHOTOGRAPHY",
+    desc: "Professional lot and inventory photography for new and pre-owned vehicles. Consistent, high-quality images shot to OEM standards — delivered fast, every time.",
+    features: [
+      "New and pre-owned vehicle photography",
+      "Exterior 360° walkaround sets",
+      "Interior detail shots",
+      "OEM and VDP-optimized image sets",
+      "Same-day or next-day turnaround",
+      "Consistent white-sky or studio-style backgrounds",
+      "Batch processing and bulk delivery",
+      "Direct upload to DMS or third-party platforms",
+    ],
+    bestFor: "Dealerships that need fast, consistent, high-volume inventory photography for their VDPs.",
+    image: LEXUS_HENDERSON.hero,
+    video: HERO_VIDEOS.lexusRoll,
+  },
+  {
+    id: "short-form-reels",
+    icon: Video,
+    label: "SHORT-FORM REELS",
+    title: "SHORT-FORM\nREELS",
+    desc: "Scroll-stopping short-form video content for Instagram, TikTok, Facebook, and YouTube Shorts. Built for dealership audiences — fast, engaging, and on-brand.",
+    features: [
+      "Instagram Reels and TikTok content",
+      "Facebook and YouTube Shorts",
+      "Vehicle feature highlights and walk-throughs",
+      "Dealership culture and team content",
+      "Seasonal promotions and event recaps",
+      "Branded motion graphics and captions",
+      "Music licensing included",
+      "Monthly content calendar and scheduling",
+    ],
+    bestFor: "Dealerships building social media presence and driving organic reach on short-form platforms.",
+    image: HERO_GRID_IMAGES[0],
+    video: HERO_VIDEOS.socialMediaAds,
+  },
+  {
+    id: "walkaround-videos",
+    icon: Video,
+    label: "WALKAROUND VIDEOS",
+    title: "WALKAROUND\nVIDEOS",
+    desc: "Professional vehicle walkaround videos that bring inventory to life online. Showcase features, condition, and personality — built to convert browsers into buyers.",
+    features: [
+      "Full exterior and interior walkaround",
+      "Feature and technology highlights",
+      "Sales rep or voiceover narration",
+      "Branded intro and outro",
+      "VDP-ready and social-ready formats",
+      "Same-week turnaround",
+      "Batch production for high-volume lots",
+      "YouTube, Facebook, and website delivery",
+    ],
+    bestFor: "Dealerships that want to increase VDP engagement and give online shoppers a real feel for the vehicle.",
+    image: HERO_GRID_IMAGES[4],
+    video: HERO_VIDEOS.gxShowroom,
+  },
 ];
 
 // Map URL slugs to section IDs
@@ -134,6 +197,9 @@ const SLUG_TO_ID: Record<string, string> = {
   "dealer-groups": "dealer-groups",
   headshots: "headshots",
   "crm-video": "crm-video",
+  "inventory-photography": "inventory-photography",
+  "short-form-reels": "short-form-reels",
+  "walkaround-videos": "walkaround-videos",
 };
 
 export default function DealerServicesPage() {
@@ -181,7 +247,7 @@ export default function DealerServicesPage() {
           <AnimFade delay={0.2}>
             <p className="font-body text-white/50 text-base sm:text-lg max-w-xl leading-relaxed mb-8">
               Content operations built specifically for automotive dealerships and dealer groups.
-              Inventory photography, walkaround videos, headshots, CRM video, and more.
+              Inventory photography, walkaround videos, short-form reels, headshots, CRM video, and more.
             </p>
           </AnimFade>
 

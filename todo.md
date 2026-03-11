@@ -145,3 +145,9 @@
 ## Nav Label Update (Mar 10)
 - [x] Rename "Case Studies" nav item to "Portfolio" in Navbar (desktop pill + mobile menu)
 - [x] Update hero headline to "VISUAL CONTENT BUILT TO PERFORM", label to "A LAS VEGAS PRODUCTION COMPANY", subtext to "Photo, video, and web production for automotive dealerships, events, headshots, and brands — Las Vegas and South Florida."
+
+## Content Restructure (Mar 10)
+- [x] Rename all "Case Studies" / "case study" text to "Portfolio" on homepage sections (CaseStudiesPreview, CTAs, buttons)
+- [x] Update "VIEW CASE STUDIES" hero CTA button to "VIEW PORTFOLIO"
+- [x] Move Inventory Photography, Short Form Reels, Walkaround Videos under Dealer Services (navbar + DealerServicesPage)
+- [x] Match visual style of existing Dealer Services sections for the 3 new items

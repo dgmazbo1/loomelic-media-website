@@ -1,5 +1,5 @@
 /* ============================================================
-   CaseStudiesPreview — Featured case studies on homepage
+   CaseStudiesPreview — Featured portfolio on homepage
    Dark section, 3 featured project cards with hero images
    Preserves: section-black, Barlow Condensed display, pill CTAs
    ============================================================ */
@@ -82,7 +82,7 @@ export default function CaseStudiesPreview() {
           <div>
             <AnimFade>
               <p className="section-label text-white/40 mb-4">
-                <span>✦</span><span>CASE STUDIES —</span>
+                <span>✦</span><span>PORTFOLIO —</span>
               </p>
             </AnimFade>
             <AnimFade delay={0.1}>
@@ -97,7 +97,7 @@ export default function CaseStudiesPreview() {
               onClick={() => navigate("/case-studies")}
               className="btn-pill-light text-xs self-start sm:self-end mb-2"
             >
-              ALL CASE STUDIES +
+              ALL PORTFOLIO +
             </button>
           </AnimFade>
         </div>
@@ -157,7 +157,7 @@ export default function CaseStudiesPreview() {
 
                     {/* CTA */}
                     <div className="flex items-center gap-2 font-body text-xs text-white/50 group-hover:text-white transition-colors">
-                      <span className="tracking-widest">VIEW CASE STUDY</span>
+                      <span className="tracking-widest">VIEW PROJECT</span>
                       <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>

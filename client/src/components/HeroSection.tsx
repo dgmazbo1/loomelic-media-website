@@ -107,9 +107,9 @@ export default function HeroSection() {
           <button
             onClick={() => navigate("/case-studies")}
             className="text-xs py-3 px-7 font-semibold tracking-widest rounded-full border border-white/30 text-white/80 hover:border-white hover:text-white transition-all duration-200 flex items-center gap-2"
-            aria-label="View case studies"
+            aria-label="View portfolio"
           >
-            VIEW CASE STUDIES <ArrowRight size={13} />
+            VIEW PORTFOLIO <ArrowRight size={13} />
           </button>
         </motion.div>
 

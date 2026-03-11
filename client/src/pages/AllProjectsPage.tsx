@@ -1,7 +1,7 @@
 /* ============================================================
    AllProjectsPage — /projects
    Dealer-acquisition rebuild: category filter tabs, project grid
-   with case study cards, CTA
+   with portfolio cards, CTA
    ============================================================ */
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -54,7 +54,7 @@ export default function AllProjectsPage() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="section-label text-white/40 mb-4"
           >
-            <span>✦</span><span>CASE STUDIES —</span>
+            <span>✦</span><span>PORTFOLIO —</span>
           </motion.p>
 
           <motion.h1
