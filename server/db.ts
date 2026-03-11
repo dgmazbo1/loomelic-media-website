@@ -660,3 +660,283 @@ export async function deleteCrmProposal(id: number) {
   if (!db) throw new Error("Database not available");
   await db.delete(crmProposals).where(eq(crmProposals.id, id));
 }
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DEALER GROWTH CRM HELPERS (from external CRM integration)
+// ─────────────────────────────────────────────────────────────────────────────
+
+import { and, lte, sql, inArray } from "drizzle-orm";
+import {
+  dealerships, InsertDealership, Dealership,
+  dealershipContacts, InsertDealershipContact,
+  visitLogs, InsertVisitLog,
+  proposalInstances, InsertProposalInstance,
+  followUps, InsertFollowUp,
+  dealershipGroups,
+  brandAssets, InsertBrandAsset,
+  appSettings,
+  viewTracking,
+  dealershipSocialLinks, socialLinkEvents,
+} from "../drizzle/schema";
+
+// ─── Dealerships ───
+export async function listDealerships(filters?: { dayPlan?: string; areaBucket?: string; visitStatus?: string }) {
+  const db = await getDb();
+  if (!db) return [];
+  const conditions = [];
+  if (filters?.dayPlan) conditions.push(eq(dealerships.dayPlan, filters.dayPlan as any));
+  if (filters?.areaBucket) conditions.push(eq(dealerships.areaBucket, filters.areaBucket));
+  if (filters?.visitStatus) conditions.push(eq(dealerships.visitStatus, filters.visitStatus as any));
+  let query = db.select().from(dealerships);
+  if (conditions.length > 0) query = query.where(and(...conditions)) as any;
+  const rows = await (query as any).orderBy(asc(dealerships.visitOrder));
+
+  // Enrich with social links from DealershipSocialLinks table
+  if (rows.length === 0) return rows;
+  const ids = rows.map((r: any) => r.id);
+  const socials = await db.select().from(dealershipSocialLinks)
+    .where(inArray(dealershipSocialLinks.dealershipId, ids))
+    .then((links: any[]) => links.filter((l: any) => !l.isDeleted && l.isPrimary));
+
+  const socialMap: Record<number, Record<string, string>> = {};
+  for (const s of socials) {
+    if (!socialMap[s.dealershipId]) socialMap[s.dealershipId] = {};
+    socialMap[s.dealershipId][s.platform] = s.url;
+  }
+
+  return rows.map((r: any) => ({
+    ...r,
+    socialInstagramUrl: socialMap[r.id]?.instagram || r.socialInstagramUrl || null,
+    socialFacebookUrl: socialMap[r.id]?.facebook || r.socialFacebookUrl || null,
+    socialTiktokUrl: socialMap[r.id]?.tiktok || r.socialTiktokUrl || null,
+    socialYoutubeUrl: socialMap[r.id]?.youtube || r.socialYoutubeUrl || null,
+  }));
+}
+
+export async function getDealership(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(dealerships).where(eq(dealerships.id, id)).limit(1);
+  return result[0];
+}
+
+export async function getDealershipBySlug(slug: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(dealerships).where(eq(dealerships.proposalSlug, slug)).limit(1);
+  return result[0];
+}
+
+export async function createDealership(data: InsertDealership) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  const result = await db.insert(dealerships).values(data);
+  return result[0].insertId;
+}
+
+export async function updateDealership(id: number, data: Partial<InsertDealership>) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  await db.update(dealerships).set(data).where(eq(dealerships.id, id));
+}
+
+export async function deleteDealership(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  await db.delete(dealerships).where(eq(dealerships.id, id));
+}
+
+// ─── Dealership Contacts ───
+export async function listDealershipContacts(dealershipId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(dealershipContacts).where(eq(dealershipContacts.dealershipId, dealershipId)).orderBy(desc(dealershipContacts.createdAt));
+}
+
+export async function getDealershipContact(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(dealershipContacts).where(eq(dealershipContacts.id, id)).limit(1);
+  return result[0];
+}
+
+export async function createDealershipContact(data: InsertDealershipContact) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  const result = await db.insert(dealershipContacts).values(data);
+  return result[0].insertId;
+}
+
+export async function updateDealershipContact(id: number, data: Partial<InsertDealershipContact>) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  await db.update(dealershipContacts).set(data).where(eq(dealershipContacts.id, id));
+}
+
+export async function deleteDealershipContact(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  await db.delete(dealershipContacts).where(eq(dealershipContacts.id, id));
+}
+
+// ─── Visit Logs ───
+export async function listVisitLogs(dealershipId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(visitLogs).where(eq(visitLogs.dealershipId, dealershipId)).orderBy(desc(visitLogs.datetime));
+}
+
+export async function createVisitLog(data: InsertVisitLog) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  const result = await db.insert(visitLogs).values(data);
+  return result[0].insertId;
+}
+
+// ─── Proposal Instances ───
+export async function listProposals(dealershipId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(proposalInstances).where(eq(proposalInstances.dealershipId, dealershipId)).orderBy(desc(proposalInstances.createdDatetime));
+}
+
+export async function createProposal(data: InsertProposalInstance) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  const result = await db.insert(proposalInstances).values(data);
+  return result[0].insertId;
+}
+
+export async function updateProposal(id: number, data: Partial<InsertProposalInstance>) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  await db.update(proposalInstances).set(data).where(eq(proposalInstances.id, id));
+}
+
+// ─── Follow-Ups ───
+export async function listFollowUps(filters?: { dealershipId?: number; status?: string; dueBefore?: Date }) {
+  const db = await getDb();
+  if (!db) return [];
+  const conditions = [];
+  if (filters?.dealershipId) conditions.push(eq(followUps.dealershipId, filters.dealershipId));
+  if (filters?.status) conditions.push(eq(followUps.status, filters.status as any));
+  if (filters?.dueBefore) conditions.push(lte(followUps.dueDate, filters.dueBefore));
+  let query = db.select().from(followUps);
+  if (conditions.length > 0) query = query.where(and(...conditions)) as any;
+  return (query as any).orderBy(asc(followUps.dueDate));
+}
+
+export async function createFollowUp(data: InsertFollowUp) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  const result = await db.insert(followUps).values(data);
+  return result[0].insertId;
+}
+
+export async function updateFollowUp(id: number, data: Partial<InsertFollowUp>) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  await db.update(followUps).set(data).where(eq(followUps.id, id));
+}
+
+// ─── Brand Assets ───
+export async function listBrandAssets(brand?: string, category?: string) {
+  const db = await getDb();
+  if (!db) return [];
+  const conditions = [];
+  if (brand) conditions.push(eq(brandAssets.brand, brand));
+  if (category) conditions.push(eq(brandAssets.category, category as any));
+  let query = db.select().from(brandAssets);
+  if (conditions.length > 0) query = query.where(and(...conditions)) as any;
+  return query;
+}
+
+export async function createBrandAsset(data: InsertBrandAsset) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  const result = await db.insert(brandAssets).values(data);
+  return result[0].insertId;
+}
+
+// ─── App Settings ───
+export async function getSetting(key: string): Promise<string | null> {
+  const db = await getDb();
+  if (!db) return null;
+  const result = await db.select().from(appSettings).where(eq(appSettings.settingKey, key)).limit(1);
+  return result[0]?.settingValue ?? null;
+}
+
+export async function setSetting(key: string, value: string) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  await db.insert(appSettings).values({ settingKey: key, settingValue: value })
+    .onDuplicateKeyUpdate({ set: { settingValue: value } });
+}
+
+export async function getAllSettings() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(appSettings);
+}
+
+// ─── View Tracking ───
+export async function trackView(data: { dealershipId: number; proposalSlug?: string; visitorIp?: string; userAgent?: string; eventType?: string }) {
+  const db = await getDb();
+  if (!db) return;
+  await db.insert(viewTracking).values(data as any);
+  if (data.eventType === 'view' || !data.eventType) {
+    await db.update(dealerships).set({
+      totalViews: sql`${dealerships.totalViews} + 1`,
+    }).where(eq(dealerships.id, data.dealershipId));
+  } else if (data.eventType?.startsWith('cta_click')) {
+    await db.update(dealerships).set({
+      ctaClicks: sql`${dealerships.ctaClicks} + 1`,
+    }).where(eq(dealerships.id, data.dealershipId));
+  }
+}
+
+export async function getViewStats(dealershipId: number) {
+  const db = await getDb();
+  if (!db) return { totalViews: 0, uniqueViews: 0, ctaClicks: 0 };
+  const result = await db.select({
+    totalViews: dealerships.totalViews,
+    uniqueViews: dealerships.uniqueViews,
+    ctaClicks: dealerships.ctaClicks,
+  }).from(dealerships).where(eq(dealerships.id, dealershipId)).limit(1);
+  return result[0] ?? { totalViews: 0, uniqueViews: 0, ctaClicks: 0 };
+}
+
+// ─── Dealership Groups ───
+export async function listGroups() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(dealershipGroups);
+}
+
+export async function createGroup(name: string) {
+  const db = await getDb();
+  if (!db) throw new Error("DB not available");
+  const result = await db.insert(dealershipGroups).values({ groupName: name });
+  return result[0].insertId;
+}
+
+export async function getGroupDealerships(groupId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(dealerships).where(eq(dealerships.groupId, groupId));
+}
+
+// ─── Dashboard Stats ───
+export async function getDashboardStats() {
+  const db = await getDb();
+  if (!db) return { total: 0, visited: 0, proposalsSent: 0, meetingsSet: 0, closedWon: 0 };
+  const all = await db.select().from(dealerships);
+  return {
+    total: all.length,
+    visited: all.filter(d => d.visitStatus !== 'Not Started').length,
+    proposalsSent: all.filter(d => ['Proposal Sent', 'Follow-Up', 'Meeting Set', 'Closed Won'].includes(d.visitStatus!)).length,
+    meetingsSet: all.filter(d => d.visitStatus === 'Meeting Set').length,
+    closedWon: all.filter(d => d.visitStatus === 'Closed Won').length,
+  };
+}

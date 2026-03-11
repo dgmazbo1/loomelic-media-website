@@ -166,3 +166,21 @@
 ## Navbar Portal Buttons Removal (Mar 11)
 - [x] Remove DEALER CRM (yellow) button from top navbar
 - [x] Remove VENDOR (purple) button from top navbar
+
+## Dealer Growth Command System (CRM) Integration (Mar 11)
+- [x] Install CRM dependencies (nanoid, recharts, nprogress)
+- [x] Copy CRM UI pages (CrmOverview, DealershipDetail, NewDealerWizard, RapidPitch, Pipeline, Settings, ProposalMicrosite)
+- [x] Copy CRM components (TopLoadingBar, CarMakerLogo)
+- [x] Merge CRM database schema (dealerships, dealerContacts, visitLogs, proposalInstances, followUps, dealershipGroups, brandAssets, appSettings, viewTracking, dealershipSocialLinks, socialLinkEvents)
+- [x] Run database migrations for all CRM tables
+- [x] Create dealerGrowth router with all CRM procedures (dealership, contact, visitLog, proposal, followUp, tracking, socialLink, dashboard, settings, brandAsset, group)
+- [x] Append CRM db helpers to server/db.ts
+- [x] Wire CRM routes in App.tsx under /growth/* prefix
+- [x] Update all tRPC calls in CRM pages to use dealerGrowth.* prefix
+- [x] Update all internal navigation links to /growth/* paths
+- [x] Add AuthGate component to protect /growth/* routes (login required)
+- [x] Convert CRM backend procedures from publicProcedure to protectedProcedure (except getBySlug and track for public proposal microsites)
+- [x] Fix TypeScript errors in CRM pages (brand type, null checks)
+- [x] Write vitest tests for dealerGrowth router and db helpers (all passing)
+- [x] Verify all CRM routes working: Overview, Pipeline, Add Target, Rapid Pitch, Settings
+- [x] Sidebar navigation working correctly for all CRM pages

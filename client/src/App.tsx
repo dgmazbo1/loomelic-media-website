@@ -50,6 +50,16 @@ import CRMDashboard from "./pages/CRMDashboard";
 import VendorSign from "./pages/VendorSign";
 import AdminCreateContract from "./pages/AdminCreateContract";
 
+// Dealer Growth CRM pages
+import CrmOverview from "./pages/crm/CrmOverview";
+import DealershipDetail from "./pages/crm/DealershipDetail";
+import NewDealerWizard from "./pages/crm/NewDealerWizard";
+import PitchMode from "./pages/crm/PitchMode";
+import Pipeline from "./pages/crm/Pipeline";
+import CrmSettings from "./pages/crm/CrmSettings";
+import ProposalMicrosite from "./pages/crm/ProposalMicrosite";
+import AuthGate from "./components/AuthGate";
+
 import {
   LexusHendersonPage,
   LexusLasVegasPage,
@@ -74,6 +84,17 @@ function Router() {
     <>
       <ScrollToTop />
       <Switch>
+        {/* Dealer Growth CRM (authenticated — requires login) */}
+        <Route path="/growth">{() => <AuthGate><CrmOverview /></AuthGate>}</Route>
+        <Route path="/growth/dealership/:id">{(params) => <AuthGate><DealershipDetail /></AuthGate>}</Route>
+        <Route path="/growth/new-dealer">{() => <AuthGate><NewDealerWizard /></AuthGate>}</Route>
+        <Route path="/growth/pitch">{() => <AuthGate><PitchMode /></AuthGate>}</Route>
+        <Route path="/growth/pitch/:id">{(params) => <AuthGate><PitchMode /></AuthGate>}</Route>
+        <Route path="/growth/pipeline">{() => <AuthGate><Pipeline /></AuthGate>}</Route>
+        <Route path="/growth/settings">{() => <AuthGate><CrmSettings /></AuthGate>}</Route>
+        {/* Proposal microsite is public-facing (clients view proposals) */}
+        <Route path="/growth/p/:slug" component={ProposalMicrosite} />
+
         {/* Admin panel */}
         <Route path="/admin" component={AdminPage} />
         <Route path="/admin/crm" component={AdminCRM} />

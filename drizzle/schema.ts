@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, boolean, json } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -513,3 +513,252 @@ export const crmProposals = mysqlTable("crm_proposals", {
 });
 export type CrmProposal = typeof crmProposals.$inferSelect;
 export type InsertCrmProposal = typeof crmProposals.$inferInsert;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DEALER GROWTH CRM TABLES (from external CRM integration)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Dealerships — core CRM record for each dealer target.
+ * Used by the Dealer Growth Command System for acquisition tracking.
+ */
+export const dealerships = mysqlTable("dealerships", {
+  id: int("id").autoincrement().primaryKey(),
+  dealershipName: varchar("dealershipName", { length: 255 }).notNull(),
+  franchiseBrands: json("franchiseBrands").$type<string[]>(),
+  primaryBrand: varchar("primaryBrand", { length: 100 }),
+  brandOverride: varchar("brandOverride", { length: 100 }),
+  logoUrlColor: text("logoUrlColor"),
+  logoUrlMono: text("logoUrlMono"),
+  logoSelectedUrl: text("logoSelectedUrl"),
+  logoGenerationPrompt: text("logoGenerationPrompt"),
+  logoGeneratedDatetime: timestamp("logoGeneratedDatetime"),
+  logoLocked: boolean("logoLocked").default(false),
+  dealerWebsiteUrl: varchar("dealerWebsiteUrl", { length: 500 }),
+  addressStreet: varchar("addressStreet", { length: 255 }),
+  addressCity: varchar("addressCity", { length: 100 }),
+  addressState: varchar("addressState", { length: 50 }),
+  addressZip: varchar("addressZip", { length: 20 }),
+  mainPhone: varchar("mainPhone", { length: 30 }),
+  hoursOfOperation: text("hoursOfOperation"),
+  areaBucket: varchar("areaBucket", { length: 100 }),
+  dayPlan: varchar("dayPlan", { length: 20 }),
+  priority: varchar("priority", { length: 20 }).default("High"),
+  visitOrder: int("visitOrder").default(0),
+  visitStatus: varchar("visitStatus", { length: 50 }).default("Not Started"),
+  lastVisitDatetime: timestamp("lastVisitDatetime"),
+  nextFollowUpDate: timestamp("nextFollowUpDate"),
+  tags: json("tags").$type<string[]>(),
+  leadTemp: varchar("leadTemp", { length: 20 }).default("none"),
+  quickNote: varchar("quickNote", { length: 280 }),
+  socialInstagramUrl: varchar("socialInstagramUrl", { length: 500 }),
+  socialFacebookUrl: varchar("socialFacebookUrl", { length: 500 }),
+  socialTiktokUrl: varchar("socialTiktokUrl", { length: 500 }),
+  socialYoutubeUrl: varchar("socialYoutubeUrl", { length: 500 }),
+  auditLastRunDatetime: timestamp("auditLastRunDatetime"),
+  auditSummaryWorking: text("auditSummaryWorking"),
+  auditSummaryMissing: text("auditSummaryMissing"),
+  auditStaffPagePresent: boolean("auditStaffPagePresent"),
+  auditStaffPhotosPresent: boolean("auditStaffPhotosPresent"),
+  auditStaffNotes: text("auditStaffNotes"),
+  auditOpportunityNotes: text("auditOpportunityNotes"),
+  proposalSlug: varchar("proposalSlug", { length: 100 }).unique(),
+  proposalPublicUrl: varchar("proposalPublicUrl", { length: 500 }),
+  proposalLastGeneratedDatetime: timestamp("proposalLastGeneratedDatetime"),
+  headshotAddon: boolean("headshotAddon").default(false),
+  groupId: int("groupId"),
+  totalViews: int("totalViews").default(0),
+  uniqueViews: int("uniqueViews").default(0),
+  ctaClicks: int("ctaClicks").default(0),
+  createdById: int("createdById"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Dealership = typeof dealerships.$inferSelect;
+export type InsertDealership = typeof dealerships.$inferInsert;
+
+/**
+ * Dealership contacts — people at each dealership.
+ */
+export const dealershipContacts = mysqlTable("contacts", {
+  id: int("id").autoincrement().primaryKey(),
+  dealershipId: int("dealershipId").notNull(),
+  firstName: varchar("firstName", { length: 100 }),
+  lastName: varchar("lastName", { length: 100 }),
+  title: varchar("title", { length: 100 }),
+  email: varchar("email", { length: 320 }),
+  phone: varchar("phone", { length: 30 }),
+  preferredContactMethod: varchar("preferredContactMethod", { length: 20 }).default("Email"),
+  bestTimeToReach: varchar("bestTimeToReach", { length: 100 }),
+  notes: text("notes"),
+  lastContactedDatetime: timestamp("lastContactedDatetime"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type DealershipContact = typeof dealershipContacts.$inferSelect;
+export type InsertDealershipContact = typeof dealershipContacts.$inferInsert;
+
+/**
+ * Visit logs — on-site visit history for dealerships.
+ */
+export const visitLogs = mysqlTable("visitLogs", {
+  id: int("id").autoincrement().primaryKey(),
+  dealershipId: int("dealershipId").notNull(),
+  contactId: int("contactId"),
+  datetime: timestamp("datetime").defaultNow().notNull(),
+  outcome: varchar("outcome", { length: 50 }),
+  nextStep: varchar("nextStep", { length: 20 }),
+  notes: text("notes"),
+  attachmentUrl: varchar("attachmentUrl", { length: 500 }),
+  createdById: int("createdById"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type VisitLog = typeof visitLogs.$inferSelect;
+export type InsertVisitLog = typeof visitLogs.$inferInsert;
+
+/**
+ * Proposal instances — generated proposal records.
+ */
+export const proposalInstances = mysqlTable("proposalInstances", {
+  id: int("id").autoincrement().primaryKey(),
+  dealershipId: int("dealershipId").notNull(),
+  contactId: int("contactId"),
+  createdDatetime: timestamp("createdDatetime").defaultNow().notNull(),
+  publicUrl: varchar("publicUrl", { length: 500 }),
+  generatedPdfUrl: varchar("generatedPdfUrl", { length: 500 }),
+  emailSubject: varchar("emailSubject", { length: 500 }),
+  emailBody: text("emailBody"),
+  sentDatetime: timestamp("sentDatetime"),
+  status: varchar("status", { length: 20 }).default("Draft"),
+  emailProviderMessageId: varchar("emailProviderMessageId", { length: 255 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ProposalInstance = typeof proposalInstances.$inferSelect;
+export type InsertProposalInstance = typeof proposalInstances.$inferInsert;
+
+/**
+ * Follow-ups — scheduled follow-up tasks.
+ */
+export const followUps = mysqlTable("followUps", {
+  id: int("id").autoincrement().primaryKey(),
+  dealershipId: int("dealershipId").notNull(),
+  contactId: int("contactId"),
+  proposalInstanceId: int("proposalInstanceId"),
+  followUpNumber: int("followUpNumber").notNull(),
+  dueDate: timestamp("dueDate").notNull(),
+  status: varchar("status", { length: 20 }).default("Pending"),
+  sentDatetime: timestamp("sentDatetime"),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type FollowUp = typeof followUps.$inferSelect;
+export type InsertFollowUp = typeof followUps.$inferInsert;
+
+/**
+ * Dealership groups — multi-rooftop group groupings.
+ */
+export const dealershipGroups = mysqlTable("dealershipGroups", {
+  id: int("id").autoincrement().primaryKey(),
+  groupName: varchar("groupName", { length: 255 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type DealershipGroup = typeof dealershipGroups.$inferSelect;
+
+/**
+ * Brand assets — OEM logo CDN references.
+ */
+export const brandAssets = mysqlTable("brandAssets", {
+  id: int("id").autoincrement().primaryKey(),
+  brand: varchar("brand", { length: 100 }).notNull(),
+  category: varchar("category", { length: 50 }).notNull(),
+  driveFileId: varchar("driveFileId", { length: 255 }),
+  filename: varchar("filename", { length: 255 }),
+  tags: json("tags").$type<string[]>(),
+  cdnUrl: varchar("cdnUrl", { length: 500 }).notNull(),
+  lastSynced: timestamp("lastSynced"),
+  isPrimary: boolean("isPrimary").default(false),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type BrandAsset = typeof brandAssets.$inferSelect;
+export type InsertBrandAsset = typeof brandAssets.$inferInsert;
+
+/**
+ * App settings — key-value configuration storage.
+ */
+export const appSettings = mysqlTable("appSettings", {
+  id: int("id").autoincrement().primaryKey(),
+  settingKey: varchar("settingKey", { length: 100 }).notNull().unique(),
+  settingValue: text("settingValue"),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type AppSetting = typeof appSettings.$inferSelect;
+
+/**
+ * View tracking — proposal microsite view analytics.
+ */
+export const viewTracking = mysqlTable("viewTracking", {
+  id: int("id").autoincrement().primaryKey(),
+  dealershipId: int("dealershipId").notNull(),
+  proposalSlug: varchar("proposalSlug", { length: 100 }),
+  visitorIp: varchar("visitorIp", { length: 45 }),
+  userAgent: text("userAgent"),
+  eventType: varchar("eventType", { length: 30 }).default("view"),
+  timeOnPageSeconds: int("timeOnPageSeconds"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ViewTrack = typeof viewTracking.$inferSelect;
+
+/**
+ * Dealership social links — protected, auditable social media links.
+ */
+export const dealershipSocialLinks = mysqlTable("dealershipSocialLinks", {
+  id: int("id").autoincrement().primaryKey(),
+  dealershipId: int("dealershipId").notNull(),
+  platform: varchar("platform", { length: 32 }).notNull(),
+  url: text("url").notNull(),
+  normalizedUrl: text("normalizedUrl"),
+  status: varchar("status", { length: 32 }).default("unverified"),
+  source: varchar("source", { length: 64 }).default("manual_entry"),
+  confidenceScore: varchar("confidenceScore", { length: 10 }).default("0.50"),
+  discoveredAt: timestamp("discoveredAt").defaultNow(),
+  lastVerifiedAt: timestamp("lastVerifiedAt"),
+  isPrimary: boolean("isPrimary").default(false),
+  isLocked: boolean("isLocked").default(false),
+  isGroupLevel: boolean("isGroupLevel").default(false),
+  isDeleted: boolean("isDeleted").default(false),
+  deletedAt: timestamp("deletedAt"),
+  notes: text("notes"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type DealershipSocialLink = typeof dealershipSocialLinks.$inferSelect;
+export type InsertDealershipSocialLink = typeof dealershipSocialLinks.$inferInsert;
+
+/**
+ * Social link events — append-only audit log.
+ */
+export const socialLinkEvents = mysqlTable("socialLinkEvents", {
+  id: int("id").autoincrement().primaryKey(),
+  dealershipId: int("dealershipId").notNull(),
+  socialLinkId: int("socialLinkId"),
+  platform: varchar("platform", { length: 32 }),
+  action: varchar("action", { length: 32 }).notNull(),
+  oldUrl: text("oldUrl"),
+  newUrl: text("newUrl"),
+  reason: text("reason"),
+  userId: int("userId"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type SocialLinkEvent = typeof socialLinkEvents.$inferSelect;
+export type InsertSocialLinkEvent = typeof socialLinkEvents.$inferInsert;

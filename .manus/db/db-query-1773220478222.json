@@ -1,0 +1,82 @@
+{
+  "query": "SHOW TABLES;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute SHOW TABLES;",
+  "rows": [
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "__drizzle_migrations"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "client_contracts"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "contract_templates"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "contracts"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "crm_contacts"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "crm_deals"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "crm_incidents"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "crm_interactions"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "crm_proposals"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "crm_tasks"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "dealer_comments"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "dealer_compliance"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "dealer_contacts"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "dealer_files"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "dealer_monthly_inputs"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "dealer_platform_access"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "dealers"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "gallery_images"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "project_videos"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "projects"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "users"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "vendor_jobs"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "vendors"
+    },
+    {
+      "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ": "w9_forms"
+    }
+  ],
+  "messages": [],
+  "stdout": "Tables_in_hZhvBDwnUYPXmoN2sbiKGJ\n__drizzle_migrations\nclient_contracts\ncontract_templates\ncontracts\ncrm_contacts\ncrm_deals\ncrm_incidents\ncrm_interactions\ncrm_proposals\ncrm_tasks\ndealer_comments\ndealer_compliance\ndealer_contacts\ndealer_files\ndealer_monthly_inputs\ndealer_platform_access\ndealers\ngallery_images\nproject_videos\nprojects\nusers\nvendor_jobs\nvendors\nw9_forms\n",
+  "stderr": "",
+  "execution_time_ms": 1309
+}

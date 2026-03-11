@@ -1,0 +1,82 @@
+{
+  "query": "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() ORDER BY TABLE_NAME;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DATABASE() ORDER BY TABLE_NAME;",
+  "rows": [
+    {
+      "TABLE_NAME": "__drizzle_migrations"
+    },
+    {
+      "TABLE_NAME": "client_contracts"
+    },
+    {
+      "TABLE_NAME": "contract_templates"
+    },
+    {
+      "TABLE_NAME": "contracts"
+    },
+    {
+      "TABLE_NAME": "crm_contacts"
+    },
+    {
+      "TABLE_NAME": "crm_deals"
+    },
+    {
+      "TABLE_NAME": "crm_incidents"
+    },
+    {
+      "TABLE_NAME": "crm_interactions"
+    },
+    {
+      "TABLE_NAME": "crm_proposals"
+    },
+    {
+      "TABLE_NAME": "crm_tasks"
+    },
+    {
+      "TABLE_NAME": "dealer_comments"
+    },
+    {
+      "TABLE_NAME": "dealer_compliance"
+    },
+    {
+      "TABLE_NAME": "dealer_contacts"
+    },
+    {
+      "TABLE_NAME": "dealer_files"
+    },
+    {
+      "TABLE_NAME": "dealer_monthly_inputs"
+    },
+    {
+      "TABLE_NAME": "dealer_platform_access"
+    },
+    {
+      "TABLE_NAME": "dealers"
+    },
+    {
+      "TABLE_NAME": "gallery_images"
+    },
+    {
+      "TABLE_NAME": "project_videos"
+    },
+    {
+      "TABLE_NAME": "projects"
+    },
+    {
+      "TABLE_NAME": "users"
+    },
+    {
+      "TABLE_NAME": "vendor_jobs"
+    },
+    {
+      "TABLE_NAME": "vendors"
+    },
+    {
+      "TABLE_NAME": "w9_forms"
+    }
+  ],
+  "messages": [],
+  "stdout": "TABLE_NAME\n__drizzle_migrations\nclient_contracts\ncontract_templates\ncontracts\ncrm_contacts\ncrm_deals\ncrm_incidents\ncrm_interactions\ncrm_proposals\ncrm_tasks\ndealer_comments\ndealer_compliance\ndealer_contacts\ndealer_files\ndealer_monthly_inputs\ndealer_platform_access\ndealers\ngallery_images\nproject_videos\nprojects\nusers\nvendor_jobs\nvendors\nw9_forms\n",
+  "stderr": "",
+  "execution_time_ms": 58
+}
