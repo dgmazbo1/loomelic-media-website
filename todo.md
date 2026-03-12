@@ -187,3 +187,14 @@
 
 ## Homepage Cleanup (Mar 11)
 - [x] Remove "Who We Serve" section from homepage (duplicates "What We Do")
+
+## Use Cases Page (Mar 11)
+- [x] Build /use-cases page with hero, positioning block, featured use case grid, expanded detail sections, SEO section, final CTA
+- [x] Add Centennial Subaru use case with full content (Overview, Challenge, Strategy, Execution, Result, Why It Worked)
+- [x] Add Findlay Nissan Henderson use case with full content (Overview, Challenge, Strategy, Execution, Result, Why It Worked)
+- [x] Add Use Cases nav item to desktop navbar (between PORTFOLIO and PROCESS)
+- [x] Add Use Cases nav item to mobile navbar menu
+- [x] Add Use Cases link to footer navigation
+- [x] Wire /use-cases route in App.tsx
+- [x] Smooth anchor navigation between featured use cases (scroll-mt-24 + href anchors)
+- [x] Verify all buttons and links route correctly

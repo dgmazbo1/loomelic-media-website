@@ -252,6 +252,7 @@ export default function ContactSection() {
                 { label: "PROJECTS", href: "/projects" },
                 { label: "SERVICES", href: "/services" },
                 { label: "PORTFOLIO", href: "/portfolio" },
+                { label: "USE CASES", href: "/use-cases" },
                 { label: "ABOUT", href: "/about" },
                 { label: "CONTACT", href: "/contact" },
               ].map((link) => (
