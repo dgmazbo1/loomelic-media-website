@@ -332,42 +332,6 @@ export default function UseCases() {
         </div>
       </section>
 
-      {/* ── 2. POSITIONING BLOCK ────────────────────────────── */}
-      <section className="section-dark border-t border-white/6" aria-label="Portfolio vs Use Cases">
-        <div className="container py-14 sm:py-20 lg:py-24">
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-start">
-            <AnimFade>
-              <SectionLabel text="THE DIFFERENCE" />
-              <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white mb-4" style={displayHeading}>
-                PORTFOLIO<br />
-                <span className="text-outline-white">VS.</span><br />
-                USE CASES
-              </h2>
-            </AnimFade>
-
-            <AnimFade delay={0.12}>
-              <div className="space-y-6 pt-2 md:pt-8">
-                <div className="rounded-2xl bg-white/[0.04] border border-white/8 p-6">
-                  <p className="font-body text-[0.6rem] tracking-[0.18em] text-white/30 uppercase mb-2">Portfolio Work</p>
-                  <p className="font-body text-sm text-white/60 leading-relaxed">
-                    Portfolio shows <em>what we created</em> — the visual output, the deliverables, the finished product. It answers: what does Loomelic Media produce?
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-white/[0.06] border border-white/12 p-6">
-                  <p className="font-body text-[0.6rem] tracking-[0.18em] text-white/40 uppercase mb-2">Use Cases</p>
-                  <p className="font-body text-sm text-white/75 leading-relaxed">
-                    Use cases show <em>why it was created, how it was deployed, and what changed as a result</em>. They answer the real question: does Loomelic Media's work actually move the business forward?
-                  </p>
-                  <p className="font-body text-sm text-white/55 leading-relaxed mt-3">
-                    Every use case here is tied to a specific dealership challenge, a defined strategy, a clear execution, and a measurable outcome. This is proof of strategy, proof of execution, and proof of business value.
-                  </p>
-                </div>
-              </div>
-            </AnimFade>
-          </div>
-        </div>
-      </section>
-
       {/* ── 3. FEATURED USE CASES GRID ──────────────────────── */}
       <section className="section-black" aria-labelledby="featured-uc-heading">
         <div className="container py-16 sm:py-24 lg:py-32">
@@ -407,52 +371,7 @@ export default function UseCases() {
         <UseCaseDetail key={uc.id} uc={uc} index={i} />
       ))}
 
-      {/* ── 5. SEO SUPPORT SECTION ──────────────────────────── */}
-      <section className="section-black border-t border-white/6" aria-label="About dealership marketing">
-        <div className="container py-14 sm:py-20 lg:py-24">
-          <div className="max-w-3xl mx-auto text-center">
-            <AnimFade>
-              <SectionLabel text="DEALERSHIP MARKETING" />
-            </AnimFade>
-            <AnimFade delay={0.1}>
-              <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] text-white mb-6" style={displayHeading}>
-                CONTENT BUILT<br />
-                <span className="text-outline-white">FOR RESULTS</span>
-              </h2>
-            </AnimFade>
-            <AnimFade delay={0.18}>
-              <p className="font-body text-sm text-white/55 leading-[1.85] mb-6">
-                Use cases like these show how dealership marketing works best when content is tied to a clear business objective. Whether the goal is moving used inventory, improving first-response quality, building stronger engagement from online leads, or increasing showroom traffic, Loomelic Media creates automotive content systems designed to support measurable dealership growth.
-              </p>
-              <p className="font-body text-sm text-white/45 leading-[1.85]">
-                From dealership social media strategy and paid content campaigns to CRM video follow-up and internet sales video marketing, Loomelic Media helps automotive teams across Nevada turn content into action. Our work spans dealership marketing case studies, automotive content marketing, dealership video marketing, and internet sales video follow-up — all built around real goals, not generic output.
-              </p>
-            </AnimFade>
-
-            {/* Keyword tags */}
-            <AnimFade delay={0.25}>
-              <div className="flex flex-wrap justify-center gap-2 mt-8">
-                {[
-                  "Dealership Marketing Case Studies",
-                  "Automotive Content Marketing",
-                  "Dealership Social Media Strategy",
-                  "Dealership Video Marketing",
-                  "Internet Sales Video Follow-Up",
-                  "Used Car Advertising Strategy",
-                  "Dealership Media Company Las Vegas",
-                  "Automotive Content Agency Nevada",
-                ].map((kw) => (
-                  <span key={kw} className="px-3 py-1 rounded-full bg-white/[0.04] border border-white/8 font-body text-[0.55rem] tracking-widest text-white/30 uppercase">
-                    {kw}
-                  </span>
-                ))}
-              </div>
-            </AnimFade>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. FINAL CTA ────────────────────────────────────── */}
+      {/* ── 5. FINAL CTA ────────────────────────────────────── */}
       <section className="section-dark border-t border-white/6 overflow-hidden" aria-label="Call to action">
         <div className="container py-16 sm:py-24 lg:py-32">
           <AnimFade>

@@ -198,3 +198,7 @@
 - [x] Wire /use-cases route in App.tsx
 - [x] Smooth anchor navigation between featured use cases (scroll-mt-24 + href anchors)
 - [x] Verify all buttons and links route correctly
+
+## Use Cases Page Cleanup (Mar 11)
+- [x] Remove "Portfolio vs. Use Cases" positioning section from /use-cases
+- [x] Remove "Dealership Marketing / Content Built For Results" SEO section from /use-cases
