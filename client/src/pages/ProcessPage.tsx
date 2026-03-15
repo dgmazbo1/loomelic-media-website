@@ -99,7 +99,7 @@ export default function ProcessPage() {
             </p>
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h1 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-white mb-6">
+            <h1 className="font-display text-[clamp(2.2rem,7vw,6rem)] leading-[0.88] text-white mb-6">
               HOW WE<br />
               <span className="text-outline-white">WORK</span>
             </h1>
@@ -128,7 +128,7 @@ export default function ProcessPage() {
                 <AnimFade>
                   <div className="flex lg:flex-col items-center lg:items-start gap-4">
                     <span
-                      className={`font-display text-[5rem] sm:text-[7rem] leading-none ${
+                      className={`font-display text-[3.3rem] sm:text-[4.7rem] leading-none ${
                         isLight ? "text-[oklch(0.07_0_0)]/8" : "text-white/8"
                       }`}
                     >
@@ -148,7 +148,7 @@ export default function ProcessPage() {
                 <div>
                   <AnimFade delay={0.1}>
                     <h2
-                      className={`font-display text-[clamp(2rem,5vw,4rem)] leading-[0.88] mb-2 ${
+                      className={`font-display text-[clamp(1.4rem,3.5vw,2.7rem)] leading-[0.88] mb-2 ${
                         isLight ? "text-[oklch(0.07_0_0)]" : "text-white"
                       }`}
                     >
@@ -231,7 +231,7 @@ export default function ProcessPage() {
       <section className="section-black">
         <div className="container py-16 sm:py-24 text-center">
           <AnimFade>
-            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.88] text-white mb-6">
+            <h2 className="font-display text-[clamp(1.6rem,4vw,3.3rem)] leading-[0.88] text-white mb-6">
               READY TO<br />
               <span className="text-outline-white">START?</span>
             </h2>

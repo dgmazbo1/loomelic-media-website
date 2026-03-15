@@ -124,7 +124,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-[clamp(3rem,9vw,8rem)] leading-[0.88] text-white max-w-4xl"
+          className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[0.88] text-white max-w-4xl"
         >
           LET'S TALK ABOUT<br />
           <span className="text-outline-white">YOUR PROJECT</span>
@@ -148,7 +148,7 @@ export default function ContactPage() {
                 <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center">
                   <CheckCircle size={32} className="text-white" />
                 </div>
-                <h2 className="font-display text-[clamp(2rem,6vw,4rem)] leading-[0.9] text-white">
+                <h2 className="font-display text-[clamp(1.4rem,4vw,2.7rem)] leading-[0.9] text-white">
                   MESSAGE<br />RECEIVED
                 </h2>
                 <p className="font-body text-white/60 text-base max-w-md leading-relaxed">

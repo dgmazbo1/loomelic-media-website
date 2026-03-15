@@ -56,7 +56,7 @@ export default function StatsSection() {
             <p className="section-label text-[oklch(0.07_0_0)]/40 mb-4">
               <span>✦</span><span>WHY DEALERS CHOOSE US —</span>
             </p>
-            <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-[oklch(0.07_0_0)]">
+            <h2 className="font-display text-[clamp(2.2rem,7vw,6rem)] leading-[0.88] text-[oklch(0.07_0_0)]">
               BUILT FOR<br />
               <span className="text-[oklch(0.78_0_0)]">DEALERSHIPS</span>
             </h2>

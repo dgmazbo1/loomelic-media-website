@@ -151,7 +151,7 @@ export default function PortfolioPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-[clamp(3rem,9vw,8rem)] leading-[0.88] text-white max-w-4xl"
+          className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[0.88] text-white max-w-4xl"
         >
           PORTFOLIO
         </motion.h1>

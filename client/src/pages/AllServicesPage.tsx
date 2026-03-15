@@ -77,7 +77,7 @@ export default function AllServicesPage() {
             <p className="section-label text-white/40 mb-6"><span>✦</span><span>SERVICES</span></p>
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h1 className="font-display text-[clamp(3rem,9vw,8rem)] leading-[0.88] text-white mb-6 max-w-4xl">
+            <h1 className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[0.88] text-white mb-6 max-w-4xl">
               VISUAL CONTENT<br />
               <span className="text-outline-white">FOR EVERY</span><br />
               INDUSTRY
@@ -138,7 +138,7 @@ export default function AllServicesPage() {
             <p className="section-label text-white/40 mb-6"><span>✦</span><span>HOW IT WORKS</span></p>
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] text-white mb-12 max-w-2xl">
+            <h2 className="font-display text-[clamp(1.6rem,4.5vw,4rem)] leading-[0.9] text-white mb-12 max-w-2xl">
               OUR<br />PROCESS
             </h2>
           </AnimFade>
@@ -193,7 +193,7 @@ export default function AllServicesPage() {
       <section className="section-dark">
         <div className="container py-16 sm:py-24">
           <AnimFade>
-            <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] text-white mb-8 max-w-2xl">
+            <h2 className="font-display text-[clamp(1.6rem,4.5vw,4rem)] leading-[0.9] text-white mb-8 max-w-2xl">
               NOT SURE<br />WHICH SERVICE?
             </h2>
           </AnimFade>

@@ -92,12 +92,12 @@ export default function ProjectsSection() {
               <p className="section-label text-white/40 mb-4">
                 <span>✦</span><span>OUR PORTFOLIO —</span>
               </p>
-              <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-white">
+              <h2 className="font-display text-[clamp(2.2rem,7vw,6rem)] leading-[0.88] text-white">
                 SELECTED<br />
                 <span className="text-[oklch(0.4_0_0)]">WORK</span>
               </h2>
             </div>
-            <span className="font-display text-[clamp(2rem,6vw,6rem)] text-[oklch(0.28_0_0)] leading-none hidden sm:block self-end pb-2">
+            <span className="font-display text-[clamp(1.4rem,4vw,4rem)] text-[oklch(0.28_0_0)] leading-none hidden sm:block self-end pb-2">
               ©2026
             </span>
           </div>

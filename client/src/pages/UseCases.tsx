@@ -203,7 +203,7 @@ function UseCaseDetail({ uc, index }: { uc: typeof USE_CASES[0]; index: number }
           <AnimFade delay={0.12}>
             <h2
               id={`uc-heading-${uc.id}`}
-              className="font-display text-[clamp(3rem,8vw,7rem)] text-white mb-4"
+              className="font-display text-[clamp(2rem,5.5vw,4.7rem)] text-white mb-4"
               style={displayHeading}
             >
               {uc.client.split(" ").slice(0, -1).join(" ")}<br />
@@ -293,7 +293,7 @@ export default function UseCases() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(2.2rem,14vw,13rem)] text-white mb-6"
+            className="font-display text-[clamp(1.5rem,9vw,8.5rem)] text-white mb-6"
             style={displayHeading}
           >
             USE CASES<br />
@@ -343,7 +343,7 @@ export default function UseCases() {
               <AnimFade delay={0.1}>
                 <h2
                   id="featured-uc-heading"
-                  className="font-display text-[clamp(2rem,10vw,9rem)] text-white"
+                  className="font-display text-[clamp(1.5rem,7vw,6rem)] text-white"
                   style={displayHeading}
                 >
                   REAL<br />
@@ -378,7 +378,7 @@ export default function UseCases() {
             <SectionLabel text="READY TO GROW?" />
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h2 className="font-display text-[clamp(2rem,10vw,10rem)] text-white mb-6 sm:mb-8" style={displayHeading}>
+            <h2 className="font-display text-[clamp(1.5rem,7vw,6.5rem)] text-white mb-6 sm:mb-8" style={displayHeading}>
               READY TO BUILD<br />
               A CONTENT SYSTEM<br />
               <span className="text-outline-white">THAT DRIVES RESULTS?</span>

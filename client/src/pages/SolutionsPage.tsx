@@ -151,7 +151,7 @@ export default function SolutionsPage() {
             </p>
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h1 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-white mb-6">
+            <h1 className="font-display text-[clamp(2.2rem,7vw,6rem)] leading-[0.88] text-white mb-6">
               CONTENT<br />
               <span className="text-outline-white">SOLUTIONS</span>
             </h1>
@@ -225,7 +225,7 @@ export default function SolutionsPage() {
 
                   <AnimFade delay={0.1}>
                     <h2
-                      className={`font-display text-[clamp(2.5rem,5vw,5rem)] leading-[0.88] mb-6 whitespace-pre-line ${
+                      className={`font-display text-[clamp(1.6rem,3.5vw,3.3rem)] leading-[0.88] mb-6 whitespace-pre-line ${
                         isEven ? "text-[oklch(0.07_0_0)]" : "text-white"
                       }`}
                     >
@@ -323,7 +323,7 @@ export default function SolutionsPage() {
       <section className="section-black">
         <div className="container py-16 sm:py-24 text-center">
           <AnimFade>
-            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.88] text-white mb-6">
+            <h2 className="font-display text-[clamp(1.6rem,4vw,3.3rem)] leading-[0.88] text-white mb-6">
               NOT SURE WHICH<br />
               <span className="text-outline-white">SOLUTION?</span>
             </h2>

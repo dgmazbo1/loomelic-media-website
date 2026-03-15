@@ -72,7 +72,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-[clamp(2rem,10vw,9.5rem)] leading-[0.88] text-white mb-6 max-w-5xl"
+          className="font-display text-[clamp(1.8rem,6.5vw,6.5rem)] leading-[0.88] text-white mb-6 max-w-5xl"
         >
           VISUAL CONTENT<br />
           <span className="text-outline-white">BUILT TO</span><br />

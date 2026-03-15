@@ -114,7 +114,7 @@ export default function PortfolioSection() {
               <p className="section-label text-[oklch(0.07_0_0)/40] mb-4"><span>✦</span><span>PORTFOLIO —</span></p>
             </AnimFade>
             <AnimFade delay={0.1}>
-              <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-[oklch(0.07_0_0)]">
+              <h2 className="font-display text-[clamp(2.2rem,7vw,6rem)] leading-[0.88] text-[oklch(0.07_0_0)]">
                 DEALER<br /><span className="text-[oklch(0.78_0_0)]">CONTENT</span>
               </h2>
             </AnimFade>

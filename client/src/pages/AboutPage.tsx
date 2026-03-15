@@ -108,7 +108,7 @@ export default function AboutPage() {
             </p>
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h1 className="font-display text-[clamp(4rem,12vw,11rem)] leading-[0.88] text-white mb-8">
+            <h1 className="font-display text-[clamp(2.6rem,8vw,7.5rem)] leading-[0.88] text-white mb-8">
               BUILT FOR<br />
               <span className="text-outline-white">DEALERSHIPS</span><br />
               THAT WANT MORE
@@ -129,7 +129,7 @@ export default function AboutPage() {
 
             {/* Left: big pull quote */}
             <AnimFade>
-              <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.92] text-[oklch(0.07_0_0)] sticky top-28">
+              <h2 className="font-display text-[clamp(1.6rem,4vw,3.3rem)] leading-[0.92] text-[oklch(0.07_0_0)] sticky top-28">
                 SOUTHERN NEVADA<br />
                 <span className="text-[oklch(0.78_0_0)]">&amp; SOUTH FL</span><br />
                 DEALER CONTENT<br />
@@ -187,7 +187,7 @@ export default function AboutPage() {
             </p>
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h2 className="font-display text-[clamp(3rem,8vw,7rem)] leading-[0.88] text-white mb-16">
+            <h2 className="font-display text-[clamp(2rem,5.5vw,4.7rem)] leading-[0.88] text-white mb-16">
               HOW WE<br />
               <span className="text-outline-white">OPERATE</span>
             </h2>
@@ -257,7 +257,7 @@ export default function AboutPage() {
             <p className="section-label text-white/40 mb-6">
               <span>✦</span><span>FREQUENTLY ASKED —</span>
             </p>
-            <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] text-white mb-12">
+            <h2 className="font-display text-[clamp(1.6rem,4.5vw,4rem)] leading-[0.9] text-white mb-12">
               DEALER<br />
               <span className="text-[oklch(0.45_0_0)]">FAQ</span>
             </h2>

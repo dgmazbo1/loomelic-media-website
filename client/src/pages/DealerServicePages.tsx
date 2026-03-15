@@ -51,7 +51,7 @@ function SubpageHero({ label, number, headline, sub }: { label: string; number: 
           <p className="section-label text-white/40 mb-6"><span>✦</span><span>DEALER SERVICES · {number}</span></p>
         </AnimFade>
         <AnimFade delay={0.1}>
-          <h1 className="font-display text-[clamp(2.8rem,8vw,7rem)] leading-[0.88] text-white mb-6 max-w-4xl">{headline}</h1>
+          <h1 className="font-display text-[clamp(1.8rem,5.5vw,4.7rem)] leading-[0.88] text-white mb-6 max-w-4xl">{headline}</h1>
         </AnimFade>
         <AnimFade delay={0.2}>
           <p className="font-body text-white/55 text-sm sm:text-base max-w-xl leading-relaxed mb-8">{sub}</p>
@@ -182,7 +182,7 @@ function CTABlock() {
     <section className="section-dark">
       <div className="container py-16 sm:py-24">
         <AnimFade>
-          <h2 className="font-display text-[clamp(2.5rem,6vw,5.5rem)] leading-[0.9] text-white mb-8 max-w-2xl">GET A DEALER<br />CONTENT PLAN</h2>
+          <h2 className="font-display text-[clamp(1.6rem,4vw,3.7rem)] leading-[0.9] text-white mb-8 max-w-2xl">GET A DEALER<br />CONTENT PLAN</h2>
         </AnimFade>
         <AnimFade delay={0.1}>
           <div className="flex flex-wrap gap-4">
@@ -242,7 +242,7 @@ export function DealerServicesOverview() {
             <p className="section-label text-white/40 mb-6"><span>✦</span><span>DEALER SERVICES</span></p>
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h1 className="font-display text-[clamp(3rem,9vw,8rem)] leading-[0.88] text-white mb-6 max-w-4xl">CONTENT THAT<br /><span className="text-outline-white">MOVES</span><br />INVENTORY</h1>
+            <h1 className="font-display text-[clamp(2rem,6vw,5.5rem)] leading-[0.88] text-white mb-6 max-w-4xl">CONTENT THAT<br /><span className="text-outline-white">MOVES</span><br />INVENTORY</h1>
           </AnimFade>
           <AnimFade delay={0.2}>
             <p className="font-body text-white/55 text-sm sm:text-base max-w-xl leading-relaxed">
@@ -281,7 +281,7 @@ export function DealerServicesOverview() {
         <div className="container py-16 sm:py-24">
           <AnimFade>
             <p className="section-label text-white/40 mb-6"><span>✦</span><span>WHO WE WORK WITH</span></p>
-            <h2 className="font-display text-[clamp(2rem,5vw,4.5rem)] leading-[0.9] text-white mb-6">SINGLE-POINT DEALERS<br />TO MULTI-ROOFTOP GROUPS</h2>
+            <h2 className="font-display text-[clamp(1.4rem,3.5vw,3rem)] leading-[0.9] text-white mb-6">SINGLE-POINT DEALERS<br />TO MULTI-ROOFTOP GROUPS</h2>
             <p className="font-body text-white/55 text-sm sm:text-base max-w-xl leading-relaxed">
               Whether you're managing 50 vehicles a month or 500, we build content systems that scale with your operation. We're familiar with Lexus, Subaru, and other OEM visual standards for certified programs and co-op submissions.
             </p>
@@ -299,7 +299,7 @@ export function DealerServicesOverview() {
       <section className="section-dark border-t border-white/5">
         <div className="container py-16 sm:py-24">
           <AnimFade>
-            <h2 className="font-display text-[clamp(2.5rem,7vw,6rem)] leading-[0.9] text-white mb-8 max-w-2xl">READY TO BOOK<br />A DEALER CALL?</h2>
+            <h2 className="font-display text-[clamp(1.6rem,4.5vw,4rem)] leading-[0.9] text-white mb-8 max-w-2xl">READY TO BOOK<br />A DEALER CALL?</h2>
           </AnimFade>
           <AnimFade delay={0.1}>
             <div className="flex flex-wrap gap-4">

@@ -131,7 +131,7 @@ export default function CaseStudies() {
             </p>
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h1 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-white mb-6">
+            <h1 className="font-display text-[clamp(2.2rem,7vw,6rem)] leading-[0.88] text-white mb-6">
               OUR<br />
               <span className="text-outline-white">WORK</span>
             </h1>
@@ -224,7 +224,7 @@ export default function CaseStudies() {
       <section className="section-black">
         <div className="container py-16 sm:py-24 text-center">
           <AnimFade>
-            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.88] text-white mb-6">
+            <h2 className="font-display text-[clamp(1.6rem,4vw,3.3rem)] leading-[0.88] text-white mb-6">
               READY TO BE<br />
               <span className="text-outline-white">NEXT?</span>
             </h2>

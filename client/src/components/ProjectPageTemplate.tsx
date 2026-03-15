@@ -153,7 +153,7 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(2.5rem,8vw,8rem)] leading-[0.88] text-white mb-6 max-w-4xl"
+            className="font-display text-[clamp(1.8rem,5.5vw,5.5rem)] leading-[0.88] text-white mb-6 max-w-4xl"
           >
             {data.title}
           </motion.h1>

@@ -86,7 +86,7 @@ export default function CaseStudiesPreview() {
               </p>
             </AnimFade>
             <AnimFade delay={0.1}>
-              <h2 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-white">
+              <h2 className="font-display text-[clamp(2.2rem,7vw,6rem)] leading-[0.88] text-white">
                 FEATURED<br />
                 <span className="text-outline-white">WORK</span>
               </h2>

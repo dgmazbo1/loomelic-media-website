@@ -75,7 +75,7 @@ export default function ContactSection() {
             </p>
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h2 className="font-display text-[clamp(4rem,14vw,13rem)] leading-[0.85] text-white mb-8 sm:mb-12">
+            <h2 className="font-display text-[clamp(2.5rem,9vw,8.5rem)] leading-[0.85] text-white mb-8 sm:mb-12">
               LET'S<br />
               BUILD YOUR<br />
               <span className="text-[oklch(0.4_0_0)]">CONTENT SYSTEM</span>
@@ -98,7 +98,7 @@ export default function ContactSection() {
               <p className="section-label text-[oklch(0.07_0_0)/40] mb-6">
                 <span>✦</span><span>CONTACT US —</span>
               </p>
-              <h3 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] text-[oklch(0.07_0_0)] mb-4">
+              <h3 className="font-display text-[clamp(1.6rem,4vw,3.3rem)] leading-[0.9] text-[oklch(0.07_0_0)] mb-4">
                 LET'S<br />
                 <span className="text-[oklch(0.78_0_0)]">TALK</span>
               </h3>

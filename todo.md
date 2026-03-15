@@ -227,3 +227,6 @@
 - [x] Add auto-sliding InventorySlideshow component to INVENTORY PHOTOGRAPHY section in DealerServicesPage
 - [x] Carousel cycles through 14 real CDN inventory photos every 3.5 seconds with fade transition
 - [x] Prev/Next buttons, dot indicators, photo counter (X / 14), pause-on-hover
+
+## Font Size Reduction — Hero & Section Headers (Mar 15)
+- [x] Reduce all hero and section header font sizes by ~1/3 on desktop across entire site

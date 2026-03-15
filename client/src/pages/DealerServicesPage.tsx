@@ -355,7 +355,7 @@ export default function DealerServicesPage() {
             </p>
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h1 className="font-display text-[clamp(3.5rem,10vw,9rem)] leading-[0.88] text-white mb-6">
+            <h1 className="font-display text-[clamp(2.2rem,7vw,6rem)] leading-[0.88] text-white mb-6">
               DEALER<br />
               <span className="text-outline-white">SERVICES</span>
             </h1>
@@ -431,7 +431,7 @@ export default function DealerServicesPage() {
 
                   <AnimFade delay={0.1}>
                     <h2
-                      className={`font-display text-[clamp(2.5rem,5vw,5rem)] leading-[0.88] mb-6 whitespace-pre-line ${
+                      className={`font-display text-[clamp(1.6rem,3.5vw,3.3rem)] leading-[0.88] mb-6 whitespace-pre-line ${
                         isEven ? "text-[oklch(0.07_0_0)]" : "text-white"
                       }`}
                     >
@@ -533,7 +533,7 @@ export default function DealerServicesPage() {
       <section className="section-black">
         <div className="container py-16 sm:py-24 text-center">
           <AnimFade>
-            <h2 className="font-display text-[clamp(2.5rem,6vw,5rem)] leading-[0.88] text-white mb-6">
+            <h2 className="font-display text-[clamp(1.6rem,4vw,3.3rem)] leading-[0.88] text-white mb-6">
               READY TO<br />
               <span className="text-outline-white">GET STARTED?</span>
             </h2>

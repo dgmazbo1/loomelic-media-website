@@ -61,7 +61,7 @@ export default function AllProjectsPage() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.88] text-white mb-6"
+            className="font-display text-[clamp(2rem,7vw,6rem)] leading-[0.88] text-white mb-6"
           >
             OUR<br />
             <span className="text-[oklch(0.4_0_0)]">WORK</span>
