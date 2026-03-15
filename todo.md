@@ -233,3 +233,6 @@
 
 ## Event Coverage Photos (Mar 15)
 - [x] Upload 7 event photos to CDN and add to Event Coverage slideshow
+
+## Remove Enterprise & Regional (Mar 15)
+- [x] Remove all "Enterprise" and "Regional" labels, tags, and references site-wide

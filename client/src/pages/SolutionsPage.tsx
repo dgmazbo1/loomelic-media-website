@@ -14,7 +14,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { useLocation } from "wouter";
 import {
-  Globe, Calendar, Monitor,
+  Calendar, Monitor,
   ArrowRight, CheckCircle,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -45,26 +45,6 @@ function AnimFade({
 }
 
 const SOLUTION_SECTIONS = [
-  {
-    id: "enterprise",
-    icon: Globe,
-    label: "ENTERPRISE / REGIONAL",
-    title: "ENTERPRISE\nPROGRAMS",
-    desc: "Regional and national content programs for OEM-aligned dealer networks, captive finance groups, and automotive brands that require standardized production at scale.",
-    features: [
-      "OEM-aligned brand standards compliance",
-      "Regional coordinator and dedicated team",
-      "Standardized production across all markets",
-      "Centralized asset management and delivery",
-      "Quarterly strategy reviews and reporting",
-      "National campaign execution",
-      "White-label production available",
-      "Custom SLA and turnaround agreements",
-    ],
-    bestFor: "Regional dealer networks, OEM programs, and national automotive brands.",
-    image: HERO_GRID_IMAGES[0],
-    video: HERO_VIDEOS.droneFiller,
-  },
   {
     id: "events",
     icon: Calendar,
@@ -109,7 +89,6 @@ const SOLUTION_SECTIONS = [
 
 // Map URL slugs to section IDs
 const SLUG_TO_ID: Record<string, string> = {
-  enterprise: "enterprise",
   events: "events",
   websites: "websites",
 };

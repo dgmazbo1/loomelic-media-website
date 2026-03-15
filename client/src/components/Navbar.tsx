@@ -25,7 +25,6 @@ const DEALER_SUB_ITEMS = [
 const OTHER_SERVICE_ITEMS = [
   { label: "Event Coverage", href: "/services/events" },
   { label: "Premium Web Services", href: "/services/websites" },
-  { label: "Enterprise / Regional", href: "/solutions/enterprise" },
 ];
 
 export default function Navbar() {

@@ -128,9 +128,8 @@ function Router() {
         {/* Home */}
         <Route path="/" component={Home} />
 
-        {/* Solutions pages (Enterprise, Events, Websites) */}
+        {/* Solutions pages (Events, Websites) */}
         <Route path="/solutions" component={SolutionsPage} />
-        <Route path="/solutions/enterprise" component={SolutionsPage} />
         <Route path="/solutions/events" component={SolutionsPage} />
         <Route path="/solutions/websites" component={SolutionsPage} />
 

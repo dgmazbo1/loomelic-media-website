@@ -14,7 +14,6 @@ const CLIENT_TYPES = [
   "DEALER GROUPS",
   "EVENTS",
   "BRANDS",
-  "ENTERPRISE",
 ];
 
 const MARQUEE_ITEMS = [
