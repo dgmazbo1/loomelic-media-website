@@ -106,8 +106,7 @@ const DEALER_SECTIONS = [
       "Digital and print-ready formats",
     ],
     bestFor: "Dealership sales teams, executives, professionals, and personal brands.",
-    image: HERO_GRID_IMAGES[1],
-    video: HERO_VIDEOS.headlight,
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/headshot-loh_f721a61c.jpg",
   },
   {
     id: "crm-video",

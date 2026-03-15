@@ -210,3 +210,11 @@
 ## Use Cases Mobile Font Cleanup (Mar 15)
 - [x] Reduce mobile font on REAL RESULTS grid heading (clamp 3.5rem → 2rem)
 - [x] Reduce mobile font on Final CTA heading (clamp 3rem → 2rem)
+
+## Scroll Fade-In Animations (Mar 15)
+- [ ] Audit existing AnimFade usage and identify headings missing scroll animation
+- [ ] Apply scroll fade-in to homepage section headings (About, Services, Stats, Projects, Portfolio, Contact)
+- [ ] Apply scroll fade-in to Use Cases page section headings
+
+## Headshots Section Image Swap (Mar 15)
+- [x] Upload LOH headshot to CDN and replace video in Headshots & Portraits section
