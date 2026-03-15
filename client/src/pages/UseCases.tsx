@@ -343,7 +343,7 @@ export default function UseCases() {
               <AnimFade delay={0.1}>
                 <h2
                   id="featured-uc-heading"
-                  className="font-display text-[clamp(3.5rem,10vw,9rem)] text-white"
+                  className="font-display text-[clamp(2rem,10vw,9rem)] text-white"
                   style={displayHeading}
                 >
                   REAL<br />
@@ -378,7 +378,7 @@ export default function UseCases() {
             <SectionLabel text="READY TO GROW?" />
           </AnimFade>
           <AnimFade delay={0.1}>
-            <h2 className="font-display text-[clamp(3rem,10vw,10rem)] text-white mb-6 sm:mb-8" style={displayHeading}>
+            <h2 className="font-display text-[clamp(2rem,10vw,10rem)] text-white mb-6 sm:mb-8" style={displayHeading}>
               READY TO BUILD<br />
               A CONTENT SYSTEM<br />
               <span className="text-outline-white">THAT DRIVES RESULTS?</span>

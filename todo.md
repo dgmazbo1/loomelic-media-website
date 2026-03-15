@@ -206,3 +206,7 @@
 ## Mobile Hero Font Fix (Mar 15)
 - [x] Reduce hero heading font size on mobile for homepage HeroSection
 - [x] Reduce hero heading font size on mobile for Use Cases page hero
+
+## Use Cases Mobile Font Cleanup (Mar 15)
+- [x] Reduce mobile font on REAL RESULTS grid heading (clamp 3.5rem → 2rem)
+- [x] Reduce mobile font on Final CTA heading (clamp 3rem → 2rem)
