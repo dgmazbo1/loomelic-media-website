@@ -13,12 +13,12 @@
      /services/dealer-services/short-form-reels         → scroll to short-form-reels
      /services/dealer-services/walkaround-videos        → scroll to walkaround-videos
    ============================================================ */
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { useLocation } from "wouter";
 import {
   Building2, Users, Camera, Video,
-  ArrowRight, CheckCircle,
+  ArrowRight, CheckCircle, ChevronLeft, ChevronRight,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { HERO_VIDEOS, LEXUS_HENDERSON, HERO_GRID_IMAGES } from "@/lib/media";
@@ -46,6 +46,123 @@ function AnimFade({
     </motion.div>
   );
 }
+
+/* ─── Auto-sliding inventory photo carousel ─── */
+function InventorySlideshow({ slides, label }: { slides: string[]; label: string }) {
+  const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const next = useCallback(() => {
+    setCurrent((c) => (c + 1) % slides.length);
+  }, [slides.length]);
+
+  const prev = useCallback(() => {
+    setCurrent((c) => (c - 1 + slides.length) % slides.length);
+  }, [slides.length]);
+
+  // Auto-advance every 3.5 seconds
+  useEffect(() => {
+    if (paused) return;
+    intervalRef.current = setInterval(next, 3500);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [next, paused]);
+
+  // Reset timer on manual navigation
+  const goTo = useCallback(
+    (idx: number) => {
+      setCurrent(idx);
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (!paused) {
+        intervalRef.current = setInterval(next, 3500);
+      }
+    },
+    [next, paused]
+  );
+
+  return (
+    <div
+      className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-black select-none"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* Slides */}
+      <AnimatePresence mode="sync">
+        <motion.img
+          key={current}
+          src={slides[current]}
+          alt={`${label} — photo ${current + 1}`}
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          draggable={false}
+        />
+      </AnimatePresence>
+
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+
+      {/* Prev / Next buttons */}
+      <button
+        onClick={(e) => { e.stopPropagation(); prev(); }}
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 flex items-center justify-center transition-colors"
+        aria-label="Previous photo"
+      >
+        <ChevronLeft className="w-4 h-4 text-white" />
+      </button>
+      <button
+        onClick={(e) => { e.stopPropagation(); next(); }}
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 flex items-center justify-center transition-colors"
+        aria-label="Next photo"
+      >
+        <ChevronRight className="w-4 h-4 text-white" />
+      </button>
+
+      {/* Dot indicators */}
+      <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => goTo(i)}
+            className={`rounded-full transition-all duration-300 ${
+              i === current
+                ? "w-5 h-1.5 bg-white"
+                : "w-1.5 h-1.5 bg-white/40 hover:bg-white/70"
+            }`}
+            aria-label={`Go to photo ${i + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Photo counter */}
+      <div className="absolute top-3 right-3 z-10 px-2 py-0.5 rounded-full bg-black/50 text-white/80 text-xs font-body tracking-widest">
+        {current + 1} / {slides.length}
+      </div>
+    </div>
+  );
+}
+
+/* ─── INVENTORY PHOTO CDN URLS ─── */
+const INVENTORY_PHOTOS = [
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_2757_7ee4795f.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_2415_553f4c39.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_3800_7758fc13.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_0145-Enhanced-NR_4cdb26b5.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_8528-Enhanced-NR_097ef5cf.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_2071_9a59dd20.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_5551_b0a2ed51.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_2017_48678792.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_5224_8e69398f.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_9501_c5c8a29f.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_4535_c4c3bb18.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_3805_ab55557b.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_8782-2_dc7744d9.jpg",
+  "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC_5454-Enhanced-NR-2_a94189c0.jpg",
+];
 
 /* ─── SECTIONS — exact same data as was in SolutionsPage ─── */
 const DEALER_SECTIONS = [
@@ -145,8 +262,8 @@ const DEALER_SECTIONS = [
       "Direct upload to DMS or third-party platforms",
     ],
     bestFor: "Dealerships that need fast, consistent, high-volume inventory photography for their VDPs.",
-    image: LEXUS_HENDERSON.hero,
-    video: HERO_VIDEOS.lexusRoll,
+    image: INVENTORY_PHOTOS[0],
+    slides: INVENTORY_PHOTOS,
   },
   {
     id: "short-form-reels",
@@ -188,7 +305,7 @@ const DEALER_SECTIONS = [
     image: HERO_GRID_IMAGES[4],
     video: HERO_VIDEOS.gxShowroom,
   },
-];
+] as const;
 
 // Map URL slugs to section IDs
 const SLUG_TO_ID: Record<string, string> = {
@@ -265,7 +382,7 @@ export default function DealerServicesPage() {
                       window.scrollTo({ top: y, behavior: "smooth" });
                     }
                   }}
-                  className="px-4 py-2 rounded-full bg-white/[0.04] border border-white/8 font-body text-xs tracking-widest text-white/40 hover:border-white/20 hover:text-white/60 transition-all"
+                  className="px-4 py-2 rounded-full border border-white/20 text-white/60 hover:text-white hover:border-white/60 font-body text-xs tracking-widest transition-all"
                 >
                   {s.label}
                 </a>
@@ -279,6 +396,8 @@ export default function DealerServicesPage() {
       {DEALER_SECTIONS.map((sol, idx) => {
         const Icon = sol.icon;
         const isEven = idx % 2 === 0;
+        const hasSlides = "slides" in sol && Array.isArray(sol.slides);
+        const hasVideo = "video" in sol && !!sol.video;
         return (
           <section
             key={sol.id}
@@ -378,26 +497,30 @@ export default function DealerServicesPage() {
                 {/* Visual side */}
                 <div className={isEven ? "order-2" : "order-2 lg:order-1"}>
                   <AnimFade delay={0.1}>
-                    <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-black">
-                      {sol.video ? (
-                        <video
-                          src={sol.video}
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          className="w-full h-full object-cover opacity-80"
-                          poster={sol.image}
-                        />
-                      ) : (
-                        <img
-                          src={sol.image}
-                          alt={sol.label}
-                          className="w-full h-full object-cover"
-                        />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    </div>
+                    {hasSlides ? (
+                      <InventorySlideshow slides={(sol as any).slides} label={sol.label} />
+                    ) : (
+                      <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-black">
+                        {hasVideo ? (
+                          <video
+                            src={(sol as any).video}
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            className="w-full h-full object-cover opacity-80"
+                            poster={sol.image}
+                          />
+                        ) : (
+                          <img
+                            src={sol.image}
+                            alt={sol.label}
+                            className="w-full h-full object-cover"
+                          />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      </div>
+                    )}
                   </AnimFade>
                 </div>
               </div>

@@ -218,3 +218,12 @@
 
 ## Headshots Section Image Swap (Mar 15)
 - [x] Upload LOH headshot to CDN and replace video in Headshots & Portraits section
+
+## Inventory Photography Slideshow (Mar 15)
+- [ ] Upload 14 inventory photos to CDN
+- [ ] Build auto-sliding carousel for INVENTORY PHOTOGRAPHY section in DealerServicesPage
+
+## Inventory Photography Slideshow (Mar 15)
+- [x] Add auto-sliding InventorySlideshow component to INVENTORY PHOTOGRAPHY section in DealerServicesPage
+- [x] Carousel cycles through 14 real CDN inventory photos every 3.5 seconds with fade transition
+- [x] Prev/Next buttons, dot indicators, photo counter (X / 14), pause-on-hover
