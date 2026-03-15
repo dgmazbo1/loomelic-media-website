@@ -293,7 +293,7 @@ export default function UseCases() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(4rem,14vw,13rem)] text-white mb-6"
+            className="font-display text-[clamp(2.2rem,14vw,13rem)] text-white mb-6"
             style={displayHeading}
           >
             USE CASES<br />

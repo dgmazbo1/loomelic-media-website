@@ -202,3 +202,7 @@
 ## Use Cases Page Cleanup (Mar 11)
 - [x] Remove "Portfolio vs. Use Cases" positioning section from /use-cases
 - [x] Remove "Dealership Marketing / Content Built For Results" SEO section from /use-cases
+
+## Mobile Hero Font Fix (Mar 15)
+- [x] Reduce hero heading font size on mobile for homepage HeroSection
+- [x] Reduce hero heading font size on mobile for Use Cases page hero
