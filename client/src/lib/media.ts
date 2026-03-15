@@ -158,13 +158,15 @@ export const TWO_MOONS_LODGE = {
 
 // ─── PROJECT: WONDR NATION G2E 2025 ─────────────────────────
 export const WONDR_NATION = {
-  hero: `${CDN2}/68fcf9bd262acd5af0693405_20251007Reception-17.jpg`,
+  hero: `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-17_f93729e6.jpg`,
   gallery: [
-    `${CDN2}/68fcf9bd3c8b4e115553c4bf_20251007Reception-10.jpg`,
-    `${CDN2}/68fcf9bd5935abe9dcf54459_20251006Memorial-14.jpg`,
-    `${CDN2}/68fcf9bd790de4dffb608dfe_20251005WomenRising-08.jpg`,
-    `${CDN2}/68fcf9bd790de4dffb608e0d_20251006Memorial-16.jpg`,
-    `${CDN2}/68fcf9bdbd34c47772126fa9_20251005WomenRising-17.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251006Memorial-14_7c4a0182.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-10_96660ba6.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-17_f93729e6.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251006Memorial-16_f717d35b.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-38_f314fb1d.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251005WomenRising-17_73efda25.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251005WomenRising-08_a546fca4.jpg`,
   ],
 };
 

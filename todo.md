@@ -230,3 +230,6 @@
 
 ## Font Size Reduction — Hero & Section Headers (Mar 15)
 - [x] Reduce all hero and section header font sizes by ~1/3 on desktop across entire site
+
+## Event Coverage Photos (Mar 15)
+- [x] Upload 7 event photos to CDN and add to Event Coverage slideshow
