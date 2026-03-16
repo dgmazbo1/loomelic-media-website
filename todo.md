@@ -236,3 +236,6 @@
 
 ## Remove Enterprise & Regional (Mar 15)
 - [x] Remove all "Enterprise" and "Regional" labels, tags, and references site-wide
+
+## G2E Photos in Event Coverage Service Page (Mar 15)
+- [x] Display all 7 G2E 2025 photos in the Services > Event Coverage gallery section
