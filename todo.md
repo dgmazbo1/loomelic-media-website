@@ -239,3 +239,6 @@
 
 ## G2E Photos in Event Coverage Service Page (Mar 15)
 - [x] Display all 7 G2E 2025 photos in the Services > Event Coverage gallery section
+
+## Event Coverage Page — G2E Gallery Section (Mar 15)
+- [x] Add dedicated G2E 2025 photo gallery section directly on the Event Coverage page

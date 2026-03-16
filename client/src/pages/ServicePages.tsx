@@ -85,6 +85,10 @@ export function EventCoveragePage() {
           { title: "SAME-DAY EDITS", desc: "Fast-turnaround edited content available for immediate social media posting during or after your event." },
         ],
         heroImage: WONDR_NATION.hero,
+        featuredGallery: {
+          label: "G2E 2025 — LAS VEGAS",
+          images: WONDR_NATION.gallery,
+        },
         galleryImages: [
           ...WONDR_NATION.gallery,
           ...RAIDERS_BLAST.gallery,

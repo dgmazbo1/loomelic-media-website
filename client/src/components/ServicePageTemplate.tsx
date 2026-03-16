@@ -22,6 +22,7 @@ export interface ServicePageData {
   heroVideo?: string;
   heroImage?: string;
   galleryImages?: string[];
+  featuredGallery?: { label: string; images: string[] };
   useCases?: string[];
   testimonials?: { quote: string; name: string; company: string }[];
   relatedProjects?: { slug: string; title: string; category: string; image: string }[];
@@ -102,6 +103,7 @@ function Lightbox({ images, startIndex, onClose }: { images: string[]; startInde
 export default function ServicePageTemplate({ data }: { data: ServicePageData }) {
   const [, navigate] = useLocation();
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+  const [featuredLightboxIdx, setFeaturedLightboxIdx] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
@@ -167,6 +169,43 @@ export default function ServicePageTemplate({ data }: { data: ServicePageData })
           </motion.p>
         </div>
       </section>
+
+      {/* Featured Gallery — shown immediately after hero when provided */}
+      {data.featuredGallery && data.featuredGallery.images.length > 0 && (
+        <section className="bg-[oklch(0.07_0_0)] py-16 sm:py-24">
+          <div className="container">
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="section-label text-white/40 mb-8"
+            >
+              <span>✦</span><span>{data.featuredGallery.label} —</span>
+            </motion.p>
+            <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
+              {data.featuredGallery.images.map((img, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.55, delay: (i % 4) * 0.07 }}
+                  className="break-inside-avoid overflow-hidden rounded-xl cursor-pointer group"
+                  onClick={() => setFeaturedLightboxIdx(i)}
+                >
+                  <img
+                    src={img}
+                    alt={`${data.featuredGallery!.label} ${i + 1}`}
+                    className="w-full h-auto object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                    loading={i < 4 ? 'eager' : 'lazy'}
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Description + Features */}
       <section className="section-light py-16 sm:py-24">
@@ -315,13 +354,24 @@ export default function ServicePageTemplate({ data }: { data: ServicePageData })
         </div>
       </section>
 
-      {/* Lightbox */}
+      {/* Lightbox — main gallery */}
       <AnimatePresence>
         {lightboxIdx !== null && data.galleryImages && (
           <Lightbox
             images={data.galleryImages}
             startIndex={lightboxIdx}
             onClose={() => setLightboxIdx(null)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Lightbox — featured gallery */}
+      <AnimatePresence>
+        {featuredLightboxIdx !== null && data.featuredGallery && (
+          <Lightbox
+            images={data.featuredGallery.images}
+            startIndex={featuredLightboxIdx}
+            onClose={() => setFeaturedLightboxIdx(null)}
           />
         )}
       </AnimatePresence>
