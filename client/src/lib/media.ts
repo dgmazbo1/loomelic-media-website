@@ -158,15 +158,15 @@ export const TWO_MOONS_LODGE = {
 
 // ─── PROJECT: WONDR NATION G2E 2025 ─────────────────────────
 export const WONDR_NATION = {
-  hero: `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-17_f93729e6.jpg`,
+  hero: `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-17_42555925.jpg`,
   gallery: [
-    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251006Memorial-14_7c4a0182.jpg`,
-    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-10_96660ba6.jpg`,
-    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-17_f93729e6.jpg`,
-    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251006Memorial-16_f717d35b.jpg`,
-    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-38_f314fb1d.jpg`,
-    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251005WomenRising-17_73efda25.jpg`,
-    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251005WomenRising-08_a546fca4.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251006Memorial-14_1ac73c0e.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-10_559b14ca.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-17_42555925.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251006Memorial-16_fcf343ff.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251007Reception-38_f483b70f.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251005WomenRising-17_91c7e202.jpg`,
+    `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251005WomenRising-08_c1e36e87.jpg`,
   ],
 };
 
