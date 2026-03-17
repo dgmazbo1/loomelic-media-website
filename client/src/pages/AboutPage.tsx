@@ -227,6 +227,12 @@ export default function AboutPage() {
               "LAS VEGAS RAIDERS",
               "CENTENNIAL SUBARU",
               "SPORTS ILLUSTRATED",
+              "FINDLAY NISSAN",
+              "ASCENT AUTOMOTIVE GROUP",
+              "LEXUS WESTERN AREA",
+              "THE BLAST",
+              "ABC HYUNDAI",
+              "LITHIA GROUP",
             ].map((name, i) => (
               <motion.div
                 key={name}

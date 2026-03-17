@@ -242,3 +242,6 @@
 
 ## Event Coverage Page — G2E Gallery Section (Mar 15)
 - [x] Add dedicated G2E 2025 photo gallery section directly on the Event Coverage page
+
+## Trusted By — Add Clients (Mar 16)
+- [x] Add ABC Hyundai and Lithia Group to the Trusted By section
