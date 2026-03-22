@@ -44,7 +44,7 @@ export default function HeroSection() {
           loop
           playsInline
           className="w-full h-full object-cover opacity-30"
-          src={HERO_VIDEOS.lexusRoll}
+          src={HERO_VIDEOS.websiteMov}
           aria-hidden="true"
         />
         <div

@@ -184,7 +184,7 @@ const DEALER_SECTIONS = [
     ],
     bestFor: "Single-point dealerships looking for a consistent, reliable content partner.",
     image: LEXUS_HENDERSON.hero,
-    video: HERO_VIDEOS.lexusRoll,
+    video: HERO_VIDEOS.websiteMov,
   },
   {
     id: "dealer-groups",

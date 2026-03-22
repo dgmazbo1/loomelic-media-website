@@ -245,3 +245,6 @@
 
 ## Trusted By — Add Clients (Mar 16)
 - [x] Add ABC Hyundai and Lithia Group to the Trusted By section
+
+## Hero Video Replacement (Mar 21)
+- [x] Upload Website.mov to CDN and replace hero video on homepage and Dealer Services page

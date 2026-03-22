@@ -36,6 +36,7 @@ export const HERO_VIDEOS = {
   rollers: `${CDN}%2F68753a37cde336ddfaa8d59a_ROLLERS-transcode.mp4`,
   madisonTalkingHead: `${CDN}%2F6872124bac082d1646d06eee_Madison%20Talking%20head-transcode.mp4`,
   lexusService: `${CDN}%2F687214ba5e2249e85fee075b_Lexus%20Service-transcode.mp4`,
+  websiteMov: `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/Website_d03f0061.mov`,
 };
 
 // ─── VIDEO POSTERS ───────────────────────────────────────────
