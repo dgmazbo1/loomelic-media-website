@@ -6,7 +6,8 @@
    ============================================================ */
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
-import { Instagram, Youtube, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import SocialLinks from "@/components/SocialLinks";
 import { LOGO_TRANSPARENT, HERO_VIDEOS } from "@/lib/media";
 
 const CLIENT_TYPES = [
@@ -138,24 +139,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 1 }}
           className="flex items-center gap-3"
         >
-          <a
-            href="https://www.instagram.com/loomelicmedia"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Loomelic Media on Instagram"
-            className="w-9 h-9 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-all"
-          >
-            <Instagram size={15} />
-          </a>
-          <a
-            href="https://www.youtube.com/@loomelicmedia"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Loomelic Media on YouTube"
-            className="w-9 h-9 flex items-center justify-center rounded-full border border-white/15 text-white/50 hover:text-white hover:border-white/40 transition-all"
-          >
-            <Youtube size={15} />
-          </a>
+          <SocialLinks variant="dark" size="md" />
         </motion.div>
 
         <motion.div

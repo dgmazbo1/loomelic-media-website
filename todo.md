@@ -281,3 +281,9 @@
 - [x] Public portfolio: graphic lightbox with prev/next navigation
 - [x] Write vitest tests for portfolio router (15 tests — public queries, admin RBAC, FORBIDDEN checks)
 - [x] Add /admin/portfolio route to App.tsx
+
+## Social Media Links (Mar 21)
+- [x] Add Facebook, TikTok, Threads links to HeroSection (alongside existing Instagram + YouTube)
+- [x] Add Facebook, TikTok, Threads links to ContactSection contact info block (light section)
+- [x] Add Facebook, TikTok, Threads links to ContactSection footer (dark section)
+- [x] Update Instagram URL to full URL with trailing slash in all locations

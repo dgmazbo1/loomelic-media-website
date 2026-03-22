@@ -5,7 +5,8 @@
    ============================================================ */
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Instagram, Youtube, Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
+import SocialLinks from "@/components/SocialLinks";
 import { LOGO_TRANSPARENT } from "@/lib/media";
 import { useLocation } from "wouter";
 
@@ -128,16 +129,7 @@ export default function ContactSection() {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-3">
-                <a href="https://www.instagram.com/loomelicmedia" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                  className="w-10 h-10 rounded-full border border-[oklch(0_0_0/0.15)] flex items-center justify-center text-[oklch(0.35_0_0)] hover:bg-[oklch(0.07_0_0)] hover:text-white hover:border-[oklch(0.07_0_0)] transition-all">
-                  <Instagram size={15} />
-                </a>
-                <a href="https://www.youtube.com/@loomelicmedia" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
-                  className="w-10 h-10 rounded-full border border-[oklch(0_0_0/0.15)] flex items-center justify-center text-[oklch(0.35_0_0)] hover:bg-[oklch(0.07_0_0)] hover:text-white hover:border-[oklch(0.07_0_0)] transition-all">
-                  <Youtube size={15} />
-                </a>
-              </div>
+              <SocialLinks variant="light" size="md" />
             </AnimFade>
 
             {/* Right: form */}
@@ -270,16 +262,7 @@ export default function ContactSection() {
                 )
               ))}
             </nav>
-            <div className="flex gap-3">
-              <a href="https://www.instagram.com/loomelicmedia" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
-                className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all">
-                <Instagram size={13} />
-              </a>
-              <a href="https://www.youtube.com/@loomelicmedia" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
-                className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/40 hover:text-white hover:border-white/40 transition-all">
-                <Youtube size={13} />
-              </a>
-            </div>
+            <SocialLinks variant="dark" size="sm" />
           </div>
           <div className="pt-6 border-t border-white/6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <p className="font-body text-[0.6rem] text-white/25 tracking-widest">© 2026 LOOMELIC MEDIA LLC. ALL RIGHTS RESERVED.</p>
