@@ -762,3 +762,117 @@ export const socialLinkEvents = mysqlTable("socialLinkEvents", {
 
 export type SocialLinkEvent = typeof socialLinkEvents.$inferSelect;
 export type InsertSocialLinkEvent = typeof socialLinkEvents.$inferInsert;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PORTFOLIO MANAGEMENT SCHEMA
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Portfolio photos — each row is one photo shown on the public portfolio page.
+ * sortOrder controls drag-and-drop display sequence (lower = first).
+ * published = false hides the photo from the public page but keeps it in the DB.
+ */
+export const portfolioPhotos = mysqlTable("portfolio_photos", {
+  id: int("id").autoincrement().primaryKey(),
+  url: text("url").notNull(),
+  fileKey: text("fileKey").notNull(),
+  title: varchar("title", { length: 256 }),
+  caption: text("caption"),
+  sortOrder: int("sortOrder").default(0).notNull(),
+  published: boolean("published").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PortfolioPhoto = typeof portfolioPhotos.$inferSelect;
+export type InsertPortfolioPhoto = typeof portfolioPhotos.$inferInsert;
+
+/**
+ * Portfolio tags — reusable labels (e.g. "EVENTS", "INVENTORY", "HEADSHOTS").
+ * slug is the URL-safe version used for filtering on the public page.
+ * color is an optional hex/oklch value for the admin tag chip.
+ */
+export const portfolioTags = mysqlTable("portfolio_tags", {
+  id: int("id").autoincrement().primaryKey(),
+  name: varchar("name", { length: 64 }).notNull().unique(),
+  slug: varchar("slug", { length: 64 }).notNull().unique(),
+  color: varchar("color", { length: 32 }).default("#ffffff"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type PortfolioTag = typeof portfolioTags.$inferSelect;
+export type InsertPortfolioTag = typeof portfolioTags.$inferInsert;
+
+/**
+ * Portfolio photo → tag join table (many-to-many).
+ */
+export const portfolioPhotoTags = mysqlTable("portfolio_photo_tags", {
+  id: int("id").autoincrement().primaryKey(),
+  photoId: int("photoId").notNull(),
+  tagId: int("tagId").notNull(),
+});
+
+export type PortfolioPhotoTag = typeof portfolioPhotoTags.$inferSelect;
+
+/**
+ * Portfolio videos — Vimeo embeds managed from the admin panel.
+ * vimeoUrl accepts full Vimeo URLs (e.g. https://vimeo.com/123456789)
+ * or embed URLs. thumbnailUrl is auto-fetched or manually set.
+ */
+export const portfolioVideos = mysqlTable("portfolio_videos", {
+  id: int("id").autoincrement().primaryKey(),
+  vimeoUrl: text("vimeoUrl").notNull(),
+  title: varchar("title", { length: 256 }),
+  caption: text("caption"),
+  thumbnailUrl: text("thumbnailUrl"),
+  sortOrder: int("sortOrder").default(0).notNull(),
+  published: boolean("published").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PortfolioVideo = typeof portfolioVideos.$inferSelect;
+export type InsertPortfolioVideo = typeof portfolioVideos.$inferInsert;
+
+/**
+ * Portfolio video → tag join table (many-to-many).
+ * Shares the same portfolioTags table as photos.
+ */
+export const portfolioVideoTags = mysqlTable("portfolio_video_tags", {
+  id: int("id").autoincrement().primaryKey(),
+  videoId: int("videoId").notNull(),
+  tagId: int("tagId").notNull(),
+});
+
+export type PortfolioVideoTag = typeof portfolioVideoTags.$inferSelect;
+
+/**
+ * Portfolio graphics — design work, brand assets, social media graphics.
+ * Same structure as portfolio_photos but kept separate for clean tab navigation.
+ */
+export const portfolioGraphics = mysqlTable("portfolio_graphics", {
+  id: int("id").autoincrement().primaryKey(),
+  url: text("url").notNull(),
+  fileKey: text("fileKey").notNull(),
+  title: varchar("title", { length: 256 }),
+  caption: text("caption"),
+  sortOrder: int("sortOrder").default(0).notNull(),
+  published: boolean("published").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type PortfolioGraphic = typeof portfolioGraphics.$inferSelect;
+export type InsertPortfolioGraphic = typeof portfolioGraphics.$inferInsert;
+
+/**
+ * Portfolio graphic → tag join table (many-to-many).
+ * Shares the same portfolioTags table as photos and videos.
+ */
+export const portfolioGraphicTags = mysqlTable("portfolio_graphic_tags", {
+  id: int("id").autoincrement().primaryKey(),
+  graphicId: int("graphicId").notNull(),
+  tagId: int("tagId").notNull(),
+});
+
+export type PortfolioGraphicTag = typeof portfolioGraphicTags.$inferSelect;

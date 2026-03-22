@@ -248,3 +248,36 @@
 
 ## Hero Video Replacement (Mar 21)
 - [x] Upload Website.mov to CDN and replace hero video on homepage and Dealer Services page
+
+## Portfolio Admin Management (Mar 21)
+- [ ] Database schema: portfolio_photos table (id, url, fileKey, title, sortOrder, published, createdAt) + portfolio_tags + portfolio_photo_tags join table
+- [ ] tRPC procedures: list, create, update, delete photos; manage tags; reorder (drag-and-drop)
+- [ ] Admin panel: portfolio manager UI with image upload, tag editor, drag-and-drop reorder, publish toggle
+- [ ] Public portfolio page: read from database instead of static array
+- [ ] Vitest tests for portfolio procedures
+- [ ] Database schema: portfolio_videos table (id, vimeoUrl, title, caption, sortOrder, published, tagIds)
+- [ ] tRPC procedures: list, create, update, delete, reorder portfolio videos
+- [ ] Admin panel: Vimeo video manager with embed preview, tag assignment, drag-and-drop reorder
+- [ ] Public portfolio page: Video tab/section with Vimeo embeds from database
+- [ ] Database schema: portfolio_graphics table (same structure as photos — image upload + tags + drag-and-drop)
+- [ ] tRPC procedures: list, create, update, delete, reorder portfolio graphics
+- [ ] Admin panel: Graphics tab with image upload, tag assignment, drag-and-drop reorder
+- [ ] Public Portfolio page: three-tab navigation — Photos | Videos | Graphics
+
+## Portfolio System — Photos, Videos, Graphics (Mar 21)
+- [x] Add portfolio_graphics table to Drizzle schema (url, fileKey, title, caption, sortOrder, published, tags)
+- [x] Build tRPC portfolio router with full CRUD for Photos, Videos, and Graphics
+- [x] Build tRPC procedures for tag management (create, list, delete) shared across all three sections
+- [x] Build drag-and-drop reorder procedures for Photos, Videos, and Graphics
+- [x] Build /admin/portfolio page with four tabs: Photos, Videos, Graphics, Tags
+- [x] Admin Photos tab: multi-file upload to S3, tag assignment, drag-and-drop reorder, publish/hide toggle, edit/delete
+- [x] Admin Videos tab: Vimeo URL embed, tag assignment, drag-and-drop reorder, publish/hide toggle, edit/delete
+- [x] Admin Graphics tab: multi-file upload to S3, tag assignment, drag-and-drop reorder, publish/hide toggle, edit/delete
+- [x] Admin Tags tab: create tags with custom color, delete tags (cascades across all items)
+- [x] Rebuild public /portfolio page with three-section tab navigation (Photos, Videos, Graphics)
+- [x] Public portfolio: tag filter bar on each section
+- [x] Public portfolio: photo lightbox with prev/next navigation
+- [x] Public portfolio: video lightbox with embedded Vimeo player (autoplay)
+- [x] Public portfolio: graphic lightbox with prev/next navigation
+- [x] Write vitest tests for portfolio router (15 tests — public queries, admin RBAC, FORBIDDEN checks)
+- [x] Add /admin/portfolio route to App.tsx
