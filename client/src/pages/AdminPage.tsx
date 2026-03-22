@@ -955,7 +955,15 @@ export default function AdminPage() {
         <div className="p-3 border-t border-white/10 space-y-1">
           {/* Enterprise Portal Buttons */}
           <div className="mb-2">
-            <p className="text-white/20 text-xs uppercase tracking-widest px-3 mb-1">Portals &amp; CRM</p>
+            <p className="text-white/20 text-xs uppercase tracking-widest px-3 mb-1">Content</p>
+            <a
+              href="/admin/portfolio"
+              className="w-full flex items-center gap-2 px-3 py-2 rounded-xl bg-white/8 hover:bg-white/15 text-white/70 hover:text-white transition-colors text-sm font-semibold mb-1"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              Portfolio
+            </a>
+            <p className="text-white/20 text-xs uppercase tracking-widest px-3 mb-1 mt-2">Portals &amp; CRM</p>
             <a
               href="/admin/crm"
               className="w-full flex items-center gap-2 px-3 py-2 rounded-xl bg-[oklch(0.85_0.23_110)]/10 hover:bg-[oklch(0.85_0.23_110)]/20 text-[oklch(0.85_0.23_110)] transition-colors text-sm font-semibold mb-1"

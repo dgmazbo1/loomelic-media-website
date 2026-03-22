@@ -287,3 +287,6 @@
 - [x] Add Facebook, TikTok, Threads links to ContactSection contact info block (light section)
 - [x] Add Facebook, TikTok, Threads links to ContactSection footer (dark section)
 - [x] Update Instagram URL to full URL with trailing slash in all locations
+
+## Admin Panel — Portfolio Link (Mar 21)
+- [x] Add Portfolio Management link to admin panel sidebar (under Portals & CRM section)
