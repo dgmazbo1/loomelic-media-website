@@ -290,3 +290,14 @@
 
 ## Admin Panel — Portfolio Link (Mar 21)
 - [x] Add Portfolio Management link to admin panel sidebar (under Portals & CRM section)
+
+## Lexus of Henderson — Vimeo Embeds (Mar 24)
+- [x] Embed GX Showroom Floor (vimeo/1080433854) under Lexus of Henderson project
+- [x] Embed RX Roller (vimeo/1080433702) under Lexus of Henderson project
+- [x] Embed LS500 Hybrid (vimeo/1080433824) under Lexus of Henderson project
+- [x] Embed fourth video (vimeo/1080433675) under Lexus of Henderson project
+- [x] Remove broken video links from Lexus of Henderson project page
+
+## Homepage — Error Section Fix (Mar 24)
+- [ ] Remove "Sorry we are having some trouble here" error section from homepage
+- [ ] Embed Lexus of Henderson Internet Welcome Video (vimeo/1021927778) in its place

@@ -35,7 +35,7 @@ export interface ProjectPageData {
   description: string;
   heroImage: string;
   gallery: string[];
-  vimeoIds?: string[];
+  vimeoIds?: (string | { id: string; portrait?: boolean; hash?: string; title?: string })[];
   videoSrc?: string;
   client?: string;
   services?: string[];
@@ -205,18 +205,33 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
               <p className="section-label text-[oklch(0.6_0_0)] mb-8">
                 <span>✦</span><span>VIDEO CONTENT —</span>
               </p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {data.vimeoIds.map((id) => (
-                  <div key={id} className="rounded-2xl overflow-hidden aspect-video bg-[oklch(0.1_0_0)]">
-                    <iframe
-                      src={`https://player.vimeo.com/video/${id}?autoplay=0&loop=0&title=0&byline=0&portrait=0`}
-                      className="w-full h-full"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      title={`Video ${id}`}
-                    />
-                  </div>
-                ))}
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {data.vimeoIds.map((entry) => {
+                  const id = typeof entry === "string" ? entry : entry.id;
+                  const portrait = typeof entry === "string" ? false : (entry.portrait ?? false);
+                  const hash = typeof entry === "string" ? undefined : entry.hash;
+                  const label = typeof entry === "string" ? `Video ${id}` : (entry.title ?? `Video ${id}`);
+                  const src = hash
+                    ? `https://player.vimeo.com/video/${id}?h=${hash}&badge=0&autopause=0&player_id=0&app_id=58479`
+                    : `https://player.vimeo.com/video/${id}?autoplay=0&loop=0&title=0&byline=0&portrait=0`;
+                  return (
+                    <div
+                      key={id}
+                      className="rounded-2xl overflow-hidden bg-[oklch(0.1_0_0)]"
+                      style={portrait ? { paddingTop: "177.78%", position: "relative" } : { aspectRatio: "16/9" }}
+                    >
+                      <iframe
+                        src={src}
+                        className="w-full h-full"
+                        style={portrait ? { position: "absolute", top: 0, left: 0, width: "100%", height: "100%" } : {}}
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                        title={label}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}

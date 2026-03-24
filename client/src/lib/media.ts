@@ -69,7 +69,12 @@ export const DESIGN_WORK = [
 export const LEXUS_HENDERSON = {
   hero: `${CDN2}/6811ef300aaf9dc73228ee1e_6811d7a56bbd1cf3c09b01f3_Timeline%201_01_00_12_14-2.jpg`,
   gallery: [],
-  vimeoIds: ["1080433801", "1080433724", "1080433986", "1080434019"],
+  vimeoIds: [
+    { id: "1080433854", hash: "c41506ad0d", portrait: true, title: "GX Showroom Floor" },
+    { id: "1080433702", hash: "7073dff8d3", portrait: true, title: "RX Roller" },
+    { id: "1080433824", hash: "f24f188fdc", portrait: true, title: "LS500 Hybrid" },
+    { id: "1080433675", hash: "8432b547a8", portrait: true, title: "Lexus Henderson" },
+  ],
 };
 
 // ─── PROJECT: LEXUS OF LAS VEGAS ─────────────────────────────
