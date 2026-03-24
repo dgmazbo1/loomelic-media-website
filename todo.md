@@ -301,3 +301,7 @@
 ## Homepage — Error Section Fix (Mar 24)
 - [x] Remove "Sorry we are having some trouble here" error section from homepage
 - [x] Embed Lexus of Henderson Internet Welcome Video (vimeo/1021927778) in its place
+
+## Video Autoplay Muted (Mar 24)
+- [x] Update homepage About section video to autoplay muted
+- [x] Update Lexus of Henderson project page videos to autoplay muted

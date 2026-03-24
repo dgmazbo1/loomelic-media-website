@@ -212,8 +212,8 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
                   const hash = typeof entry === "string" ? undefined : entry.hash;
                   const label = typeof entry === "string" ? `Video ${id}` : (entry.title ?? `Video ${id}`);
                   const src = hash
-                    ? `https://player.vimeo.com/video/${id}?h=${hash}&badge=0&autopause=0&player_id=0&app_id=58479`
-                    : `https://player.vimeo.com/video/${id}?autoplay=0&loop=0&title=0&byline=0&portrait=0`;
+                    ? `https://player.vimeo.com/video/${id}?h=${hash}&autoplay=1&muted=1&loop=1&badge=0&autopause=0&player_id=0&app_id=58479`
+                    : `https://player.vimeo.com/video/${id}?autoplay=1&muted=1&loop=1&title=0&byline=0&portrait=0`;
                   return (
                     <div
                       key={id}
