@@ -649,7 +649,7 @@ export default function Home() {
                       {/* Social Media Icons Row + Completeness + Workflow */}
                       <div className="flex items-center gap-2 mt-2">
                         <a
-                          href={d.socialInstagramUrl || '#'}
+                          href={d.socialInstagramUrl || undefined}
                           target="_blank"
                           rel="noopener noreferrer"
                           title={d.socialInstagramUrl ? 'Instagram' : 'No Instagram found'}
@@ -659,7 +659,7 @@ export default function Home() {
                           <InstagramIcon active={!!d.socialInstagramUrl} />
                         </a>
                         <a
-                          href={d.socialFacebookUrl || '#'}
+                          href={d.socialFacebookUrl || undefined}
                           target="_blank"
                           rel="noopener noreferrer"
                           title={d.socialFacebookUrl ? 'Facebook' : 'No Facebook found'}
@@ -669,7 +669,7 @@ export default function Home() {
                           <FacebookIcon active={!!d.socialFacebookUrl} />
                         </a>
                         <a
-                          href={d.socialTiktokUrl || '#'}
+                          href={d.socialTiktokUrl || undefined}
                           target="_blank"
                           rel="noopener noreferrer"
                           title={d.socialTiktokUrl ? 'TikTok' : 'No TikTok found'}
@@ -679,7 +679,7 @@ export default function Home() {
                           <TikTokIcon active={!!d.socialTiktokUrl} />
                         </a>
                         <a
-                          href={d.socialYoutubeUrl || '#'}
+                          href={d.socialYoutubeUrl || undefined}
                           target="_blank"
                           rel="noopener noreferrer"
                           title={d.socialYoutubeUrl ? 'YouTube' : 'No YouTube found'}

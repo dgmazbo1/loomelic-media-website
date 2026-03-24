@@ -305,3 +305,7 @@
 ## Video Autoplay Muted (Mar 24)
 - [x] Update homepage About section video to autoplay muted
 - [x] Update Lexus of Henderson project page videos to autoplay muted
+
+## Broken Links Audit (Mar 24)
+- [x] Scan all components and pages for broken/placeholder links
+- [x] Fix or remove all broken links found
