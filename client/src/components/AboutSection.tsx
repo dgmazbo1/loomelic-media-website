@@ -21,7 +21,8 @@ const TRUSTED_BY = [
   "LITHIA GROUP",
 ];
 
-const VIMEO_ID = "925584368";
+const VIMEO_ID = "1021927778";
+const VIMEO_HASH = "21e1d0f24e";
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -134,12 +135,13 @@ export default function AboutSection() {
         <AnimFade delay={0.2}>
           <div className="relative w-full rounded-2xl overflow-hidden bg-black shadow-xl" style={{ paddingBottom: "56.25%" }}>
             <iframe
-              src={`https://player.vimeo.com/video/${VIMEO_ID}?autoplay=0&title=0&byline=0&portrait=0&color=9bff57`}
+              src={`https://player.vimeo.com/video/${VIMEO_ID}?h=${VIMEO_HASH}&title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479`}
               className="absolute inset-0 w-full h-full"
               frameBorder="0"
-              allow="autoplay; fullscreen; picture-in-picture"
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
-              title="Loomelic Media Showreel"
+              title="Lexus of Henderson Internet Welcome Video"
             />
           </div>
           <p className="font-body text-xs text-[oklch(0.55_0_0)] mt-3 tracking-widest uppercase">

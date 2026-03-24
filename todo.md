@@ -299,5 +299,5 @@
 - [x] Remove broken video links from Lexus of Henderson project page
 
 ## Homepage — Error Section Fix (Mar 24)
-- [ ] Remove "Sorry we are having some trouble here" error section from homepage
-- [ ] Embed Lexus of Henderson Internet Welcome Video (vimeo/1021927778) in its place
+- [x] Remove "Sorry we are having some trouble here" error section from homepage
+- [x] Embed Lexus of Henderson Internet Welcome Video (vimeo/1021927778) in its place
