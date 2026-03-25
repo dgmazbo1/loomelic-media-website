@@ -345,7 +345,7 @@ export default function Navbar() {
             {/* Footer info */}
             <div className="px-8 py-5 border-t border-white/8">
               <p className="font-body text-xs text-white/30 tracking-widest uppercase">Las Vegas, NV · South Florida</p>
-              <p className="font-body text-sm text-white/50 mt-1">702-827-4110</p>
+              <a href="tel:+17028274110" className="font-body text-sm text-white/50 mt-1 hover:text-white transition-colors block">702-827-4110</a>
             </div>
           </motion.div>
         )}

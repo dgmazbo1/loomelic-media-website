@@ -58,10 +58,11 @@ const FAQS = [
   {
     q: "What's the best way to get started?",
     a: "The fastest way is to fill out the contact form below or call us directly at 702-827-4110. We'll schedule a 30-minute discovery call to understand your needs and put together a content plan.",
+    phone: "702-827-4110",
   },
 ];
 
-function FAQItem({ q, a }: { q: string; a: string }) {
+function FAQItem({ q, a, phone }: { q: string; a: string; phone?: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-b border-white/10">
@@ -84,7 +85,15 @@ function FAQItem({ q, a }: { q: string; a: string }) {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <p className="font-body text-sm text-white/55 leading-relaxed pb-6 max-w-2xl">{a}</p>
+            <p className="font-body text-sm text-white/55 leading-relaxed pb-6 max-w-2xl">
+              {phone ? (
+                <>
+                  {a.split(phone)[0]}
+                  <a href={`tel:+1${phone.replace(/\D/g, '')}`} className="text-white hover:text-white/70 transition-colors underline underline-offset-2">{phone}</a>
+                  {a.split(phone)[1]}
+                </>
+              ) : a}
+            </p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -278,7 +287,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.06 }}
               >
-                <FAQItem q={faq.q} a={faq.a} />
+                <FAQItem q={faq.q} a={faq.a} phone={(faq as { q: string; a: string; phone?: string }).phone} />
               </motion.div>
             ))}
           </div>

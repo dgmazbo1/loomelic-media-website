@@ -236,7 +236,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-body text-xs text-white/40 tracking-widest uppercase mb-1">Phone</p>
-                  <p className="font-body text-sm text-white">702-827-4110</p>
+                  <a href="tel:+17028274110" className="font-body text-sm text-white hover:text-white/70 transition-colors">702-827-4110</a>
                 </div>
               </div>
 
@@ -246,7 +246,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="font-body text-xs text-white/40 tracking-widest uppercase mb-1">Email</p>
-                  <p className="font-body text-sm text-white">info@loomelicmedia.com</p>
+                  <a href="mailto:info@loomelicmedia.com" className="font-body text-sm text-white hover:text-white/70 transition-colors">info@loomelicmedia.com</a>
                 </div>
               </div>
 

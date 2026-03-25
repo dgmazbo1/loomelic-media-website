@@ -309,3 +309,7 @@
 ## Broken Links Audit (Mar 24)
 - [x] Scan all components and pages for broken/placeholder links
 - [x] Fix or remove all broken links found
+
+## Mobile Phone & Email Links (Mar 24)
+- [x] Audit all phone/email references and ensure tel: and mailto: hrefs are used
+- [x] Verify Book a Call section has live phone and email tap links
