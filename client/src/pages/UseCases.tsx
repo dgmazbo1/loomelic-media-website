@@ -71,15 +71,34 @@ const USE_CASES = [
     id: "centennial-subaru",
     title: "CENTENNIAL SUBARU",
     category: "USED CAR CAMPAIGN · SOCIAL MEDIA ADS",
-    result: "Increased showroom traffic",
+    result: "Multiple used cars sold within 5 days of posting",
     image: CENTENNIAL_SUBARU.hero,
     overview:
-      "Centennial Subaru needed a stronger way to spotlight used inventory and create more weekend traffic. Loomelic Media developed a Weekend Special campaign built around a trio of used cars — giving shoppers more options, creating urgency, and making the dealership's used inventory feel active and worth visiting.",
+      "Centennial Subaru needed a faster, more targeted way to move used inventory off the lot. Loomelic Media developed a recurring Weekend Special video campaign — three separate units, each spotlighting a different used vehicle — designed to create urgency, drive weekend showroom traffic, and convert online attention into same-week sales.",
     challenge:
-      "Used inventory was moving but wasn't generating enough weekend traffic or online urgency.",
+      "Used inventory was sitting longer than desired, and generic social posts weren't generating the urgency or foot traffic needed to move vehicles quickly. The dealership needed content that felt timely, local, and compelling enough to prompt action within days — not weeks.",
     solution:
-      "A trio-based weekend special campaign with boosted social ads targeting in-market Las Vegas shoppers.",
-    tags: ["Used Car Advertising", "Social Media Ads", "Weekend Campaign", "Las Vegas Dealership"],
+      "Loomelic Media produced a series of Weekend Special video ads — each one built around a specific used vehicle with pricing, urgency messaging, and a clear call to action. Each video was simultaneously boosted on social media, precisely targeted to the dealership's core demographic and Primary Market Area (PMA) in the Las Vegas metro. By reaching in-market shoppers who were already within driving distance and actively considering a purchase, the campaign converted views into showroom visits within the same weekend.",
+    result2:
+      "Multiple used cars sold within a 5-day window of each video being posted and boosted. The campaign demonstrated that well-produced, strategically targeted video content — when matched with the right audience at the right time — can directly accelerate used car sales without relying on discounting or traditional advertising.",
+    videos: [
+      {
+        url: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/WeekendSpecial1_0874fc0d.mp4",
+        label: "WEEKEND SPECIAL #1",
+        lang: "en",
+      },
+      {
+        url: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/WeekendSpecial2_ac81deaf.mp4",
+        label: "WEEKEND SPECIAL #2",
+        lang: "en",
+      },
+      {
+        url: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/WeekendSpecial3_20ddce1e.mp4",
+        label: "WEEKEND SPECIAL #3",
+        lang: "en",
+      },
+    ],
+    tags: ["Used Car Advertising", "Social Media Ads", "Weekend Campaign", "PMA Targeting", "Demographic Boosting", "Las Vegas Dealership", "5-Day Sales Cycle"],
   },
   {
     id: "findlay-nissan-henderson",
@@ -210,9 +229,9 @@ function UseCaseDetail({ uc, onClose }: { uc: (typeof USE_CASES)[0]; onClose: ()
         {uc.videos && uc.videos.length > 0 && (
           <div className="mb-8">
             <p className="font-body text-[0.6rem] text-white/35 tracking-[0.18em] mb-4">
-              ✶ INTRO VIDEOS — BILINGUAL SALES OUTREACH
+              ✶ CAMPAIGN VIDEOS
             </p>
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {uc.videos.map((v) => (
                 <div key={v.url} className="rounded-xl overflow-hidden bg-[oklch(0.07_0_0)]">
                   <video
@@ -233,9 +252,16 @@ function UseCaseDetail({ uc, onClose }: { uc: (typeof USE_CASES)[0]; onClose: ()
                 </div>
               ))}
             </div>
-            <p className="text-white/40 text-xs leading-relaxed mt-4 max-w-2xl">
-              Each member of the internet sales team records a personal intro video in both English and Spanish. When a lead submits an inquiry, the CRM automatically sends the matching-language video as the first response — turning a cold form submission into a warm, face-to-face connection before the customer ever visits the lot.
-            </p>
+            {uc.id === "findlay-nissan-henderson" && (
+              <p className="text-white/40 text-xs leading-relaxed mt-4 max-w-2xl">
+                Each member of the internet sales team records a personal intro video in both English and Spanish. When a lead submits an inquiry, the CRM automatically sends the matching-language video as the first response — turning a cold form submission into a warm, face-to-face connection before the customer ever visits the lot.
+              </p>
+            )}
+            {uc.id === "centennial-subaru" && (
+              <p className="text-white/40 text-xs leading-relaxed mt-4 max-w-2xl">
+                Each Weekend Special video was produced, posted, and boosted simultaneously — targeting the dealership’s core demographic and Primary Market Area (PMA) in the Las Vegas metro. The combination of high-quality production and precise audience targeting drove showroom visits within days of each post going live.
+              </p>
+            )}
           </div>
         )}
 

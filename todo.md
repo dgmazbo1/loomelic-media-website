@@ -335,3 +335,8 @@
 
 ## Findlay Nissan Videos — Aspect Ratio Fix (Mar 25)
 - [x] Change video containers from 9:16 portrait to 16:9 landscape in UseCases.tsx
+
+## Centennial Subaru Use Case Update (Mar 25)
+- [x] Upload #1, #2, #3 WeekendSpecial.mp4 to CDN
+- [x] Embed three videos in Centennial Subaru use case
+- [x] Expand challenge/solution/result copy with 5-day sales window, demographic boosting, PMA targeting
