@@ -212,14 +212,14 @@ function UseCaseDetail({ uc, onClose }: { uc: (typeof USE_CASES)[0]; onClose: ()
             <p className="font-body text-[0.6rem] text-white/35 tracking-[0.18em] mb-4">
               ✶ INTRO VIDEOS — BILINGUAL SALES OUTREACH
             </p>
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-6">
               {uc.videos.map((v) => (
                 <div key={v.url} className="rounded-xl overflow-hidden bg-[oklch(0.07_0_0)]">
                   <video
                     src={v.url}
                     controls
                     playsInline
-                    className="w-full aspect-[9/16] object-cover"
+                    className="w-full aspect-video object-contain bg-black"
                     preload="metadata"
                   />
                   <div className="px-4 py-3 flex items-center gap-2">

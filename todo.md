@@ -332,3 +332,6 @@
 - [x] Upload CourtneyIntro.mov (English) and SoniaSpanish.mp4 (Spanish) to CDN
 - [x] Embed both intro videos in the Findlay Nissan use case
 - [x] Update copy to highlight bilingual sales outreach strategy
+
+## Findlay Nissan Videos — Aspect Ratio Fix (Mar 25)
+- [x] Change video containers from 9:16 portrait to 16:9 landscape in UseCases.tsx
