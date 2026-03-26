@@ -3,6 +3,7 @@
  * All procedures for the Vendor Portal Admin panel at /vendor/admin
  */
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { publicProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
 import { vendors, vendorJobs, contracts, crmTasks, crmIncidents } from "../../drizzle/schema";
@@ -17,6 +18,7 @@ export const vendorAdminRouter = router({
   /* ── Dashboard Stats ─────────────────────────────────────────── */
   getDashboardStats: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
 
     const [totalRow] = await db.select({ count: count() }).from(vendors);
     const totalVendors = Number(totalRow?.count ?? 0);
@@ -74,6 +76,7 @@ export const vendorAdminRouter = router({
   /* ── Vendors ─────────────────────────────────────────────────── */
   listVendors: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return db
       .select({
         id: vendors.id,
@@ -96,6 +99,7 @@ export const vendorAdminRouter = router({
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const token = generateToken();
       await db.insert(vendors).values({
         token,
@@ -110,6 +114,7 @@ export const vendorAdminRouter = router({
   /* ── Contracts ───────────────────────────────────────────────── */
   listContracts: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return db
       .select({
         id: contracts.id,
@@ -126,6 +131,7 @@ export const vendorAdminRouter = router({
   /* ── Jobs ────────────────────────────────────────────────────── */
   listJobs: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return db
       .select()
       .from(vendorJobs)
@@ -140,9 +146,7 @@ export const vendorAdminRouter = router({
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
-      // Create a job without a specific vendor (open posting)
-      // We need a vendorId — use 0 as placeholder for unassigned
-      // First check if there are any vendors to assign to
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const [firstVendor] = await db.select({ id: vendors.id }).from(vendors).limit(1);
       if (!firstVendor) {
         throw new Error("No vendors exist yet. Create a vendor first.");
@@ -159,6 +163,7 @@ export const vendorAdminRouter = router({
   /* ── Tasks ───────────────────────────────────────────────────── */
   listTasks: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return db
       .select()
       .from(crmTasks)
@@ -171,6 +176,7 @@ export const vendorAdminRouter = router({
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       await db.insert(crmTasks).values({
         title: input.title,
         status: "open",
@@ -181,6 +187,7 @@ export const vendorAdminRouter = router({
   /* ── Incidents ───────────────────────────────────────────────── */
   listIncidents: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return db
       .select()
       .from(crmIncidents)
@@ -193,6 +200,7 @@ export const vendorAdminRouter = router({
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       await db.insert(crmIncidents).values({
         title: input.title,
         status: "open",

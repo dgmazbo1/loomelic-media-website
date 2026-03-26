@@ -165,7 +165,8 @@ export function CentennialSubaruPage() {
           "A dynamic automotive photography and video project for Centennial Subaru, showcasing their off-road capable lineup and dealership culture. The project combined traditional automotive photography with cinematic video to create a comprehensive content library for the dealership's marketing campaigns across social media and digital advertising.",
         heroImage: CENTENNIAL_SUBARU.hero,
         gallery: CENTENNIAL_SUBARU.gallery,
-        videoSrc: HERO_VIDEOS.centennialDrone,
+        vimeoIds: CENTENNIAL_SUBARU.vimeoIds,
+        videoSrc: HERO_VIDEOS.centennialDrone + "#t=0,5",
         feedback: {
           quote: "From the first shoot to the final delivery, the process was seamless. They came prepared, worked efficiently, and the results spoke for themselves. Our social media content has never looked better — and our customers have noticed.",
           name: "Marketing Manager",

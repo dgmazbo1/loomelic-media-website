@@ -105,7 +105,7 @@ function DashboardSection() {
             <p className="text-sm" style={{ color: "oklch(0.4 0 0)" }}>No contracts yet.</p>
           ) : (
             <div className="space-y-2">
-              {recentContracts.slice(0, 3).map((c: { id: number; contractorName: string; status: string }) => (
+              {recentContracts.slice(0, 3).map((c: any) => (
                 <div key={c.id} className="flex items-center justify-between">
                   <span className="text-sm truncate" style={{ color: "oklch(0.7 0 0)" }}>{c.contractorName}</span>
                   <StatusBadge status={c.status} />
@@ -148,7 +148,7 @@ function VendorsSection() {
     onError: (e) => toast.error("Failed: " + e.message),
   });
 
-  const filtered = vendors.filter((v: { name: string; email: string; role: string }) => {
+  const filtered = vendors.filter((v: any) => {
     const matchSearch = v.name.toLowerCase().includes(search.toLowerCase()) ||
       v.email?.toLowerCase().includes(search.toLowerCase());
     const matchRole = roleFilter === "all" || v.role === roleFilter;
@@ -212,7 +212,7 @@ function VendorsSection() {
             <p className="text-sm">No vendors found.</p>
           </div>
         ) : (
-          filtered.map((v: { id: number; name: string; email: string; role: string; token: string; status: string }) => (
+          filtered.map((v: any) => (
             <div key={v.id} className="flex items-center gap-4 px-5 py-4 rounded-lg transition-all" style={{ background: "oklch(0.07 0 0)", border: "1px solid oklch(0.12 0 0)" }}
               onMouseEnter={e => (e.currentTarget.style.background = "oklch(0.09 0 0)")}
               onMouseLeave={e => (e.currentTarget.style.background = "oklch(0.07 0 0)")}
@@ -253,7 +253,7 @@ function ContractsSection() {
 
   const { data: contracts = [] } = trpc.vendorAdmin.listContracts.useQuery();
 
-  const filtered = contracts.filter((c: { contractorName: string; projectName: string }) =>
+  const filtered = contracts.filter((c: any) =>
     c.contractorName?.toLowerCase().includes(search.toLowerCase()) ||
     c.projectName?.toLowerCase().includes(search.toLowerCase())
   );
@@ -284,7 +284,7 @@ function ContractsSection() {
             </button>
           </div>
         ) : (
-          filtered.map((c: { id: number; contractorName: string; projectName: string; status: string; token: string; createdAt: number }) => (
+          filtered.map((c: any) => (
             <div key={c.id} className="flex items-center gap-4 px-5 py-4 rounded-lg transition-all" style={{ background: "oklch(0.07 0 0)", border: "1px solid oklch(0.12 0 0)" }}
               onMouseEnter={e => (e.currentTarget.style.background = "oklch(0.09 0 0)")}
               onMouseLeave={e => (e.currentTarget.style.background = "oklch(0.07 0 0)")}
@@ -365,7 +365,7 @@ function JobsSection() {
             <p className="text-sm">No jobs posted yet.</p>
           </div>
         ) : (
-          jobs.map((j: { id: number; title: string; description: string; status: string; shootDate: number | null }) => (
+          jobs.map((j: any) => (
             <div key={j.id} className="flex items-center gap-4 px-5 py-4 rounded-lg" style={{ background: "oklch(0.07 0 0)", border: "1px solid oklch(0.12 0 0)" }}>
               <Briefcase size={16} style={{ color: "#CCFF00" }} />
               <div className="flex-1 min-w-0">

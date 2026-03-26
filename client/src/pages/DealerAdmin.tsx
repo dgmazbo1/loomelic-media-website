@@ -318,7 +318,7 @@ function TasksSection() {
             <p className="text-sm">No tasks found.</p>
           </div>
         ) : (
-          filtered.map((t: { id: number; title: string; description: string; status: string; createdAt: number }) => (
+          filtered.map((t: any) => (
             <div key={t.id} className="flex items-center gap-4 px-5 py-4 rounded-lg" style={{ background: "oklch(0.07 0 0)", border: "1px solid oklch(0.12 0 0)" }}>
               <CheckSquare size={16} style={{ color: "oklch(0.4 0 0)" }} />
               <div className="flex-1 min-w-0">
@@ -384,7 +384,7 @@ function IncidentsSection() {
             <p className="text-sm">No incidents reported.</p>
           </div>
         ) : (
-          incidents.map((inc: { id: number; title: string; description: string; status: string }) => (
+          incidents.map((inc: any) => (
             <div key={inc.id} className="flex items-center gap-4 px-5 py-4 rounded-lg" style={{ background: "oklch(0.07 0 0)", border: "1px solid oklch(0.12 0 0)" }}>
               <AlertTriangle size={16} style={{ color: "#f87171" }} />
               <div className="flex-1 min-w-0">
@@ -450,7 +450,7 @@ function RemindersSection() {
             <p className="text-sm">No reminders set.</p>
           </div>
         ) : (
-          reminders.map((r: { id: number; title: string; dueDate: number | null; status: string }) => (
+          reminders.map((r: any) => (
             <div key={r.id} className="flex items-center gap-4 px-5 py-4 rounded-lg" style={{ background: "oklch(0.07 0 0)", border: "1px solid oklch(0.12 0 0)" }}>
               <Bell size={16} style={{ color: "#CCFF00" }} />
               <div className="flex-1">

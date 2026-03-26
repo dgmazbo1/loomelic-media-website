@@ -14,6 +14,7 @@ import { dealerGrowthRouter } from "./routers/dealerGrowth";
 import { portfolioRouter } from "./routers/portfolio";
 import { contactRouter } from "./routers/contact";
 import { featuredWorkRouter } from "./routers/featuredWork";
+import { portfolioGraphicsRouter } from "./routers/portfolioGraphics";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -41,6 +42,7 @@ export const appRouter = router({
   portfolio: portfolioRouter,
   contact: contactRouter,
   featuredWork: featuredWorkRouter,
+  portfolioGraphics: portfolioGraphicsRouter,
 });
 
 export type AppRouter = typeof appRouter;

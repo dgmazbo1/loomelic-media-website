@@ -137,6 +137,13 @@ export const JANEL_NEHIAMIA = {
 export const CENTENNIAL_SUBARU = {
   hero: `https://files.manuscdn.com/user_upload_by_module/session_file/310419663029344895/RHOFQHNWUSYjEkJb.jpg`,
   gallery: [],
+  vimeoIds: [
+    { id: "1080432883", hash: "6f014ee6dd", portrait: true,  title: "#3 Weekend Special" },
+    { id: "1167199233", hash: "241d4afa10", portrait: true,  title: "Weekend Special #2" },
+    { id: "1080433020", hash: "cff946d6f8", portrait: true,  title: "2024 Solterra Special" },
+    { id: "1080432935", hash: "dbe1b9f569", portrait: false, title: "WRX Roller" },
+    { id: "1080433070", hash: "e41801d372", portrait: false, title: "Three Square" },
+  ],
 };
 
 // ─── PROJECT: JW OFFROAD ─────────────────────────────────────

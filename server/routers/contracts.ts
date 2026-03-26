@@ -16,6 +16,7 @@ async function generateToken(): Promise<string> {
 
 async function getW9ByEmailAndYear(email: string, year: number) {
   const db = await getDb();
+  if (!db) return null;
   const results = await db
     .select()
     .from(w9Forms)
@@ -26,6 +27,7 @@ async function getW9ByEmailAndYear(email: string, year: number) {
 
 async function upsertW9Form(data: typeof w9Forms.$inferInsert) {
   const db = await getDb();
+  if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
   const existing = await getW9ByEmailAndYear(data.contractorEmail, data.taxYear);
   if (existing) {
     await db.update(w9Forms).set({ ...data, updatedAt: new Date() }).where(eq(w9Forms.id, existing.id));
@@ -44,6 +46,7 @@ async function upsertW9Form(data: typeof w9Forms.$inferInsert) {
 
 async function getContractByToken(token: string) {
   const db = await getDb();
+  if (!db) return null;
   const results = await db.select().from(contracts).where(eq(contracts.token, token)).limit(1);
   return results[0] ?? null;
 }
@@ -87,6 +90,7 @@ export const contractsRouter = router({
   getAllW9s: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return await db.select().from(w9Forms).orderBy(desc(w9Forms.createdAt));
   }),
 
@@ -114,6 +118,7 @@ export const contractsRouter = router({
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const token = await generateToken();
       await db.insert(contracts).values({
         ...input,
@@ -152,6 +157,7 @@ export const contractsRouter = router({
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       let w9FormId: number | undefined;
       if (input.w9Data) {
         w9FormId = await upsertW9Form(input.w9Data);
@@ -175,6 +181,7 @@ export const contractsRouter = router({
   getAllContracts: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return await db.select().from(contracts).orderBy(desc(contracts.createdAt));
   }),
 
@@ -183,6 +190,7 @@ export const contractsRouter = router({
     .input(z.object({ id: z.number() }))
     .query(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const results = await db.select().from(contracts).where(eq(contracts.id, input.id)).limit(1);
       return results[0] ?? null;
     }),
@@ -191,6 +199,7 @@ export const contractsRouter = router({
 
   getAllTemplates: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return await db.select().from(contractTemplates).orderBy(desc(contractTemplates.createdAt));
   }),
 
@@ -198,6 +207,7 @@ export const contractsRouter = router({
     .input(z.object({ id: z.number() }))
     .query(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const results = await db.select().from(contractTemplates).where(eq(contractTemplates.id, input.id)).limit(1);
       return results[0] ?? null;
     }),
@@ -218,6 +228,7 @@ export const contractsRouter = router({
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       await db.insert(contractTemplates).values({ ...input, createdBy: ctx.user.id });
       return { success: true };
     }),
@@ -239,6 +250,7 @@ export const contractsRouter = router({
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const { id, ...data } = input;
       await db.update(contractTemplates).set({ ...data, updatedAt: new Date() }).where(eq(contractTemplates.id, id));
       return { success: true };
@@ -249,6 +261,7 @@ export const contractsRouter = router({
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       await db.delete(contractTemplates).where(eq(contractTemplates.id, input.id));
       return { success: true };
     }),
@@ -278,6 +291,7 @@ export const contractsRouter = router({
     .mutation(async ({ ctx, input }) => {
       if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const token = await generateToken();
       await db.insert(clientContracts).values({ ...input, token, status: "draft" } as any);
       const inserted = await db
@@ -292,6 +306,7 @@ export const contractsRouter = router({
   getAllClientContracts: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return await db.select().from(clientContracts).orderBy(desc(clientContracts.createdAt));
   }),
 
@@ -299,6 +314,7 @@ export const contractsRouter = router({
     .input(z.object({ token: z.string() }))
     .query(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const results = await db.select().from(clientContracts).where(eq(clientContracts.token, input.token)).limit(1);
       if (!results[0]) throw new TRPCError({ code: "NOT_FOUND", message: "Contract not found" });
       return results[0];
@@ -312,6 +328,7 @@ export const contractsRouter = router({
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       await db.update(clientContracts).set({
         clientSignature: input.clientSignature,
         pdfData: input.pdfData,

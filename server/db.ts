@@ -578,14 +578,14 @@ export async function createContract(data: {
 }) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
-  const [result] = await db.insert(contracts).values({ ...data, status: "draft" });
+  const [result] = await (db as any).insert(contracts).values({ ...data, status: "draft" });
   return (result as { insertId: number }).insertId;
 }
 
 export async function updateContractStatus(id: number, status: "draft" | "sent" | "signed" | "completed" | "cancelled" | "expired") {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
-  await db.update(contracts).set({ status }).where(eq(contracts.id, id));
+  await db.update(contracts).set({ status: status as any }).where(eq(contracts.id, id));
 }
 
 // ─── CRM Stats ────────────────────────────────────────────────────────────────
@@ -607,9 +607,9 @@ export async function getCrmStats() {
   const openTasks = allTasks.filter((t: { status: string }) => t.status === "open" || t.status === "in_progress").length;
   const openIncidents = allIncidents.filter((i: { status: string }) => i.status === "open" || i.status === "investigating").length;
   const activeDeals = allDeals.filter((d: { stage: string }) => d.stage !== "closed_won" && d.stage !== "closed_lost").length;
-  const totalRevenue = allContracts
-    .filter((c: { isRevenue: number; status: string }) => c.isRevenue === 1 && c.status === "signed")
-    .reduce((sum: number, c: { amount: number | null }) => sum + (c.amount ?? 0), 0);
+  const totalRevenue = (allContracts as any[])
+    .filter((c: any) => c.isRevenue === 1 && c.status === "signed")
+    .reduce((sum: number, c: any) => sum + (c.amount ?? 0), 0);
 
   return {
     totalContacts: allContacts.length,
@@ -986,5 +986,60 @@ export async function reorderFeaturedWork(updates: { id: number; sortOrder: numb
   if (!db) throw new Error("Database not available");
   for (const u of updates) {
     await db.update(featuredWork).set({ sortOrder: u.sortOrder }).where(eq(featuredWork.id, u.id));
+  }
+}
+
+// ─── Portfolio Graphics ───────────────────────────────────────────────────────
+
+import { portfolioGraphics } from "../drizzle/schema";
+
+export async function getAllPortfolioGraphics() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(portfolioGraphics).orderBy(portfolioGraphics.sortOrder);
+}
+
+export async function getPublishedPortfolioGraphics() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(portfolioGraphics)
+    .where(eq(portfolioGraphics.published, true))
+    .orderBy(portfolioGraphics.sortOrder);
+}
+
+export async function createPortfolioGraphic(data: {
+  title?: string; caption?: string; url: string; fileKey: string;
+  published?: boolean; sortOrder?: number;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(portfolioGraphics).values({
+    url: data.url,
+    fileKey: data.fileKey,
+    title: data.title,
+    caption: data.caption,
+    published: data.published ?? true,
+    sortOrder: data.sortOrder ?? 0,
+  });
+  return (result as { insertId: number }).insertId;
+}
+
+export async function updatePortfolioGraphic(id: number, data: Partial<typeof portfolioGraphics.$inferInsert>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(portfolioGraphics).set({ ...data, updatedAt: new Date() }).where(eq(portfolioGraphics.id, id));
+}
+
+export async function deletePortfolioGraphic(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(portfolioGraphics).where(eq(portfolioGraphics.id, id));
+}
+
+export async function reorderPortfolioGraphics(updates: { id: number; sortOrder: number }[]) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  for (const u of updates) {
+    await db.update(portfolioGraphics).set({ sortOrder: u.sortOrder }).where(eq(portfolioGraphics.id, u.id));
   }
 }

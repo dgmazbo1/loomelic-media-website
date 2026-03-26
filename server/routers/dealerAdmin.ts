@@ -3,10 +3,11 @@
  * All procedures for the Dealer Portal Admin panel at /dealer/admin
  */
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { publicProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
 import { dealers, crmTasks, crmIncidents } from "../../drizzle/schema";
-import { eq, desc, count, sql, and } from "drizzle-orm";
+import { eq, desc, count, sql } from "drizzle-orm";
 import { randomBytes } from "crypto";
 
 function generateToken() {
@@ -17,6 +18,7 @@ export const dealerAdminRouter = router({
   /* ── Dashboard Stats ─────────────────────────────────────────── */
   getDashboardStats: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
 
     const [totalRow] = await db.select({ count: count() }).from(dealers);
     const totalDealers = Number(totalRow?.count ?? 0);
@@ -61,6 +63,7 @@ export const dealerAdminRouter = router({
   /* ── Dealers ─────────────────────────────────────────────────── */
   listDealers: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     const rows = await db
       .select({
         id: dealers.id,
@@ -73,7 +76,6 @@ export const dealerAdminRouter = router({
       .from(dealers)
       .orderBy(desc(dealers.createdAt));
 
-    // Normalize to name/company for the UI
     return rows.map(r => ({
       id: r.id,
       token: r.token,
@@ -92,6 +94,7 @@ export const dealerAdminRouter = router({
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const token = generateToken();
       await db.insert(dealers).values({
         token,
@@ -105,6 +108,7 @@ export const dealerAdminRouter = router({
   /* ── Tasks ───────────────────────────────────────────────────── */
   listTasks: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return db
       .select()
       .from(crmTasks)
@@ -118,6 +122,7 @@ export const dealerAdminRouter = router({
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       await db.insert(crmTasks).values({
         title: input.title,
         description: input.description ?? "",
@@ -129,6 +134,7 @@ export const dealerAdminRouter = router({
   /* ── Incidents ───────────────────────────────────────────────── */
   listIncidents: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return db
       .select()
       .from(crmIncidents)
@@ -142,6 +148,7 @@ export const dealerAdminRouter = router({
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       await db.insert(crmIncidents).values({
         title: input.title,
         description: input.description ?? "",
@@ -153,6 +160,7 @@ export const dealerAdminRouter = router({
   /* ── Reminders (stored as pending tasks) ────────────────────── */
   listReminders: publicProcedure.query(async () => {
     const db = await getDb();
+    if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return db
       .select()
       .from(crmTasks)
@@ -167,6 +175,7 @@ export const dealerAdminRouter = router({
     }))
     .mutation(async ({ input }) => {
       const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       await db.insert(crmTasks).values({
         title: input.title,
         description: input.dueDate ? `Due: ${new Date(input.dueDate).toLocaleString()}` : "",
