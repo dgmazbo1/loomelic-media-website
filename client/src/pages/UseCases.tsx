@@ -86,14 +86,27 @@ const USE_CASES = [
     title: "FINDLAY NISSAN HENDERSON",
     category: "INTERNET SALES · CRM VIDEO STRATEGY",
     result: "Warmer lead engagement from day one",
-    image: LEXUS_LAS_VEGAS.hero,
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/findlay_real_5_4k_324d20d3.webp",
     overview:
-      "Findlay Nissan Henderson wanted to improve the way customers experienced the dealership after submitting an online inquiry. Loomelic Media created custom intro videos for the internet sales team to send out as part of the first-response process, giving online leads a more personal and professional first impression.",
+      "Findlay Nissan Henderson wanted to make every online lead feel like a VIP from the very first touchpoint. Loomelic Media produced custom intro videos for the internet sales team — filmed in both English and Spanish — so every customer, regardless of their preferred language, receives a warm, personal, and professional first response. The result: leads that feel seen, heard, and ready to engage.",
     challenge:
-      "Online leads were receiving generic first responses, reducing engagement quality and early trust.",
+      "Online leads were receiving generic, text-only first responses. In a market as diverse as Las Vegas, a one-language approach meant a significant portion of Spanish-speaking customers never felt personally connected to the dealership.",
     solution:
-      "Custom intro videos for the internet sales team, deployed as part of the first-response workflow.",
-    tags: ["CRM Video", "Internet Sales", "Lead Response", "Dealership Video Marketing"],
+      "Custom bilingual intro videos — one in English, one in Spanish — produced for the internet sales team and deployed as the first response in the CRM workflow. Each video puts a real face and voice to the dealership, building trust before the customer ever steps on the lot.",
+    result2: "Higher open rates on first-response messages, stronger lead engagement, and a more inclusive customer experience that speaks to the full Las Vegas market.",
+    videos: [
+      {
+        url: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/CourtneyIntro_fcba6429.mov",
+        label: "ENGLISH INTRO — Courtney",
+        lang: "en",
+      },
+      {
+        url: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/SoniaSpanish_db72db60.mp4",
+        label: "SPANISH INTRO — Sonia",
+        lang: "es",
+      },
+    ],
+    tags: ["CRM Video", "Bilingual Marketing", "Internet Sales", "Lead Response", "Spanish-Language Content", "Dealership Video Marketing"],
   },
 ];
 
@@ -182,7 +195,7 @@ function UseCaseDetail({ uc, onClose }: { uc: (typeof USE_CASES)[0]; onClose: ()
           {[
             { label: "CHALLENGE", text: uc.challenge },
             { label: "SOLUTION", text: uc.solution },
-            { label: "RESULT", text: uc.result },
+            { label: "RESULT", text: uc.result2 ?? uc.result },
           ].map((item) => (
             <div key={item.label} className="border-l-2 border-[oklch(0.92_0.28_142)] pl-4">
               <p className="font-body text-[0.55rem] text-[oklch(0.92_0.28_142)] tracking-[0.18em] mb-1">
@@ -192,6 +205,39 @@ function UseCaseDetail({ uc, onClose }: { uc: (typeof USE_CASES)[0]; onClose: ()
             </div>
           ))}
         </div>
+
+        {/* Bilingual intro videos — shown when videos array is present */}
+        {uc.videos && uc.videos.length > 0 && (
+          <div className="mb-8">
+            <p className="font-body text-[0.6rem] text-white/35 tracking-[0.18em] mb-4">
+              ✶ INTRO VIDEOS — BILINGUAL SALES OUTREACH
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {uc.videos.map((v) => (
+                <div key={v.url} className="rounded-xl overflow-hidden bg-[oklch(0.07_0_0)]">
+                  <video
+                    src={v.url}
+                    controls
+                    playsInline
+                    className="w-full aspect-[9/16] object-cover"
+                    preload="metadata"
+                  />
+                  <div className="px-4 py-3 flex items-center gap-2">
+                    <span className="font-body text-[0.55rem] tracking-[0.15em] text-[oklch(0.92_0.28_142)] uppercase">
+                      {v.lang === "es" ? "🇪🇸" : "🇺🇸"}
+                    </span>
+                    <span className="font-body text-[0.6rem] tracking-[0.12em] text-white/60 uppercase">
+                      {v.label}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-white/40 text-xs leading-relaxed mt-4 max-w-2xl">
+              Each member of the internet sales team records a personal intro video in both English and Spanish. When a lead submits an inquiry, the CRM automatically sends the matching-language video as the first response — turning a cold form submission into a warm, face-to-face connection before the customer ever visits the lot.
+            </p>
+          </div>
+        )}
 
         <div className="flex flex-wrap gap-2">
           {uc.tags.map((tag) => (

@@ -326,3 +326,9 @@
 ## Contact Form Email Notifications (Mar 25)
 - [x] Send email to Denham@loomelicmedia.com on every contact form submission (Resend API key needed for email; Manus notification fires as fallback)
 - [x] Include all form fields in the email (name, company, role, email, phone, service, message)
+
+## Findlay Nissan Use Case Update (Mar 25)
+- [x] Upload 5K photo as CDN asset and set as cover image
+- [x] Upload CourtneyIntro.mov (English) and SoniaSpanish.mp4 (Spanish) to CDN
+- [x] Embed both intro videos in the Findlay Nissan use case
+- [x] Update copy to highlight bilingual sales outreach strategy
