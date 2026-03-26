@@ -19,6 +19,14 @@ import {
   SPORTS_ILLUSTRATED,
 } from "@/lib/media";
 
+/* ─── TYPES ─────────────────────────────────────────────── */
+type VideoItem = {
+  url: string;
+  label: string;
+  lang: string;
+  portrait?: boolean;
+};
+
 /* ─── FEATURED WORK DATA ─────────────────────────────────── */
 const FEATURED_WORK = [
   {
@@ -86,18 +94,21 @@ const USE_CASES = [
         url: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/WeekendSpecial1_0874fc0d.mp4",
         label: "WEEKEND SPECIAL #1",
         lang: "en",
-      },
+        portrait: true,
+      } as VideoItem,
       {
         url: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/WeekendSpecial2_ac81deaf.mp4",
         label: "WEEKEND SPECIAL #2",
         lang: "en",
-      },
+        portrait: true,
+      } as VideoItem,
       {
         url: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/WeekendSpecial3_20ddce1e.mp4",
         label: "WEEKEND SPECIAL #3",
         lang: "en",
-      },
-    ],
+        portrait: true,
+      } as VideoItem,
+    ] as VideoItem[],
     tags: ["Used Car Advertising", "Social Media Ads", "Weekend Campaign", "PMA Targeting", "Demographic Boosting", "Las Vegas Dealership", "5-Day Sales Cycle"],
   },
   {
@@ -231,15 +242,21 @@ function UseCaseDetail({ uc, onClose }: { uc: (typeof USE_CASES)[0]; onClose: ()
             <p className="font-body text-[0.6rem] text-white/35 tracking-[0.18em] mb-4">
               ✶ CAMPAIGN VIDEOS
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className={`grid gap-6 ${
+              uc.videos[0]?.portrait
+                ? "grid-cols-1 sm:grid-cols-3"
+                : "sm:grid-cols-2"
+            }`}>
               {uc.videos.map((v) => (
                 <div key={v.url} className="rounded-xl overflow-hidden bg-[oklch(0.07_0_0)]">
                   <video
                     src={v.url}
                     controls
                     playsInline
-                    className="w-full aspect-video object-contain bg-black"
-                    preload="metadata"
+                    className={`w-full object-cover ${
+                      v.portrait ? "aspect-[9/16]" : "aspect-video object-contain"
+                    }`}
+                    preload="auto"
                   />
                   <div className="px-4 py-3 flex items-center gap-2">
                     <span className="font-body text-[0.55rem] tracking-[0.15em] text-[oklch(0.92_0.28_142)] uppercase">

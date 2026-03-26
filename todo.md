@@ -340,3 +340,7 @@
 - [x] Upload #1, #2, #3 WeekendSpecial.mp4 to CDN
 - [x] Embed three videos in Centennial Subaru use case
 - [x] Expand challenge/solution/result copy with 5-day sales window, demographic boosting, PMA targeting
+
+## Use Cases Video Format Fix (Mar 25)
+- [x] Centennial Subaru videos: display as 9:16 portrait
+- [x] All use case videos: show preview frame (not black screen) on load
