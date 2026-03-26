@@ -313,3 +313,12 @@
 ## Mobile Phone & Email Links (Mar 24)
 - [x] Audit all phone/email references and ensure tel: and mailto: hrefs are used
 - [x] Verify Book a Call section has live phone and email tap links
+
+## Use Cases Page Redesign (Mar 25)
+- [ ] Design and build two layout variants for Use Cases page
+- [ ] Apply chosen layout variant
+
+## Use Cases Page — Tabbed Card Layout (Mar 25)
+- [x] Rewrite UseCases.tsx with Featured Work + Use Cases tabs using card grid style
+- [x] Apply Layout A card style to Use Cases tab
+- [x] Clean up temporary preview routes (/use-cases-a, /use-cases-b)
