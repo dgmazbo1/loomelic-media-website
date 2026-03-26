@@ -354,3 +354,6 @@
 ## Use Case Card Overlay (Mar 25)
 - [x] Update Findlay Nissan cover image to DSC02345.jpg (Nissan Pathfinder SR)
 - [x] Apply Style 1 gradient fade name overlay to all use case cards (title + location, no category label)
+
+## Use Case Overlay Font Update (Mar 25)
+- [x] Change overlay title font to font-display (Barlow Condensed 800 italic) to match hero "CONTENT"/"BUILT" style

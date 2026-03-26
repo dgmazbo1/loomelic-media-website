@@ -183,7 +183,7 @@ function ProjectCard({
           {/* Title overlay bottom-left */}
           <div className="absolute bottom-0 left-0 px-5 pb-5">
             <h3
-              className="font-display text-[clamp(1.4rem,3.5vw,2rem)] text-white leading-tight"
+              className="font-display text-[clamp(1.6rem,4vw,2.4rem)] text-white leading-none tracking-wide"
               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}
             >
               {title}
