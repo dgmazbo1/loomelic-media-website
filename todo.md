@@ -350,3 +350,7 @@
 
 ## Use Cases Scroll Fix (Mar 25)
 - [x] Scroll to top of use case detail when a card is clicked
+
+## Use Case Card Overlay (Mar 25)
+- [x] Update Findlay Nissan cover image to DSC02345.jpg (Nissan Pathfinder SR)
+- [x] Apply Style 1 gradient fade name overlay to all use case cards (title + location, no category label)

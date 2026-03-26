@@ -116,7 +116,7 @@ const USE_CASES = [
     title: "FINDLAY NISSAN HENDERSON",
     category: "INTERNET SALES · CRM VIDEO STRATEGY",
     result: "Warmer lead engagement from day one",
-    image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/findlay_real_5_4k_324d20d3.webp",
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/DSC02345_f9558775.jpg",
     overview:
       "Findlay Nissan Henderson wanted to make every online lead feel like a VIP from the very first touchpoint. Loomelic Media produced custom intro videos for the internet sales team — filmed in both English and Spanish — so every customer, regardless of their preferred language, receives a warm, personal, and professional first response. The result: leads that feel seen, heard, and ready to engage.",
     challenge:
@@ -147,12 +147,14 @@ function ProjectCard({
   image,
   index,
   onClick,
+  showOverlay = false,
 }: {
   title: string;
   category: string;
   image: string;
   index: number;
   onClick?: () => void;
+  showOverlay?: boolean;
 }) {
   return (
     <motion.div
@@ -163,30 +165,57 @@ function ProjectCard({
       onClick={onClick}
       className="project-card group cursor-pointer"
     >
-      {/* Card header */}
-      <div className="flex items-center justify-between px-5 py-4">
-        <div className="min-w-0 flex-1 mr-3">
-          <p className="font-body text-[0.6rem] text-white/35 tracking-[0.15em] mb-0.5 truncate">
-            {category}
-          </p>
-          <h3 className="font-display-normal text-sm sm:text-base text-white leading-tight truncate">
-            {title}
-          </h3>
+      {showOverlay ? (
+        /* ── Overlay style: full image with gradient fade + name ── */
+        <div className="relative overflow-hidden rounded-xl mx-3 mt-3 mb-3 aspect-[16/10] bg-[oklch(0.15_0_0)]">
+          <img
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+            loading="lazy"
+          />
+          {/* Gradient fade from bottom */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+          {/* Arrow button top-right */}
+          <div className="absolute top-3 right-3 w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-white/60 group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-300">
+            <span className="text-xs">→</span>
+          </div>
+          {/* Title overlay bottom-left */}
+          <div className="absolute bottom-0 left-0 px-5 pb-5">
+            <h3
+              className="font-display text-[clamp(1.4rem,3.5vw,2rem)] text-white leading-tight"
+              style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}
+            >
+              {title}
+            </h3>
+          </div>
         </div>
-        <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/50 group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-300 shrink-0">
-          <span className="text-xs">→</span>
-        </div>
-      </div>
-
-      {/* Image */}
-      <div className="overflow-hidden mx-3 mb-3 rounded-xl aspect-[16/10] bg-[oklch(0.15_0_0)]">
-        <img
-          src={image}
-          alt={title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-          loading="lazy"
-        />
-      </div>
+      ) : (
+        /* ── Default style: header above image ── */
+        <>
+          <div className="flex items-center justify-between px-5 py-4">
+            <div className="min-w-0 flex-1 mr-3">
+              <p className="font-body text-[0.6rem] text-white/35 tracking-[0.15em] mb-0.5 truncate">
+                {category}
+              </p>
+              <h3 className="font-display-normal text-sm sm:text-base text-white leading-tight truncate">
+                {title}
+              </h3>
+            </div>
+            <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center text-white/50 group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-300 shrink-0">
+              <span className="text-xs">→</span>
+            </div>
+          </div>
+          <div className="overflow-hidden mx-3 mb-3 rounded-xl aspect-[16/10] bg-[oklch(0.15_0_0)]">
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+              loading="lazy"
+            />
+          </div>
+        </>
+      )}
     </motion.div>
   );
 }
@@ -461,6 +490,7 @@ export default function UseCases() {
                         image={uc.image}
                         index={i}
                         onClick={() => handleCardClick(uc.id)}
+                        showOverlay
                       />
                       <AnimatePresence>
                         {expandedId === uc.id && (
