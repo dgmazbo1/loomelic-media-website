@@ -5,7 +5,7 @@
    Use Cases tab: clicking a card expands the full case study detail.
    ============================================================ */
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
 import ContactSection from "@/components/ContactSection";
@@ -80,7 +80,7 @@ const USE_CASES = [
     title: "CENTENNIAL SUBARU",
     category: "USED CAR CAMPAIGN · SOCIAL MEDIA ADS",
     result: "Multiple used cars sold within 5 days of posting",
-    image: CENTENNIAL_SUBARU.hero,
+    image: "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/centennial_subaru_cover_ca0df0aa.jpg",
     overview:
       "Centennial Subaru needed a faster, more targeted way to move used inventory off the lot. Loomelic Media developed a recurring Weekend Special video campaign — three separate units, each spotlighting a different used vehicle — designed to create urgency, drive weekend showroom traffic, and convert online attention into same-week sales.",
     challenge:
@@ -302,6 +302,18 @@ export default function UseCases() {
   const [, navigate] = useLocation();
   const [activeTab, setActiveTab] = useState<"featured" | "usecases">("featured");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const detailRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  const handleCardClick = (id: string) => {
+    const next = expandedId === id ? null : id;
+    setExpandedId(next);
+    if (next) {
+      // Scroll to the detail panel after animation starts
+      setTimeout(() => {
+        detailRefs.current[next]?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 80);
+    }
+  };
 
   const tabs = [
     { id: "featured" as const, label: "FEATURED WORK" },
@@ -448,17 +460,17 @@ export default function UseCases() {
                         category={uc.category}
                         image={uc.image}
                         index={i}
-                        onClick={() =>
-                          setExpandedId(expandedId === uc.id ? null : uc.id)
-                        }
+                        onClick={() => handleCardClick(uc.id)}
                       />
                       <AnimatePresence>
                         {expandedId === uc.id && (
-                          <UseCaseDetail
-                            key={`detail-${uc.id}`}
-                            uc={uc}
-                            onClose={() => setExpandedId(null)}
-                          />
+                          <div ref={(el) => { detailRefs.current[uc.id] = el; }}>
+                            <UseCaseDetail
+                              key={`detail-${uc.id}`}
+                              uc={uc}
+                              onClose={() => setExpandedId(null)}
+                            />
+                          </div>
                         )}
                       </AnimatePresence>
                     </>

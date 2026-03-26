@@ -344,3 +344,9 @@
 ## Use Cases Video Format Fix (Mar 25)
 - [x] Centennial Subaru videos: display as 9:16 portrait
 - [x] All use case videos: show preview frame (not black screen) on load
+
+## Centennial Subaru Cover Photo (Mar 25)
+- [x] Upload DSC_8782.jpg to CDN and set as Centennial Subaru use case cover image
+
+## Use Cases Scroll Fix (Mar 25)
+- [x] Scroll to top of use case detail when a card is clicked
