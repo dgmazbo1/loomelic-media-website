@@ -9,6 +9,7 @@ import { useState, useRef } from "react";
 import { useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
 import ContactSection from "@/components/ContactSection";
+import { trpc } from "@/lib/trpc";
 import {
   LEXUS_HENDERSON,
   LEXUS_LAS_VEGAS,
@@ -217,6 +218,50 @@ function ProjectCard({
         </>
       )}
     </motion.div>
+  );
+}
+
+/* ─── FEATURED WORK GRID (DB-driven) ────────────────────── */
+function FeaturedWorkGrid({ navigate }: { navigate: (path: string) => void }) {
+  const { data: dbItems, isLoading } = trpc.featuredWork.listPublic.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+  });
+
+  // Fallback to static data while DB is empty or loading
+  const items = dbItems && dbItems.length > 0
+    ? dbItems.map((item, i) => ({
+        slug: item.slug ?? "",
+        title: item.title,
+        category: item.category ?? "",
+        image: item.imageUrl,
+        index: i,
+      }))
+    : FEATURED_WORK.map((p, i) => ({ ...p, index: i }));
+
+  if (isLoading) {
+    return (
+      <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-10">
+        {[0, 1, 2, 3].map(i => (
+          <div key={i} className="project-card aspect-[16/10] bg-white/5 animate-pulse rounded-xl" />
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-10">
+      {items.map((project, i) => (
+        <ProjectCard
+          key={project.slug || String(i)}
+          title={project.title}
+          category={project.category}
+          image={project.image}
+          index={i}
+          showOverlay
+          onClick={project.slug ? () => navigate(`/projects/${project.slug}`) : undefined}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -439,19 +484,8 @@ export default function UseCases() {
                   </span>
                 </div>
 
-                {/* Card grid */}
-                <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-10">
-                  {FEATURED_WORK.map((project, i) => (
-                    <ProjectCard
-                      key={project.slug}
-                      title={project.title}
-                      category={project.category}
-                      image={project.image}
-                      index={i}
-                      onClick={() => navigate(`/projects/${project.slug}`)}
-                    />
-                  ))}
-                </div>
+                {/* Card grid — DB-driven */}
+                <FeaturedWorkGrid navigate={navigate} />
 
                 <div className="flex justify-start">
                   <button onClick={() => navigate("/projects")} className="btn-pill-light text-xs">
@@ -482,9 +516,8 @@ export default function UseCases() {
                 {/* Card grid — with expandable detail */}
                 <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-10">
                   {USE_CASES.map((uc, i) => (
-                    <>
+                    <div key={uc.id}>
                       <ProjectCard
-                        key={uc.id}
                         title={uc.title}
                         category={uc.category}
                         image={uc.image}
@@ -494,7 +527,7 @@ export default function UseCases() {
                       />
                       <AnimatePresence>
                         {expandedId === uc.id && (
-                          <div ref={(el) => { detailRefs.current[uc.id] = el; }}>
+                          <div ref={(el) => { detailRefs.current[uc.id] = el; }} className="col-span-1 sm:col-span-2">
                             <UseCaseDetail
                               key={`detail-${uc.id}`}
                               uc={uc}
@@ -503,7 +536,7 @@ export default function UseCases() {
                           </div>
                         )}
                       </AnimatePresence>
-                    </>
+                    </div>
                   ))}
                 </div>
               </motion.div>

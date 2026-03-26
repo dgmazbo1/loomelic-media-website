@@ -876,3 +876,31 @@ export const portfolioGraphicTags = mysqlTable("portfolio_graphic_tags", {
 });
 
 export type PortfolioGraphicTag = typeof portfolioGraphicTags.$inferSelect;
+
+/**
+ * Featured Work — cards shown on the public Use Cases page "Featured Work" tab.
+ * Admin can add, delete, and reorder via the admin panel.
+ * sortOrder controls display sequence (lower = first).
+ */
+export const featuredWork = mysqlTable("featured_work", {
+  id: int("id").autoincrement().primaryKey(),
+  /** Display title shown on the card overlay */
+  title: varchar("title", { length: 256 }).notNull(),
+  /** Short category label (e.g. "Inventory Photography") */
+  category: varchar("category", { length: 128 }),
+  /** CDN URL of the cover image */
+  imageUrl: text("imageUrl").notNull(),
+  /** S3 file key for the cover image */
+  imageKey: text("imageKey"),
+  /** Optional URL slug linking to a project detail page */
+  slug: varchar("slug", { length: 128 }),
+  /** Controls display order — lower numbers appear first */
+  sortOrder: int("sortOrder").default(0).notNull(),
+  /** Whether this card is visible on the public page */
+  published: boolean("published").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type FeaturedWork = typeof featuredWork.$inferSelect;
+export type InsertFeaturedWork = typeof featuredWork.$inferInsert;

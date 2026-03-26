@@ -940,3 +940,51 @@ export async function getDashboardStats() {
     closedWon: all.filter(d => d.visitStatus === 'Closed Won').length,
   };
 }
+
+// ─── Featured Work helpers ────────────────────────────────────────────────────
+import { featuredWork, InsertFeaturedWork } from "../drizzle/schema";
+
+export async function getAllFeaturedWork() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(featuredWork).orderBy(asc(featuredWork.sortOrder));
+}
+
+export async function getPublishedFeaturedWork() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(featuredWork)
+    .where(eq(featuredWork.published, true))
+    .orderBy(asc(featuredWork.sortOrder));
+}
+
+export async function createFeaturedWork(data: Omit<InsertFeaturedWork, 'id' | 'createdAt' | 'updatedAt'>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  const [result] = await db.insert(featuredWork).values(data);
+  const insertId = (result as { insertId: number }).insertId;
+  const [row] = await db.select().from(featuredWork).where(eq(featuredWork.id, insertId));
+  return row;
+}
+
+export async function updateFeaturedWork(id: number, data: Partial<InsertFeaturedWork>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.update(featuredWork).set(data).where(eq(featuredWork.id, id));
+  const [row] = await db.select().from(featuredWork).where(eq(featuredWork.id, id));
+  return row;
+}
+
+export async function deleteFeaturedWork(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.delete(featuredWork).where(eq(featuredWork.id, id));
+}
+
+export async function reorderFeaturedWork(updates: { id: number; sortOrder: number }[]) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  for (const u of updates) {
+    await db.update(featuredWork).set({ sortOrder: u.sortOrder }).where(eq(featuredWork.id, u.id));
+  }
+}

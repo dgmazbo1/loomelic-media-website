@@ -357,3 +357,14 @@
 
 ## Use Case Overlay Font Update (Mar 25)
 - [x] Change overlay title font to font-display (Barlow Condensed 800 italic) to match hero "CONTENT"/"BUILT" style
+
+## Bug Fix (Mar 26)
+- [x] Fix missing React key prop in UseCases component list renders
+
+## Featured Work Admin Manager (Mar 26)
+- [x] Add featured_work table to DB schema with sortOrder field
+- [x] Build tRPC procedures: list, create, update, delete, reorder featured work
+- [x] Build admin Featured Work manager page with drag-to-reorder, add, delete
+- [x] Wire public UseCases page to load featured work from DB
+- [x] Fix missing React key prop on fragment in USE_CASES.map()
+- [x] Write vitest tests for featured work procedures

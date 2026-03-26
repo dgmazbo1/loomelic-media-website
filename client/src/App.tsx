@@ -49,6 +49,7 @@ import DealerAdmin from "./pages/DealerAdmin";
 import VendorAdmin from "./pages/VendorAdmin";
 import AdminCRM from "./pages/AdminCRM";
 import PortfolioAdmin from "./pages/PortfolioAdmin";
+import FeaturedWorkAdmin from "./pages/FeaturedWorkAdmin";
 import AdminCRMModule from "./pages/AdminCRMModule";
 import CRMDashboard from "./pages/CRMDashboard";
 import VendorSign from "./pages/VendorSign";
@@ -102,6 +103,7 @@ function Router() {
         {/* Admin panel */}
         <Route path="/admin" component={AdminPage} />
         <Route path="/admin/portfolio" component={PortfolioAdmin} />
+        <Route path="/admin/featured-work" component={FeaturedWorkAdmin} />
         <Route path="/admin/crm" component={AdminCRM} />
         <Route path="/admin/crm/dealer" component={AdminCRMModule} />
 
