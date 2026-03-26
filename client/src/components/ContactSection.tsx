@@ -9,6 +9,7 @@ import { Phone, Mail, MapPin } from "lucide-react";
 import SocialLinks from "@/components/SocialLinks";
 import { LOGO_TRANSPARENT } from "@/lib/media";
 import { useLocation } from "wouter";
+import { trpc } from "@/lib/trpc";
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -42,6 +43,17 @@ export default function ContactSection() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [submitError, setSubmitError] = useState("");
+
+  const submitMutation = trpc.contact.submit.useMutation({
+    onSuccess: () => {
+      setSubmitted(true);
+      setSubmitError("");
+    },
+    onError: (err) => {
+      setSubmitError(err.message || "Something went wrong. Please try again.");
+    },
+  });
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -57,7 +69,16 @@ export default function ContactSection() {
     const errs = validate();
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setErrors({});
-    setSubmitted(true);
+    setSubmitError("");
+    submitMutation.mutate({
+      name: form.name,
+      dealership: form.dealership,
+      role: form.role,
+      email: form.email,
+      phone: form.phone,
+      service: form.service,
+      message: form.message,
+    });
   };
 
   const scrollToForm = () => {
@@ -222,8 +243,16 @@ export default function ContactSection() {
                     {errors.message && <p className="font-body text-xs text-red-500 mt-1">{errors.message}</p>}
                   </div>
 
-                  <button type="submit" className="btn-pill-dark text-xs w-full sm:w-auto">
-                    SEND REQUEST →
+                  {submitError && (
+                    <p className="font-body text-xs text-red-500 mt-1">{submitError}</p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={submitMutation.isPending}
+                    className="btn-pill-dark text-xs w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {submitMutation.isPending ? "SENDING..." : "SEND REQUEST →"}
                   </button>
                 </form>
               )}

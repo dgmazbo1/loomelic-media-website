@@ -322,3 +322,7 @@
 - [x] Rewrite UseCases.tsx with Featured Work + Use Cases tabs using card grid style
 - [x] Apply Layout A card style to Use Cases tab
 - [x] Clean up temporary preview routes (/use-cases-a, /use-cases-b)
+
+## Contact Form Email Notifications (Mar 25)
+- [x] Send email to Denham@loomelicmedia.com on every contact form submission (Resend API key needed for email; Manus notification fires as fallback)
+- [x] Include all form fields in the email (name, company, role, email, phone, service, message)
