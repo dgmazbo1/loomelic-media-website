@@ -1,0 +1,9 @@
+{
+  "query": "DELETE FROM portfolio_graphics WHERE fileKey LIKE '%gx_spring_facebook_profile%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute DELETE FROM portfolio_graphics WHERE fileKey LIKE '%gx_spring_facebook_profile%';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 156
+}

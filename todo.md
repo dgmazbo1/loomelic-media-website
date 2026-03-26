@@ -371,3 +371,14 @@
 
 ## Portfolio Graphics Upload (Mar 26)
 - [x] Upload 12 client graphic designs to CDN and add to Portfolio Graphics section
+
+## Centennial Subaru Featured Work Videos (Mar 26)
+- [ ] Collect all video IDs from Vimeo review folder link
+- [ ] Embed all videos in Centennial Subaru featured work page
+- [ ] Shorten hero video to 5 seconds (start/end trim via Vimeo embed params)
+
+## Graphics Removal (Mar 26)
+- [x] Remove "Lexus GX — Spring Facebook Profile" (gx_spring_facebook_profile) from portfolio_graphics
+
+## Bug Fix — FeaturedWorkAdmin (Mar 26)
+- [x] Fix React error #301 (hooks violation) in FeaturedWorkAdmin page

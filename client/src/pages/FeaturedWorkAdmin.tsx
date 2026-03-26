@@ -3,7 +3,7 @@
    Manage the cards shown on the public Use Cases "Featured Work" tab.
    Features: drag-to-reorder, add (with image upload), edit, delete, publish toggle
    ============================================================ */
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
@@ -315,11 +315,9 @@ export default function FeaturedWorkAdmin() {
 
   const [localItems, setLocalItems] = useState<FeaturedItem[]>([]);
   // Sync local state when server data arrives
-  const prevItemsRef = useRef<FeaturedItem[]>([]);
-  if (items !== prevItemsRef.current) {
-    prevItemsRef.current = items as FeaturedItem[];
+  useEffect(() => {
     setLocalItems(items as FeaturedItem[]);
-  }
+  }, [items]);
 
   const createMut = trpc.featuredWork.create.useMutation({
     onSuccess: () => { utils.featuredWork.listAll.invalidate(); setShowAddForm(false); toast.success("Card added"); },
