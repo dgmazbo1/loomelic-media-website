@@ -368,3 +368,6 @@
 - [x] Wire public UseCases page to load featured work from DB
 - [x] Fix missing React key prop on fragment in USE_CASES.map()
 - [x] Write vitest tests for featured work procedures
+
+## Portfolio Graphics Upload (Mar 26)
+- [x] Upload 12 client graphic designs to CDN and add to Portfolio Graphics section
