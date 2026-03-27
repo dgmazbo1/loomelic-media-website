@@ -3,7 +3,7 @@
    Three-section portfolio: Photos, Videos, Graphics
    Data-driven from the database via tRPC
    ============================================================ */
-import { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Image, Video, Palette } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -379,7 +379,7 @@ function GraphicLightbox({
 
 // ─── Section Tabs ─────────────────────────────────────────────────────────────
 
-const SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = [
+const SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = [ // eslint-disable-line @typescript-eslint/no-unused-vars
   { id: "photos", label: "Photos", icon: <Image size={16} /> },
   { id: "videos", label: "Videos", icon: <Video size={16} /> },
   { id: "graphics", label: "Graphics", icon: <Palette size={16} /> },

@@ -395,3 +395,6 @@
 
 ## Bug Fix — Portfolio Videos Tab (Mar 27)
 - [ ] Debug and fix portfolio videos not showing in the Videos tab on /portfolio
+
+## Bug Fix — Portfolio Videos Tab Error (Mar 27 #2)
+- [x] Identify and fix the error shown on the Videos tab on /portfolio (missing React import caused ReferenceError in production build)
