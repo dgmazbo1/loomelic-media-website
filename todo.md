@@ -382,3 +382,6 @@
 
 ## Bug Fix — FeaturedWorkAdmin (Mar 26)
 - [x] Fix React error #301 (hooks violation) in FeaturedWorkAdmin page
+
+## Featured Work DB Seed (Mar 26)
+- [x] Insert all 7 projects into featured_work table (Lexus Henderson, Lexus LV, Raiders, Centennial Subaru, Wondr Nation, Bob Marley, Sports Illustrated)
