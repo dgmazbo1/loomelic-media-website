@@ -33,42 +33,49 @@ const FEATURED_WORK = [
   {
     slug: "lexus-of-henderson",
     title: "LEXUS OF HENDERSON",
+    location: "HENDERSON, NV",
     category: "AUTOMOTIVE • MARKETING",
     image: LEXUS_HENDERSON.hero,
   },
   {
     slug: "lexus-of-las-vegas",
     title: "LEXUS OF LAS VEGAS",
+    location: "LAS VEGAS, NV",
     category: "AUTOMOTIVE • PHOTOGRAPHY",
     image: LEXUS_LAS_VEGAS.hero,
   },
   {
     slug: "las-vegas-raiders-tour",
     title: "LAS VEGAS RAIDERS TOUR",
+    location: "LAS VEGAS, NV",
     category: "EVENTS • VIDEOGRAPHY",
     image: RAIDERS_BLAST.hero,
   },
   {
     slug: "centennial-subaru",
     title: "CENTENNIAL SUBARU",
+    location: "LAS VEGAS, NV",
     category: "AUTOMOTIVE • DEALER SERVICES",
     image: CENTENNIAL_SUBARU.hero,
   },
   {
     slug: "wondr-nation-g2e",
     title: "WONDR NATION G2E",
+    location: "LAS VEGAS, NV",
     category: "EVENTS • PHOTOGRAPHY",
     image: WONDR_NATION.hero,
   },
   {
     slug: "bob-marley-hope-road",
     title: "BOB MARLEY HOPE ROAD",
+    location: "LAS VEGAS, NV",
     category: "EVENTS • EDITORIAL PHOTOGRAPHY",
     image: BOB_MARLEY.hero,
   },
   {
     slug: "sports-illustrated-sportsperson-2026",
     title: "SPORTS ILLUSTRATED: SPORTSPERSON OF THE YEAR 2026",
+    location: "LAS VEGAS, NV",
     category: "EVENTS • PHOTOGRAPHY",
     image: SPORTS_ILLUSTRATED.hero,
   },
@@ -144,18 +151,22 @@ const USE_CASES = [
 /* ─── SHARED CARD COMPONENT ──────────────────────────────── */
 function ProjectCard({
   title,
+  location,
   category,
   image,
   index,
   onClick,
   showOverlay = false,
+  showViewCta = false,
 }: {
   title: string;
+  location?: string;
   category: string;
   image: string;
   index: number;
   onClick?: () => void;
   showOverlay?: boolean;
+  showViewCta?: boolean;
 }) {
   return (
     <motion.div
@@ -175,20 +186,34 @@ function ProjectCard({
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
             loading="lazy"
           />
-          {/* Gradient fade from bottom */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+          {/* Gradient fade from bottom — deeper on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           {/* Arrow button top-right */}
           <div className="absolute top-3 right-3 w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-white/60 group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-300">
             <span className="text-xs">→</span>
           </div>
-          {/* Title overlay bottom-left */}
+          {/* Title + location overlay bottom-left */}
           <div className="absolute bottom-0 left-0 px-5 pb-5">
+            {location && (
+              <p className="font-body text-[0.55rem] text-white/50 tracking-[0.2em] mb-1 uppercase">
+                {location}
+              </p>
+            )}
             <h3
               className="font-display text-[clamp(1.6rem,4vw,2.4rem)] text-white leading-none tracking-wide"
               style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}
             >
               {title}
             </h3>
+            {/* "View Project" CTA — slides up on hover */}
+            {showViewCta && (
+              <div className="overflow-hidden h-0 group-hover:h-8 transition-all duration-300 ease-out">
+                <p className="font-body text-[0.65rem] tracking-[0.2em] text-[oklch(0.92_0.28_142)] pt-2 flex items-center gap-1.5">
+                  VIEW PROJECT <span className="text-xs">→</span>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       ) : (
@@ -232,6 +257,7 @@ function FeaturedWorkGrid({ navigate }: { navigate: (path: string) => void }) {
     ? dbItems.map((item, i) => ({
         slug: item.slug ?? "",
         title: item.title,
+        location: (item as { location?: string }).location ?? "",
         category: item.category ?? "",
         image: item.imageUrl,
         index: i,
@@ -254,10 +280,12 @@ function FeaturedWorkGrid({ navigate }: { navigate: (path: string) => void }) {
         <ProjectCard
           key={project.slug || String(i)}
           title={project.title}
+          location={(project as { location?: string }).location}
           category={project.category}
           image={project.image}
           index={i}
           showOverlay
+          showViewCta
           onClick={project.slug ? () => navigate(`/projects/${project.slug}`) : undefined}
         />
       ))}
@@ -524,6 +552,7 @@ export default function UseCases() {
                         index={i}
                         onClick={() => handleCardClick(uc.id)}
                         showOverlay
+                        showViewCta={false}
                       />
                       <AnimatePresence>
                         {expandedId === uc.id && (

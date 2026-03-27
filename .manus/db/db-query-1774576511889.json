@@ -1,0 +1,9 @@
+{
+  "query": "\n-- Check current state of portfolio_videos\nSELECT id, vimeoUrl, title, sortOrder, published FROM portfolio_videos ORDER BY sortOrder;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute \n-- Check current state of portfolio_videos\nSELECT id, vimeoUrl, title, sortOrder, published FROM portfolio_videos ORDER BY sortOrder;\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1215
+}

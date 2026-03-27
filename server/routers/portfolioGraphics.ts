@@ -29,6 +29,7 @@ export const portfolioGraphicsRouter = router({
     .input(z.object({
       title: z.string().optional(),
       caption: z.string().optional(),
+      client: z.string().max(128).optional(),
       url: z.string().url(),
       fileKey: z.string(),
       published: z.boolean().optional(),
@@ -45,6 +46,7 @@ export const portfolioGraphicsRouter = router({
       id: z.number(),
       title: z.string().optional(),
       caption: z.string().optional(),
+      client: z.string().max(128).optional(),
       published: z.boolean().optional(),
     }))
     .mutation(async ({ ctx, input }) => {

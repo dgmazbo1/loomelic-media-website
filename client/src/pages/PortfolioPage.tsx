@@ -14,7 +14,7 @@ import { trpc } from "@/lib/trpc";
 type Tag = { id: number; name: string; slug: string; color: string | null };
 type PhotoItem = { id: number; url: string; title: string | null; caption: string | null; tags: Tag[] };
 type VideoItem = { id: number; vimeoUrl: string; title: string | null; caption: string | null; thumbnailUrl: string | null; tags: Tag[] };
-type GraphicItem = { id: number; url: string; title: string | null; caption: string | null; tags: Tag[] };
+type GraphicItem = { id: number; url: string; title: string | null; caption: string | null; client: string | null; tags: Tag[] };
 
 type SectionId = "photos" | "videos" | "graphics";
 
@@ -387,9 +387,51 @@ const SECTIONS: { id: SectionId; label: string; icon: React.ReactNode }[] = [
 
 // ─── Main Page ────────────────────────────────────────────────────────────────
 
+// ─── Client Filter Bar (Graphics) ───────────────────────────────────────────
+
+function ClientFilterBar({
+  clients,
+  activeClient,
+  onSelect,
+}: {
+  clients: string[];
+  activeClient: string | null;
+  onSelect: (client: string | null) => void;
+}) {
+  if (clients.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-2 mt-6">
+      <button
+        onClick={() => onSelect(null)}
+        className={`px-4 py-1.5 rounded-full text-[0.7rem] font-semibold tracking-[0.1em] transition-all duration-200 ${
+          activeClient === null
+            ? "bg-white text-[oklch(0.07_0_0)]"
+            : "bg-white/8 text-white/60 border border-white/10 hover:bg-white/15 hover:text-white"
+        }`}
+      >
+        ALL
+      </button>
+      {clients.map((client) => (
+        <button
+          key={client}
+          onClick={() => onSelect(activeClient === client ? null : client)}
+          className={`px-4 py-1.5 rounded-full text-[0.7rem] font-semibold tracking-[0.1em] transition-all duration-200 ${
+            activeClient === client
+              ? "bg-white text-[oklch(0.07_0_0)]"
+              : "bg-white/8 text-white/60 border border-white/10 hover:bg-white/15 hover:text-white"
+          }`}
+        >
+          {client.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 export default function PortfolioPage() {
   const [activeSection, setActiveSection] = useState<SectionId>("photos");
   const [activeTagId, setActiveTagId] = useState<number | null>(null);
+  const [activeClient, setActiveClient] = useState<string | null>(null);
 
   // Photo lightbox
   const [photoLightboxIndex, setPhotoLightboxIndex] = useState<number | null>(null);
@@ -413,14 +455,23 @@ export default function PortfolioPage() {
     ? (videos as VideoItem[])
     : (videos as VideoItem[]).filter((v) => v.tags.some((t) => t.id === activeTagId));
 
-  const filteredGraphics = activeTagId === null
-    ? (graphics as GraphicItem[])
-    : (graphics as GraphicItem[]).filter((g) => g.tags.some((t) => t.id === activeTagId));
+  const graphicsTyped = graphics as GraphicItem[];
+  // Derive unique client list from graphics data (preserving order of first appearance)
+  const graphicClients = Array.from(
+    new Set(graphicsTyped.map((g) => g.client).filter((c): c is string => !!c))
+  );
 
-  // Reset tag filter when switching sections
+  const filteredGraphics = graphicsTyped.filter((g) => {
+    const tagMatch = activeTagId === null || g.tags.some((t) => t.id === activeTagId);
+    const clientMatch = activeClient === null || g.client === activeClient;
+    return tagMatch && clientMatch;
+  });
+
+  // Reset tag + client filter when switching sections
   const handleSectionChange = useCallback((id: SectionId) => {
     setActiveSection(id);
     setActiveTagId(null);
+    setActiveClient(null);
   }, []);
 
   const isLoading = activeSection === "photos" ? photosLoading : activeSection === "videos" ? videosLoading : graphicsLoading;
@@ -481,12 +532,20 @@ export default function PortfolioPage() {
           ))}
         </motion.div>
 
-        {/* Tag filter */}
-        <TagFilterBar
-          tags={allTags as Tag[]}
-          activeTagId={activeTagId}
-          onSelect={setActiveTagId}
-        />
+        {/* Tag filter (Photos + Videos) / Client filter (Graphics) */}
+        {activeSection !== "graphics" ? (
+          <TagFilterBar
+            tags={allTags as Tag[]}
+            activeTagId={activeTagId}
+            onSelect={setActiveTagId}
+          />
+        ) : (
+          <ClientFilterBar
+            clients={graphicClients}
+            activeClient={activeClient}
+            onSelect={setActiveClient}
+          />
+        )}
       </section>
 
       {/* Grid */}

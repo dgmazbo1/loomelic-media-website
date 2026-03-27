@@ -1,0 +1,64 @@
+{
+  "query": "SELECT id, title, caption, sortOrder FROM portfolio_videos ORDER BY sortOrder;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute SELECT id, title, caption, sortOrder FROM portfolio_videos ORDER BY sortOrder;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "#3 Weekend Special",
+      "caption": "Centennial Subaru — Used Car Campaign",
+      "sortOrder": "1"
+    },
+    {
+      "id": "2",
+      "title": "Weekend Special #2",
+      "caption": "Centennial Subaru — Used Car Campaign",
+      "sortOrder": "2"
+    },
+    {
+      "id": "3",
+      "title": "2024 Solterra Special",
+      "caption": "Centennial Subaru — EV Campaign",
+      "sortOrder": "3"
+    },
+    {
+      "id": "4",
+      "title": "WRX Roller",
+      "caption": "Centennial Subaru — Performance Highlight",
+      "sortOrder": "4"
+    },
+    {
+      "id": "5",
+      "title": "Three Square",
+      "caption": "Centennial Subaru — Community Partnership",
+      "sortOrder": "5"
+    },
+    {
+      "id": "6",
+      "title": "GX Showroom Floor",
+      "caption": "Lexus of Henderson — Inventory Showcase",
+      "sortOrder": "6"
+    },
+    {
+      "id": "7",
+      "title": "RX Roller",
+      "caption": "Lexus of Henderson — Dynamic Walkaround",
+      "sortOrder": "7"
+    },
+    {
+      "id": "8",
+      "title": "LS500 Hybrid",
+      "caption": "Lexus of Henderson — Flagship Sedan",
+      "sortOrder": "8"
+    },
+    {
+      "id": "9",
+      "title": "Lexus Henderson Intro",
+      "caption": "Lexus of Henderson — Dealership Overview",
+      "sortOrder": "9"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tcaption\tsortOrder\n1\t#3 Weekend Special\tCentennial Subaru — Used Car Campaign\t1\n2\tWeekend Special #2\tCentennial Subaru — Used Car Campaign\t2\n3\t2024 Solterra Special\tCentennial Subaru — EV Campaign\t3\n4\tWRX Roller\tCentennial Subaru — Performance Highlight\t4\n5\tThree Square\tCentennial Subaru — Community Partnership\t5\n6\tGX Showroom Floor\tLexus of Henderson — Inventory Showcase\t6\n7\tRX Roller\tLexus of Henderson — Dynamic Walkaround\t7\n8\tLS500 Hybrid\tLexus of Henderson — Flagship Sedan\t8\n9\tLexus Henderson Intro\tLexus of Henderson — Dealership Overview\t9\n",
+  "stderr": "",
+  "execution_time_ms": 350
+}

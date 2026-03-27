@@ -856,6 +856,8 @@ export const portfolioGraphics = mysqlTable("portfolio_graphics", {
   fileKey: text("fileKey").notNull(),
   title: varchar("title", { length: 256 }),
   caption: text("caption"),
+  /** Client/brand name for filter tabs (e.g. "Lexus of Henderson", "Findlay Nissan", "Centennial Subaru") */
+  client: varchar("client", { length: 128 }),
   sortOrder: int("sortOrder").default(0).notNull(),
   published: boolean("published").default(true).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),

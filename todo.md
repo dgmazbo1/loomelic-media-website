@@ -385,3 +385,10 @@
 
 ## Featured Work DB Seed (Mar 26)
 - [x] Insert all 7 projects into featured_work table (Lexus Henderson, Lexus LV, Raiders, Centennial Subaru, Wondr Nation, Bob Marley, Sports Illustrated)
+
+## Featured Work Card UX (Mar 26)
+- [x] Add "View Project" hover CTA (slide-up label + arrow) to Featured Work cards
+- [x] Embed all videos from Vimeo folder (user/189901004/folder/28722208) into Portfolio Videos section
+- [x] Add location subtitles to Featured Work card overlays (e.g., "HENDERSON, NV")
+- [x] Add client filter tabs to Graphics page (All / Lexus / Findlay Nissan / Centennial Subaru)
+- [x] Add client field to portfolioGraphics table for filtering

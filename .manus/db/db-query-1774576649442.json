@@ -1,0 +1,100 @@
+{
+  "query": "SELECT id, title, client FROM portfolio_graphics ORDER BY sortOrder;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute SELECT id, title, client FROM portfolio_graphics ORDER BY sortOrder;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "NULL",
+      "client": "NULL"
+    },
+    {
+      "id": "2",
+      "title": "NULL",
+      "client": "NULL"
+    },
+    {
+      "id": "60005",
+      "title": "Lexus GX — Spring Campaign Square",
+      "client": "Lexus of Henderson"
+    },
+    {
+      "id": "30002",
+      "title": "Lexus TX500h — Instagram Profile",
+      "client": "Lexus of Henderson"
+    },
+    {
+      "id": "30003",
+      "title": "Findlay Nissan — Black Friday $3,500 Off Kicks",
+      "client": "Findlay Nissan"
+    },
+    {
+      "id": "30006",
+      "title": "Centennial Subaru — 286 Kids With New Jackets",
+      "client": "Centennial Subaru"
+    },
+    {
+      "id": "30005",
+      "title": "Findlay Nissan — Save Big on Sentras $0 Down",
+      "client": "Findlay Nissan"
+    },
+    {
+      "id": "30007",
+      "title": "Findlay Nissan — BBQ Event Invite March 7th",
+      "client": "Findlay Nissan"
+    },
+    {
+      "id": "30010",
+      "title": "Centennial Subaru — Last Day 2025 Stock Save Big",
+      "client": "Centennial Subaru"
+    },
+    {
+      "id": "60001",
+      "title": "Findlay Nissan — Presidents Day Sentra $129/mo",
+      "client": "Findlay Nissan"
+    },
+    {
+      "id": "30004",
+      "title": "Centennial Subaru — $750 Event Cash",
+      "client": "Centennial Subaru"
+    },
+    {
+      "id": "30012",
+      "title": "Centennial Subaru — Brake Service $50 Off Any Brake Job",
+      "client": "Centennial Subaru"
+    },
+    {
+      "id": "30008",
+      "title": "Centennial Subaru — Oil Change + Tire Rotation $109.95",
+      "client": "Centennial Subaru"
+    },
+    {
+      "id": "30009",
+      "title": "Centennial Subaru — Wild Card Special 10% Off Any Service",
+      "client": "Centennial Subaru"
+    },
+    {
+      "id": "30011",
+      "title": "Centennial Subaru — Alignment Special $139.95",
+      "client": "Centennial Subaru"
+    },
+    {
+      "id": "60002",
+      "title": "Lexus of Las Vegas — Black History Month Festival",
+      "client": "Lexus of Las Vegas"
+    },
+    {
+      "id": "60003",
+      "title": "Centennial Subaru — 2026 Forester Walk Around",
+      "client": "Centennial Subaru"
+    },
+    {
+      "id": "60004",
+      "title": "Findlay Nissan — Still Available Story",
+      "client": "Findlay Nissan"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tclient\n1\tNULL\tNULL\n2\tNULL\tNULL\n60005\tLexus GX — Spring Campaign Square\tLexus of Henderson\n30002\tLexus TX500h — Instagram Profile\tLexus of Henderson\n30003\tFindlay Nissan — Black Friday $3,500 Off Kicks\tFindlay Nissan\n30006\tCentennial Subaru — 286 Kids With New Jackets\tCentennial Subaru\n30005\tFindlay Nissan — Save Big on Sentras $0 Down\tFindlay Nissan\n30007\tFindlay Nissan — BBQ Event Invite March 7th\tFindlay Nissan\n30010\tCentennial Subaru — Last Day 2025 Stock Save Big\tCentennial Subaru\n60001\tFindlay Nissan — Presidents Day Sentra $129/mo\tFindlay Nissan\n30004\tCentennial Subaru — $750 Event Cash\tCentennial Subaru\n30012\tCentennial Subaru — Brake Service $50 Off Any Brake Job\tCentennial Subaru\n30008\tCentennial Subaru — Oil Change + Tire Rotation $109.95\tCentennial Subaru\n30009\tCentennial Subaru — Wild Card Special 10% Off Any Service\tCentennial Subaru\n30011\tCentennial Subaru — Alignment Special $139.95\tCentennial Subaru\n60002\tLexus of Las Vegas — Black History Month Festival\tLexus of Las Vegas\n60003\tCentennial Subaru — 2026 Forester Walk Around\tCentennial Subaru\n60004\tFindlay Nissan — Still Available Story\tFindlay Nissan\n",
+  "stderr": "",
+  "execution_time_ms": 381
+}

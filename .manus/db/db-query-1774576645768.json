@@ -1,0 +1,9 @@
+{
+  "query": "\nUPDATE portfolio_graphics SET client = 'Lexus of Henderson' WHERE title LIKE 'Lexus GX%' OR title LIKE 'Lexus TX%' OR title LIKE 'Lexus of Henderson%';\nUPDATE portfolio_graphics SET client = 'Lexus of Las Vegas' WHERE title LIKE 'Lexus of Las Vegas%';\nUPDATE portfolio_graphics SET client = 'Findlay Nissan' WHERE title LIKE 'Findlay Nissan%';\nUPDATE portfolio_graphics SET client = 'Centennial Subaru' WHERE title LIKE 'Centennial Subaru%';\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute \nUPDATE portfolio_graphics SET client = 'Lexus of Henderson' WHERE title LIKE 'Lexus GX%' OR title LIKE 'Lexus TX%' OR title LIKE 'Lexus of Henderson%';\nUPDATE portfolio_graphics SET client = 'Lexus of Las Vegas' WHERE title LIKE 'Lexus of Las Vegas%';\nUPDATE portfolio_graphics SET client = 'Findlay Nissan' WHERE title LIKE 'Findlay Nissan%';\nUPDATE portfolio_graphics SET client = 'Centennial Subaru' WHERE title LIKE 'Centennial Subaru%';\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 543
+}
