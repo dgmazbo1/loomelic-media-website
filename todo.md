@@ -398,3 +398,7 @@
 
 ## Bug Fix — Portfolio Videos Tab Error (Mar 27 #2)
 - [x] Identify and fix the error shown on the Videos tab on /portfolio (missing React import caused ReferenceError in production build)
+
+## Portfolio UX — Fullscreen Video & Instant Photos (Mar 27)
+- [x] Video lightbox: make it truly fullscreen (100vw x 100vh, iframe fills entire screen)
+- [x] Photos: instant load — eager load above-fold images, blur-up placeholder for below-fold

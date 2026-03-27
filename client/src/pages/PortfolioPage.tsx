@@ -32,7 +32,7 @@ function getVimeoThumbnail(url: string): string {
 
 function getVimeoEmbedUrl(url: string): string {
   const id = extractVimeoId(url);
-  return id ? `https://player.vimeo.com/video/${id}?autoplay=1&color=ffffff&title=0&byline=0&portrait=0` : "";
+  return id ? `https://player.vimeo.com/video/${id}?autoplay=1&color=ffffff&title=0&byline=0&portrait=0&fullscreen=1` : "";
 }
 
 // ─── Tag Filter Bar ───────────────────────────────────────────────────────────
@@ -81,6 +81,8 @@ function TagFilterBar({
 function PhotoCard({ item, index, onClick }: { item: PhotoItem; index: number; onClick: () => void }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
+  // Eagerly load the first 8 photos (above the fold); lazy-load the rest
+  const isAboveFold = index < 8;
 
   return (
     <motion.div
@@ -94,7 +96,9 @@ function PhotoCard({ item, index, onClick }: { item: PhotoItem; index: number; o
       <img
         src={item.url}
         alt={item.caption ?? item.title ?? ""}
-        loading="lazy"
+        loading={isAboveFold ? "eager" : "lazy"}
+        fetchPriority={isAboveFold ? "high" : "auto"}
+        decoding="async"
         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300" />
@@ -272,49 +276,54 @@ function VideoLightbox({
   onClose: () => void;
 }) {
   const embedUrl = getVimeoEmbedUrl(item.vimeoUrl);
+
+  // Close on Escape key
+  React.useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.25 }}
-      className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center"
-      onClick={onClose}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[200] bg-black"
     >
-      <button onClick={onClose} className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-10" aria-label="Close">
-        <X size={18} />
-      </button>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        transition={{ duration: 0.25 }}
-        className="w-full max-w-5xl mx-8 flex flex-col items-center gap-4"
-        onClick={(e) => e.stopPropagation()}
+      {/* Close button — floating top-right */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 z-10 w-11 h-11 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-white/25 transition-colors"
+        aria-label="Close video"
       >
-        <div className="w-full aspect-video rounded-xl overflow-hidden bg-black">
-          {embedUrl ? (
-            <iframe
-              src={embedUrl}
-              className="w-full h-full"
-              frameBorder="0"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-              title={item.title ?? "Video"}
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-white/30 text-sm">
-              Invalid Vimeo URL
-            </div>
-          )}
+        <X size={20} />
+      </button>
+
+      {/* Full-screen iframe — no padding, no max-width */}
+      {embedUrl ? (
+        <iframe
+          src={embedUrl}
+          className="w-full h-full"
+          style={{ display: "block", border: "none" }}
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+          title={item.title ?? "Video"}
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center text-white/30 text-sm">
+          Invalid Vimeo URL
         </div>
-        {item.title && (
-          <div className="text-center">
-            <p className="font-display-normal text-xs text-white/80 tracking-widest">{item.title.toUpperCase()}</p>
-            {item.caption && <p className="font-body text-xs text-white/40 mt-0.5">{item.caption}</p>}
-          </div>
-        )}
-      </motion.div>
+      )}
+
+      {/* Title overlay — bottom left, subtle */}
+      {item.title && (
+        <div className="absolute bottom-6 left-6 pointer-events-none">
+          <p className="font-display-normal text-xs text-white/60 tracking-widest">{item.title.toUpperCase()}</p>
+          {item.caption && <p className="font-body text-[0.65rem] text-white/35 mt-0.5">{item.caption}</p>}
+        </div>
+      )}
     </motion.div>
   );
 }
