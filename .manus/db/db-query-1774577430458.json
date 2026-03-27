@@ -1,0 +1,73 @@
+{
+  "query": "SELECT id, vimeoUrl, title, published, sortOrder FROM portfolio_videos ORDER BY sortOrder;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute SELECT id, vimeoUrl, title, published, sortOrder FROM portfolio_videos ORDER BY sortOrder;",
+  "rows": [
+    {
+      "id": "1",
+      "vimeoUrl": "https://vimeo.com/1080432883",
+      "title": "#3 Weekend Special",
+      "published": "1",
+      "sortOrder": "1"
+    },
+    {
+      "id": "2",
+      "vimeoUrl": "https://vimeo.com/1167199233",
+      "title": "Weekend Special #2",
+      "published": "1",
+      "sortOrder": "2"
+    },
+    {
+      "id": "3",
+      "vimeoUrl": "https://vimeo.com/1080433020",
+      "title": "2024 Solterra Special",
+      "published": "1",
+      "sortOrder": "3"
+    },
+    {
+      "id": "4",
+      "vimeoUrl": "https://vimeo.com/1080432935",
+      "title": "WRX Roller",
+      "published": "1",
+      "sortOrder": "4"
+    },
+    {
+      "id": "5",
+      "vimeoUrl": "https://vimeo.com/1080433070",
+      "title": "Three Square",
+      "published": "1",
+      "sortOrder": "5"
+    },
+    {
+      "id": "6",
+      "vimeoUrl": "https://vimeo.com/1080433854",
+      "title": "GX Showroom Floor",
+      "published": "1",
+      "sortOrder": "6"
+    },
+    {
+      "id": "7",
+      "vimeoUrl": "https://vimeo.com/1080433702",
+      "title": "RX Roller",
+      "published": "1",
+      "sortOrder": "7"
+    },
+    {
+      "id": "8",
+      "vimeoUrl": "https://vimeo.com/1080433824",
+      "title": "LS500 Hybrid",
+      "published": "1",
+      "sortOrder": "8"
+    },
+    {
+      "id": "9",
+      "vimeoUrl": "https://vimeo.com/1080433675",
+      "title": "Lexus Henderson Intro",
+      "published": "1",
+      "sortOrder": "9"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tvimeoUrl\ttitle\tpublished\tsortOrder\n1\thttps://vimeo.com/1080432883\t#3 Weekend Special\t1\t1\n2\thttps://vimeo.com/1167199233\tWeekend Special #2\t1\t2\n3\thttps://vimeo.com/1080433020\t2024 Solterra Special\t1\t3\n4\thttps://vimeo.com/1080432935\tWRX Roller\t1\t4\n5\thttps://vimeo.com/1080433070\tThree Square\t1\t5\n6\thttps://vimeo.com/1080433854\tGX Showroom Floor\t1\t6\n7\thttps://vimeo.com/1080433702\tRX Roller\t1\t7\n8\thttps://vimeo.com/1080433824\tLS500 Hybrid\t1\t8\n9\thttps://vimeo.com/1080433675\tLexus Henderson Intro\t1\t9\n",
+  "stderr": "",
+  "execution_time_ms": 367
+}

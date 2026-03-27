@@ -392,3 +392,6 @@
 - [x] Add location subtitles to Featured Work card overlays (e.g., "HENDERSON, NV")
 - [x] Add client filter tabs to Graphics page (All / Lexus / Findlay Nissan / Centennial Subaru)
 - [x] Add client field to portfolioGraphics table for filtering
+
+## Bug Fix — Portfolio Videos Tab (Mar 27)
+- [ ] Debug and fix portfolio videos not showing in the Videos tab on /portfolio
