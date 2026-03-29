@@ -149,16 +149,17 @@ function VideoRow({
   onUpdate,
   onDelete,
 }: {
-  video: { id: number; label?: string | null; embedUrl: string };
-  onUpdate: (id: number, label: string, embedUrl: string) => void;
+  video: { id: number; label?: string | null; embedUrl: string; portrait?: boolean };
+  onUpdate: (id: number, label: string, embedUrl: string, portrait: boolean) => void;
   onDelete: (id: number) => void;
 }) {
   const [editing, setEditing] = useState(false);
   const [label, setLabel] = useState(video.label ?? "");
   const [url, setUrl] = useState(video.embedUrl);
+  const [portrait, setPortrait] = useState(video.portrait ?? false);
 
   const save = () => {
-    onUpdate(video.id, label, url);
+    onUpdate(video.id, label, url, portrait);
     setEditing(false);
   };
 
@@ -169,6 +170,16 @@ function VideoRow({
         <div className="flex-1 flex flex-col gap-2">
           <Input value={label} onChange={e => setLabel(e.target.value)} placeholder="Label (e.g. Walk-around)" className="h-8 text-xs bg-white/5 border-white/20 text-white" />
           <Input value={url} onChange={e => setUrl(e.target.value)} placeholder="Embed URL" className="h-8 text-xs bg-white/5 border-white/20 text-white" />
+          {/* Portrait toggle */}
+          <label className="flex items-center gap-2 cursor-pointer select-none">
+            <div
+              onClick={() => setPortrait(p => !p)}
+              className={`relative w-9 h-5 rounded-full transition-colors ${ portrait ? 'bg-purple-500' : 'bg-white/20' }`}
+            >
+              <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${ portrait ? 'translate-x-4' : '' }`} />
+            </div>
+            <span className="text-xs text-white/50">Portrait / Vertical (9:16)</span>
+          </label>
           <div className="flex gap-2">
             <button onClick={save} className="flex items-center gap-1 text-xs text-green-400 hover:text-green-300"><Check size={12} /> Save</button>
             <button onClick={() => setEditing(false)} className="flex items-center gap-1 text-xs text-white/40 hover:text-white/60"><X size={12} /> Cancel</button>
@@ -176,7 +187,12 @@ function VideoRow({
         </div>
       ) : (
         <div className="flex-1 min-w-0">
-          <p className="text-white/80 text-xs font-medium truncate">{video.label || "Untitled"}</p>
+          <div className="flex items-center gap-2">
+            <p className="text-white/80 text-xs font-medium truncate">{video.label || "Untitled"}</p>
+            {video.portrait && (
+              <span className="shrink-0 text-[0.55rem] font-bold tracking-wide text-purple-300 bg-purple-500/20 px-1.5 py-0.5 rounded-full">9:16</span>
+            )}
+          </div>
           <p className="text-white/30 text-[0.65rem] truncate">{video.embedUrl}</p>
         </div>
       )}
@@ -347,13 +363,54 @@ function UploadQueuePanel({
   );
 }
 
-// ─── Project Editor ───────────────────────────────────────────────────────────
+// ─── Add Video Form ────────────────────────────────────────────────────────────────
+function AddVideoForm({
+  onAdd,
+  onCancel,
+  isPending,
+}: {
+  onAdd: (label: string, embedUrl: string, portrait: boolean) => void;
+  onCancel: () => void;
+  isPending: boolean;
+}) {
+  const [label, setLabel] = useState("");
+  const [url, setUrl] = useState("");
+  const [portrait, setPortrait] = useState(false);
+
+  return (
+    <div className="p-4 rounded-xl bg-white/5 border border-white/20 space-y-2">
+      <Input value={label} onChange={e => setLabel(e.target.value)} placeholder="Label (e.g. Walk-around Tour)" className="h-8 text-xs bg-white/5 border-white/20 text-white" />
+      <Input value={url} onChange={e => setUrl(e.target.value)} placeholder="Vimeo or YouTube embed URL" className="h-8 text-xs bg-white/5 border-white/20 text-white" />
+      {/* Portrait toggle */}
+      <label className="flex items-center gap-2 cursor-pointer select-none">
+        <div
+          onClick={() => setPortrait(p => !p)}
+          className={`relative w-9 h-5 rounded-full transition-colors ${ portrait ? 'bg-purple-500' : 'bg-white/20' }`}
+        >
+          <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${ portrait ? 'translate-x-4' : '' }`} />
+        </div>
+        <span className="text-xs text-white/50">Portrait / Vertical (9:16)</span>
+      </label>
+      <div className="flex gap-2">
+        <Button
+          size="sm"
+          className="h-7 text-xs"
+          onClick={() => onAdd(label, url, portrait)}
+          disabled={!url || isPending}
+        >
+          {isPending ? "Adding..." : "Add Video"}
+        </Button>
+        <Button size="sm" variant="ghost" className="h-7 text-xs text-white/40" onClick={onCancel}>Cancel</Button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Project Editor ────────────────────────────────────────────────────────────────
 function ProjectEditor({ slug, name }: { slug: string; name: string }) {
   const utils = trpc.useUtils();
   const heroInputRef = useRef<HTMLInputElement>(null);
   const [uploadQueue, setUploadQueue] = useState<UploadItem[]>([]);
-  const [newVideoUrl, setNewVideoUrl] = useState("");
-  const [newVideoLabel, setNewVideoLabel] = useState("");
   const [addingVideo, setAddingVideo] = useState(false);
 
   // Ensure project row exists
@@ -401,7 +458,7 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
   });
 
   const addVideo = trpc.admin.addVideo.useMutation({
-    onSuccess: () => { utils.admin.getProject.invalidate({ slug }); setNewVideoUrl(""); setNewVideoLabel(""); setAddingVideo(false); toast.success("Video added"); },
+    onSuccess: () => { utils.admin.getProject.invalidate({ slug }); setAddingVideo(false); toast.success("Video added"); },
     onError: (e) => toast.error(e.message),
   });
 
@@ -666,21 +723,11 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
 
         <div className="space-y-2">
           {addingVideo && (
-            <div className="p-4 rounded-xl bg-white/5 border border-white/20 space-y-2">
-              <Input value={newVideoLabel} onChange={e => setNewVideoLabel(e.target.value)} placeholder="Label (e.g. Walk-around Tour)" className="h-8 text-xs bg-white/5 border-white/20 text-white" />
-              <Input value={newVideoUrl} onChange={e => setNewVideoUrl(e.target.value)} placeholder="Vimeo or YouTube embed URL" className="h-8 text-xs bg-white/5 border-white/20 text-white" />
-              <div className="flex gap-2">
-                <Button
-                  size="sm"
-                  className="h-7 text-xs"
-                  onClick={() => addVideo.mutate({ slug, label: newVideoLabel, embedUrl: newVideoUrl })}
-                  disabled={!newVideoUrl || addVideo.isPending}
-                >
-                  {addVideo.isPending ? "Adding..." : "Add Video"}
-                </Button>
-                <Button size="sm" variant="ghost" className="h-7 text-xs text-white/40" onClick={() => setAddingVideo(false)}>Cancel</Button>
-              </div>
-            </div>
+            <AddVideoForm
+              onAdd={(label, embedUrl, portrait) => addVideo.mutate({ slug, label, embedUrl, portrait })}
+              onCancel={() => setAddingVideo(false)}
+              isPending={addVideo.isPending}
+            />
           )}
           {videos.length === 0 && !addingVideo && (
             <p className="text-white/20 text-sm text-center py-6">No videos yet — click "Add Video" to add a Vimeo or YouTube embed URL</p>
@@ -689,7 +736,7 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
             <VideoRow
               key={v.id}
               video={v}
-              onUpdate={(id, label, embedUrl) => updateVideo.mutate({ id, label, embedUrl })}
+              onUpdate={(id, label, embedUrl, portrait) => updateVideo.mutate({ id, label, embedUrl, portrait })}
               onDelete={(id) => deleteVideo.mutate({ id })}
             />
           ))}

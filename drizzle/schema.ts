@@ -67,6 +67,8 @@ export const projectVideos = mysqlTable("project_videos", {
   projectId: int("projectId").notNull(),
   label: varchar("label", { length: 128 }),
   embedUrl: text("embedUrl").notNull(),
+  /** true = portrait/vertical (9:16), false = landscape (16:9) */
+  portrait: boolean("portrait").default(false).notNull(),
   sortOrder: int("sortOrder").default(0).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });

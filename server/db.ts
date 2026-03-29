@@ -209,10 +209,12 @@ export async function addProjectVideo(data: InsertProjectVideo) {
   await db.insert(projectVideos).values(data);
 }
 
-export async function updateProjectVideo(id: number, label: string, embedUrl: string) {
+export async function updateProjectVideo(id: number, label: string, embedUrl: string, portrait?: boolean) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
-  await db.update(projectVideos).set({ label, embedUrl }).where(eq(projectVideos.id, id));
+  const updateData: Partial<typeof projectVideos.$inferInsert> = { label, embedUrl };
+  if (portrait !== undefined) updateData.portrait = portrait;
+  await db.update(projectVideos).set(updateData).where(eq(projectVideos.id, id));
 }
 
 export async function deleteProjectVideo(id: number) {

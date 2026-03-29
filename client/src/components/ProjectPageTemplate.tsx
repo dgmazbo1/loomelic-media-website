@@ -259,19 +259,59 @@ export default function ProjectPageTemplate({ data }: { data: ProjectPageData })
               <p className="section-label text-[oklch(0.6_0_0)] mb-8">
                 <span>✦</span><span>VIDEO CONTENT —</span>
               </p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {dbVideos.map((v) => (
-                  <div key={v.id} className="rounded-2xl overflow-hidden aspect-video bg-[oklch(0.1_0_0)]">
-                    <iframe
-                      src={v.embedUrl}
-                      className="w-full h-full"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      title={v.label ?? "Video"}
-                    />
-                  </div>
-                ))}
-              </div>
+              {/* Portrait (9:16) videos get a dedicated row with narrower columns */}
+              {dbVideos.some(v => v.portrait) ? (
+                <div className="flex flex-wrap gap-4 justify-center">
+                  {dbVideos.map((v) => (
+                    v.portrait ? (
+                      /* Portrait: fixed width ~280px, 9:16 ratio */
+                      <div
+                        key={v.id}
+                        className="rounded-2xl overflow-hidden bg-[oklch(0.1_0_0)] shrink-0"
+                        style={{ width: 'clamp(200px, 28vw, 300px)', aspectRatio: '9/16' }}
+                      >
+                        <iframe
+                          src={v.embedUrl}
+                          className="w-full h-full"
+                          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                          allowFullScreen
+                          title={v.label ?? "Video"}
+                        />
+                      </div>
+                    ) : (
+                      /* Landscape: full width 16:9 */
+                      <div
+                        key={v.id}
+                        className="rounded-2xl overflow-hidden bg-[oklch(0.1_0_0)] w-full"
+                        style={{ aspectRatio: '16/9' }}
+                      >
+                        <iframe
+                          src={v.embedUrl}
+                          className="w-full h-full"
+                          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                          allowFullScreen
+                          title={v.label ?? "Video"}
+                        />
+                      </div>
+                    )
+                  ))}
+                </div>
+              ) : (
+                /* All landscape: 2-col grid */
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {dbVideos.map((v) => (
+                    <div key={v.id} className="rounded-2xl overflow-hidden bg-[oklch(0.1_0_0)]" style={{ aspectRatio: '16/9' }}>
+                      <iframe
+                        src={v.embedUrl}
+                        className="w-full h-full"
+                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                        allowFullScreen
+                        title={v.label ?? "Video"}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 

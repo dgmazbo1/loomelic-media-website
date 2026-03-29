@@ -163,6 +163,7 @@ export const adminRouter = router({
       slug: z.string(),
       label: z.string().optional(),
       embedUrl: z.string().url(),
+      portrait: z.boolean().optional(),
     }))
     .mutation(async ({ input }) => {
       const project = await getProjectBySlug(input.slug);
@@ -173,20 +174,22 @@ export const adminRouter = router({
         projectId: project.id,
         label: input.label ?? null,
         embedUrl: input.embedUrl,
+        portrait: input.portrait ?? false,
         sortOrder: existing.length,
       });
       return { success: true };
     }),
 
-  /** Update a video's label or URL */
+  /** Update a video's label, URL, or portrait flag */
   updateVideo: adminProcedure
     .input(z.object({
       id: z.number(),
       label: z.string(),
       embedUrl: z.string().url(),
+      portrait: z.boolean().optional(),
     }))
     .mutation(async ({ input }) => {
-      await updateProjectVideo(input.id, input.label, input.embedUrl);
+      await updateProjectVideo(input.id, input.label, input.embedUrl, input.portrait);
       return { success: true };
     }),
 

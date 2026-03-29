@@ -1,0 +1,55 @@
+{
+  "query": "\nSELECT id, label, embedUrl FROM project_videos WHERE projectId = 3;\nSELECT id, url, altText FROM gallery_images WHERE projectId = 3 LIMIT 5;\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute \nSELECT id, label, embedUrl FROM project_videos WHERE projectId = 3;\nSELECT id, url, altText FROM gallery_images WHERE projectId = 3 LIMIT 5;\n",
+  "rows": [
+    {
+      "id": "1",
+      "label": "L-Certified RX350",
+      "embedUrl": "https://vimeo.com/1167198812/5f15cc6cd4?fl=ml&fe=ec"
+    },
+    {
+      "id": "2",
+      "label": "2026 RZ",
+      "embedUrl": "https://vimeo.com/1167198837/8bb059865b?fl=ml&fe=ec"
+    },
+    {
+      "id": "3",
+      "label": "LX600",
+      "embedUrl": "https://vimeo.com/1167198795/5309cc2871?fl=ml&fe=ec"
+    },
+    {
+      "id": "id",
+      "label": "url",
+      "embedUrl": "altText"
+    },
+    {
+      "id": "1",
+      "label": "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/loomelic/gallery/lexus-of-las-vegas-u55xrdhNyP.jpg",
+      "embedUrl": "NULL"
+    },
+    {
+      "id": "2",
+      "label": "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/loomelic/gallery/lexus-of-las-vegas-C0QVF6PWBt.jpg",
+      "embedUrl": "NULL"
+    },
+    {
+      "id": "3",
+      "label": "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/loomelic/gallery/lexus-of-las-vegas-dMzCD_2Ivu.jpg",
+      "embedUrl": "NULL"
+    },
+    {
+      "id": "4",
+      "label": "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/loomelic/gallery/lexus-of-las-vegas-nUjDVjJ7Wi.jpg",
+      "embedUrl": "NULL"
+    },
+    {
+      "id": "5",
+      "label": "https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/loomelic/gallery/lexus-of-las-vegas-Jd7_eOnoC5.jpg",
+      "embedUrl": "NULL"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tlabel\tembedUrl\n1\tL-Certified RX350\thttps://vimeo.com/1167198812/5f15cc6cd4?fl=ml&fe=ec\n2\t2026 RZ\thttps://vimeo.com/1167198837/8bb059865b?fl=ml&fe=ec\n3\tLX600\thttps://vimeo.com/1167198795/5309cc2871?fl=ml&fe=ec\nid\turl\taltText\n1\thttps://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/loomelic/gallery/lexus-of-las-vegas-u55xrdhNyP.jpg\tNULL\n2\thttps://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/loomelic/gallery/lexus-of-las-vegas-C0QVF6PWBt.jpg\tNULL\n3\thttps://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/loomelic/gallery/lexus-of-las-vegas-dMzCD_2Ivu.jpg\tNULL\n4\thttps://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/loomelic/gallery/lexus-of-las-vegas-nUjDVjJ7Wi.jpg\tNULL\n5\thttps://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/loomelic/gallery/lexus-of-las-vegas-Jd7_eOnoC5.jpg\tNULL\n",
+  "stderr": "",
+  "execution_time_ms": 391
+}

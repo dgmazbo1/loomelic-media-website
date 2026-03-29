@@ -394,7 +394,7 @@
 - [x] Add client field to portfolioGraphics table for filtering
 
 ## Bug Fix — Portfolio Videos Tab (Mar 27)
-- [ ] Debug and fix portfolio videos not showing in the Videos tab on /portfolio
+- [x] Debug and fix portfolio videos not showing in the Videos tab on /portfolio
 
 ## Bug Fix — Portfolio Videos Tab Error (Mar 27 #2)
 - [x] Identify and fix the error shown on the Videos tab on /portfolio (missing React import caused ReferenceError in production build)
@@ -402,3 +402,17 @@
 ## Portfolio UX — Fullscreen Video & Instant Photos (Mar 27)
 - [x] Video lightbox: make it truly fullscreen (100vw x 100vh, iframe fills entire screen)
 - [x] Photos: instant load — eager load above-fold images, blur-up placeholder for below-fold
+
+## Lexus of Las Vegas Featured Project (Mar 29)
+- [x] Remove broken links from the Lexus of Las Vegas featured project page (fixed Vimeo review links to proper embed URLs)
+
+## Lexus of Las Vegas — Vertical Video Fix (Mar 29)
+- [x] Fix DB-managed videos on project pages: detect portrait/vertical format and render at 9:16 aspect ratio (no black side bars)
+
+## Project Media Admin Editor (Mar 29)
+- [x] Add portrait boolean field to project_videos schema and migrate
+- [x] Mark Lexus LV videos as portrait=true in DB
+- [x] Render portrait videos at 9:16 aspect ratio in ProjectPageTemplate (no black bars)
+- [x] Build admin project media editor: gallery photo upload/delete/reorder per project
+- [x] Build admin project media editor: video add (URL + label + portrait toggle) / delete per project
+- [x] Wire media editor into AdminPage under each project card

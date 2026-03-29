@@ -20,7 +20,7 @@ export const mediaRouter = router({
       return {
         heroImageUrl: project.heroImageUrl,
         gallery: gallery.map(img => ({ id: img.id, url: img.url, altText: img.altText, sortOrder: img.sortOrder })),
-        videos: videos.map(v => ({ id: v.id, label: v.label, embedUrl: v.embedUrl, sortOrder: v.sortOrder })),
+        videos: videos.map(v => ({ id: v.id, label: v.label, embedUrl: v.embedUrl, portrait: v.portrait ?? false, sortOrder: v.sortOrder })),
       };
     }),
 });

@@ -1,0 +1,8 @@
+{
+  "query": "\nSELECT pv.id, pv.label, pv.embed_url FROM project_videos pv WHERE pv.project_id = 3;\nSHOW TABLES LIKE '%galler%';\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute \nSELECT pv.id, pv.label, pv.embed_url FROM project_videos pv WHERE pv.project_id = 3;\nSHOW TABLES LIKE '%galler%';\n",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 2: Unknown column 'pv.project_id' in 'where clause'"
+  ]
+}
