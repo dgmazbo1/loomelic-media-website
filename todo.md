@@ -416,3 +416,10 @@
 - [x] Build admin project media editor: gallery photo upload/delete/reorder per project
 - [x] Build admin project media editor: video add (URL + label + portrait toggle) / delete per project
 - [x] Wire media editor into AdminPage under each project card
+
+## Admin Panel — Photo & Video Reordering (Mar 29)
+- [x] Add sortOrder field to project_videos table and migrate
+- [x] Add reorderVideos tRPC procedure to admin router
+- [x] Add drag-and-drop reordering to project gallery photos in AdminPage (already has DnD kit)
+- [x] Add drag-and-drop reordering to project videos in AdminPage (new SortableVideoRow)
+- [x] Persist video sort order to DB via reorderVideos mutation

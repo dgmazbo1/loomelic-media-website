@@ -223,6 +223,14 @@ export async function deleteProjectVideo(id: number) {
   await db.delete(projectVideos).where(eq(projectVideos.id, id));
 }
 
+export async function reorderProjectVideos(updates: { id: number; sortOrder: number }[]) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  for (const u of updates) {
+    await db.update(projectVideos).set({ sortOrder: u.sortOrder }).where(eq(projectVideos.id, u.id));
+  }
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // ENTERPRISE CRM HELPERS
 // ─────────────────────────────────────────────────────────────────────────────

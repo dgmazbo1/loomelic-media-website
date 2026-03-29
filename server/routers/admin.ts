@@ -18,6 +18,7 @@ import {
   addProjectVideo,
   updateProjectVideo,
   deleteProjectVideo,
+  reorderProjectVideos,
 } from "../db";
 import { storagePut } from "../storage";
 import { nanoid } from "nanoid";
@@ -198,6 +199,16 @@ export const adminRouter = router({
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input }) => {
       await deleteProjectVideo(input.id);
+      return { success: true };
+    }),
+
+  /** Reorder videos within a project */
+  reorderVideos: adminProcedure
+    .input(z.object({
+      updates: z.array(z.object({ id: z.number(), sortOrder: z.number() })),
+    }))
+    .mutation(async ({ input }) => {
+      await reorderProjectVideos(input.updates);
       return { success: true };
     }),
 

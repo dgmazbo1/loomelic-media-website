@@ -7,7 +7,7 @@
    - Hero image picker (upload or promote from gallery)
    - Video manager: add/edit/delete embed URLs
    ============================================================ */
-import { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
@@ -143,15 +143,50 @@ function SortableGalleryCard({
   );
 }
 
+// ─── Sortable Video Row ──────────────────────────────────────────────────────
+function SortableVideoRow({
+  video,
+  onUpdate,
+  onDelete,
+}: {
+  video: { id: number; label?: string | null; embedUrl: string; portrait?: boolean; sortOrder: number };
+  onUpdate: (id: number, label: string, embedUrl: string, portrait: boolean) => void;
+  onDelete: (id: number) => void;
+}) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: video.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.4 : 1,
+    zIndex: isDragging ? 50 : undefined,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style}>
+      <VideoRow video={video} onUpdate={onUpdate} onDelete={onDelete} dragHandleProps={{ ...attributes, ...listeners }} />
+    </div>
+  );
+}
+
 // ─── Video Row ────────────────────────────────────────────────────────────────
 function VideoRow({
   video,
   onUpdate,
   onDelete,
+  dragHandleProps,
 }: {
   video: { id: number; label?: string | null; embedUrl: string; portrait?: boolean };
   onUpdate: (id: number, label: string, embedUrl: string, portrait: boolean) => void;
   onDelete: (id: number) => void;
+  dragHandleProps?: React.HTMLAttributes<HTMLDivElement>;
 }) {
   const [editing, setEditing] = useState(false);
   const [label, setLabel] = useState(video.label ?? "");
@@ -165,6 +200,16 @@ function VideoRow({
 
   return (
     <div className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
+      {/* Drag handle */}
+      {dragHandleProps && (
+        <div
+          {...dragHandleProps}
+          className="mt-1 p-1 rounded cursor-grab active:cursor-grabbing text-white/20 hover:text-white/50 transition-colors shrink-0"
+          title="Drag to reorder"
+        >
+          <GripVertical size={14} />
+        </div>
+      )}
       <Video size={16} className="text-white/40 mt-1 shrink-0" />
       {editing ? (
         <div className="flex-1 flex flex-col gap-2">
@@ -472,6 +517,29 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
     onError: (e) => toast.error(e.message),
   });
 
+  const reorderVideos = trpc.admin.reorderVideos.useMutation({
+    onSuccess: () => utils.admin.getProject.invalidate({ slug }),
+    onError: (e) => toast.error(e.message),
+  });
+
+  // Local video order state for optimistic drag-and-drop
+  const [localVideos, setLocalVideos] = useState<typeof videos>([]);
+  useEffect(() => {
+    setLocalVideos(data?.videos ?? []);
+  }, [data?.videos]);
+
+  const handleVideoDragEnd = useCallback((event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+    setLocalVideos(prev => {
+      const oldIndex = prev.findIndex(v => v.id === active.id);
+      const newIndex = prev.findIndex(v => v.id === over.id);
+      const reordered = arrayMove(prev, oldIndex, newIndex);
+      reorderVideos.mutate({ updates: reordered.map((v, i) => ({ id: v.id, sortOrder: i })) });
+      return reordered;
+    });
+  }, [reorderVideos]);
+
   // ── Bulk upload handler ──────────────────────────────────────────────────────
   // Enqueues all selected files, then fires parallel uploads (max 3 concurrent)
   const handleBulkUpload = useCallback(async (files: File[]) => {
@@ -721,26 +789,42 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
           </button>
         </div>
 
-        <div className="space-y-2">
-          {addingVideo && (
-            <AddVideoForm
-              onAdd={(label, embedUrl, portrait) => addVideo.mutate({ slug, label, embedUrl, portrait })}
-              onCancel={() => setAddingVideo(false)}
-              isPending={addVideo.isPending}
-            />
-          )}
-          {videos.length === 0 && !addingVideo && (
-            <p className="text-white/20 text-sm text-center py-6">No videos yet — click "Add Video" to add a Vimeo or YouTube embed URL</p>
-          )}
-          {videos.map(v => (
-            <VideoRow
-              key={v.id}
-              video={v}
-              onUpdate={(id, label, embedUrl, portrait) => updateVideo.mutate({ id, label, embedUrl, portrait })}
-              onDelete={(id) => deleteVideo.mutate({ id })}
-            />
-          ))}
-        </div>
+        {localVideos.length > 1 && (
+          <p className="text-white/20 text-[0.65rem] mb-2 flex items-center gap-1">
+            <GripVertical size={11} className="inline" /> Drag the grip handle to reorder
+          </p>
+        )}
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleVideoDragEnd}
+        >
+          <SortableContext
+            items={localVideos.map(v => v.id)}
+            strategy={rectSortingStrategy}
+          >
+            <div className="space-y-2">
+              {addingVideo && (
+                <AddVideoForm
+                  onAdd={(label, embedUrl, portrait) => addVideo.mutate({ slug, label, embedUrl, portrait })}
+                  onCancel={() => setAddingVideo(false)}
+                  isPending={addVideo.isPending}
+                />
+              )}
+              {localVideos.length === 0 && !addingVideo && (
+                <p className="text-white/20 text-sm text-center py-6">No videos yet — click "Add Video" to add a Vimeo or YouTube embed URL</p>
+              )}
+              {localVideos.map(v => (
+                <SortableVideoRow
+                  key={v.id}
+                  video={v}
+                  onUpdate={(id, label, embedUrl, portrait) => updateVideo.mutate({ id, label, embedUrl, portrait })}
+                  onDelete={(id) => deleteVideo.mutate({ id })}
+                />
+              ))}
+            </div>
+          </SortableContext>
+        </DndContext>
       </section>
     </div>
   );
