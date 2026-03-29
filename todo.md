@@ -444,3 +444,10 @@
 ## SEO Fixes (Mar 29)
 - [x] Fix homepage (/) title: was 14 chars ("Loomelic Media"), now 43 chars ("Las Vegas Video Production | Loomelic Media") via useSEO hook
 - [x] Fix homepage (/) description: was 235 chars, now 116 chars — within 50–160 char limit
+
+## SEO — Service Subpages (Mar 29)
+- [x] Apply useSEO to ServiceSubpages.tsx (DealerServicesPage, EventCoverageSubpage, HeadshotsSubpage, WebsiteBuildingPage)
+- [x] Apply useSEO to DealerServicePages.tsx (DealerServicesOverview, DealerInventoryPhotographyPage, DealerShortFormReelsPage, DealerWalkaroundVideosPage, DealerEventsPage, DealerCRMIntroVideosPage)
+- [x] Apply useSEO to ServicePages.tsx (AutomotiveMarketingPage, EventCoveragePage, SocialMediaContentPage, PhotographyPage, BrandStrategyPage, HeadshotsPage, WebsiteRedesignPage)
+- [x] Apply useSEO to DealerServicesPage.tsx (legacy /services/dealer-services route)
+- [x] Apply useSEO to AllServicesPage, ProcessPage, SolutionsPage, PortfolioPage, CaseStudies, ContactPage, AboutPage

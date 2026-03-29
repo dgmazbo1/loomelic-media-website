@@ -18,6 +18,7 @@ import {
   ArrowRight, CheckCircle,
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useSEO } from "@/hooks/useSEO";
 import { HERO_VIDEOS, LEXUS_HENDERSON, RAIDERS_BLAST, HERO_GRID_IMAGES } from "@/lib/media";
 
 function AnimFade({
@@ -95,6 +96,11 @@ const SLUG_TO_ID: Record<string, string> = {
 
 export default function SolutionsPage() {
   const [location, navigate] = useLocation();
+  useSEO({
+    title: "Enterprise Solutions | Loomelic Media",
+    description: "Scalable video and photography solutions for dealership groups, enterprise brands, and event companies across Las Vegas and South Florida.",
+    canonical: "/solutions",
+  });
 
   // Extract the slug from the URL path (e.g. /solutions/headshots → headshots)
   const slug = location.replace(/^\/solutions\/?/, "").split("?")[0].split("#")[0].trim();

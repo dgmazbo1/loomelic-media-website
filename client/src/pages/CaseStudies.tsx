@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useSEO } from "@/hooks/useSEO";
 import {
   LEXUS_HENDERSON,
   LEXUS_LAS_VEGAS,
@@ -115,6 +116,11 @@ function AnimFade({ children, className = "", delay = 0 }: { children: React.Rea
 export default function CaseStudies() {
   const [, navigate] = useLocation();
   const [filter, setFilter] = useState("ALL");
+  useSEO({
+    title: "Projects & Case Studies | Loomelic Media",
+    description: "Browse Loomelic Media's client projects — automotive, events, and brand campaigns across Las Vegas and South Florida.",
+    canonical: "/projects",
+  });
 
   const filtered = filter === "ALL" ? ALL_STUDIES : ALL_STUDIES.filter((s) => s.category === filter);
 

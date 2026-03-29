@@ -8,6 +8,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Image, Video, Palette } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import { trpc } from "@/lib/trpc";
+import { useSEO } from "@/hooks/useSEO";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -484,6 +485,12 @@ export default function PortfolioPage() {
   }, []);
 
   const isLoading = activeSection === "photos" ? photosLoading : activeSection === "videos" ? videosLoading : graphicsLoading;
+
+  useSEO({
+    title: "Portfolio | Loomelic Media Las Vegas",
+    description: "Browse Loomelic Media's portfolio of video, photography, and graphic work for Las Vegas dealerships, events, and brands.",
+    canonical: "/portfolio",
+  });
 
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">

@@ -9,6 +9,7 @@
            /services/headshots
    ============================================================ */
 
+import { useSEO } from "@/hooks/useSEO";
 import ServicePageTemplate from "@/components/ServicePageTemplate";
 import {
   HERO_VIDEOS,
@@ -22,6 +23,11 @@ import {
 
 // ─── AUTOMOTIVE MARKETING ────────────────────────────────────
 export function AutomotiveMarketingPage() {
+  useSEO({
+    title: "Automotive Marketing Video Las Vegas",
+    description: "Video production and photography for Las Vegas automotive dealers — inventory, social reels, events, and CRM content at scale.",
+    canonical: "/services/automotive-marketing",
+  });
   return (
     <ServicePageTemplate
       data={{
@@ -68,6 +74,11 @@ export function AutomotiveMarketingPage() {
 
 // ─── EVENT COVERAGE ──────────────────────────────────────────
 export function EventCoveragePage() {
+  useSEO({
+    title: "Event Video & Photo Coverage Las Vegas",
+    description: "Professional event photography and videography in Las Vegas — corporate events, concerts, brand activations, and private gatherings.",
+    canonical: "/services/event-coverage",
+  });
   return (
     <ServicePageTemplate
       data={{
@@ -104,6 +115,11 @@ export function EventCoveragePage() {
 
 // ─── SOCIAL MEDIA CONTENT ────────────────────────────────────
 export function SocialMediaContentPage() {
+  useSEO({
+    title: "Social Media Video Content Las Vegas",
+    description: "Short-form social media video production for Las Vegas businesses — Reels, TikToks, and YouTube Shorts built to drive engagement.",
+    canonical: "/services/social-media-content",
+  });
   return (
     <ServicePageTemplate
       data={{
@@ -135,8 +151,13 @@ export function SocialMediaContentPage() {
   );
 }
 
-// ─── PHOTOGRAPHY ─────────────────────────────────────────────
+// ─── PHOTOGRAPHY ───────────────────────────────────────────
 export function PhotographyPage() {
+  useSEO({
+    title: "Commercial Photography Las Vegas",
+    description: "Professional commercial photography for Las Vegas businesses — product, event, corporate, and brand photography with fast turnaround.",
+    canonical: "/services/photography",
+  });
   return (
     <ServicePageTemplate
       data={{
@@ -171,6 +192,11 @@ export function PhotographyPage() {
 
 // ─── BRAND STRATEGY ──────────────────────────────────────────
 export function BrandStrategyPage() {
+  useSEO({
+    title: "Brand Strategy & Content Las Vegas",
+    description: "Brand strategy and visual content development for Las Vegas businesses — positioning, identity, and content systems that scale.",
+    canonical: "/services/brand-strategy",
+  });
   return (
     <ServicePageTemplate
       data={{
@@ -204,6 +230,11 @@ export function BrandStrategyPage() {
 
 // ─── HEADSHOTS + TEAM PHOTOGRAPHY ──────────────────────────
 export function HeadshotsPage() {
+  useSEO({
+    title: "Corporate Headshots Las Vegas | Loomelic",
+    description: "Professional corporate headshots for Las Vegas teams — on-site setup, retouching, and organized gallery delivery for every department.",
+    canonical: "/services/headshots",
+  });
   return (
     <ServicePageTemplate
       data={{
@@ -239,9 +270,14 @@ export function HeadshotsPage() {
   );
 }
 
-// ─── WEBSITE REDESIGN ────────────────────────────────────────
+// ─── WEBSITE REDESIGN ──────────────────────────────────────────
 // NOTE: Gallery/video intentionally omitted — content to be added later by client
 export function WebsiteRedesignPage() {
+  useSEO({
+    title: "Website Redesign Las Vegas | Loomelic",
+    description: "Modern website redesigns for Las Vegas businesses — mobile-first, fast-loading, and built to convert visitors into customers.",
+    canonical: "/services/website-redesign",
+  });
   return (
     <ServicePageTemplate
       data={{

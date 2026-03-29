@@ -9,6 +9,7 @@ import { useLocation } from "wouter";
 import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ContactSection from "@/components/ContactSection";
+import { useSEO } from "@/hooks/useSEO";
 
 const SERVICES = [
   {
@@ -65,6 +66,11 @@ function AnimFade({ children, className = "", delay = 0 }: { children: React.Rea
 
 export default function AllServicesPage() {
   const [, navigate] = useLocation();
+  useSEO({
+    title: "All Services | Loomelic Media Las Vegas",
+    description: "Explore all video production, photography, and web services from Loomelic Media — serving Las Vegas, Henderson, and South Florida.",
+    canonical: "/services",
+  });
 
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">

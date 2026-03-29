@@ -7,6 +7,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, MapPin, Phone, Mail } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useSEO } from "@/hooks/useSEO";
 
 type FormData = {
   name: string;
@@ -78,6 +79,11 @@ const inputClass = (hasError: boolean) =>
   `w-full bg-white/5 border ${hasError ? "border-red-400/60" : "border-white/10"} rounded-xl px-4 py-3.5 font-body text-sm text-white placeholder:text-white/25 focus:outline-none focus:border-white/30 focus:bg-white/8 transition-all duration-200`;
 
 export default function ContactPage() {
+  useSEO({
+    title: "Contact Loomelic Media Las Vegas",
+    description: "Get in touch with Loomelic Media for video production, photography, and web services in Las Vegas, Henderson, and South Florida.",
+    canonical: "/contact",
+  });
   const [form, setForm] = useState<FormData>({
     name: "", email: "", phone: "", business: "", type: "", message: "",
   });

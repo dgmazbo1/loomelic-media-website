@@ -8,6 +8,7 @@ import { useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
 import ContactSection from "@/components/ContactSection";
 import { ChevronDown } from "lucide-react";
+import { useSEO } from "@/hooks/useSEO";
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -103,6 +104,11 @@ function FAQItem({ q, a, phone }: { q: string; a: string; phone?: string }) {
 
 export default function AboutPage() {
   const [, navigate] = useLocation();
+  useSEO({
+    title: "About Loomelic Media Las Vegas",
+    description: "Loomelic Media is a Las Vegas video production company serving automotive dealers, events, and brands across Nevada and South Florida.",
+    canonical: "/about",
+  });
 
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">

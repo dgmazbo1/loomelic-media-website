@@ -12,6 +12,7 @@ import { useRef, useState } from "react";
 import { useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
 import ContactSection from "@/components/ContactSection";
+import { useSEO } from "@/hooks/useSEO";
 
 /* ─── SHARED UTILITIES ─────────────────────────────────────── */
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -232,6 +233,11 @@ function OtherServicesSection({ current }: { current: string }) {
 /* ─── DEALER OVERVIEW ──────────────────────────────────────── */
 export function DealerServicesOverview() {
   const [, navigate] = useLocation();
+  useSEO({
+    title: "Dealer Content Services Las Vegas",
+    description: "Complete monthly content systems for Las Vegas automotive dealers — photography, video, social reels, and event coverage.",
+    canonical: "/services/dealer",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />
@@ -316,6 +322,11 @@ export function DealerServicesOverview() {
 
 /* ─── 01 INVENTORY PHOTOGRAPHY ─────────────────────────────── */
 export function DealerInventoryPhotographyPage() {
+  useSEO({
+    title: "Inventory Photography Las Vegas Dealers",
+    description: "High-volume dealership inventory photography in Las Vegas — consistent lighting, same-day delivery, ready for VDP and AutoTrader.",
+    canonical: "/services/dealer/01-inventory-photography",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />
@@ -363,6 +374,11 @@ export function DealerInventoryPhotographyPage() {
 
 /* ─── 02 SHORT-FORM REELS ───────────────────────────────────── */
 export function DealerShortFormReelsPage() {
+  useSEO({
+    title: "Short-Form Reels for Car Dealers Vegas",
+    description: "Vertical video reels for Las Vegas dealerships — engineered for Instagram, TikTok, and YouTube Shorts to drive inbound traffic.",
+    canonical: "/services/dealer/02-short-form-reels",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />
@@ -409,6 +425,11 @@ export function DealerShortFormReelsPage() {
 
 /* ─── 03 WALKAROUND VIDEOS ─────────────────────────────────── */
 export function DealerWalkaroundVideosPage() {
+  useSEO({
+    title: "Walkaround Videos for Dealerships Vegas",
+    description: "Cinematic vehicle walkaround videos for Las Vegas dealers — produced to a consistent standard for VDP, YouTube, and social media.",
+    canonical: "/services/dealer/03-walkaround-videos",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />
@@ -456,6 +477,11 @@ export function DealerWalkaroundVideosPage() {
 
 /* ─── 04 DEALERSHIP EVENTS ─────────────────────────────────── */
 export function DealerEventsPage() {
+  useSEO({
+    title: "Dealership Event Coverage Las Vegas",
+    description: "Photo and video coverage for Las Vegas dealership sales events, model launches, and community activations — same-day social delivery.",
+    canonical: "/services/dealer/04-dealership-events",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />
@@ -502,6 +528,11 @@ export function DealerEventsPage() {
 
 /* ─── 05 CRM INTRO VIDEOS ──────────────────────────────────── */
 export function DealerCRMIntroVideosPage() {
+  useSEO({
+    title: "CRM Intro Videos for Car Dealers Vegas",
+    description: "Personalized CRM video messages for Las Vegas dealership sales reps — built to humanize follow-up and improve appointment show rates.",
+    canonical: "/services/dealer/05-crm-intro-videos",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />

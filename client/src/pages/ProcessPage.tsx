@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { useLocation } from "wouter";
 import { Phone, FileText, Settings, Repeat, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useSEO } from "@/hooks/useSEO";
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -85,6 +86,11 @@ const STEPS = [
 
 export default function ProcessPage() {
   const [, navigate] = useLocation();
+  useSEO({
+    title: "Our Process | Loomelic Media Las Vegas",
+    description: "How Loomelic Media works: discovery, proposal, production, and delivery. A clear, no-surprise process for every video and photo project.",
+    canonical: "/process",
+  });
 
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)] overflow-x-hidden">

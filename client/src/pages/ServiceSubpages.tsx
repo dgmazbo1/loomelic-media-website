@@ -82,6 +82,11 @@ function CTASection({ headline, cta, onClick }: { headline: string; cta: string;
 /* ─── DEALER SERVICES ──────────────────────────────────────── */
 export function DealerServicesPage() {
   const [, navigate] = useLocation();
+  useSEO({
+    title: "Dealer Videography & Photography Las Vegas",
+    description: "Monthly content systems for automotive dealers — inventory photos, walkaround videos, social reels, and event coverage in Las Vegas.",
+    canonical: "/services/dealer",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />
@@ -125,6 +130,11 @@ export function DealerServicesPage() {
 /* ─── EVENT COVERAGE ───────────────────────────────────────── */
 export function EventCoverageSubpage() {
   const [, navigate] = useLocation();
+  useSEO({
+    title: "Event Coverage Las Vegas | Loomelic Media",
+    description: "Full-service photo and video coverage for conventions, trade shows, corporate events, and brand activations in Las Vegas.",
+    canonical: "/services/events",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />
@@ -165,6 +175,11 @@ export function EventCoverageSubpage() {
 /* ─── HEADSHOTS ────────────────────────────────────────────── */
 export function HeadshotsSubpage() {
   const [, navigate] = useLocation();
+  useSEO({
+    title: "Professional Headshots Las Vegas",
+    description: "On-site professional headshots for dealerships and corporate teams in Las Vegas and Henderson — retouched and gallery-delivered.",
+    canonical: "/services/headshots",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />
@@ -205,6 +220,11 @@ export function HeadshotsSubpage() {
 /* ─── WEBSITE BUILDING ─────────────────────────────────────── */
 export function WebsiteBuildingPage() {
   const [, navigate] = useLocation();
+  useSEO({
+    title: "Website Design & Build | Loomelic Media",
+    description: "Modern, mobile-first websites for dealerships and businesses in Las Vegas — fast, conversion-focused, and SEO-ready from day one.",
+    canonical: "/services/websites",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)]">
       <Navbar />
