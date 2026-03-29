@@ -10,6 +10,7 @@ import { useRef } from "react";
 import { useLocation } from "wouter";
 import Navbar from "@/components/Navbar";
 import ContactSection from "@/components/ContactSection";
+import { useSEO } from "@/hooks/useSEO";
 
 function AnimFade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);

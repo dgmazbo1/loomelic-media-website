@@ -27,16 +27,19 @@
     <meta name="twitter:description" content="Monthly content systems for Nevada dealerships — inventory photography, walkaround videos, social reels, event coverage, and staff headshots." />
     <meta name="twitter:image" content="https://loomelicmedia.com/og-image.jpg" />
 
-    <!-- Schema.org LocalBusiness -->
+    <!-- Schema.org LocalBusiness + Services -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
+      "@id": "https://loomelicmedia.com/#organization",
       "name": "Loomelic Media",
-      "description": "Las Vegas production company specializing in automotive dealer content, inventory photography, walkaround videos, social media reels, event coverage, and staff headshots.",
+      "description": "Las Vegas video production company specializing in automotive dealership content, convention and trade show video production, event coverage, inventory photography, social media reels, and staff headshots. Serving Las Vegas, Henderson, and all of Southern Nevada.",
       "url": "https://loomelicmedia.com",
       "telephone": "+17028274110",
       "email": "info@loomelicmedia.com",
+      "logo": "https://loomelicmedia.com/og-image.jpg",
+      "image": "https://loomelicmedia.com/og-image.jpg",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "5940 South Rainbow Blvd #4058",
@@ -50,13 +53,35 @@
         "latitude": 36.0856,
         "longitude": -115.2523
       },
-      "areaServed": ["Las Vegas, NV", "Henderson, NV", "Southern Nevada"],
+      "areaServed": [
+        {"@type": "City", "name": "Las Vegas", "sameAs": "https://en.wikipedia.org/wiki/Las_Vegas"},
+        {"@type": "City", "name": "Henderson", "sameAs": "https://en.wikipedia.org/wiki/Henderson,_Nevada"},
+        {"@type": "State", "name": "Nevada"}
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Video Production Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Convention Video Production Las Vegas", "description": "Professional video production for conventions, trade shows, and corporate events at Las Vegas Convention Center, Mandalay Bay, Venetian Expo, and all major Las Vegas venues."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Trade Show Video Production Las Vegas", "description": "Booth highlight videos, keynote coverage, and event recap reels for trade shows including CES, SEMA, NAB Show, Money20/20, and AWS re:Invent."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Automotive Dealership Video Production Las Vegas", "description": "Inventory walkaround videos, social media reels, CRM intro videos, and dealership event coverage for Las Vegas and Henderson automotive dealers."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Inventory Photography Las Vegas", "description": "Professional automotive inventory photography for car dealerships in Las Vegas, Henderson, and Southern Nevada."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Event Coverage Las Vegas", "description": "Photo and video coverage for corporate events, product launches, and brand activations in Las Vegas."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Staff Headshots Las Vegas", "description": "Professional staff headshots and team photography for dealerships and corporate clients in Las Vegas."}}
+        ]
+      },
       "sameAs": [
         "https://www.instagram.com/loomelicmedia",
-        "https://www.youtube.com/@loomelicmedia"
+        "https://www.youtube.com/@loomelicmedia",
+        "https://www.facebook.com/loomelicmedia",
+        "https://www.tiktok.com/@loomelicmedia"
       ],
       "priceRange": "$$",
-      "openingHours": "Mo-Fr 09:00-18:00"
+      "openingHours": "Mo-Fr 09:00-18:00",
+      "knowsAbout": [
+        "Video Production", "Convention Videography", "Trade Show Video", "Automotive Photography",
+        "Dealership Marketing", "Event Coverage", "Social Media Content", "Las Vegas Production"
+      ]
     }
     </script>
 

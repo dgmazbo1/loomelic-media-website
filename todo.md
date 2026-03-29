@@ -430,3 +430,17 @@
   - Fixed 3 DB featured_work slugs (las-vegas-raiders, wondr-nation, sports-illustrated) to match registered routes
   - Created JwOffroadPage component and registered /projects/jw-offroad route
   - Confirmed all nav, footer, CTA, and service links are correct
+
+## SEO Market Domination — Conventions + Automotive (Mar 29)
+- [x] Audit Cerious.com convention and automotive content depth
+- [x] Research Las Vegas convention and dealership SEO keyword landscape
+- [x] Deliver full market domination SEO strategy document (conventions + automotive + trade shows)
+- [ ] Build schema injection (LocalBusiness, VideoObject, Service) sitewide
+- [ ] Build meta tag management in admin panel (title, description, OG image per page)
+- [ ] Build XML sitemap auto-generation at /sitemap.xml + robots.txt
+- [ ] Build Blog/Insights CMS with admin interface
+- [ ] Build programmatic service + location pages system (convention, trade show, automotive pages)
+
+## SEO Fixes (Mar 29)
+- [x] Fix homepage (/) title: was 14 chars ("Loomelic Media"), now 43 chars ("Las Vegas Video Production | Loomelic Media") via useSEO hook
+- [x] Fix homepage (/) description: was 235 chars, now 116 chars — within 50–160 char limit

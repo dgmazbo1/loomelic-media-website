@@ -7,6 +7,7 @@
                 → Contact CTA (dark) → Contact Form (light) → Footer (dark)
    ============================================================ */
 
+import { useSEO } from "@/hooks/useSEO";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -20,6 +21,11 @@ import PortalsSection from "@/components/PortalsSection";
 import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
+  useSEO({
+    title: "Las Vegas Video Production",
+    description: "Las Vegas video production for conventions, trade shows & automotive dealers. Serving Henderson and Southern Nevada.",
+    canonical: "/",
+  });
   return (
     <div className="min-h-screen bg-[oklch(0.07_0_0)] overflow-x-hidden">
       <Navbar />
