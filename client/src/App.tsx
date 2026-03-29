@@ -74,6 +74,7 @@ import {
   WondrNationPage,
   BobMarleyPage,
   SportsIllustratedPage,
+  JwOffroadPage,
 } from "./pages/ProjectPages";
 
 /** Scrolls to the top of the page on every route change — fixes the "scroll to bottom" bug */
@@ -206,6 +207,7 @@ function Router() {
         <Route path="/projects/bob-marley-hope-road" component={BobMarleyPage} />
         <Route path="/projects/sports-illustrated-sportsperson-2026" component={SportsIllustratedPage} />
         <Route path="/projects/sports-illustrated-spoty-2026" component={SportsIllustratedPage} />
+        <Route path="/projects/jw-offroad" component={JwOffroadPage} />
         <Route path="/projects/janel-and-nehiamia" component={() => {
           const [, navigate] = useLocation();
           useEffect(() => { navigate("/projects"); }, []);

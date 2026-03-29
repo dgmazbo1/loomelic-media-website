@@ -17,6 +17,7 @@ import {
   WONDR_NATION,
   BOB_MARLEY,
   SPORTS_ILLUSTRATED,
+  JW_OFFROAD,
   HERO_VIDEOS,
 } from "@/lib/media";
 
@@ -274,6 +275,43 @@ export function BobMarleyPage() {
             metric: "Social Reach",
             value: "Viral",
             label: "Select images shared widely across social media, generating organic reach beyond the initial campaign.",
+          },
+        ],
+      }}
+    />
+  );
+}
+
+// ─── JW OFFROAD ─────────────────────────────────────────────
+export function JwOffroadPage() {
+  return (
+    <ProjectPageTemplate
+      data={{
+        slug: "jw-offroad",
+        title: "JW OFFROAD",
+        category: "AUTOMOTIVE • LIFESTYLE",
+        year: "2025",
+        client: "JW Offroad",
+        services: ["Product Photography", "Videography", "Social Media Content"],
+        description:
+          "A lifestyle-driven automotive content campaign for JW Offroad, capturing the raw energy and capability of their aftermarket vehicle builds. The project combined on-location action photography with product detail shots to create a compelling visual library for social media, digital advertising, and brand storytelling.",
+        heroImage: JW_OFFROAD.hero,
+        gallery: JW_OFFROAD.gallery,
+        outcomes: [
+          {
+            metric: "Content Type",
+            value: "Lifestyle",
+            label: "Action-focused photography and video showcasing off-road performance and aftermarket builds.",
+          },
+          {
+            metric: "Deliverables",
+            value: "50+",
+            label: "Edited photos and video clips optimized for social media and digital advertising.",
+          },
+          {
+            metric: "Platforms",
+            value: "3",
+            label: "Content delivered for Instagram, Facebook, and the JW Offroad website.",
           },
         ],
       }}

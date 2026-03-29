@@ -423,3 +423,10 @@
 - [x] Add drag-and-drop reordering to project gallery photos in AdminPage (already has DnD kit)
 - [x] Add drag-and-drop reordering to project videos in AdminPage (new SortableVideoRow)
 - [x] Persist video sort order to DB via reorderVideos mutation
+
+## Broken Links Audit & Fix (Mar 29)
+- [x] Audit all links across the site (nav, project pages, CTAs, footer, social links)
+- [x] Fix all identified broken links
+  - Fixed 3 DB featured_work slugs (las-vegas-raiders, wondr-nation, sports-illustrated) to match registered routes
+  - Created JwOffroadPage component and registered /projects/jw-offroad route
+  - Confirmed all nav, footer, CTA, and service links are correct

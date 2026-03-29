@@ -1,0 +1,8 @@
+{
+  "query": "SELECT id, title, slug, category, is_published FROM featured_work ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute SELECT id, title, slug, category, is_published FROM featured_work ORDER BY id;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1054 (42S22) at line 1: Unknown column 'is_published' in 'field list'"
+  ]
+}

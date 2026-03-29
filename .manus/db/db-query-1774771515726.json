@@ -1,0 +1,45 @@
+{
+  "query": "UPDATE featured_work SET slug = 'las-vegas-raiders-tour' WHERE slug = 'las-vegas-raiders';\nUPDATE featured_work SET slug = 'wondr-nation-g2e' WHERE slug = 'wondr-nation';\nUPDATE featured_work SET slug = 'sports-illustrated-sportsperson-2026' WHERE slug = 'sports-illustrated';\nSELECT id, title, slug FROM featured_work ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute UPDATE featured_work SET slug = 'las-vegas-raiders-tour' WHERE slug = 'las-vegas-raiders';\nUPDATE featured_work SET slug = 'wondr-nation-g2e' WHERE slug = 'wondr-nation';\nUPDATE featured_work SET slug = 'sports-illustrated-sportsperson-2026' WHERE slug = 'sports-illustrated';\nSELECT id, title, slug FROM featured_work ORDER BY id;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "Lexus of Henderson",
+      "slug": "lexus-of-henderson"
+    },
+    {
+      "id": "2",
+      "title": "Lexus of Las Vegas",
+      "slug": "lexus-of-las-vegas"
+    },
+    {
+      "id": "3",
+      "title": "Las Vegas Raiders",
+      "slug": "las-vegas-raiders-tour"
+    },
+    {
+      "id": "4",
+      "title": "Centennial Subaru",
+      "slug": "centennial-subaru"
+    },
+    {
+      "id": "5",
+      "title": "Wondr Nation G2E",
+      "slug": "wondr-nation-g2e"
+    },
+    {
+      "id": "6",
+      "title": "Bob Marley Hope Road",
+      "slug": "bob-marley-hope-road"
+    },
+    {
+      "id": "7",
+      "title": "Sports Illustrated",
+      "slug": "sports-illustrated-sportsperson-2026"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tslug\n1\tLexus of Henderson\tlexus-of-henderson\n2\tLexus of Las Vegas\tlexus-of-las-vegas\n3\tLas Vegas Raiders\tlas-vegas-raiders-tour\n4\tCentennial Subaru\tcentennial-subaru\n5\tWondr Nation G2E\twondr-nation-g2e\n6\tBob Marley Hope Road\tbob-marley-hope-road\n7\tSports Illustrated\tsports-illustrated-sportsperson-2026\n",
+  "stderr": "",
+  "execution_time_ms": 528
+}

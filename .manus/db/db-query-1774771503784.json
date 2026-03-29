@@ -1,0 +1,99 @@
+{
+  "query": "DESCRIBE featured_work; SELECT id, title, slug, category FROM featured_work ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user D3ADtLHzpWqDkQ8.6577a1716d46 --database hZhvBDwnUYPXmoN2sbiKGJ --execute DESCRIBE featured_work; SELECT id, title, slug, category FROM featured_work ORDER BY id;",
+  "rows": [
+    {
+      "Field": "id",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "PRI",
+      "Default": "NULL",
+      "Extra": "auto_increment"
+    },
+    {
+      "Field": "title",
+      "Type": "varchar(256)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "category",
+      "Type": "varchar(128)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "imageUrl",
+      "Type": "text",
+      "Null": "NO",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "imageKey",
+      "Type": "text",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "slug",
+      "Type": "varchar(128)",
+      "Null": "YES",
+      "Key": "",
+      "Default": "NULL",
+      "Extra": ""
+    },
+    {
+      "Field": "sortOrder",
+      "Type": "int",
+      "Null": "NO",
+      "Key": "",
+      "Default": "0",
+      "Extra": ""
+    },
+    {
+      "Field": "published",
+      "Type": "tinyint(1)",
+      "Null": "NO",
+      "Key": "",
+      "Default": "1",
+      "Extra": ""
+    },
+    {
+      "Field": "createdAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": ""
+    },
+    {
+      "Field": "updatedAt",
+      "Type": "timestamp",
+      "Null": "NO",
+      "Key": "",
+      "Default": "CURRENT_TIMESTAMP",
+      "Extra": "DEFAULT_GENERATED on update CURRENT_TIMESTAMP"
+    }
+  ],
+  "messages": [
+    "id\ttitle\tslug\tcategory",
+    "1\tLexus of Henderson\tlexus-of-henderson\tAutomotive",
+    "2\tLexus of Las Vegas\tlexus-of-las-vegas\tAutomotive",
+    "3\tLas Vegas Raiders\tlas-vegas-raiders\tEvents",
+    "4\tCentennial Subaru\tcentennial-subaru\tAutomotive",
+    "5\tWondr Nation G2E\twondr-nation\tEvents",
+    "6\tBob Marley Hope Road\tbob-marley-hope-road\tBrand",
+    "7\tSports Illustrated\tsports-illustrated\tBrand"
+  ],
+  "stdout": "Field\tType\tNull\tKey\tDefault\tExtra\nid\tint\tNO\tPRI\tNULL\tauto_increment\ntitle\tvarchar(256)\tNO\t\tNULL\t\ncategory\tvarchar(128)\tYES\t\tNULL\t\nimageUrl\ttext\tNO\t\tNULL\t\nimageKey\ttext\tYES\t\tNULL\t\nslug\tvarchar(128)\tYES\t\tNULL\t\nsortOrder\tint\tNO\t\t0\t\npublished\ttinyint(1)\tNO\t\t1\t\ncreatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\t\nupdatedAt\ttimestamp\tNO\t\tCURRENT_TIMESTAMP\tDEFAULT_GENERATED on update CURRENT_TIMESTAMP\nid\ttitle\tslug\tcategory\n1\tLexus of Henderson\tlexus-of-henderson\tAutomotive\n2\tLexus of Las Vegas\tlexus-of-las-vegas\tAutomotive\n3\tLas Vegas Raiders\tlas-vegas-raiders\tEvents\n4\tCentennial Subaru\tcentennial-subaru\tAutomotive\n5\tWondr Nation G2E\twondr-nation\tEvents\n6\tBob Marley Hope Road\tbob-marley-hope-road\tBrand\n7\tSports Illustrated\tsports-illustrated\tBrand\n",
+  "stderr": "",
+  "execution_time_ms": 392
+}
