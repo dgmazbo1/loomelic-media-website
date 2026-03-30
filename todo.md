@@ -459,3 +459,12 @@
 - [x] Update any internal links that point to /use-cases#featured-work to /featured-work
 - [x] Add useSEO to new FeaturedWorkPage (title + description)
 - [x] Wire /featured-work route in App.tsx
+
+## Convention Video Production SEO Page (Mar 29)
+- [x] Research top-ranking convention/trade show video production pages and keyword gaps
+- [x] Build /services/convention-video-production-las-vegas with full SEO content
+- [x] Add route to App.tsx
+- [x] Add to Services mega-menu in Navbar (under Other Services)
+- [x] Add useSEO with optimized title and description
+- [x] Add JSON-LD structured data (LocalBusiness + Service + FAQPage schema)
+- [x] Internal links to related service pages and portfolio

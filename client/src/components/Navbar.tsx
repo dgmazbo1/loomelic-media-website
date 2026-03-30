@@ -23,6 +23,7 @@ const DEALER_SUB_ITEMS = [
 
 /* ─── TOP-LEVEL SERVICE ITEMS (non-dealer) ───────────────── */
 const OTHER_SERVICE_ITEMS = [
+  { label: "Convention & Trade Show", href: "/services/convention-video-production-las-vegas" },
   { label: "Event Coverage", href: "/services/events" },
   { label: "Premium Web Services", href: "/services/websites" },
 ];
