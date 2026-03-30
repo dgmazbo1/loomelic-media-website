@@ -472,3 +472,7 @@
 ## Convention Page Edits (Mar 30)
 - [x] Remove last 6 images from gallery (keep only first 4)
 - [x] Update hero H1 to "CONVENTION / VIDEOGRAPHY / & PHOTOGRAPHY"
+
+## Convention Gallery — New Images (Mar 30)
+- [x] Upload 8 new convention photos to CDN
+- [x] Add all 8 CDN URLs to ConventionPage.tsx gallery

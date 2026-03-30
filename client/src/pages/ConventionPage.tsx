@@ -178,6 +178,15 @@ const VENUES = [
 
 const GALLERY_IMAGES = [
   ...WONDR_NATION.gallery.slice(0, 4),
+  // New convention photos — G2E / Wondr Nation
+  `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251005WomenRising-08_637f104d.webp`,
+  `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251005WomenRising-09_38731058.webp`,
+  `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251005WomenRising-15_3fbd80ba.webp`,
+  `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251006Day2SneakPeek-16_80b3e2e4.webp`,
+  `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251006Day2SneakPeek-20_16b4d346.webp`,
+  `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251006Day2SneakPeek-31_f90b4171.webp`,
+  `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251008Day3SneakPeek-02_9ffd196c.webp`,
+  `https://d2xsxph8kpxj0f.cloudfront.net/310419663029344895/hZhvBDwnUYPXmoN2sbiKGJ/20251008Day3SneakPeek-03_7f04bee2.webp`,
 ];
 
 const FAQ_ITEMS = [
