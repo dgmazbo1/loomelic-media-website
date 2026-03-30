@@ -36,6 +36,7 @@ import {
 // Enterprise pages
 import SolutionsPage from "./pages/SolutionsPage";
 import UseCases from "./pages/UseCases";
+import FeaturedWork from "./pages/FeaturedWork";
 import UseCasesLayoutA from "./pages/UseCasesLayoutA";
 import UseCasesLayoutB from "./pages/UseCasesLayoutB";
 import CaseStudies from "./pages/CaseStudies";
@@ -160,6 +161,7 @@ function Router() {
         <Route path="/solutions/brands">{() => { const [,n] = useLocation(); useEffect(() => { n("/services/dealer-services/dealerships"); }, []); return null; }}</Route>
         <Route path="/solutions/dealers">{() => { const [,n] = useLocation(); useEffect(() => { n("/services/dealer-services/dealerships"); }, []); return null; }}</Route>
         <Route path="/case-studies" component={CaseStudies} />
+        <Route path="/featured-work" component={FeaturedWork} />
         <Route path="/use-cases" component={UseCases} />
         <Route path="/use-cases-a" component={UseCasesLayoutA} />
         <Route path="/use-cases-b" component={UseCasesLayoutB} />

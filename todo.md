@@ -451,3 +451,11 @@
 - [x] Apply useSEO to ServicePages.tsx (AutomotiveMarketingPage, EventCoveragePage, SocialMediaContentPage, PhotographyPage, BrandStrategyPage, HeadshotsPage, WebsiteRedesignPage)
 - [x] Apply useSEO to DealerServicesPage.tsx (legacy /services/dealer-services route)
 - [x] Apply useSEO to AllServicesPage, ProcessPage, SolutionsPage, PortfolioPage, CaseStudies, ContactPage, AboutPage
+
+## Featured Work — Separate Nav Item (Mar 29)
+- [x] Create standalone /featured-work page (pulls from featured_work DB, same card grid style)
+- [x] Add "Featured Work" as its own top-nav item in desktop and mobile Navbar
+- [x] Remove Featured Work tab from UseCases page — leave only Use Cases content
+- [x] Update any internal links that point to /use-cases#featured-work to /featured-work
+- [x] Add useSEO to new FeaturedWorkPage (title + description)
+- [x] Wire /featured-work route in App.tsx

@@ -215,6 +215,7 @@ export default function Navbar() {
             </div>
 
             <button onClick={() => goTo("/portfolio")} className={`${pillBase} ${location.startsWith("/portfolio") || location.startsWith("/case-studies") ? pillActive : pillIdle}`}>PORTFOLIO</button>
+            <button onClick={() => goTo("/featured-work")} className={`${pillBase} ${location === "/featured-work" ? pillActive : pillIdle}`}>FEATURED WORK</button>
             <button onClick={() => goTo("/use-cases")} className={`${pillBase} ${location === "/use-cases" ? pillActive : pillIdle}`}>USE CASES</button>
             <button onClick={() => goTo("/process")} className={`${pillBase} ${location === "/process" ? pillActive : pillIdle}`}>PROCESS</button>
             <button onClick={() => goTo("/about")} className={`${pillBase} ${location === "/about" ? pillActive : pillIdle}`}>ABOUT</button>
@@ -319,6 +320,7 @@ export default function Navbar() {
               {/* Direct links */}
               {[
                 { label: "PORTFOLIO", href: "/portfolio" },
+                { label: "FEATURED WORK", href: "/featured-work" },
                 { label: "USE CASES", href: "/use-cases" },
                 { label: "PROCESS", href: "/process" },
                 { label: "OUR STORY", href: "/about" },
