@@ -110,7 +110,7 @@ function ProjectCard({
       onClick={onClick}
       className="project-card group cursor-pointer"
     >
-      <div className={`relative overflow-hidden rounded-xl mx-3 mt-3 mb-3 aspect-[16/10] bg-[oklch(0.15_0_0)] ${isExpanded ? "ring-2 ring-[oklch(0.92_0.28_142)]" : ""}`}>
+      <div className={`relative overflow-hidden rounded-xl mx-3 mt-3 mb-3 aspect-[16/10] bg-[oklch(0.15_0_0)] ${isExpanded ? "ring-2 ring-white/40" : ""}`}>
         <img
           src={image}
           alt={title}
@@ -123,7 +123,7 @@ function ProjectCard({
         {/* Arrow / close indicator */}
         <div className={`absolute top-3 right-3 w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 ${
           isExpanded
-            ? "bg-[oklch(0.92_0.28_142)] border-[oklch(0.92_0.28_142)] text-black"
+            ? "bg-white border-white text-black"
             : "border-white/30 text-white/60 group-hover:bg-white group-hover:text-black group-hover:border-white"
         }`}>
           <span className="text-xs">{isExpanded ? "✕" : "→"}</span>
@@ -141,7 +141,7 @@ function ProjectCard({
           </h3>
           {!isExpanded && (
             <div className="overflow-hidden h-0 group-hover:h-8 transition-all duration-300 ease-out">
-              <p className="font-body text-[0.65rem] tracking-[0.2em] text-[oklch(0.92_0.28_142)] pt-2 flex items-center gap-1.5">
+              <p className="font-body text-[0.65rem] tracking-[0.2em] text-white/70 pt-2 flex items-center gap-1.5">
                 READ CASE STUDY <span className="text-xs">→</span>
               </p>
             </div>
@@ -188,8 +188,8 @@ function UseCaseDetail({ uc, onClose }: { uc: (typeof USE_CASES)[0]; onClose: ()
             { label: "SOLUTION", text: uc.solution },
             { label: "RESULT", text: uc.result2 ?? uc.result },
           ].map((item) => (
-            <div key={item.label} className="border-l-2 border-[oklch(0.92_0.28_142)] pl-4">
-              <p className="font-body text-[0.55rem] text-[oklch(0.92_0.28_142)] tracking-[0.18em] mb-1">
+            <div key={item.label} className="border-l-2 border-white/30 pl-4">
+              <p className="font-body text-[0.55rem] text-white/60 tracking-[0.18em] mb-1">
                 {item.label}
               </p>
               <p className="text-white/80 text-sm leading-relaxed">{item.text}</p>
@@ -220,7 +220,7 @@ function UseCaseDetail({ uc, onClose }: { uc: (typeof USE_CASES)[0]; onClose: ()
                     preload="auto"
                   />
                   <div className="px-4 py-3 flex items-center gap-2">
-                    <span className="font-body text-[0.55rem] tracking-[0.15em] text-[oklch(0.92_0.28_142)] uppercase">
+                    <span className="font-body text-[0.55rem] tracking-[0.15em] text-white/60 uppercase">
                       {v.lang === "es" ? "🇪🇸" : "🇺🇸"}
                     </span>
                     <span className="font-body text-[0.6rem] tracking-[0.12em] text-white/60 uppercase">

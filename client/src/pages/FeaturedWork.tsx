@@ -112,7 +112,7 @@ function ProjectCard({
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       {/* Text overlay */}
       <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
-        <p className="font-body text-[0.6rem] tracking-[0.18em] text-[oklch(0.92_0.28_142)] mb-1">
+        <p className="font-body text-[0.6rem] tracking-[0.18em] text-white/70 mb-1">
           {category}
         </p>
         <h3 className="font-display text-[clamp(1rem,2.5vw,1.4rem)] leading-tight text-white">
@@ -120,11 +120,11 @@ function ProjectCard({
         </h3>
       </div>
       {/* View CTA — slides up on hover */}
-      <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-5 py-3 bg-[oklch(0.92_0.28_142)] translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-        <span className="font-body text-[0.6rem] tracking-[0.18em] text-black font-semibold">
+      <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-5 py-3 bg-white/50 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+        <span className="font-display text-[0.9rem] tracking-[0.14em] uppercase text-black font-bold">
           VIEW PROJECT
         </span>
-        <span className="text-black text-sm">→</span>
+        <span className="text-black text-sm font-bold">→</span>
       </div>
     </motion.div>
   );

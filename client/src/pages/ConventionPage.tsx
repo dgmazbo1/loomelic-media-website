@@ -237,7 +237,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
         </span>
         <ChevronDown
           size={18}
-          className={`text-white/30 shrink-0 mt-0.5 transition-transform duration-300 ${open ? "rotate-180 text-[oklch(0.92_0.28_142)]" : ""}`}
+          className={`text-white/30 shrink-0 mt-0.5 transition-transform duration-300 ${open ? "rotate-180 text-white" : ""}`}
         />
       </button>
       <AnimatePresence>
@@ -463,8 +463,8 @@ export default function ConventionPage() {
                 transition={{ duration: 0.5, delay: i * 0.07 }}
                 className="bg-[oklch(0.1_0_0)] border border-white/6 rounded-2xl p-7 hover:border-white/15 transition-colors duration-300 group"
               >
-                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mb-5 group-hover:bg-[oklch(0.92_0.28_142/0.12)] transition-colors duration-300">
-                  <svc.icon size={18} className="text-white/50 group-hover:text-[oklch(0.92_0.28_142)] transition-colors duration-300" />
+                <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center mb-5 group-hover:bg-white/10 transition-colors duration-300">
+                  <svc.icon size={18} className="text-white/50 group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 className="font-display-normal text-base text-white mb-3">{svc.title}</h3>
                 <p className="text-white/45 text-sm leading-relaxed">{svc.desc}</p>
@@ -565,7 +565,7 @@ export default function ConventionPage() {
                 transition={{ duration: 0.4, delay: i * 0.07 }}
                 className="flex items-center gap-4 bg-[oklch(0.1_0_0)] border border-white/6 rounded-xl px-6 py-5"
               >
-                <CheckCircle2 size={16} className="text-[oklch(0.92_0.28_142)] shrink-0" />
+                <CheckCircle2 size={16} className="text-white/70 shrink-0" />
                 <div>
                   <p className="text-white/80 text-sm font-medium leading-tight">{venue.name}</p>
                   <p className="text-white/25 text-[0.6rem] tracking-[0.15em] mt-0.5">{venue.abbr}</p>
@@ -720,7 +720,7 @@ export default function ConventionPage() {
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 className="text-left bg-[oklch(0.1_0_0)] border border-white/6 rounded-2xl p-6 hover:border-white/20 hover:bg-[oklch(0.12_0_0)] transition-all duration-300 group"
               >
-                <h3 className="font-display-normal text-base text-white mb-2 group-hover:text-[oklch(0.92_0.28_142)] transition-colors duration-200">
+                <h3 className="font-display-normal text-base text-white mb-2 group-hover:text-white transition-colors duration-200">
                   {link.title}
                 </h3>
                 <p className="text-white/40 text-sm leading-relaxed">{link.desc}</p>

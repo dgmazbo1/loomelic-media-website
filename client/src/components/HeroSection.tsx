@@ -166,7 +166,7 @@ export default function HeroSection() {
               key={i}
               className="font-display-normal text-sm text-white/20 px-6 shrink-0"
             >
-              {cat} <span className="text-lime mx-2">✦</span>
+              {cat} <span className="text-white/40 mx-2">✦</span>
             </span>
           ))}
         </div>

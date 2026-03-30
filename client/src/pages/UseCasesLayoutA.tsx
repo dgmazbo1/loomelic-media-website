@@ -23,7 +23,7 @@ const USE_CASES = [
     image: CENTENNIAL_SUBARU.hero,
     result: "Customers came in after seeing the ads. Used car sales momentum improved since launch.",
     resultStat: "Increased showroom traffic",
-    accent: "oklch(0.92 0.28 142)",
+    accent: "oklch(1 0 0)",
     overview: "Centennial Subaru needed a stronger way to spotlight used inventory and create more weekend traffic. Loomelic Media developed a Weekend Special campaign built around a trio of used cars — giving shoppers more options, creating urgency, and making the dealership's used inventory feel active and worth visiting.",
     theChallenge: "Used inventory can move fast, but getting the right eyes on the right vehicles at the right time requires more than a standard listing post. Centennial Subaru needed a campaign that made used inventory feel timely, visible, and worth acting on before the weekend ended.",
     theStrategy: "We created a used car weekend special concept highlighting three featured used vehicles in one campaign. This gave the dealership more content value in a single post, increased shopper interest by showing options instead of one unit, and created a stronger promotional angle for weekend traffic.",
@@ -39,7 +39,7 @@ const USE_CASES = [
     image: LEXUS_HENDERSON.hero,
     result: "A major change in customers' first response. Early engagement improved significantly.",
     resultStat: "Warmer lead engagement",
-    accent: "oklch(0.75 0.18 250)",
+    accent: "oklch(1 0 0)",
     overview: "Findlay Nissan Henderson wanted to improve the way customers experienced the dealership after submitting an online inquiry. Loomelic Media created custom intro videos for the internet sales team to send out as part of the first response process.",
     theChallenge: "Online leads move fast, and first response quality can heavily influence whether a customer replies, engages, or disappears. Standard text and email responses often feel generic.",
     theStrategy: "Loomelic Media developed intro videos for the internet sales team that could be sent out when a customer inquiry came in — humanizing the dealership's response process and building trust earlier.",
@@ -171,7 +171,7 @@ export default function UseCasesLayoutA() {
       <Navbar />
 
       {/* ── LAYOUT LABEL (preview only) ── */}
-      <div className="fixed top-20 right-4 z-50 px-3 py-1.5 rounded-full bg-[oklch(0.92_0.28_142)] text-black font-body text-[0.6rem] tracking-widest uppercase font-bold">
+      <div className="fixed top-20 right-4 z-50 px-3 py-1.5 rounded-full bg-white text-black font-body text-[0.6rem] tracking-widest uppercase font-bold">
         Layout A — Card Style
       </div>
 

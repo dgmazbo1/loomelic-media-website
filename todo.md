@@ -476,3 +476,9 @@
 ## Convention Gallery — New Images (Mar 30)
 - [x] Upload 8 new convention photos to CDN
 - [x] Add all 8 CDN URLs to ConventionPage.tsx gallery
+
+## Design Fixes — Remove Green, Fix Overlay (Mar 30)
+- [x] View Project overlay: white background at ~50% opacity
+- [x] View Project text: use hero display font (font-display)
+- [x] Replace all green text/labels (Brand, Events, etc.) with white
+- [x] Global audit: remove all green color values from codebase

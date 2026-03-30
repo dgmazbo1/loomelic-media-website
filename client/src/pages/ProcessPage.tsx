@@ -199,7 +199,7 @@ export default function ProcessPage() {
                       <ul className="space-y-2.5">
                         {step.details.map((d, j) => (
                           <li key={j} className="flex items-start gap-2.5">
-                            <span className="text-lime mt-0.5 shrink-0 text-sm">—</span>
+                            <span className="text-white/50 mt-0.5 shrink-0 text-sm">—</span>
                             <span
                               className={`font-body text-sm ${
                                 isLight ? "text-[oklch(0.35_0_0)]" : "text-white/45"
@@ -220,7 +220,7 @@ export default function ProcessPage() {
                         isLight ? "text-[oklch(0.45_0_0)]" : "text-white/40"
                       }`}
                     >
-                      <ArrowRight size={14} className="shrink-0 mt-0.5 text-lime" />
+                      <ArrowRight size={14} className="shrink-0 mt-0.5 text-white/50" />
                       <p className="font-body text-sm italic leading-relaxed">
                         {step.outcome}
                       </p>

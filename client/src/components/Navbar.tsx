@@ -336,7 +336,7 @@ export default function Navbar() {
                   onClick={() => goTo(link.href)}
                   className="text-left py-4 border-b border-white/6 group"
                 >
-                  <span className="font-display-normal text-4xl sm:text-5xl text-white/90 group-hover:text-lime transition-colors duration-200">
+                  <span className="font-display-normal text-4xl sm:text-5xl text-white/90 group-hover:text-white transition-colors duration-200">
                     {link.label}
                   </span>
                 </motion.button>
@@ -386,7 +386,7 @@ function MobileAccordion({
           nested ? "py-2.5" : "py-4"
         }`}
       >
-        <span className={`font-display-normal transition-colors duration-200 group-hover:text-lime ${
+        <span className={`font-display-normal transition-colors duration-200 group-hover:text-white ${
           nested
             ? "text-xl text-white/60"
             : "text-4xl sm:text-5xl text-white/90"

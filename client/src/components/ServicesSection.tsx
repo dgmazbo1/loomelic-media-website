@@ -181,7 +181,7 @@ export default function ServicesSection() {
                 <ul className="space-y-2 mb-5 flex-1">
                   {svc.deliverables.map((d, j) => (
                     <li key={j} className="flex items-start gap-2 font-body text-xs text-white/40">
-                      <span className="text-lime mt-0.5 shrink-0">—</span>
+                      <span className="text-white/50 mt-0.5 shrink-0">—</span>
                       <span>{d}</span>
                     </li>
                   ))}

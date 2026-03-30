@@ -16,7 +16,7 @@ const SOLUTIONS = [
     desc: "Inventory photography, walkaround videos, social reels, and event coverage — delivered on a monthly retainer with consistent turnaround.",
     features: ["Lot photography", "Walkaround + delivery videos", "Social media reels", "Staff headshots"],
     href: "/solutions/dealers",
-    accent: "oklch(0.92 0.28 142)", // lime
+    accent: "oklch(1 0 0)", // white
   },
   {
     icon: Users,
@@ -145,7 +145,7 @@ export default function SolutionsOverview() {
                     <ul className="space-y-2 mb-5 flex-1">
                       {sol.features.map((f, j) => (
                         <li key={j} className="flex items-start gap-2 font-body text-xs text-white/40">
-                          <span className="text-lime mt-0.5 shrink-0">—</span>
+                          <span className="text-white/50 mt-0.5 shrink-0">—</span>
                           <span>{f}</span>
                         </li>
                       ))}
