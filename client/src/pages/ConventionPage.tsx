@@ -178,8 +178,6 @@ const VENUES = [
 
 const GALLERY_IMAGES = [
   ...WONDR_NATION.gallery.slice(0, 4),
-  ...BOB_MARLEY.gallery.slice(0, 3),
-  ...SPORTS_ILLUSTRATED.gallery.slice(0, 3),
 ];
 
 const FAQ_ITEMS = [
@@ -299,9 +297,9 @@ export default function ConventionPage() {
             <h1 className="font-display text-[clamp(2.8rem,9vw,7.5rem)] leading-[0.86] text-white mb-6">
               CONVENTION
               <br />
-              <span className="text-[oklch(0.55_0_0)]">VIDEOGRAPHER</span>
+              <span className="text-[oklch(0.55_0_0)]">VIDEOGRAPHY</span>
               <br />
-              <span className="text-[oklch(0.35_0_0)]">&amp; PHOTOGRAPHER</span>
+              <span className="text-[oklch(0.35_0_0)]">&amp; PHOTOGRAPHY</span>
             </h1>
 
             <p className="text-white/60 text-base sm:text-lg max-w-xl leading-relaxed mb-4">

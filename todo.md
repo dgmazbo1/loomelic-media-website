@@ -468,3 +468,7 @@
 - [x] Add useSEO with optimized title and description
 - [x] Add JSON-LD structured data (LocalBusiness + Service + FAQPage schema)
 - [x] Internal links to related service pages and portfolio
+
+## Convention Page Edits (Mar 30)
+- [x] Remove last 6 images from gallery (keep only first 4)
+- [x] Update hero H1 to "CONVENTION / VIDEOGRAPHY / & PHOTOGRAPHY"
