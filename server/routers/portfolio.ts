@@ -10,7 +10,8 @@
  */
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
+import { router, publicProcedure, ownerProcedure } from "../_core/trpc";
+import { ENV } from "../_core/env";
 import { getDb } from "../db";
 import {
   portfolioPhotos,
@@ -26,9 +27,9 @@ import { storagePut } from "../storage";
 
 // ─── helpers ──────────────────────────────────────────────────────────────────
 
-function requireAdmin(role: string) {
-  if (role !== "admin") {
-    throw new TRPCError({ code: "FORBIDDEN", message: "Admin only" });
+function requireAdmin(openId: string) {
+  if (openId !== ENV.ownerOpenId) {
+    throw new TRPCError({ code: "FORBIDDEN", message: "Owner only" });
   }
 }
 
@@ -102,8 +103,8 @@ export const portfolioRouter = router({
   }),
 
   /** ADMIN — list ALL photos (including unpublished) */
-  listAllPhotos: protectedProcedure.query(async ({ ctx }) => {
-    requireAdmin(ctx.user.role);
+  listAllPhotos: ownerProcedure.query(async ({ ctx }) => {
+    requireAdmin(ctx.user.openId);
     const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
     const photos = await db
@@ -128,7 +129,7 @@ export const portfolioRouter = router({
   }),
 
   /** ADMIN — upload a new photo (base64 payload → S3) */
-  uploadPhoto: protectedProcedure
+  uploadPhoto: ownerProcedure
     .input(
       z.object({
         filename: z.string(),
@@ -140,7 +141,7 @@ export const portfolioRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
       const buffer = Buffer.from(input.base64, "base64");
@@ -167,7 +168,7 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — update photo metadata + tags */
-  updatePhoto: protectedProcedure
+  updatePhoto: ownerProcedure
     .input(
       z.object({
         id: z.number(),
@@ -178,7 +179,7 @@ export const portfolioRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
       const updateData: Record<string, unknown> = {};
@@ -201,10 +202,10 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — delete a photo */
-  deletePhoto: protectedProcedure
+  deletePhoto: ownerProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       await db.delete(portfolioPhotoTags).where(eq(portfolioPhotoTags.photoId, input.id));
       await db.delete(portfolioPhotos).where(eq(portfolioPhotos.id, input.id));
@@ -212,10 +213,10 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — reorder photos (drag-and-drop) */
-  reorderPhotos: protectedProcedure
+  reorderPhotos: ownerProcedure
     .input(z.object({ order: z.array(z.object({ id: z.number(), sortOrder: z.number() })) }))
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       await Promise.all(
         input.order.map(({ id, sortOrder }) =>
@@ -256,8 +257,8 @@ export const portfolioRouter = router({
   }),
 
   /** ADMIN — list ALL videos (including unpublished) */
-  listAllVideos: protectedProcedure.query(async ({ ctx }) => {
-    requireAdmin(ctx.user.role);
+  listAllVideos: ownerProcedure.query(async ({ ctx }) => {
+    requireAdmin(ctx.user.openId);
     const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
     const videos = await db
@@ -282,7 +283,7 @@ export const portfolioRouter = router({
   }),
 
   /** ADMIN — create a new video entry (Vimeo URL) */
-  createVideo: protectedProcedure
+  createVideo: ownerProcedure
     .input(
       z.object({
         vimeoUrl: z.string().url(),
@@ -293,7 +294,7 @@ export const portfolioRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
       const existing = await db
@@ -322,7 +323,7 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — update video metadata + tags */
-  updateVideo: protectedProcedure
+  updateVideo: ownerProcedure
     .input(
       z.object({
         id: z.number(),
@@ -335,7 +336,7 @@ export const portfolioRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
       const updateData: Record<string, unknown> = {};
@@ -360,10 +361,10 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — delete a video */
-  deleteVideo: protectedProcedure
+  deleteVideo: ownerProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       await db.delete(portfolioVideoTags).where(eq(portfolioVideoTags.videoId, input.id));
       await db.delete(portfolioVideos).where(eq(portfolioVideos.id, input.id));
@@ -371,10 +372,10 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — reorder videos (drag-and-drop) */
-  reorderVideos: protectedProcedure
+  reorderVideos: ownerProcedure
     .input(z.object({ order: z.array(z.object({ id: z.number(), sortOrder: z.number() })) }))
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       await Promise.all(
         input.order.map(({ id, sortOrder }) =>
@@ -415,8 +416,8 @@ export const portfolioRouter = router({
   }),
 
   /** ADMIN — list ALL graphics (including unpublished) */
-  listAllGraphics: protectedProcedure.query(async ({ ctx }) => {
-    requireAdmin(ctx.user.role);
+  listAllGraphics: ownerProcedure.query(async ({ ctx }) => {
+    requireAdmin(ctx.user.openId);
     const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
     const graphics = await db
@@ -441,7 +442,7 @@ export const portfolioRouter = router({
   }),
 
   /** ADMIN — upload a new graphic (base64 payload → S3) */
-  uploadGraphic: protectedProcedure
+  uploadGraphic: ownerProcedure
     .input(
       z.object({
         filename: z.string(),
@@ -453,7 +454,7 @@ export const portfolioRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
       const buffer = Buffer.from(input.base64, "base64");
@@ -480,7 +481,7 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — update graphic metadata + tags */
-  updateGraphic: protectedProcedure
+  updateGraphic: ownerProcedure
     .input(
       z.object({
         id: z.number(),
@@ -489,10 +490,10 @@ export const portfolioRouter = router({
         published: z.boolean().optional(),
         tagIds: z.array(z.number()).optional(),
       })
-    )
-    .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
-      const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+    )    .mutation(async ({ ctx, input }) => {
+      requireAdmin(ctx.user.openId);
+      const 
+db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
 
       const updateData: Record<string, unknown> = {};
       if (input.title !== undefined) updateData.title = input.title;
@@ -514,10 +515,10 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — delete a graphic */
-  deleteGraphic: protectedProcedure
+  deleteGraphic: ownerProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       await db.delete(portfolioGraphicTags).where(eq(portfolioGraphicTags.graphicId, input.id));
       await db.delete(portfolioGraphics).where(eq(portfolioGraphics.id, input.id));
@@ -525,10 +526,10 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — reorder graphics (drag-and-drop) */
-  reorderGraphics: protectedProcedure
+  reorderGraphics: ownerProcedure
     .input(z.object({ order: z.array(z.object({ id: z.number(), sortOrder: z.number() })) }))
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       await Promise.all(
         input.order.map(({ id, sortOrder }) =>
@@ -549,10 +550,10 @@ export const portfolioRouter = router({
   }),
 
   /** ADMIN — create a new tag */
-  createTag: protectedProcedure
+  createTag: ownerProcedure
     .input(z.object({ name: z.string().min(1).max(64), color: z.string().optional() }))
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       const slug = slugify(input.name);
       const [inserted] = await db
@@ -563,10 +564,10 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — update a tag */
-  updateTag: protectedProcedure
+  updateTag: ownerProcedure
     .input(z.object({ id: z.number(), name: z.string().min(1).max(64).optional(), color: z.string().optional() }))
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       const updateData: Record<string, string> = {};
       if (input.name) { updateData.name = input.name.toUpperCase(); updateData.slug = slugify(input.name); }
@@ -576,10 +577,10 @@ export const portfolioRouter = router({
     }),
 
   /** ADMIN — delete a tag (also removes from all join tables) */
-  deleteTag: protectedProcedure
+  deleteTag: ownerProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      requireAdmin(ctx.user.role);
+      requireAdmin(ctx.user.openId);
       const db = await getDb(); if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       await db.delete(portfolioPhotoTags).where(eq(portfolioPhotoTags.tagId, input.id));
       await db.delete(portfolioVideoTags).where(eq(portfolioVideoTags.tagId, input.id));

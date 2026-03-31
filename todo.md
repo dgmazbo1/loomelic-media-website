@@ -491,3 +491,10 @@
 
 ## Convention Page — Remove Bold SEO Keywords (Mar 30)
 - [x] Remove all bold/strong formatting from body copy in ConventionPage.tsx (SEO keywords should not be visually bolded)
+
+## Admin Auth — Owner-Only Access (Mar 31)
+- [x] Audit current admin route and procedure protection
+- [x] Create ownerProcedure that checks ctx.user.openId === OWNER_OPEN_ID
+- [x] Apply ownerProcedure to all admin tRPC procedures (admin, crm, featuredWork, portfolio, portfolioGraphics, contracts routers)
+- [x] Add OwnerGate component for /admin/* frontend routes (redirects non-owners with access denied screen)
+- [x] Verify no admin endpoint is accessible by any other logged-in user (all tests passing, 51/51)

@@ -64,7 +64,8 @@ function makeCtx(role: "admin" | "user" | null = null): TrpcContext {
   const user = role
     ? {
         id: 1,
-        openId: "test-user",
+        // Owner procedures check openId === OWNER_OPEN_ID, not role
+        openId: role === "admin" ? "jkB7nWiTEoQp6VJPadCSJJ" : "test-user",
         email: "test@example.com",
         name: "Test User",
         loginMethod: "manus" as const,

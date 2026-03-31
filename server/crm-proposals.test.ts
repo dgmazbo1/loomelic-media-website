@@ -6,9 +6,19 @@ import { describe, expect, it } from "vitest";
 import { appRouter } from "./routers";
 import type { TrpcContext } from "./_core/context";
 
-function createPublicContext(): { ctx: TrpcContext } {
+function createOwnerContext(): { ctx: TrpcContext } {
   const ctx: TrpcContext = {
-    user: null,
+    user: {
+      id: 1,
+      openId: "jkB7nWiTEoQp6VJPadCSJJ",
+      email: "owner@loomelicmedia.com",
+      name: "Denham",
+      loginMethod: "manus" as const,
+      role: "admin" as const,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      lastSignedIn: new Date(),
+    },
     req: {
       cookies: {},
       headers: {},
@@ -22,7 +32,7 @@ function createPublicContext(): { ctx: TrpcContext } {
 }
 
 describe("CRM Proposals & Enhanced Contacts", () => {
-  const { ctx } = createPublicContext();
+  const { ctx } = createOwnerContext();
   const caller = appRouter.createCaller(ctx);
 
   // ─── Proposals ──────────────────────────────────────────────────────────────

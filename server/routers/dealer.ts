@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
+import { ownerProcedure, publicProcedure, router } from "../_core/trpc";
 import {
   getAllDealers, getDealerById, getDealerByToken, createDealer, updateDealer, updateDealerByToken,
   getDealerContacts, replaceDealerContacts,
@@ -13,13 +13,8 @@ import {
 import { storagePut } from "../storage";
 import { nanoid } from "nanoid";
 
-// ─── Admin-only guard ────────────────────────────────────────────────────────
-const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
-  if (ctx.user.role !== "admin") {
-    throw new TRPCError({ code: "FORBIDDEN", message: "Admin access required" });
-  }
-  return next({ ctx });
-});
+// ─── Admin-only guard (owner-only) ───────────────────────────────────────────────
+const adminProcedure = ownerProcedure;
 
 export const dealerRouter = router({
 

@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
+import { ownerProcedure, publicProcedure, router } from "../_core/trpc";
+import { ENV } from "../_core/env";
 import { TRPCError } from "@trpc/server";
 import {
   getAllFeaturedWork,
@@ -24,16 +25,16 @@ export const featuredWorkRouter = router({
   }),
 
   /** Admin — returns all items (published + unpublished) */
-  listAll: protectedProcedure.use(({ ctx, next }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+  listAll: ownerProcedure.use(({ ctx, next }) => {
+    if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
     return next({ ctx });
   }).query(async () => {
     return getAllFeaturedWork();
   }),
 
   /** Admin — create a new featured work card */
-  create: protectedProcedure.use(({ ctx, next }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+  create: ownerProcedure.use(({ ctx, next }) => {
+    if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
     return next({ ctx });
   }).input(z.object({
     title: z.string().min(1).max(256),
@@ -48,8 +49,8 @@ export const featuredWorkRouter = router({
   }),
 
   /** Admin — update an existing card (title, category, image, slug, published) */
-  update: protectedProcedure.use(({ ctx, next }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+  update: ownerProcedure.use(({ ctx, next }) => {
+    if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
     return next({ ctx });
   }).input(z.object({
     id: z.number().int(),
@@ -66,8 +67,8 @@ export const featuredWorkRouter = router({
   }),
 
   /** Admin — delete a card */
-  delete: protectedProcedure.use(({ ctx, next }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+  delete: ownerProcedure.use(({ ctx, next }) => {
+    if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
     return next({ ctx });
   }).input(z.object({
     id: z.number().int(),
@@ -77,8 +78,8 @@ export const featuredWorkRouter = router({
   }),
 
   /** Admin — upload a cover image for a featured work card (base64 encoded) */
-  uploadCoverImage: protectedProcedure.use(({ ctx, next }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+  uploadCoverImage: ownerProcedure.use(({ ctx, next }) => {
+    if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
     return next({ ctx });
   }).input(z.object({
     filename: z.string(),
@@ -93,8 +94,8 @@ export const featuredWorkRouter = router({
   }),
 
   /** Admin — bulk-update sortOrder after drag-and-drop reorder */
-  reorder: protectedProcedure.use(({ ctx, next }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+  reorder: ownerProcedure.use(({ ctx, next }) => {
+    if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
     return next({ ctx });
   }).input(z.array(z.object({
     id: z.number().int(),

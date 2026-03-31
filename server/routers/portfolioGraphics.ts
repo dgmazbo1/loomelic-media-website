@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
+import { publicProcedure, ownerProcedure, router } from "../_core/trpc";
 import { TRPCError } from "@trpc/server";
 import {
   getAllPortfolioGraphics,
@@ -10,6 +10,7 @@ import {
   reorderPortfolioGraphics,
 } from "../db";
 import { storagePut } from "../storage";
+import { ENV } from "../_core/env";
 
 function randomSuffix() {
   return Math.random().toString(36).slice(2, 10);
@@ -20,12 +21,12 @@ export const portfolioGraphicsRouter = router({
     return await getPublishedPortfolioGraphics();
   }),
 
-  listAll: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+  listAll: ownerProcedure.query(async ({ ctx }) => {
+    if (ctx.user.openId !== ENV.ownerOpenId) throw new TRPCError({ code: "FORBIDDEN" });
     return await getAllPortfolioGraphics();
   }),
 
-  create: protectedProcedure
+  create: ownerProcedure
     .input(z.object({
       title: z.string().optional(),
       caption: z.string().optional(),
@@ -36,12 +37,12 @@ export const portfolioGraphicsRouter = router({
       sortOrder: z.number().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user.openId !== ENV.ownerOpenId) throw new TRPCError({ code: "FORBIDDEN" });
       const id = await createPortfolioGraphic(input);
       return { success: true, id };
     }),
 
-  update: protectedProcedure
+  update: ownerProcedure
     .input(z.object({
       id: z.number(),
       title: z.string().optional(),
@@ -50,36 +51,36 @@ export const portfolioGraphicsRouter = router({
       published: z.boolean().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user.openId !== ENV.ownerOpenId) throw new TRPCError({ code: "FORBIDDEN" });
       const { id, ...data } = input;
       await updatePortfolioGraphic(id, data);
       return { success: true };
     }),
 
-  delete: protectedProcedure
+  delete: ownerProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user.openId !== ENV.ownerOpenId) throw new TRPCError({ code: "FORBIDDEN" });
       await deletePortfolioGraphic(input.id);
       return { success: true };
     }),
 
-  reorder: protectedProcedure
+  reorder: ownerProcedure
     .input(z.array(z.object({ id: z.number(), sortOrder: z.number() })))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user.openId !== ENV.ownerOpenId) throw new TRPCError({ code: "FORBIDDEN" });
       await reorderPortfolioGraphics(input);
       return { success: true };
     }),
 
-  uploadImage: protectedProcedure
+  uploadImage: ownerProcedure
     .input(z.object({
       filename: z.string(),
       mimeType: z.string(),
       base64: z.string(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user.openId !== ENV.ownerOpenId) throw new TRPCError({ code: "FORBIDDEN" });
       const buffer = Buffer.from(input.base64, "base64");
       const ext = input.filename.split(".").pop() ?? "jpg";
       const key = `portfolio-graphics/${randomSuffix()}-${Date.now()}.${ext}`;

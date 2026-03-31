@@ -15,7 +15,8 @@ type AuthenticatedUser = NonNullable<TrpcContext["user"]>;
 function makeUser(role: "admin" | "user" = "user"): AuthenticatedUser {
   return {
     id: 1,
-    openId: "test-open-id",
+    // Owner procedures check openId === OWNER_OPEN_ID, not role
+    openId: role === "admin" ? "jkB7nWiTEoQp6VJPadCSJJ" : "test-open-id",
     email: "test@example.com",
     name: "Test User",
     loginMethod: "manus",

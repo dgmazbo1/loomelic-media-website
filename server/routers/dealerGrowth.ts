@@ -2,7 +2,7 @@
  * Dealer Growth Command System Router
  * Handles dealership acquisition, proposals, social audits, contacts, visit logs, etc.
  */
-import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
+import { publicProcedure, protectedProcedure, ownerProcedure, router } from "../_core/trpc";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import * as db from "../db";
@@ -11,10 +11,8 @@ import { invokeLLM } from "../_core/llm";
 import { generateImage } from "../_core/imageGeneration";
 import { storagePut } from "../storage";
 
-// AUTH GATE — adminProcedure passes through without role check (owner request)
-const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
-  return next({ ctx });
-});
+// AUTH GATE — owner-only, only OWNER_OPEN_ID may call these procedures
+const adminProcedure = ownerProcedure;
 
 export const dealerGrowthRouter = router({
   // ─── Dealerships ───

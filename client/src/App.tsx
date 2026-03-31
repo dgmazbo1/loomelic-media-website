@@ -67,6 +67,7 @@ import Pipeline from "./pages/crm/Pipeline";
 import CrmSettings from "./pages/crm/CrmSettings";
 import ProposalMicrosite from "./pages/crm/ProposalMicrosite";
 import AuthGate from "./components/AuthGate";
+import OwnerGate from "./components/OwnerGate";
 
 import {
   LexusHendersonPage,
@@ -104,13 +105,13 @@ function Router() {
         {/* Proposal microsite is public-facing (clients view proposals) */}
         <Route path="/growth/p/:slug" component={ProposalMicrosite} />
 
-        {/* Admin panel */}
-        <Route path="/admin" component={AdminPage} />
-        <Route path="/admin/portfolio" component={PortfolioAdmin} />
-        <Route path="/admin/featured-work" component={FeaturedWorkAdmin} />
-        <Route path="/admin/graphics" component={GraphicsAdmin} />
-        <Route path="/admin/crm" component={AdminCRM} />
-        <Route path="/admin/crm/dealer" component={AdminCRMModule} />
+        {/* Admin panel — owner-only (OWNER_OPEN_ID) */}
+        <Route path="/admin">{() => <OwnerGate><AdminPage /></OwnerGate>}</Route>
+        <Route path="/admin/portfolio">{() => <OwnerGate><PortfolioAdmin /></OwnerGate>}</Route>
+        <Route path="/admin/featured-work">{() => <OwnerGate><FeaturedWorkAdmin /></OwnerGate>}</Route>
+        <Route path="/admin/graphics">{() => <OwnerGate><GraphicsAdmin /></OwnerGate>}</Route>
+        <Route path="/admin/crm">{() => <OwnerGate><AdminCRM /></OwnerGate>}</Route>
+        <Route path="/admin/crm/dealer">{() => <OwnerGate><AdminCRMModule /></OwnerGate>}</Route>
 
         {/* CRM Dashboard */}
         <Route path="/crm" component={CRMDashboard} />
@@ -134,7 +135,7 @@ function Router() {
         <Route path="/vendor/admin/analytics" component={VendorAdmin} />
         <Route path="/vendor/admin/settings" component={VendorAdmin} />
         <Route path="/vendor/sign/:token" component={VendorSign} />
-        <Route path="/admin/contracts/new" component={AdminCreateContract} />
+        <Route path="/admin/contracts/new">{() => <OwnerGate><AdminCreateContract /></OwnerGate>}</Route>
 
         {/* Home */}
         <Route path="/" component={Home} />

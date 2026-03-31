@@ -1,7 +1,8 @@
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, router } from "./_core/trpc";
+import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
+import { ENV } from "./_core/env";
 import { adminRouter } from "./routers/admin";
 import { mediaRouter } from "./routers/media";
 import { dealerRouter } from "./routers/dealer";
@@ -21,6 +22,9 @@ export const appRouter = router({
   system: systemRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
+    isOwner: protectedProcedure.query(({ ctx }) => ({
+      isOwner: ctx.user.openId === ENV.ownerOpenId,
+    })),
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });

@@ -88,7 +88,7 @@ export const contractsRouter = router({
     }),
 
   getAllW9s: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return await db.select().from(w9Forms).orderBy(desc(w9Forms.createdAt));
@@ -116,7 +116,7 @@ export const contractsRouter = router({
       pdfData: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const token = await generateToken();
@@ -179,7 +179,7 @@ export const contractsRouter = router({
 
   /** Admin: list all contractor contracts */
   getAllContracts: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return await db.select().from(contracts).orderBy(desc(contracts.createdAt));
@@ -226,7 +226,7 @@ export const contractsRouter = router({
       equipment: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       await db.insert(contractTemplates).values({ ...input, createdBy: ctx.user.id });
@@ -248,7 +248,7 @@ export const contractsRouter = router({
       equipment: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const { id, ...data } = input;
@@ -259,7 +259,7 @@ export const contractsRouter = router({
   deleteTemplate: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       await db.delete(contractTemplates).where(eq(contractTemplates.id, input.id));
@@ -289,7 +289,7 @@ export const contractsRouter = router({
       paymentTerms: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
-      if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+      if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
       const token = await generateToken();
@@ -304,7 +304,7 @@ export const contractsRouter = router({
     }),
 
   getAllClientContracts: protectedProcedure.query(async ({ ctx }) => {
-    if (ctx.user.role !== "admin") throw new TRPCError({ code: "FORBIDDEN" });
+    if (ctx.user.openId !== process.env.OWNER_OPEN_ID) throw new TRPCError({ code: "FORBIDDEN" });
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "DB unavailable" });
     return await db.select().from(clientContracts).orderBy(desc(clientContracts.createdAt));

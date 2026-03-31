@@ -2,6 +2,7 @@ import { NOT_ADMIN_ERR_MSG, UNAUTHED_ERR_MSG } from '@shared/const';
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import type { TrpcContext } from "./context";
+import { ENV } from "./env";
 
 const t = initTRPC.context<TrpcContext>().create({
   transformer: superjson,
@@ -27,11 +28,18 @@ const requireUser = t.middleware(async opts => {
 
 export const protectedProcedure = t.procedure.use(requireUser);
 
-export const adminProcedure = t.procedure.use(
+// ownerProcedure — only Denham's Manus account (OWNER_OPEN_ID) may call these.
+// This is stricter than a role check: no other user, regardless of DB role,
+// can invoke admin procedures.
+export const ownerProcedure = t.procedure.use(
   t.middleware(async opts => {
     const { ctx, next } = opts;
 
-    if (!ctx.user || ctx.user.role !== 'admin') {
+    if (!ctx.user) {
+      throw new TRPCError({ code: "UNAUTHORIZED", message: UNAUTHED_ERR_MSG });
+    }
+
+    if (ctx.user.openId !== ENV.ownerOpenId) {
       throw new TRPCError({ code: "FORBIDDEN", message: NOT_ADMIN_ERR_MSG });
     }
 
@@ -43,3 +51,7 @@ export const adminProcedure = t.procedure.use(
     });
   }),
 );
+
+// adminProcedure is now an alias for ownerProcedure so all existing routers
+// that import adminProcedure from this file are automatically upgraded.
+export const adminProcedure = ownerProcedure;

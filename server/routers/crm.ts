@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../_core/trpc";
+import { ownerProcedure, publicProcedure, router } from "../_core/trpc";
 import {
   getAllCrmContacts, createCrmContact, updateCrmContact, deleteCrmContact,
   getAllCrmDeals, createCrmDeal, updateCrmDeal, deleteCrmDeal,
@@ -14,8 +14,8 @@ import { getDb } from "../db";
 import { crmInteractions, crmContacts } from "../../drizzle/schema";
 import { eq, desc } from "drizzle-orm";
 
-// All CRM procedures are public (admin panel has no auth requirement)
-const adminProcedure = publicProcedure;
+// All CRM procedures are owner-only
+const adminProcedure = ownerProcedure;
 
 export const crmRouter = router({
 
