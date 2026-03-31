@@ -382,18 +382,18 @@ export default function ConventionPage() {
                 </p>
                 <p>
                   Our convention videographers and photographers have worked the floors of the{" "}
-                  <strong className="text-white/80">Las Vegas Convention Center</strong>,{" "}
-                  <strong className="text-white/80">Venetian Expo</strong>,{" "}
-                  <strong className="text-white/80">Mandalay Bay Convention Center</strong>,{" "}
-                  <strong className="text-white/80">Resorts World</strong>, and every other major
+                  Las Vegas Convention Center,{" "}
+                  Venetian Expo,{" "}
+                  Mandalay Bay Convention Center,{" "}
+                  Resorts World, and every other major
                   Las Vegas venue. We know the lighting conditions, the floor layouts, the union
                   rules, and how to get clean audio in a 100,000-square-foot exhibit hall.
                 </p>
                 <p>
                   Whether you need a single{" "}
-                  <strong className="text-white/80">Las Vegas convention videographer</strong> for
+                  Las Vegas convention videographer for
                   booth coverage, a full multi-camera crew for a keynote, or a{" "}
-                  <strong className="text-white/80">trade show photographer</strong> to document
+                  trade show photographer to document
                   your entire exhibit presence — we scale to fit your show.
                 </p>
               </div>
@@ -599,20 +599,17 @@ export default function ConventionPage() {
 
             <div className="space-y-6 text-white/55 text-sm sm:text-base leading-relaxed not-prose">
               <p>
-                Las Vegas is the convention capital of the world. The{" "}
-                <strong className="text-white/80">Las Vegas Convention Center</strong> alone hosts
+                Las Vegas is the convention capital of the world. The Las Vegas Convention Center alone hosts
                 more than 60 major trade shows per year, drawing millions of attendees and tens of
                 thousands of exhibitors. When your brand is on that floor, the content you capture
-                becomes your most valuable post-show marketing asset — and the quality of your{" "}
-                <strong className="text-white/80">convention videographer</strong> determines
-                whether that content works for you or against you.
+                becomes your most valuable post-show marketing asset — and the quality of your
+                convention videographer determines whether that content works for you or against you.
               </p>
 
               <p>
                 Loomelic Media is a Las Vegas-based video production and photography company
                 specializing in convention and trade show coverage. We provide professional{" "}
-                <strong className="text-white/80">convention videography</strong> and{" "}
-                <strong className="text-white/80">trade show photography</strong> for exhibitors,
+                convention videography and trade show photography for exhibitors,
                 event organizers, and corporate brands at every major Las Vegas venue — including
                 the Las Vegas Convention Center, Venetian Expo, Mandalay Bay Convention Center,
                 Resorts World, Paris Las Vegas, and MGM Grand.
@@ -622,23 +619,16 @@ export default function ConventionPage() {
                 Our convention production services cover the full spectrum of event content: booth
                 and exhibit coverage, keynote and breakout session recording, on-camera speaker
                 interviews, product demo videos, attendee testimonials, convention highlight reels,
-                and same-day social media edits. We also offer combined{" "}
-                <strong className="text-white/80">convention photography and videography packages</strong>{" "}
-                so you get both a professional photographer and videographer on-site simultaneously —
+                and same-day social media edits. We also offer combined convention photography and videography packages so you get both a professional photographer and videographer on-site simultaneously —
                 the most cost-effective way to maximize your content output from a single event.
               </p>
 
               <p>
                 Convention floors are high-pressure environments. Tight schedules, loud ambient
-                noise, complex lighting, and no second chances on live product demos. Our{" "}
-                <strong className="text-white/80">trade show videographers</strong> are experienced
+                noise, complex lighting, and no second chances on live product demos. Our trade show videographers are experienced
                 working in exhibit halls and conference centers, and we come prepared with
                 professional wireless audio systems, portable lighting rigs, and the technical
-                knowledge to adapt to any venue condition. We have covered{" "}
-                <strong className="text-white/80">CES</strong>,{" "}
-                <strong className="text-white/80">SEMA</strong>,{" "}
-                <strong className="text-white/80">G2E</strong>,{" "}
-                <strong className="text-white/80">NAB Show</strong>, MAGIC, Money20/20, and
+                knowledge to adapt to any venue condition. We have covered CES, SEMA, G2E, NAB Show, MAGIC, Money20/20, and
                 hundreds of other Las Vegas conventions — and we bring that institutional knowledge
                 to every new project.
               </p>

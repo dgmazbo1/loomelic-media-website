@@ -505,7 +505,7 @@ function PhotosTab() {
 
   const uploadMutation = trpc.portfolio.uploadPhoto.useMutation({
     onSuccess: () => { utils.portfolio.listAllPhotos.invalidate(); toast.success("Photo uploaded"); },
-    onError: () => toast.error("Upload failed"),
+    onError: (e) => toast.error(`Upload failed: ${e.message}`, { duration: 8000 }),
   });
   const updateMutation = trpc.portfolio.updatePhoto.useMutation({
     onSuccess: () => utils.portfolio.listAllPhotos.invalidate(),
@@ -798,7 +798,7 @@ function GraphicsTab() {
 
   const uploadMutation = trpc.portfolio.uploadGraphic.useMutation({
     onSuccess: () => { utils.portfolio.listAllGraphics.invalidate(); toast.success("Graphic uploaded"); },
-    onError: () => toast.error("Upload failed"),
+    onError: (e) => toast.error(`Upload failed: ${e.message}`, { duration: 8000 }),
   });
   const updateMutation = trpc.portfolio.updateGraphic.useMutation({
     onSuccess: () => utils.portfolio.listAllGraphics.invalidate(),

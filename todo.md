@@ -482,3 +482,12 @@
 - [x] View Project text: use hero display font (font-display)
 - [x] Replace all green text/labels (Brand, Events, etc.) with white
 - [x] Global audit: remove all green color values from codebase
+
+## Admin Upload Error Visibility (Mar 30)
+- [ ] Show full error message (not just "failed") on photo upload errors in all admin upload flows
+- [ ] Display per-file error with filename and specific error detail in bulk upload
+- [ ] Show server-side error messages (S3 errors, size limits, type errors) in the UI
+- [ ] Add expandable error detail panel so Denham can copy/paste error for debugging
+
+## Convention Page — Remove Bold SEO Keywords (Mar 30)
+- [x] Remove all bold/strong formatting from body copy in ConventionPage.tsx (SEO keywords should not be visually bolded)
