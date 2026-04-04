@@ -8,9 +8,10 @@ import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
+import AdminLayout, { TW } from "@/components/AdminLayout";
 import {
   Upload, Trash2, GripVertical, Video, Image, Palette,
-  Plus, X, Pencil, Check, Eye, EyeOff, Tag, ChevronLeft,
+  Plus, X, Pencil, Check, Eye, EyeOff, Tag, ChevronLeft, Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -1003,9 +1004,11 @@ export default function PortfolioAdmin() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[oklch(0.07_0_0)] flex items-center justify-center">
-        <div className="text-white/40 text-sm">Loading…</div>
-      </div>
+      <AdminLayout title="Portfolio">
+        <div className="flex items-center justify-center h-64">
+          <Loader2 size={24} className="animate-spin" style={{ color: TW.indigo }} />
+        </div>
+      </AdminLayout>
     );
   }
 
@@ -1016,71 +1019,57 @@ export default function PortfolioAdmin() {
 
   if (user.role !== "admin") {
     return (
-      <div className="min-h-screen bg-[oklch(0.07_0_0)] flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <p className="text-white/60">You don't have permission to access this page.</p>
-          <Link href="/">
-            <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
-              Go Home
-            </Button>
-          </Link>
+      <AdminLayout title="Portfolio">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-center space-y-4">
+            <p className="text-sm" style={{ color: TW.textSecondary }}>You don’t have permission to access this page.</p>
+            <Link href="/">
+              <Button variant="outline">Go Home</Button>
+            </Link>
+          </div>
         </div>
-      </div>
+      </AdminLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[oklch(0.07_0_0)] text-white">
-      {/* Header */}
-      <div className="border-b border-white/10 bg-black/40 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-screen-2xl mx-auto px-6 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Link href="/admin">
-              <button className="text-white/40 hover:text-white/80 transition-colors flex items-center gap-1.5 text-sm">
-                <ChevronLeft size={16} />
-                Admin
-              </button>
-            </Link>
-            <span className="text-white/20">/</span>
-            <span className="text-sm font-mono tracking-wider text-white">PORTFOLIO</span>
-          </div>
-          <Link href="/portfolio">
-            <button className="text-xs text-white/40 hover:text-white/70 font-mono tracking-wider transition-colors">
-              VIEW LIVE →
-            </button>
-          </Link>
-        </div>
-      </div>
-
+    <AdminLayout
+      title="Portfolio"
+      actions={
+        <Link href="/portfolio">
+          <button className="text-xs font-medium transition-colors" style={{ color: TW.indigo }}>
+            View Live →
+          </button>
+        </Link>
+      }
+    >
       {/* Tab bar */}
-      <div className="border-b border-white/10 bg-black/20">
-        <div className="max-w-screen-2xl mx-auto px-6">
-          <div className="flex gap-0">
-            {TABS.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-5 py-4 text-sm font-mono tracking-wider border-b-2 transition-all ${
-                  activeTab === tab.id
-                    ? "border-white text-white"
-                    : "border-transparent text-white/40 hover:text-white/70"
-                }`}
-              >
-                {tab.icon}
-                {tab.label.toUpperCase()}
-              </button>
-            ))}
-          </div>
+      <div className="mb-6" style={{ borderBottom: `1px solid ${TW.border}` }}>
+        <div className="flex gap-0">
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className="flex items-center gap-2 px-5 py-3 text-sm font-medium border-b-2 transition-all"
+              style={{
+                borderBottomColor: activeTab === tab.id ? TW.indigo : "transparent",
+                color: activeTab === tab.id ? TW.indigo : TW.textMuted,
+              }}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Content */}
-      <div className="max-w-screen-2xl mx-auto px-6 py-8">
+      <div>
         {activeTab === "photos" && <PhotosTab />}
         {activeTab === "videos" && <VideosTab />}
         {activeTab === "graphics" && <GraphicsTab />}
         {activeTab === "tags" && <TagsTab />}
       </div>
-    </div>
+    </AdminLayout>
   );
 }

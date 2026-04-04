@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-
-
+import AdminLayout, { TW } from "@/components/AdminLayout";
 import {
   Car, Camera, Users, TrendingUp, CheckSquare, AlertTriangle,
   FileText, Plus, Loader2, ChevronRight, Copy, ExternalLink,
@@ -732,64 +731,53 @@ export default function AdminCRM() {
   const [activeTab, setActiveTab] = useState("overview");
 
   if (loading) return (
-    <div className="min-h-screen bg-[oklch(0.07_0_0)] flex items-center justify-center">
-      <Loader2 className="w-8 h-8 animate-spin text-[oklch(0.85_0.23_110)]" />
-    </div>
+    <AdminLayout title="Business CRM">
+      <div className="flex items-center justify-center h-64">
+        <Loader2 size={24} className="animate-spin" style={{ color: TW.indigo }} />
+      </div>
+    </AdminLayout>
   );
 
   if (!user || user.role !== "admin") return (
-    <div className="min-h-screen bg-[oklch(0.07_0_0)] flex items-center justify-center p-6">
-      <div className="text-center">
-        <Shield className="w-12 h-12 text-red-400 mx-auto mb-4" />
-        <h2 className="text-xl font-bold text-white mb-2">Admin Access Required</h2>
-        <p className="text-zinc-400 mb-4">You need admin privileges to access the CRM.</p>
-        <Link href="/admin"><Button variant="outline" className="border-zinc-700 text-zinc-300">Go to Admin Panel</Button></Link>
+    <AdminLayout title="Business CRM">
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center space-y-4">
+          <Shield size={40} style={{ color: TW.coral }} className="mx-auto" />
+          <h2 className="text-lg font-bold" style={{ color: TW.textPrimary }}>Admin Access Required</h2>
+          <p className="text-sm" style={{ color: TW.textSecondary }}>You need admin privileges to access the CRM.</p>
+          <Link href="/admin"><Button variant="outline">Go to Admin Panel</Button></Link>
+        </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 
   return (
-    <div className="min-h-screen bg-[oklch(0.07_0_0)]">
-      {/* Top Nav */}
-      <div className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center gap-4 h-14">
-            <Link href="/admin">
-              <button className="text-zinc-400 hover:text-white transition-colors">
-                <ArrowLeft className="w-4 h-4" />
+    <AdminLayout title="Business CRM" subtitle="Dealers, Vendors, Contacts & Contracts">
+      {/* Tab bar */}
+      <div className="mb-6 overflow-x-auto" style={{ borderBottom: `1px solid ${TW.border}` }}>
+        <div className="flex gap-0 min-w-max">
+          {TABS.map(tab => {
+            const Icon = tab.icon;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className="flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-all whitespace-nowrap"
+                style={{
+                  borderBottomColor: activeTab === tab.id ? TW.indigo : "transparent",
+                  color: activeTab === tab.id ? TW.indigo : TW.textMuted,
+                }}
+              >
+                <Icon size={14} />
+                {tab.label}
               </button>
-            </Link>
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded bg-[oklch(0.85_0.23_110)] flex items-center justify-center">
-                <BarChart3 className="w-3.5 h-3.5 text-black" />
-              </div>
-              <span className="font-black text-white text-sm">Loomelic CRM</span>
-            </div>
-            <div className="flex-1 overflow-x-auto">
-              <div className="flex gap-1 min-w-max">
-                {TABS.map(tab => {
-                  const Icon = tab.icon;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold transition-colors whitespace-nowrap ${
-                        activeTab === tab.id ? "bg-[oklch(0.85_0.23_110)] text-black" : "text-zinc-400 hover:text-white hover:bg-zinc-800"
-                      }`}
-                    >
-                      <Icon className="w-3.5 h-3.5" />
-                      {tab.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+      <div>
         {activeTab === "overview" && <OverviewTab />}
         {activeTab === "dealers" && <DealersTab />}
         {activeTab === "vendors" && <VendorsTab />}
@@ -800,6 +788,6 @@ export default function AdminCRM() {
         {activeTab === "contracts" && <ContractsTab />}
         {activeTab === "interactions" && <AdminCRMModule />}
       </div>
-    </div>
+    </AdminLayout>
   );
 }

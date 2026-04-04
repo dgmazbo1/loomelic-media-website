@@ -8,7 +8,8 @@ import {
   Phone, Mail, Users, MessageSquare, Activity, Plus, X, Clock,
   ArrowUpRight, ArrowDownLeft,
 } from "lucide-react";
-import CRMLayout, { CRMCard, CRM_COLORS } from "@/components/CRMLayout";
+import AdminLayout, { TW, TWCard } from "@/components/AdminLayout";
+import { CRM_COLORS } from "@/components/CRMLayout";
 import { toast } from "sonner";
 
 /* ─── Type config ────────────────────────────────────────── */
@@ -238,7 +239,7 @@ export default function CRMActivityPage() {
   const grouped = groupByDate(filtered);
 
   return (
-    <CRMLayout
+    <AdminLayout
       title="Activity"
       subtitle={`${interactions.length} interaction${interactions.length !== 1 ? "s" : ""} logged`}
       actions={
@@ -281,7 +282,7 @@ export default function CRMActivityPage() {
 
       {/* Timeline */}
       {filtered.length === 0 ? (
-        <CRMCard className="flex flex-col items-center justify-center py-16 text-center">
+        <TWCard className="flex flex-col items-center justify-center py-16 text-center">
           <Activity size={36} style={{ color: "oklch(0.80 0.005 260)" }} />
           <p className="text-sm font-medium mt-3" style={{ color: CRM_COLORS.textPrimary }}>
             {typeFilter !== "all" ? `No ${typeFilter}s logged yet` : "No activity logged yet"}
@@ -296,7 +297,7 @@ export default function CRMActivityPage() {
               Log Interaction
             </button>
           )}
-        </CRMCard>
+        </TWCard>
       ) : (
         <div className="max-w-2xl">
           {Object.entries(grouped).map(([date, items]) => (
@@ -335,6 +336,6 @@ export default function CRMActivityPage() {
           contacts={contacts as any[]}
         />
       )}
-    </CRMLayout>
+    </AdminLayout>
   );
 }

@@ -10,7 +10,8 @@ import {
   Mail, Phone, StickyNote, CheckCircle, X, Trash2, Edit2,
   Clock,
 } from "lucide-react";
-import CRMLayout, { CRMCard, ScoreCircle, CRM_COLORS } from "@/components/CRMLayout";
+import AdminLayout, { TW, TWCard } from "@/components/AdminLayout";
+import { ScoreCircle, CRM_COLORS } from "@/components/CRMLayout";
 import { toast } from "sonner";
 
 /* ─── Types ──────────────────────────────────────────────── */
@@ -361,7 +362,7 @@ export default function CRMContactsPage() {
   }, [contacts, typeFilter, search]);
 
   return (
-    <CRMLayout
+    <AdminLayout
       title="Contacts"
       subtitle={`${contacts.length} total contact${contacts.length !== 1 ? "s" : ""}`}
       actions={
@@ -410,7 +411,7 @@ export default function CRMContactsPage() {
 
       {/* Contact grid */}
       {filtered.length === 0 ? (
-        <CRMCard className="flex flex-col items-center justify-center py-16 text-center">
+        <TWCard className="flex flex-col items-center justify-center py-16 text-center">
           <Users size={36} style={{ color: "oklch(0.80 0.005 260)" }} />
           <p className="text-sm font-medium mt-3" style={{ color: CRM_COLORS.textPrimary }}>
             {search || typeFilter !== "all" ? "No contacts match your filters" : "No contacts yet"}
@@ -426,7 +427,7 @@ export default function CRMContactsPage() {
               Add Contact
             </button>
           )}
-        </CRMCard>
+        </TWCard>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filtered.map((c: any) => (
@@ -458,6 +459,6 @@ export default function CRMContactsPage() {
           loading={updateContact.isPending}
         />
       )}
-    </CRMLayout>
+    </AdminLayout>
   );
 }

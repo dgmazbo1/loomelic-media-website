@@ -5,7 +5,8 @@
 import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { Plus, DollarSign, X, ChevronRight } from "lucide-react";
-import CRMLayout, { CRM_COLORS } from "@/components/CRMLayout";
+import AdminLayout, { TW } from "@/components/AdminLayout";
+import { CRM_COLORS } from "@/components/CRMLayout";
 import { toast } from "sonner";
 
 /* ─── Stage config ───────────────────────────────────────── */
@@ -205,7 +206,7 @@ export default function CRMPipelinePage() {
     .reduce((s: number, d: any) => s + (d.value ?? 0), 0);
 
   return (
-    <CRMLayout
+    <AdminLayout
       title="Pipeline"
       subtitle={`${deals.length} deal${deals.length !== 1 ? "s" : ""} · ${formatCurrency(activeValue)} active`}
       actions={
@@ -305,6 +306,6 @@ export default function CRMPipelinePage() {
           defaultStage={defaultStage}
         />
       )}
-    </CRMLayout>
+    </AdminLayout>
   );
 }

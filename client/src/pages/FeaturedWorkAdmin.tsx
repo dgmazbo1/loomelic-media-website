@@ -8,6 +8,7 @@ import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
+import AdminLayout, { TW, TWCard } from "@/components/AdminLayout";
 import {
   GripVertical, Trash2, Plus, X, Pencil, Check, Eye, EyeOff,
   LogOut, Image as ImageIcon, Loader2, ArrowLeft,
@@ -385,9 +386,11 @@ export default function FeaturedWorkAdmin() {
   // Auth guard
   if (loading) {
     return (
-      <div className="min-h-screen bg-[oklch(0.07_0_0)] flex items-center justify-center">
-        <Loader2 size={24} className="text-white/30 animate-spin" />
-      </div>
+      <AdminLayout title="Featured Work">
+        <div className="flex items-center justify-center h-64">
+          <Loader2 size={24} className="animate-spin" style={{ color: TW.indigo }} />
+        </div>
+      </AdminLayout>
     );
   }
   if (!isAuthenticated || user?.role !== "admin") {
@@ -396,31 +399,21 @@ export default function FeaturedWorkAdmin() {
   }
 
   return (
-    <div className="min-h-screen bg-[oklch(0.07_0_0)] text-white">
-      {/* Header */}
-      <header className="sticky top-0 z-20 bg-[oklch(0.07_0_0)]/95 backdrop-blur border-b border-white/10 px-6 py-4 flex items-center gap-4">
-        <a
-          href="/admin"
-          className="flex items-center gap-1.5 text-white/40 hover:text-white transition-colors text-sm"
+    <AdminLayout
+      title="Featured Work"
+      subtitle={`${localItems.length} card${localItems.length !== 1 ? "s" : ""}`}
+      actions={
+        <Button
+          size="sm"
+          onClick={() => { setShowAddForm(true); setEditingItem(null); }}
+          disabled={showAddForm}
+          className="h-8 text-xs gap-1.5"
         >
-          <ArrowLeft size={14} /> Admin
-        </a>
-        <span className="text-white/20">/</span>
-        <h1 className="text-white font-semibold text-sm">Featured Work</h1>
-        <div className="ml-auto flex items-center gap-3">
-          <span className="text-white/30 text-xs">{localItems.length} card{localItems.length !== 1 ? "s" : ""}</span>
-          <Button
-            size="sm"
-            onClick={() => { setShowAddForm(true); setEditingItem(null); }}
-            disabled={showAddForm}
-            className="h-8 text-xs gap-1.5"
-          >
-            <Plus size={13} /> Add Card
-          </Button>
-        </div>
-      </header>
-
-      <div className="max-w-2xl mx-auto px-6 py-8 space-y-4">
+          <Plus size={13} /> Add Card
+        </Button>
+      }
+    >
+      <div className="max-w-2xl space-y-4">
         {/* Add form */}
         {showAddForm && (
           <ItemForm
@@ -505,18 +498,21 @@ export default function FeaturedWorkAdmin() {
 
         {/* Live preview link */}
         {localItems.length > 0 && (
-          <div className="pt-4 border-t border-white/10">
+          <div className="pt-4" style={{ borderTop: `1px solid ${TW.border}` }}>
             <a
               href="/use-cases"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs text-white/30 hover:text-white/60 transition-colors"
+              className="flex items-center gap-2 text-xs transition-colors"
+              style={{ color: TW.textMuted }}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = TW.indigo; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = TW.textMuted; }}
             >
               <Eye size={12} /> Preview on Use Cases page →
             </a>
           </div>
         )}
       </div>
-    </div>
+    </AdminLayout>
   );
 }

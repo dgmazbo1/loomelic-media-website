@@ -519,3 +519,12 @@
 - [x] Rebuild Activity/Interactions view — timeline with coral accent dots
 - [x] All CRM routes protected by OwnerGate (owner-only access, login required)
 - [x] 52/52 tests passing, TypeScript clean
+
+## Admin + CRM Redesign — Twisty Finance SaaS Design (Apr 4)
+- [x] Build unified AdminLayout shell with Twisty tokens: light bg, navy sidebar, white cards, indigo accent
+- [x] Apply AdminLayout to /admin main dashboard with Twisty card grid and CRM quick-link
+- [x] Apply AdminLayout to /admin/portfolio, /admin/featured-work, /admin/graphics, /admin/crm
+- [x] Apply AdminLayout to all /crm/* pages (replaced ORION CRMLayout)
+- [x] CRM links in admin sidebar (CRM Overview, Contacts, Pipeline, Proposals, Activity)
+- [x] Admin access fixed: DB role check instead of OWNER_OPEN_ID (both Denham accounts set to admin)
+- [x] 52/52 tests passing, TypeScript clean

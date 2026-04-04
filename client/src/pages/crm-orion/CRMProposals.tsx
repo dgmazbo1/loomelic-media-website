@@ -7,7 +7,8 @@ import { trpc } from "@/lib/trpc";
 import {
   FileText, Plus, Send, Eye, CheckCircle, XCircle, Trash2, X, Clock,
 } from "lucide-react";
-import CRMLayout, { CRMCard, CRM_COLORS } from "@/components/CRMLayout";
+import AdminLayout, { TW, TWCard } from "@/components/AdminLayout";
+import { CRM_COLORS } from "@/components/CRMLayout";
 import { toast } from "sonner";
 
 /* ─── Status config ──────────────────────────────────────── */
@@ -283,7 +284,7 @@ export default function CRMProposalsPage() {
   const sentCount = (proposals as any[]).filter((p: any) => p.status !== "draft").length;
 
   return (
-    <CRMLayout
+    <AdminLayout
       title="Proposals"
       subtitle={`${proposals.length} total · ${formatCurrency(totalValue)} pipeline`}
       actions={
@@ -302,11 +303,11 @@ export default function CRMProposalsPage() {
           { label: "Accepted Value", value: formatCurrency(acceptedValue), sub: "signed" },
           { label: "Pipeline Value", value: formatCurrency(totalValue), sub: "all proposals" },
         ].map(({ label, value, sub }) => (
-          <CRMCard key={label} className="text-center">
+          <TWCard key={label} className="text-center">
             <div className="text-2xl font-bold" style={{ color: CRM_COLORS.textPrimary }}>{value}</div>
             <div className="text-xs font-medium mt-0.5" style={{ color: CRM_COLORS.textSecondary }}>{label}</div>
             <div className="text-xs mt-1" style={{ color: "oklch(0.62 0.18 25)" }}>{sub}</div>
-          </CRMCard>
+          </TWCard>
         ))}
       </div>
 
@@ -337,7 +338,7 @@ export default function CRMProposalsPage() {
 
       {/* Proposals grid */}
       {filtered.length === 0 ? (
-        <CRMCard className="flex flex-col items-center justify-center py-16 text-center">
+        <TWCard className="flex flex-col items-center justify-center py-16 text-center">
           <FileText size={36} style={{ color: "oklch(0.80 0.005 260)" }} />
           <p className="text-sm font-medium mt-3" style={{ color: CRM_COLORS.textPrimary }}>
             {statusFilter !== "all" ? `No ${statusFilter} proposals` : "No proposals yet"}
@@ -352,7 +353,7 @@ export default function CRMProposalsPage() {
               Create Proposal
             </button>
           )}
-        </CRMCard>
+        </TWCard>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
           {filtered.map((p: any) => (
@@ -376,6 +377,6 @@ export default function CRMProposalsPage() {
           deals={deals as any[]}
         />
       )}
-    </CRMLayout>
+    </AdminLayout>
   );
 }

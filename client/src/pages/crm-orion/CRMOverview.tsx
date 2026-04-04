@@ -10,7 +10,8 @@ import {
   Clock, Flame, Thermometer, Snowflake, Activity, Plus,
   Building2, FileText,
 } from "lucide-react";
-import CRMLayout, { CRMCard, ScoreCircle, CRM_COLORS } from "@/components/CRMLayout";
+import AdminLayout, { TW, TWCard } from "@/components/AdminLayout";
+import { ScoreCircle, CRM_COLORS } from "@/components/CRMLayout";
 
 /* ─── Helpers ─────────────────────────────────────────────── */
 function formatCurrency(val: number | null | undefined) {
@@ -105,7 +106,7 @@ function StatCard({ icon: Icon, label, value, sub, accent }: {
   icon: React.ElementType; label: string; value: string | number; sub?: string; accent?: boolean;
 }) {
   return (
-    <CRMCard className="flex items-start gap-4">
+    <TWCard className="flex items-start gap-4">
       <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
         style={{ background: accent ? "oklch(0.95 0.04 25)" : "oklch(0.96 0.005 80)" }}>
         <Icon size={18} style={{ color: accent ? "oklch(0.62 0.18 25)" : "oklch(0.50 0.005 260)" }} />
@@ -115,7 +116,7 @@ function StatCard({ icon: Icon, label, value, sub, accent }: {
         <div className="text-xs font-medium mt-0.5" style={{ color: CRM_COLORS.textSecondary }}>{label}</div>
         {sub && <div className="text-xs mt-1" style={{ color: "oklch(0.62 0.18 25)" }}>{sub}</div>}
       </div>
-    </CRMCard>
+    </TWCard>
   );
 }
 
@@ -161,7 +162,7 @@ export default function CRMOverviewPage() {
   const recentActivity = useMemo(() => interactions.slice(0, 8), [interactions]);
 
   return (
-    <CRMLayout
+    <AdminLayout
       title="Overview"
       subtitle="Your pipeline at a glance"
       actions={
@@ -185,7 +186,7 @@ export default function CRMOverviewPage() {
       {/* Middle row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
         {/* Pipeline donut */}
-        <CRMCard className="lg:col-span-1">
+        <TWCard className="lg:col-span-1">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold" style={{ color: CRM_COLORS.textPrimary }}>Pipeline</h3>
             <Link href="/crm/pipeline">
@@ -203,10 +204,10 @@ export default function CRMOverviewPage() {
               </span>
             </div>
           </div>
-        </CRMCard>
+        </TWCard>
 
         {/* Recent contacts */}
-        <CRMCard className="lg:col-span-2">
+        <TWCard className="lg:col-span-2">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-semibold" style={{ color: CRM_COLORS.textPrimary }}>Recent Contacts</h3>
             <Link href="/crm/contacts">
@@ -231,13 +232,13 @@ export default function CRMOverviewPage() {
               {recentContacts.map((c: any) => <ContactRow key={c.id} contact={c} />)}
             </div>
           )}
-        </CRMCard>
+        </TWCard>
       </div>
 
       {/* Bottom row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Activity feed */}
-        <CRMCard className="lg:col-span-2">
+        <TWCard className="lg:col-span-2">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold" style={{ color: CRM_COLORS.textPrimary }}>Recent Activity</h3>
             <Link href="/crm/activity">
@@ -275,10 +276,10 @@ export default function CRMOverviewPage() {
               </div>
             </div>
           )}
-        </CRMCard>
+        </TWCard>
 
         {/* Business overview */}
-        <CRMCard>
+        <TWCard>
           <h3 className="text-sm font-semibold mb-4" style={{ color: CRM_COLORS.textPrimary }}>Business Overview</h3>
           <div className="flex flex-col gap-3">
             {[
@@ -318,8 +319,8 @@ export default function CRMOverviewPage() {
               </div>
             );
           })()}
-        </CRMCard>
+        </TWCard>
       </div>
-    </CRMLayout>
+    </AdminLayout>
   );
 }
