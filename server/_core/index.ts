@@ -33,6 +33,18 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
+
+  // SEO: Canonical domain redirect — www.loomelicmedia.com → loomelicmedia.com (301)
+  // This consolidates all SEO authority on the bare domain.
+  app.use((req, res, next) => {
+    const host = req.headers.host ?? "";
+    if (host.startsWith("www.")) {
+      const canonical = `https://loomelicmedia.com${req.url}`;
+      return res.redirect(301, canonical);
+    }
+    next();
+  });
+
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
 

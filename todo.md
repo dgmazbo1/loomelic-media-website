@@ -498,3 +498,8 @@
 - [x] Apply ownerProcedure to all admin tRPC procedures (admin, crm, featuredWork, portfolio, portfolioGraphics, contracts routers)
 - [x] Add OwnerGate component for /admin/* frontend routes (redirects non-owners with access denied screen)
 - [x] Verify no admin endpoint is accessible by any other logged-in user (all tests passing, 51/51)
+
+## Domain & SEO Hardening (Apr 4)
+- [x] Add www → loomelicmedia.com canonical 301 redirect in Express server
+- [x] Add noindex meta tags to all /admin/* routes (via OwnerGate component)
+- [ ] Submit loomelicmedia.com to Google Search Console and request indexing for convention page

@@ -9,9 +9,25 @@ import { trpc } from "@/lib/trpc";
 import { getLoginUrl } from "@/const";
 import { Loader2, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 
 export default function OwnerGate({ children }: { children: React.ReactNode }) {
   const { user, loading, isAuthenticated } = useAuth();
+
+  // Prevent search engines from indexing any admin route
+  useEffect(() => {
+    let el = document.querySelector('meta[name="robots"]') as HTMLMetaElement | null;
+    if (!el) {
+      el = document.createElement("meta");
+      el.setAttribute("name", "robots");
+      document.head.appendChild(el);
+    }
+    el.setAttribute("content", "noindex, nofollow");
+    return () => {
+      // Restore to indexable when leaving admin routes
+      if (el) el.setAttribute("content", "index, follow");
+    };
+  }, []);
 
   // Ask the server whether the current user is the owner.
   // This is a lightweight check — the server compares ctx.user.openId === ENV.ownerOpenId.
