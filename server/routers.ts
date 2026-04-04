@@ -23,7 +23,7 @@ export const appRouter = router({
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     isOwner: protectedProcedure.query(({ ctx }) => ({
-      isOwner: ctx.user.openId === ENV.ownerOpenId,
+      isOwner: ctx.user.role === "admin",
     })),
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
