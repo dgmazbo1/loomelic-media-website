@@ -85,6 +85,15 @@
     }
     </script>
 
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA4_MEASUREMENT_ID%"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '%VITE_GA4_MEASUREMENT_ID%', { anonymize_ip: true });
+    </script>
+
     <!-- Google Fonts: Barlow Condensed (display) + DM Sans (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

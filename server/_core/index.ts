@@ -84,6 +84,18 @@ async function startServer() {
       { loc: "/projects/bob-marley-hope-road", priority: "0.8", changefreq: "monthly" },
       { loc: "/projects/sports-illustrated-sportsperson-2026", priority: "0.8", changefreq: "monthly" },
       { loc: "/projects/jw-offroad", priority: "0.7", changefreq: "monthly" },
+      // High-value SEO pages
+      { loc: "/services/convention-video-production-las-vegas", priority: "0.9", changefreq: "monthly" },
+      { loc: "/featured-work", priority: "0.9", changefreq: "weekly" },
+      // Case studies (portfolio)
+      { loc: "/case-studies", priority: "0.8", changefreq: "monthly" },
+      { loc: "/case-studies/lexus-of-henderson", priority: "0.8", changefreq: "monthly" },
+      { loc: "/case-studies/lexus-of-las-vegas", priority: "0.8", changefreq: "monthly" },
+      { loc: "/case-studies/centennial-subaru", priority: "0.8", changefreq: "monthly" },
+      { loc: "/case-studies/wondr-nation-g2e", priority: "0.8", changefreq: "monthly" },
+      { loc: "/case-studies/las-vegas-raiders-tour", priority: "0.8", changefreq: "monthly" },
+      { loc: "/case-studies/bob-marley-hope-road", priority: "0.8", changefreq: "monthly" },
+      { loc: "/case-studies/sports-illustrated", priority: "0.8", changefreq: "monthly" },
     ];
     const xml = [
       '<?xml version="1.0" encoding="UTF-8"?>',

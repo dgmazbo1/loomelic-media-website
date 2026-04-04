@@ -503,3 +503,8 @@
 - [x] Add www → loomelicmedia.com canonical 301 redirect in Express server
 - [x] Add noindex meta tags to all /admin/* routes (via OwnerGate component)
 - [ ] Submit loomelicmedia.com to Google Search Console and request indexing for convention page
+
+## SEO & Analytics (Apr 4)
+- [x] Verify sitemap.xml covers all pages — added convention page, featured-work, and all case-study URLs
+- [x] Integrate Google Analytics 4 (GA4) with measurement ID G-L1VJ73G61W via VITE_GA4_MEASUREMENT_ID
+- [ ] Submit sitemap.xml to Google Search Console (manual step — see instructions)
