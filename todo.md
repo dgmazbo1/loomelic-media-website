@@ -508,3 +508,14 @@
 - [x] Verify sitemap.xml covers all pages — added convention page, featured-work, and all case-study URLs
 - [x] Integrate Google Analytics 4 (GA4) with measurement ID G-L1VJ73G61W via VITE_GA4_MEASUREMENT_ID
 - [ ] Submit sitemap.xml to Google Search Console (manual step — see instructions)
+
+## CRM Redesign — ORION Design Language (Apr 4)
+- [x] Create CRMLayout shell with ORION-style icon-only dark sidebar and warm off-white theme
+- [x] Apply ORION color tokens globally to CRM (warm bg, coral accent, card whites)
+- [x] Rebuild CRMDashboard overview — donut pipeline chart, stats panel, recent contacts
+- [x] Rebuild Contacts view — ORION card grid with score/temp circles, pill filter chips, search
+- [x] Rebuild Pipeline view — Kanban with coral accent active stage, deal value stats
+- [x] Rebuild Proposals view — clean card list with status badges
+- [x] Rebuild Activity/Interactions view — timeline with coral accent dots
+- [x] All CRM routes protected by OwnerGate (owner-only access, login required)
+- [x] 52/52 tests passing, TypeScript clean

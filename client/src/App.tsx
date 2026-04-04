@@ -58,6 +58,13 @@ import CRMDashboard from "./pages/CRMDashboard";
 import VendorSign from "./pages/VendorSign";
 import AdminCreateContract from "./pages/AdminCreateContract";
 
+// ORION CRM pages
+import CRMOverviewPage from "./pages/crm-orion/CRMOverview";
+import CRMContactsPage from "./pages/crm-orion/CRMContacts";
+import CRMPipelinePage from "./pages/crm-orion/CRMPipeline";
+import CRMProposalsPage from "./pages/crm-orion/CRMProposals";
+import CRMActivityPage from "./pages/crm-orion/CRMActivity";
+
 // Dealer Growth CRM pages
 import CrmOverview from "./pages/crm/CrmOverview";
 import DealershipDetail from "./pages/crm/DealershipDetail";
@@ -113,8 +120,12 @@ function Router() {
         <Route path="/admin/crm">{() => <OwnerGate><AdminCRM /></OwnerGate>}</Route>
         <Route path="/admin/crm/dealer">{() => <OwnerGate><AdminCRMModule /></OwnerGate>}</Route>
 
-        {/* CRM Dashboard */}
-        <Route path="/crm" component={CRMDashboard} />
+        {/* CRM — ORION Design (owner-only) */}
+        <Route path="/crm">{() => <OwnerGate><CRMOverviewPage /></OwnerGate>}</Route>
+        <Route path="/crm/contacts">{() => <OwnerGate><CRMContactsPage /></OwnerGate>}</Route>
+        <Route path="/crm/pipeline">{() => <OwnerGate><CRMPipelinePage /></OwnerGate>}</Route>
+        <Route path="/crm/proposals">{() => <OwnerGate><CRMProposalsPage /></OwnerGate>}</Route>
+        <Route path="/crm/activity">{() => <OwnerGate><CRMActivityPage /></OwnerGate>}</Route>
 
         {/* Portals */}
         <Route path="/dealer" component={DealerPortal} />
