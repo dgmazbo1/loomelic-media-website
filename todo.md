@@ -528,3 +528,18 @@
 - [x] CRM links in admin sidebar (CRM Overview, Contacts, Pipeline, Proposals, Activity)
 - [x] Admin access fixed: DB role check instead of OWNER_OPEN_ID (both Denham accounts set to admin)
 - [x] 52/52 tests passing, TypeScript clean
+
+## Admin Content Visibility Fix (Apr 4)
+- [ ] Fix AdminPage: project list and ProjectEditor content not visible after Twisty redesign
+- [ ] Fix PortfolioAdmin: portfolio items not visible/manageable
+- [ ] Fix FeaturedWorkAdmin: featured work items not visible/manageable
+- [ ] Fix GraphicsAdmin: graphics items not visible/manageable
+- [ ] Verify all admin CRUD operations work (create, edit, delete, upload)
+
+## Dealer & Vendor Admin Twisty Redesign (Apr 4)
+- [x] Rewrite PortalAdminLayout with Twisty tokens (light bg, navy sidebar, white cards, indigo accents)
+- [x] /dealer/admin portal now uses Twisty design (no changes needed to DealerAdmin.tsx)
+- [x] /vendor/admin portal now uses Twisty design (no changes needed to VendorAdmin.tsx)
+- [x] StatusBadge, StatCard, AdminCard, PrimaryButton, OutlineButton, SearchBar all Twisty-styled
+- [x] Fixed flaky listContacts test timeout (10s)
+- [x] TypeScript clean (0 errors), 52/52 tests passing

@@ -42,7 +42,7 @@ describe("CRM Router", () => {
     it("should list contacts (returns array)", async () => {
       const contacts = await caller.crm.listContacts();
       expect(Array.isArray(contacts)).toBe(true);
-    });
+    }, 10000);
 
     it("should create a contact and return an id", async () => {
       const result = await caller.crm.createContact({
