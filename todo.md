@@ -543,3 +543,6 @@
 - [x] StatusBadge, StatCard, AdminCard, PrimaryButton, OutlineButton, SearchBar all Twisty-styled
 - [x] Fixed flaky listContacts test timeout (10s)
 - [x] TypeScript clean (0 errors), 52/52 tests passing
+
+## Sidebar Navigation Links (Apr 5)
+- [x] Add Dealer Admin and Vendor Admin links to AdminLayout sidebar (Portals group)

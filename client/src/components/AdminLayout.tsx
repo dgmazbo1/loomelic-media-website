@@ -17,7 +17,7 @@ import { getLoginUrl } from "@/const";
 import {
   LayoutDashboard, Users, GitBranch, FileText, Activity,
   Image, Star, Settings, LogOut, ChevronRight, Briefcase,
-  BarChart2, Shield, Menu, X, Bell, Search,
+  BarChart2, Shield, Menu, X, Bell, Search, Building2,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -74,6 +74,13 @@ const ADMIN_NAV = [
     items: [
       { icon: Briefcase,       label: "Dealer CRM",    href: "/admin/crm" },
       { icon: Shield,          label: "Contracts",     href: "/admin/crm/dealer" },
+    ],
+  },
+  {
+    group: "Portals",
+    items: [
+      { icon: Building2,       label: "Dealer Admin",  href: "/dealer/admin" },
+      { icon: Users,           label: "Vendor Admin",  href: "/vendor/admin" },
     ],
   },
 ];
