@@ -172,15 +172,15 @@ export function AdminPageHeader({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="px-8 pt-8 pb-6 flex items-start justify-between">
+    <div className="px-4 sm:px-8 pt-5 sm:pt-8 pb-4 sm:pb-6 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
       <div>
         <div className="text-xs font-semibold tracking-wide mb-2 flex items-center gap-2"
           style={{ color: TW.textMuted }}>
           <span>{breadcrumb}</span>
         </div>
-        <h1 className="text-2xl font-bold" style={{ color: TW.textPrimary }}>{title}</h1>
+        <h1 className="text-xl sm:text-2xl font-bold" style={{ color: TW.textPrimary }}>{title}</h1>
       </div>
-      {action && <div className="mt-6">{action}</div>}
+      {action && <div className="sm:mt-6">{action}</div>}
     </div>
   );
 }

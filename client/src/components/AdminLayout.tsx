@@ -258,7 +258,7 @@ export default function AdminLayout({
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top bar */}
-        <header className="shrink-0 flex items-center gap-4 px-6 py-4"
+        <header className="shrink-0 flex items-center gap-2 sm:gap-4 px-3 sm:px-6 py-3 sm:py-4"
           style={{ background: "white", borderBottom: `1px solid ${TW.border}` }}>
           {/* Mobile menu + collapse toggle */}
           <button
@@ -278,7 +278,7 @@ export default function AdminLayout({
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             {actions}
             {/* User avatar */}
             <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"
@@ -289,7 +289,7 @@ export default function AdminLayout({
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-3 sm:p-4 lg:p-6">
           {children}
         </main>
       </div>

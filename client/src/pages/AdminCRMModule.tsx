@@ -101,7 +101,7 @@ function ContactsTab({ onSelectContact }: { onSelectContact: (id: number, name: 
   return (
     <div className="space-y-4">
       {/* Header */}
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <h2 className="text-lg font-bold text-white">Contacts</h2>
           <span className="text-xs bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded-full">{contacts?.length ?? 0}</span>
@@ -109,17 +109,17 @@ function ContactsTab({ onSelectContact }: { onSelectContact: (id: number, name: 
         <div className="flex items-center gap-2">
           <Input
             value={search} onChange={e => setSearch(e.target.value)}
-            placeholder="Search contacts..." className="bg-zinc-800 border-zinc-700 text-white text-sm w-48 h-8"
+            placeholder="Search contacts..." className="bg-zinc-800 border-zinc-700 text-white text-sm w-full sm:w-48 h-8"
           />
           <Button onClick={() => { setShowCreate(!showCreate); resetForm(); }} size="sm"
-            className="bg-[oklch(0.85_0.23_110)] text-black font-bold h-8 text-xs">
+            className="bg-[oklch(0.85_0.23_110)] text-black font-bold h-8 text-xs shrink-0">
             <Plus className="w-3.5 h-3.5 mr-1" /> New Contact
           </Button>
         </div>
       </div>
 
       {/* Stats row */}
-      <div className="grid grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {(["prospect", "active", "inactive", "churned"] as const).map(s => (
           <div key={s} className="bg-zinc-900 border border-zinc-800 rounded-lg p-3">
             <div className="text-xs text-zinc-500 capitalize mb-1">{s}</div>
@@ -290,7 +290,7 @@ function DealsTab() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-3">
           <div className="text-xs text-zinc-500 mb-1 flex items-center gap-1"><TrendingUp className="w-3 h-3" /> Pipeline Value</div>
           <div className="text-xl font-bold text-white">${pipelineValue.toLocaleString()}</div>
@@ -338,7 +338,7 @@ function DealsTab() {
       )}
 
       {/* Kanban board */}
-      <div className="grid grid-cols-3 gap-3 xl:grid-cols-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 xl:grid-cols-6">
         {STAGE_CONFIG.map(stage => (
           <div key={stage.key} className={`bg-zinc-900 border ${stage.color} rounded-lg p-3 min-h-[200px]`}>
             <div className="flex items-center justify-between mb-3">

@@ -1045,12 +1045,12 @@ export default function PortfolioAdmin() {
     >
       {/* Tab bar */}
       <div className="mb-6" style={{ borderBottom: `1px solid ${TW.border}` }}>
-        <div className="flex gap-0">
+        <div className="flex gap-0 overflow-x-auto">
           {TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className="flex items-center gap-2 px-5 py-3 text-sm font-medium border-b-2 transition-all"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-3 text-xs sm:text-sm font-medium border-b-2 transition-all whitespace-nowrap shrink-0"
               style={{
                 borderBottomColor: activeTab === tab.id ? TW.indigo : "transparent",
                 color: activeTab === tab.id ? TW.indigo : TW.textMuted,

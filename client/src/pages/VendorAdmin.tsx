@@ -63,7 +63,7 @@ function DashboardSection() {
   const vendorsByRole = stats?.vendorsByRole ?? [];
 
   return (
-    <div className="px-8 py-6 space-y-6">
+    <div className="px-4 sm:px-8 py-4 sm:py-6 space-y-6">
       <AdminPageHeader breadcrumb="VENDOR ADMIN DASHBOARD" title="OVERVIEW" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -156,7 +156,7 @@ function VendorsSection() {
   });
 
   return (
-    <div className="px-8 py-6">
+    <div className="px-4 sm:px-8 py-4 sm:py-6">
       <AdminPageHeader
         breadcrumb="VENDOR MANAGEMENT"
         title="VENDORS"
@@ -259,7 +259,7 @@ function ContractsSection() {
   );
 
   return (
-    <div className="px-8 py-6">
+    <div className="px-4 sm:px-8 py-4 sm:py-6">
       <AdminPageHeader
         breadcrumb="CONTRACT MANAGEMENT"
         title="CONTRACTS"
@@ -327,7 +327,7 @@ function JobsSection() {
   });
 
   return (
-    <div className="px-8 py-6">
+    <div className="px-4 sm:px-8 py-4 sm:py-6">
       <AdminPageHeader
         breadcrumb="JOB MANAGEMENT"
         title="JOBS"
@@ -393,7 +393,7 @@ function TasksSection() {
   });
 
   return (
-    <div className="px-8 py-6">
+    <div className="px-4 sm:px-8 py-4 sm:py-6">
       <AdminPageHeader
         breadcrumb="TASK MANAGEMENT"
         title="TASKS"
@@ -454,7 +454,7 @@ function IncidentsSection() {
   });
 
   return (
-    <div className="px-8 py-6">
+    <div className="px-4 sm:px-8 py-4 sm:py-6">
       <AdminPageHeader
         breadcrumb="INCIDENT MANAGEMENT"
         title="INCIDENTS"
@@ -511,7 +511,7 @@ function AnalyticsSection() {
   const vendorsByRole = stats?.vendorsByRole ?? [];
 
   return (
-    <div className="px-8 py-6 space-y-6">
+    <div className="px-4 sm:px-8 py-4 sm:py-6 space-y-6">
       <AdminPageHeader breadcrumb="ANALYTICS" title="ANALYTICS" />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -567,7 +567,7 @@ function AnalyticsSection() {
 /* ─── Settings ───────────────────────────────────────────────────────────── */
 function SettingsSection() {
   return (
-    <div className="px-8 py-6">
+    <div className="px-4 sm:px-8 py-4 sm:py-6">
       <AdminPageHeader breadcrumb="SETTINGS" title="SETTINGS" />
       <AdminCard title="PORTAL SETTINGS">
         <p className="text-sm" style={{ color: "oklch(0.5 0 0)" }}>

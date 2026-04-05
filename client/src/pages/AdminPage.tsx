@@ -2,7 +2,7 @@
    Admin Panel — Media Management
    Route: /admin (protected, admin role only)
    Features:
-   - Project list sidebar
+   - Project list sidebar (collapsible on mobile)
    - Gallery manager: upload, delete, drag-to-reorder
    - Hero image picker (upload or promote from gallery)
    - Video manager: add/edit/delete embed URLs
@@ -10,9 +10,8 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
-import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
-import { Upload, Trash2, GripVertical, Video, Image, ChevronRight, LogOut, Star, Plus, X, Pencil, Check, AlertTriangle } from "lucide-react";
+import { Upload, Trash2, GripVertical, Video, Image, ChevronRight, Star, Plus, X, Pencil, Check, AlertTriangle, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -200,52 +199,53 @@ function VideoRow({
   };
 
   return (
-    <div className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
+    <div className="flex items-start gap-3 p-3 rounded-xl" style={{ background: TW.indigoBg, border: `1px solid ${TW.border}` }}>
       {/* Drag handle */}
       {dragHandleProps && (
         <div
           {...dragHandleProps}
-          className="mt-1 p-1 rounded cursor-grab active:cursor-grabbing text-white/20 hover:text-white/50 transition-colors shrink-0"
+          className="mt-1 p-1 rounded cursor-grab active:cursor-grabbing transition-colors shrink-0"
+          style={{ color: TW.textMuted }}
           title="Drag to reorder"
         >
           <GripVertical size={14} />
         </div>
       )}
-      <Video size={16} className="text-white/40 mt-1 shrink-0" />
+      <Video size={16} className="mt-1 shrink-0" style={{ color: TW.textMuted }} />
       {editing ? (
-        <div className="flex-1 flex flex-col gap-2">
-          <Input value={label} onChange={e => setLabel(e.target.value)} placeholder="Label (e.g. Walk-around)" className="h-8 text-xs bg-white/5 border-white/20 text-white" />
-          <Input value={url} onChange={e => setUrl(e.target.value)} placeholder="Embed URL" className="h-8 text-xs bg-white/5 border-white/20 text-white" />
+        <div className="flex-1 flex flex-col gap-2 min-w-0">
+          <Input value={label} onChange={e => setLabel(e.target.value)} placeholder="Label (e.g. Walk-around)" className="h-8 text-xs" />
+          <Input value={url} onChange={e => setUrl(e.target.value)} placeholder="Embed URL" className="h-8 text-xs" />
           {/* Portrait toggle */}
           <label className="flex items-center gap-2 cursor-pointer select-none">
             <div
               onClick={() => setPortrait(p => !p)}
-              className={`relative w-9 h-5 rounded-full transition-colors ${ portrait ? 'bg-purple-500' : 'bg-white/20' }`}
+              className={`relative w-9 h-5 rounded-full transition-colors ${ portrait ? 'bg-purple-500' : 'bg-gray-200' }`}
             >
               <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${ portrait ? 'translate-x-4' : '' }`} />
             </div>
-            <span className="text-xs text-white/50">Portrait / Vertical (9:16)</span>
+            <span className="text-xs" style={{ color: TW.textSecondary }}>Portrait / Vertical (9:16)</span>
           </label>
           <div className="flex gap-2">
-            <button onClick={save} className="flex items-center gap-1 text-xs text-green-400 hover:text-green-300"><Check size={12} /> Save</button>
-            <button onClick={() => setEditing(false)} className="flex items-center gap-1 text-xs text-white/40 hover:text-white/60"><X size={12} /> Cancel</button>
+            <button onClick={save} className="flex items-center gap-1 text-xs text-green-600 hover:text-green-700"><Check size={12} /> Save</button>
+            <button onClick={() => setEditing(false)} className="flex items-center gap-1 text-xs" style={{ color: TW.textMuted }}><X size={12} /> Cancel</button>
           </div>
         </div>
       ) : (
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <p className="text-white/80 text-xs font-medium truncate">{video.label || "Untitled"}</p>
+            <p className="text-xs font-medium truncate" style={{ color: TW.textPrimary }}>{video.label || "Untitled"}</p>
             {video.portrait && (
-              <span className="shrink-0 text-[0.55rem] font-bold tracking-wide text-purple-300 bg-purple-500/20 px-1.5 py-0.5 rounded-full">9:16</span>
+              <span className="shrink-0 text-[0.55rem] font-bold tracking-wide text-purple-600 bg-purple-100 px-1.5 py-0.5 rounded-full">9:16</span>
             )}
           </div>
-          <p className="text-white/30 text-[0.65rem] truncate">{video.embedUrl}</p>
+          <p className="text-[0.65rem] truncate" style={{ color: TW.textMuted }}>{video.embedUrl}</p>
         </div>
       )}
       {!editing && (
         <div className="flex gap-1.5 shrink-0">
-          <button onClick={() => setEditing(true)} className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"><Pencil size={12} className="text-white/60" /></button>
-          <button onClick={() => onDelete(video.id)} className="p-1.5 rounded-lg bg-red-500/20 hover:bg-red-500/40 transition-colors"><Trash2 size={12} className="text-red-400" /></button>
+          <button onClick={() => setEditing(true)} className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"><Pencil size={12} style={{ color: TW.textSecondary }} /></button>
+          <button onClick={() => onDelete(video.id)} className="p-1.5 rounded-lg hover:bg-red-50 transition-colors"><Trash2 size={12} className="text-red-400" /></button>
         </div>
       )}
     </div>
@@ -292,24 +292,26 @@ function BulkUploadZone({
       onDragLeave={() => setDragging(false)}
       onDrop={handleDrop}
       onClick={() => !disabled && inputRef.current?.click()}
-      className={`border-2 border-dashed rounded-2xl p-10 flex flex-col items-center justify-center gap-3 cursor-pointer transition-all ${
+      className={`border-2 border-dashed rounded-2xl p-8 flex flex-col items-center justify-center gap-3 cursor-pointer transition-all ${
         dragging
-          ? "border-blue-400/60 bg-blue-500/10 scale-[1.01]"
+          ? "scale-[1.01]"
           : disabled
-          ? "border-white/10 opacity-50 cursor-not-allowed"
-          : "border-white/20 hover:border-white/40 hover:bg-white/3"
+          ? "opacity-50 cursor-not-allowed"
+          : ""
       }`}
+      style={{
+        borderColor: dragging ? TW.indigo : TW.border,
+        background: dragging ? TW.indigoBg : "transparent",
+      }}
     >
-      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${
-        dragging ? "bg-blue-500/20" : "bg-white/5"
-      }`}>
-        <Upload size={22} className={dragging ? "text-blue-400" : "text-white/30"} />
+      <div className="w-12 h-12 rounded-2xl flex items-center justify-center transition-colors" style={{ background: dragging ? TW.indigoBg : "oklch(0.96 0.005 265)" }}>
+        <Upload size={22} style={{ color: dragging ? TW.indigo : TW.textMuted }} />
       </div>
       <div className="text-center">
-        <p className={`text-sm font-medium ${ dragging ? "text-blue-300" : "text-white/50" }`}>
+        <p className="text-sm font-medium" style={{ color: dragging ? TW.indigo : TW.textSecondary }}>
           {dragging ? "Drop to upload" : "Drop photos here or click to browse"}
         </p>
-        <p className="text-white/20 text-xs mt-1">JPG, PNG, WEBP · Select multiple files at once</p>
+        <p className="text-xs mt-1" style={{ color: TW.textMuted }}>JPG, PNG, WEBP · Select multiple files at once</p>
       </div>
       <input ref={inputRef} type="file" accept="image/*" multiple className="hidden" onChange={handleChange} />
     </div>
@@ -325,82 +327,45 @@ function UploadQueuePanel({
   onDismiss: () => void;
 }) {
   if (items.length === 0) return null;
-
-  const done = items.filter(i => i.status === "done").length;
-  const errors = items.filter(i => i.status === "error").length;
-  const total = items.length;
-  const allFinished = items.every(i => i.status === "done" || i.status === "error");
-  const progress = Math.round((done / total) * 100);
+  const allDone = items.every(i => i.status === "done" || i.status === "error");
+  const doneCount = items.filter(i => i.status === "done").length;
+  const errorCount = items.filter(i => i.status === "error").length;
+  const uploadingCount = items.filter(i => i.status === "uploading").length;
 
   return (
-    <div className="mb-6 rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+    <div className="mb-4 rounded-xl overflow-hidden" style={{ border: `1px solid ${TW.border}` }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <span className="text-white/70 text-xs font-semibold">
-            {allFinished
-              ? errors > 0
-                ? `Upload complete — ${errors} failed`
-                : `All ${total} photos uploaded`
-              : `Uploading ${done}/${total}…`}
+      <div className="flex items-center justify-between px-4 py-2.5" style={{ background: TW.indigoBg }}>
+        <div className="flex items-center gap-2">
+          {!allDone && <div className="w-3.5 h-3.5 border-2 rounded-full animate-spin" style={{ borderColor: `${TW.border} ${TW.border} ${TW.border} ${TW.indigo}` }} />}
+          {allDone && errorCount === 0 && <Check size={14} className="text-green-500" />}
+          {allDone && errorCount > 0 && <AlertTriangle size={14} className="text-amber-500" />}
+          <span className="text-xs font-medium" style={{ color: TW.textPrimary }}>
+            {allDone
+              ? `${doneCount} uploaded${errorCount > 0 ? `, ${errorCount} failed` : ""}`
+              : `Uploading ${uploadingCount > 0 ? `${uploadingCount} of ${items.length}` : items.length} photo${items.length !== 1 ? "s" : ""}…`}
           </span>
-          {errors > 0 && (
-            <span className="flex items-center gap-1 text-[0.6rem] text-red-400 bg-red-500/15 px-2 py-0.5 rounded-full">
-              <AlertTriangle size={10} /> {errors} error{errors !== 1 ? "s" : ""}
-            </span>
-          )}
         </div>
-        {allFinished && (
-          <button onClick={onDismiss} className="p-1 rounded-lg text-white/30 hover:text-white hover:bg-white/10 transition-colors">
-            <X size={14} />
+        {allDone && (
+          <button onClick={onDismiss} className="p-1 rounded-lg hover:bg-gray-100 transition-colors">
+            <X size={12} style={{ color: TW.textMuted }} />
           </button>
         )}
       </div>
-
-      {/* Overall progress bar */}
-      {!allFinished && (
-        <div className="h-1 bg-white/10">
-          <div
-            className="h-full bg-blue-500 transition-all duration-300"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      )}
-
-      {/* Per-file thumbnail grid */}
-      <div className="p-4 grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+      {/* Thumbnails */}
+      <div className="flex gap-2 p-3 overflow-x-auto" style={{ background: "white" }}>
         {items.map(item => (
-          <div key={item.id} className="relative aspect-square rounded-lg overflow-hidden bg-white/5">
-            <img src={item.previewUrl} alt={item.file.name} className="w-full h-full object-cover" />
-            {/* Status overlay */}
-            <div className={`absolute inset-0 flex items-center justify-center transition-all ${
+          <div key={item.id} className="relative shrink-0 w-14 h-14 rounded-lg overflow-hidden" style={{ border: `1px solid ${TW.border}` }}>
+            <img src={item.previewUrl} alt="" className="w-full h-full object-cover" />
+            <div className={`absolute inset-0 flex items-center justify-center transition-opacity ${
+              item.status === "done" ? "bg-green-500/60" :
+              item.status === "error" ? "bg-red-500/60" :
               item.status === "uploading" ? "bg-black/40" :
-              item.status === "done" ? "bg-black/0" :
-              item.status === "error" ? "bg-red-900/50" :
-              "bg-black/30"
+              "bg-black/20"
             }`}>
-              {item.status === "uploading" && (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              )}
-              {item.status === "done" && (
-                <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
-                  <Check size={11} className="text-white" />
-                </div>
-              )}
-              {item.status === "error" && (
-                <div className="w-5 h-5 rounded-full bg-red-500 flex items-center justify-center" title={item.error}>
-                  <X size={11} className="text-white" />
-                </div>
-              )}
-              {item.status === "pending" && (
-                <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-white/60" />
-                </div>
-              )}
-            </div>
-            {/* Filename tooltip */}
-            <div className="absolute bottom-0 left-0 right-0 bg-black/60 px-1 py-0.5 truncate text-[0.5rem] text-white/50">
-              {item.file.name}
+              {item.status === "done" && <Check size={16} className="text-white" />}
+              {item.status === "error" && <X size={16} className="text-white" />}
+              {item.status === "uploading" && <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />}
             </div>
           </div>
         ))}
@@ -409,7 +374,7 @@ function UploadQueuePanel({
   );
 }
 
-// ─── Add Video Form ────────────────────────────────────────────────────────────────
+// ─── Add Video Form ──────────────────────────────────────────────────────────
 function AddVideoForm({
   onAdd,
   onCancel,
@@ -424,27 +389,21 @@ function AddVideoForm({
   const [portrait, setPortrait] = useState(false);
 
   return (
-    <div className="p-4 rounded-xl space-y-2" style={{ background: TW.indigoBg, border: `1px solid ${TW.border}` }}>
-      <Input value={label} onChange={e => setLabel(e.target.value)} placeholder="Label (e.g. Walk-around Tour)" className="h-8 text-xs" />
+    <div className="p-4 rounded-xl space-y-3" style={{ background: TW.indigoBg, border: `1px solid ${TW.border}` }}>
+      <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: TW.indigo }}>New Video</p>
+      <Input value={label} onChange={e => setLabel(e.target.value)} placeholder="Label (e.g. Walk-around)" className="h-8 text-xs" />
       <Input value={url} onChange={e => setUrl(e.target.value)} placeholder="Vimeo or YouTube embed URL" className="h-8 text-xs" />
-      {/* Portrait toggle */}
       <label className="flex items-center gap-2 cursor-pointer select-none">
         <div
           onClick={() => setPortrait(p => !p)}
-          className="relative w-9 h-5 rounded-full transition-colors"
-          style={{ background: portrait ? TW.indigo : TW.border }}
+          className={`relative w-9 h-5 rounded-full transition-colors ${ portrait ? 'bg-purple-500' : 'bg-gray-200' }`}
         >
           <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow transition-transform ${ portrait ? 'translate-x-4' : '' }`} />
         </div>
         <span className="text-xs" style={{ color: TW.textSecondary }}>Portrait / Vertical (9:16)</span>
       </label>
       <div className="flex gap-2">
-        <Button
-          size="sm"
-          className="h-7 text-xs"
-          onClick={() => onAdd(label, url, portrait)}
-          disabled={!url || isPending}
-        >
+        <Button size="sm" className="h-7 text-xs flex-1" disabled={!url || isPending} onClick={() => onAdd(label, url, portrait)}>
           {isPending ? "Adding..." : "Add Video"}
         </Button>
         <Button size="sm" variant="ghost" className="h-7 text-xs" style={{ color: TW.textMuted }} onClick={onCancel}>Cancel</Button>
@@ -469,13 +428,11 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
     { slug },
     {
       retry: false,
-      // Retry once after a short delay to catch the case where ensureProject just ran
       retryDelay: 500,
     }
   );
 
   // If project not found in DB, seed it then refetch
-  // Use useEffect to avoid calling setState during render
   useEffect(() => {
     if (!data && !isLoading && !seeded && !seeding) {
       setSeeding(true);
@@ -488,14 +445,13 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
   }, [data, isLoading, seeded, seeding, slug, name, ensureMut, refetch]);
 
   const uploadGalleryMut = trpc.admin.uploadGalleryImage.useMutation();
-
   const uploadHero = trpc.admin.uploadHeroImage.useMutation({
     onSuccess: () => { utils.admin.getProject.invalidate({ slug }); toast.success("Hero image updated"); },
     onError: (e) => toast.error(e.message),
   });
 
   const deleteImage = trpc.admin.deleteGalleryImage.useMutation({
-    onSuccess: () => { utils.admin.getProject.invalidate({ slug }); toast.success("Photo removed"); },
+    onSuccess: () => { utils.admin.getProject.invalidate({ slug }); toast.success("Photo deleted"); },
     onError: (e) => toast.error(e.message),
   });
 
@@ -524,8 +480,14 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
     onError: (e) => toast.error(e.message),
   });
 
+  // Local gallery order state for optimistic drag-and-drop
+  const [localGallery, setLocalGallery] = useState<Array<{ id: number; url: string; altText?: string | null; sortOrder: number }>>([]);
+  useEffect(() => {
+    setLocalGallery(data?.gallery ?? []);
+  }, [data?.gallery]);
+
   // Local video order state for optimistic drag-and-drop
-  const [localVideos, setLocalVideos] = useState<typeof videos>([]);
+  const [localVideos, setLocalVideos] = useState<Array<{ id: number; label?: string | null; embedUrl: string; portrait?: boolean; sortOrder: number }>>([]);
   useEffect(() => {
     setLocalVideos(data?.videos ?? []);
   }, [data?.videos]);
@@ -543,11 +505,9 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
   }, [reorderVideos]);
 
   // ── Bulk upload handler ──────────────────────────────────────────────────────
-  // Enqueues all selected files, then fires parallel uploads (max 3 concurrent)
   const handleBulkUpload = useCallback(async (files: File[]) => {
     if (!files.length) return;
 
-    // Build queue items with local preview URLs
     const items: UploadItem[] = files.map(file => ({
       id: Math.random().toString(36).slice(2),
       file,
@@ -557,7 +517,6 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
 
     setUploadQueue(prev => [...prev, ...items]);
 
-    // Upload with concurrency limit of 3
     const CONCURRENCY = 3;
     let index = 0;
 
@@ -565,7 +524,6 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
       if (index >= items.length) return;
       const item = items[index++];
 
-      // Mark as uploading
       setUploadQueue(prev => prev.map(i => i.id === item.id ? { ...i, status: "uploading" } : i));
 
       try {
@@ -582,14 +540,11 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
         setUploadQueue(prev => prev.map(i => i.id === item.id ? { ...i, status: "error", error: msg } : i));
       }
 
-      // Chain next upload
       await uploadNext();
     };
 
-    // Kick off CONCURRENCY parallel chains
     await Promise.all(Array.from({ length: Math.min(CONCURRENCY, items.length) }, uploadNext));
 
-    // Refresh gallery after all done
     utils.admin.getProject.invalidate({ slug });
   }, [slug, uploadGalleryMut, utils]);
 
@@ -599,12 +554,6 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
     const base64 = await fileToBase64(file);
     await uploadHero.mutateAsync({ slug, filename: file.name, mimeType: file.type, base64 });
   }, [slug, uploadHero]);
-
-  // Local gallery order state for optimistic drag-and-drop
-  const [localGallery, setLocalGallery] = useState<typeof gallery>([]);
-  useEffect(() => {
-    setLocalGallery(data?.gallery ?? []);
-  }, [data?.gallery]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -618,15 +567,12 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
       const oldIndex = prev.findIndex(img => img.id === active.id);
       const newIndex = prev.findIndex(img => img.id === over.id);
       const reordered = arrayMove(prev, oldIndex, newIndex);
-      // Persist to server
       reorder.mutate({ updates: reordered.map((img, i) => ({ id: img.id, sortOrder: i })) });
       return reordered;
     });
   }, [reorder]);
 
   const handleSetHero = useCallback(async (url: string) => {
-    // We need to re-upload the image as hero — for now, just update the project hero URL directly
-    // by uploading the same image from its URL (fetch + re-upload)
     try {
       const resp = await fetch(url);
       const blob = await resp.blob();
@@ -640,7 +586,7 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
 
   if (isLoading || seeding) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex items-center justify-center h-48">
         <div className="flex flex-col items-center gap-3">
           <div className="w-8 h-8 border-2 rounded-full animate-spin" style={{ borderColor: `${TW.border} ${TW.border} ${TW.border} ${TW.indigo}` }} />
           {seeding && <p className="text-xs" style={{ color: TW.textMuted }}>Setting up project...</p>}
@@ -657,7 +603,7 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
     <div className="space-y-8">
       {/* Hero Image */}
       <section>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <h3 className="text-sm font-semibold tracking-widest uppercase flex items-center gap-2" style={{ color: TW.textPrimary }}>
             <Star size={14} style={{ color: "oklch(0.7 0.18 85)" }} /> Cover / Hero Image
           </h3>
@@ -671,7 +617,7 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
           <input ref={heroInputRef} type="file" accept="image/*" className="hidden" onChange={e => handleHeroUpload(e.target.files)} />
         </div>
         {heroUrl ? (
-          <div className="relative rounded-2xl overflow-hidden aspect-video max-w-md">
+          <div className="relative rounded-2xl overflow-hidden aspect-video w-full sm:max-w-sm">
             <img src={heroUrl} alt="Hero" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
             <Badge className="absolute bottom-3 left-3 bg-amber-400 text-black text-[0.6rem] font-bold">CURRENT HERO</Badge>
@@ -679,7 +625,7 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
         ) : (
           <div
             onClick={() => heroInputRef.current?.click()}
-            className="rounded-2xl aspect-video max-w-md flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors"
+            className="rounded-2xl aspect-video w-full sm:max-w-sm flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors"
             style={{ border: `2px dashed ${TW.border}` }}
             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = TW.indigo; (e.currentTarget as HTMLElement).style.background = TW.indigoBg; }}
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = TW.border; (e.currentTarget as HTMLElement).style.background = "transparent"; }}
@@ -692,7 +638,7 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
 
       {/* Gallery */}
       <section>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <h3 className="text-sm font-semibold tracking-widest uppercase flex items-center gap-2" style={{ color: TW.textPrimary }}>
             <Image size={14} style={{ color: TW.indigo }} /> Gallery ({gallery.length} photos)
           </h3>
@@ -738,7 +684,7 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
                 items={localGallery.map(img => img.id)}
                 strategy={rectSortingStrategy}
               >
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-3">
                   {localGallery.map((img, i) => (
                     <SortableGalleryCard
                       key={img.id}
@@ -785,7 +731,7 @@ function ProjectEditor({ slug, name }: { slug: string; name: string }) {
 
       {/* Videos */}
       <section>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <h3 className="text-sm font-semibold tracking-widest uppercase flex items-center gap-2" style={{ color: TW.textPrimary }}>
             <Video size={14} style={{ color: "oklch(0.55 0.15 290)" }} /> Videos ({videos.length})
           </h3>
@@ -892,6 +838,8 @@ export default function AdminPage() {
   const [newName, setNewName] = useState("");
   const [newSlug, setNewSlug] = useState("");
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
+  // Mobile: project list panel collapsed by default on small screens
+  const [projectListOpen, setProjectListOpen] = useState(true);
   const utils = trpc.useUtils();
 
   // Query runs unconditionally — no auth required
@@ -944,184 +892,205 @@ export default function AdminPage() {
       subtitle="Manage projects, gallery, and videos"
       actions={publishActions}
     >
-      <div className="flex gap-6 h-full">
+      {/* Responsive layout: stack on mobile, side-by-side on lg+ */}
+      <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
+
         {/* Project list panel */}
-        <TWCard className="w-64 shrink-0 flex flex-col overflow-hidden" style={{ height: "calc(100vh - 120px)" }}>
-          <div className="p-4" style={{ borderBottom: `1px solid ${TW.border}` }}>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-semibold" style={{ color: TW.textPrimary }}>Projects</p>
-                {projects.length > 0 && (
-                  <p className="text-xs mt-0.5" style={{ color: TW.textMuted }}>
-                    {projects.filter(p => p.hasHero).length}/{projects.length} ready
-                  </p>
-                )}
-              </div>
-              <button
-                onClick={() => setShowNewProject(v => !v)}
-                className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors"
-                style={{ background: TW.indigoBg, color: TW.indigo }}
-                title="Add new project"
-              >
-                <Plus size={14} />
-              </button>
-            </div>
-          </div>
-
-          <nav className="flex-1 overflow-y-auto p-3 space-y-0.5">
-
-          {/* New project form */}
-          {showNewProject && (
-            <div className="mb-2 p-3 rounded-xl space-y-2" style={{ background: TW.indigoBg, border: `1px solid ${TW.border}` }}>
-              <p className="text-[0.65rem] font-semibold uppercase tracking-wider" style={{ color: TW.indigo }}>New Project</p>
-              <Input
-                value={newName}
-                onChange={e => handleNameChange(e.target.value)}
-                placeholder="Project name"
-                className="h-7 text-xs"
-                autoFocus
-              />
-              <div className="space-y-1">
-                <Input
-                  value={newSlug}
-                  onChange={e => setNewSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ""))}
-                  placeholder="url-slug"
-                  className="h-7 text-xs font-mono"
-                />
-                <p className="text-[0.55rem] px-1" style={{ color: TW.textMuted }}>URL: /projects/{newSlug || "url-slug"}</p>
-              </div>
-              <div className="flex gap-1.5">
-                <Button
-                  size="sm"
-                  className="h-6 text-[0.65rem] px-2 flex-1"
-                  disabled={!newName || !newSlug || createProjectMut.isPending}
-                  onClick={() => createProjectMut.mutate({ name: newName, slug: newSlug })}
-                >
-                  {createProjectMut.isPending ? "Creating..." : "Create"}
-                </Button>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  className="h-6 text-[0.65rem] px-2"
-                  style={{ color: TW.textMuted }}
-                  onClick={() => { setShowNewProject(false); setNewName(""); setNewSlug(""); }}
-                >
-                  Cancel
-                </Button>
+        <div className="lg:w-64 lg:shrink-0">
+          <TWCard className="flex flex-col overflow-hidden">
+            {/* Panel header — tappable on mobile to collapse */}
+            <div
+              className="p-4 cursor-pointer lg:cursor-default select-none"
+              style={{ borderBottom: projectListOpen ? `1px solid ${TW.border}` : "none" }}
+              onClick={() => setProjectListOpen(v => !v)}
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-semibold" style={{ color: TW.textPrimary }}>Projects</p>
+                  {projects.length > 0 && (
+                    <p className="text-xs mt-0.5" style={{ color: TW.textMuted }}>
+                      {projects.filter(p => p.hasHero).length}/{projects.length} ready
+                    </p>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setShowNewProject(v => !v); setProjectListOpen(true); }}
+                    className="w-7 h-7 rounded-lg flex items-center justify-center transition-colors"
+                    style={{ background: TW.indigoBg, color: TW.indigo }}
+                    title="Add new project"
+                  >
+                    <Plus size={14} />
+                  </button>
+                  <span className="lg:hidden" style={{ color: TW.textMuted }}>
+                    {projectListOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                  </span>
+                </div>
               </div>
             </div>
-          )}
 
-          {/* Project list */}
-          {projects.map(p => {
-            const isSelected = selectedSlug === p.slug;
-            const isComplete = p.hasHero && p.galleryCount > 0;
-
-            return (
-              <div key={p.slug} className="group/item relative">
-                <button
-                  onClick={() => { setSelectedSlug(p.slug); refetchStatuses(); }}
-                  className="w-full flex flex-col px-3 py-2.5 rounded-xl text-left transition-all pr-8"
-                  style={{
-                    background: isSelected ? TW.indigo : "transparent",
-                    color: isSelected ? "white" : TW.textSecondary,
-                  }}
-                  onMouseEnter={e => { if (!isSelected) (e.currentTarget as HTMLElement).style.background = TW.indigoBg; }}
-                  onMouseLeave={e => { if (!isSelected) (e.currentTarget as HTMLElement).style.background = "transparent"; }}
-                >
-                  {/* Project name row */}
-                  <div className="flex items-center justify-between w-full">
-                    <span className="truncate text-sm font-medium">{p.name}</span>
-                    <div className="flex items-center gap-1 shrink-0 ml-2">
-                      {isComplete ? (
-                        <span className="w-1.5 h-1.5 rounded-full" style={{ background: TW.green }} title="Ready" />
-                      ) : (
-                        <span className="w-1.5 h-1.5 rounded-full bg-amber-400" title="Needs attention" />
-                      )}
-                      {isSelected && <ChevronRight size={12} className="opacity-60" />}
+            {projectListOpen && (
+              <nav className="overflow-y-auto p-3 space-y-0.5 lg:max-h-[calc(100vh-220px)]">
+                {/* New project form */}
+                {showNewProject && (
+                  <div className="mb-2 p-3 rounded-xl space-y-2" style={{ background: TW.indigoBg, border: `1px solid ${TW.border}` }}>
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-wider" style={{ color: TW.indigo }}>New Project</p>
+                    <Input
+                      value={newName}
+                      onChange={e => handleNameChange(e.target.value)}
+                      placeholder="Project name"
+                      className="h-7 text-xs"
+                      autoFocus
+                    />
+                    <div className="space-y-1">
+                      <Input
+                        value={newSlug}
+                        onChange={e => setNewSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ""))}
+                        placeholder="url-slug"
+                        className="h-7 text-xs font-mono"
+                      />
+                      <p className="text-[0.55rem] px-1" style={{ color: TW.textMuted }}>URL: /projects/{newSlug || "url-slug"}</p>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <Button
+                        size="sm"
+                        className="h-6 text-[0.65rem] px-2 flex-1"
+                        disabled={!newName || !newSlug || createProjectMut.isPending}
+                        onClick={() => createProjectMut.mutate({ name: newName, slug: newSlug })}
+                      >
+                        {createProjectMut.isPending ? "Creating..." : "Create"}
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="h-6 text-[0.65rem] px-2"
+                        style={{ color: TW.textMuted }}
+                        onClick={() => { setShowNewProject(false); setNewName(""); setNewSlug(""); }}
+                      >
+                        Cancel
+                      </Button>
                     </div>
                   </div>
-                  {/* Status badges row */}
-                  <div className="flex items-center gap-1.5 mt-1">
-                    <span className="text-[0.55rem] px-1.5 py-0.5 rounded font-semibold tracking-wide"
-                      style={p.hasHero
-                        ? { background: isSelected ? "rgba(255,255,255,0.2)" : TW.greenBg, color: isSelected ? "white" : TW.green }
-                        : { background: "oklch(0.96 0.06 85)", color: "oklch(0.55 0.15 85)" }}>
-                      {p.hasHero ? "✓ HERO" : "! HERO"}
-                    </span>
-                    <span className="text-[0.55rem] px-1.5 py-0.5 rounded font-semibold tracking-wide"
-                      style={p.galleryCount > 0
-                        ? { background: isSelected ? "rgba(255,255,255,0.2)" : TW.indigoBg, color: isSelected ? "white" : TW.indigo }
-                        : { background: "oklch(0.95 0.005 265)", color: TW.textMuted }}>
-                      {p.galleryCount} PHOTO{p.galleryCount !== 1 ? "S" : ""}
-                    </span>
-                    {p.videoCount > 0 && (
-                      <span className="text-[0.55rem] px-1.5 py-0.5 rounded font-semibold tracking-wide"
-                        style={{ background: isSelected ? "rgba(255,255,255,0.2)" : "oklch(0.95 0.04 290)", color: isSelected ? "white" : "oklch(0.45 0.18 290)" }}>
-                        {p.videoCount} VID
-                      </span>
-                    )}
-                  </div>
-                </button>
-
-                {/* Delete button — appears on hover */}
-                {deleteConfirm === p.id ? (
-                  <div className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                    <button
-                      onClick={() => deleteProjectMut.mutate({ id: p.id })}
-                      className="p-1 rounded bg-red-500 hover:bg-red-600 transition-colors"
-                      title="Confirm delete"
-                    >
-                      <Check size={11} className="text-white" />
-                    </button>
-                    <button
-                      onClick={() => setDeleteConfirm(null)}
-                      className="p-1 rounded transition-colors"
-                      style={{ background: TW.border }}
-                      title="Cancel"
-                    >
-                      <X size={11} style={{ color: TW.textMuted }} />
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    onClick={(e) => { e.stopPropagation(); setDeleteConfirm(p.id); }}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-lg opacity-0 group-hover/item:opacity-100 hover:!text-red-500 transition-all"
-                    style={{ color: TW.textMuted }}
-                    title="Delete project"
-                  >
-                    <Trash2 size={12} />
-                  </button>
                 )}
-              </div>
-            );
-          })}
 
-          {projects.length === 0 && !showNewProject && (
-            <p className="text-xs text-center py-6" style={{ color: TW.textMuted }}>No projects yet — click + to add one</p>
-          )}
-        </nav>
+                {/* Project list — 2-col grid on mobile, single col on lg */}
+                <div className="grid grid-cols-2 gap-1 lg:grid-cols-1 lg:gap-0 lg:space-y-0">
+                  {projects.map(p => {
+                    const isSelected = selectedSlug === p.slug;
+                    const isComplete = p.hasHero && p.galleryCount > 0;
 
-        </TWCard>
+                    return (
+                      <div key={p.slug} className="group/item relative">
+                        <button
+                          onClick={() => {
+                            setSelectedSlug(p.slug);
+                            setProjectListOpen(false); // collapse list on mobile after selection
+                            refetchStatuses();
+                          }}
+                          className="w-full flex flex-col px-3 py-2.5 rounded-xl text-left transition-all"
+                          style={{
+                            background: isSelected ? TW.indigo : "transparent",
+                            color: isSelected ? "white" : TW.textSecondary,
+                          }}
+                          onMouseEnter={e => { if (!isSelected) (e.currentTarget as HTMLElement).style.background = TW.indigoBg; }}
+                          onMouseLeave={e => { if (!isSelected) (e.currentTarget as HTMLElement).style.background = "transparent"; }}
+                        >
+                          {/* Project name row */}
+                          <div className="flex items-center justify-between w-full">
+                            <span className="truncate text-xs font-medium">{p.name}</span>
+                            <div className="flex items-center gap-1 shrink-0 ml-1">
+                              {isComplete ? (
+                                <span className="w-1.5 h-1.5 rounded-full" style={{ background: TW.green }} title="Ready" />
+                              ) : (
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" title="Needs attention" />
+                              )}
+                              {isSelected && <ChevronRight size={10} className="opacity-60" />}
+                            </div>
+                          </div>
+                          {/* Status badges row */}
+                          <div className="flex items-center gap-1 mt-1 flex-wrap">
+                            <span className="text-[0.5rem] px-1 py-0.5 rounded font-semibold tracking-wide"
+                              style={p.hasHero
+                                ? { background: isSelected ? "rgba(255,255,255,0.2)" : TW.greenBg, color: isSelected ? "white" : TW.green }
+                                : { background: "oklch(0.96 0.06 85)", color: "oklch(0.55 0.15 85)" }}>
+                              {p.hasHero ? "✓ HERO" : "! HERO"}
+                            </span>
+                            <span className="text-[0.5rem] px-1 py-0.5 rounded font-semibold tracking-wide"
+                              style={p.galleryCount > 0
+                                ? { background: isSelected ? "rgba(255,255,255,0.2)" : TW.indigoBg, color: isSelected ? "white" : TW.indigo }
+                                : { background: "oklch(0.95 0.005 265)", color: TW.textMuted }}>
+                              {p.galleryCount} PH
+                            </span>
+                            {p.videoCount > 0 && (
+                              <span className="text-[0.5rem] px-1 py-0.5 rounded font-semibold tracking-wide"
+                                style={{ background: isSelected ? "rgba(255,255,255,0.2)" : "oklch(0.95 0.04 290)", color: isSelected ? "white" : "oklch(0.45 0.18 290)" }}>
+                                {p.videoCount} VID
+                              </span>
+                            )}
+                          </div>
+                        </button>
+
+                        {/* Delete button — appears on hover */}
+                        {deleteConfirm === p.id ? (
+                          <div className="absolute right-1 top-1/2 -translate-y-1/2 flex items-center gap-1 z-10">
+                            <button
+                              onClick={() => deleteProjectMut.mutate({ id: p.id })}
+                              className="p-1 rounded bg-red-500 hover:bg-red-600 transition-colors"
+                              title="Confirm delete"
+                            >
+                              <Check size={11} className="text-white" />
+                            </button>
+                            <button
+                              onClick={() => setDeleteConfirm(null)}
+                              className="p-1 rounded transition-colors"
+                              style={{ background: TW.border }}
+                              title="Cancel"
+                            >
+                              <X size={11} style={{ color: TW.textMuted }} />
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            onClick={(e) => { e.stopPropagation(); setDeleteConfirm(p.id); }}
+                            className="absolute right-1 top-1 p-1 rounded-lg opacity-0 group-hover/item:opacity-100 hover:!text-red-500 transition-all"
+                            style={{ color: TW.textMuted }}
+                            title="Delete project"
+                          >
+                            <Trash2 size={11} />
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {projects.length === 0 && !showNewProject && (
+                  <p className="text-xs text-center py-6" style={{ color: TW.textMuted }}>No projects yet — click + to add one</p>
+                )}
+              </nav>
+            )}
+          </TWCard>
+        </div>
 
         {/* Main content */}
         <div className="flex-1 min-w-0">
           {selectedProject ? (
-            <TWCard className="p-8">
+            <TWCard className="p-4 sm:p-6 lg:p-8">
               <div className="mb-6">
-                <h2 className="text-xl font-bold" style={{ color: TW.textPrimary }}>{selectedProject.name}</h2>
+                <h2 className="text-lg sm:text-xl font-bold" style={{ color: TW.textPrimary }}>{selectedProject.name}</h2>
                 <p className="text-sm mt-1" style={{ color: TW.textSecondary }}>Manage photos, hero image, and videos for this project</p>
               </div>
-              <ProjectEditor slug={selectedProject.slug} name={selectedProject.name} />
+              {/* key={slug} forces full re-mount when project changes — fixes stale gallery state */}
+              <ProjectEditor key={selectedProject.slug} slug={selectedProject.slug} name={selectedProject.name} />
             </TWCard>
           ) : (
-            <TWCard className="flex items-center justify-center" style={{ minHeight: "400px" }}>
+            <TWCard className="flex items-center justify-center" style={{ minHeight: "300px" }}>
               <div className="text-center space-y-3">
                 <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto" style={{ background: TW.indigoBg }}>
                   <Image size={28} style={{ color: TW.indigo }} />
                 </div>
                 <h2 className="font-semibold" style={{ color: TW.textSecondary }}>Select a project</h2>
-                <p className="text-sm" style={{ color: TW.textMuted }}>Choose a project from the left panel to manage its media</p>
+                <p className="text-sm" style={{ color: TW.textMuted }}>Choose a project from the panel above to manage its media</p>
               </div>
             </TWCard>
           )}

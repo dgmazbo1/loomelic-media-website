@@ -552,3 +552,27 @@
 - [x] Add GA4 trackBookACall conversion event on all Book a Call buttons (navbar, hero, about, stats, use-cases)
 - [x] Created client/src/lib/analytics.ts utility for all future GA4 event tracking
 - [x] TypeScript clean (0 errors), 52/52 tests passing
+
+## Mobile Admin & Photo Fix (Apr 5)
+- [x] Fix missing project photos in admin panel project editor
+- [x] Make AdminLayout sidebar mobile-responsive (hamburger menu / drawer)
+- [x] Make AdminPage (main admin) fully mobile-responsive
+- [x] Make CRM pages fully mobile-responsive
+- [x] Make PortalAdminLayout (Dealer/Vendor) mobile-responsive
+- [x] Make Portfolio, Featured Work, Graphics admin pages mobile-responsive
+
+## Mobile Admin & Photo Fix (Apr 2026)
+- [x] Fix missing project photos in admin panel (add key prop to ProjectEditor to force re-mount on project switch)
+- [x] Make AdminLayout header mobile-responsive (reduced padding, gap)
+- [x] Make AdminPage project list collapsible on mobile with 2-col grid
+- [x] Make AdminPage hero image full-width on mobile
+- [x] Make PortfolioAdmin tab bar scrollable on mobile
+- [x] Make PortalAdminLayout AdminPageHeader responsive (reduced padding, stacked on mobile)
+- [x] Make DealerAdmin content sections responsive (px-8 → px-4 sm:px-8)
+- [x] Make VendorAdmin content sections responsive (px-8 → px-4 sm:px-8)
+- [x] Make AdminCRM overview stats grid responsive (grid-cols-1 sm:grid-cols-2 lg:grid-cols-3)
+- [x] Make CRMProposals stats grid responsive (grid-cols-1 sm:grid-cols-3)
+- [x] Make AdminCRMModule contacts stats grid responsive (grid-cols-2 sm:grid-cols-4)
+- [x] Make AdminCRMModule deals stats grid responsive (grid-cols-1 sm:grid-cols-3)
+- [x] Make AdminCRMModule kanban grid responsive (grid-cols-2 sm:grid-cols-3)
+- [x] Make AdminCRMModule contacts header responsive (stacked on mobile)
