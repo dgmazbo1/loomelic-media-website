@@ -9,6 +9,7 @@ import { useLocation } from "wouter";
 import { ArrowRight } from "lucide-react";
 import SocialLinks from "@/components/SocialLinks";
 import { LOGO_TRANSPARENT, HERO_VIDEOS } from "@/lib/media";
+import { trackBookACall } from "@/lib/analytics";
 
 const CLIENT_TYPES = [
   "DEALERSHIPS",
@@ -98,7 +99,7 @@ export default function HeroSection() {
           className="flex flex-wrap items-center gap-3 mb-6"
         >
           <button
-            onClick={() => navigate("/contact")}
+            onClick={() => { trackBookACall("hero"); navigate("/contact"); }}
             className="btn-pill-light text-xs py-3 px-7 font-semibold tracking-widest"
             aria-label="Book a discovery call"
           >

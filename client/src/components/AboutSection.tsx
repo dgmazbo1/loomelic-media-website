@@ -6,6 +6,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useLocation } from "wouter";
+import { trackBookACall } from "@/lib/analytics";
 
 const TRUSTED_BY = [
   "LEXUS OF LAS VEGAS",
@@ -113,7 +114,7 @@ export default function AboutSection() {
               OUR WORK +
             </button>
             <button
-              onClick={() => navigate("/contact")}
+              onClick={() => { trackBookACall("about"); navigate("/contact"); }}
               className="btn-pill-outline !text-[oklch(0.07_0_0)] !border-[oklch(0_0_0/0.2)] hover:!bg-[oklch(0.07_0_0)] hover:!text-white text-xs"
             >
               BOOK A CALL ↗

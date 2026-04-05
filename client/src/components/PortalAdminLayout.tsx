@@ -93,6 +93,22 @@ export default function PortalAdminLayout({
         })}
       </nav>
 
+      {/* Back to Admin link */}
+      <div className="px-3 pb-2">
+        <Link href="/admin">
+          <button
+            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-all hover:opacity-80"
+            style={{ color: TW.sidebarText, background: TW.sidebarHover }}
+            onClick={() => setMobileOpen(false)}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: TW.sidebarText, flexShrink: 0 }}>
+              <path d="M19 12H5M12 5l-7 7 7 7" />
+            </svg>
+            <span>Back to Admin</span>
+          </button>
+        </Link>
+      </div>
+
       {/* User footer */}
       <div className="px-4 py-4 flex items-center gap-3" style={{ borderTop: `1px solid ${TW.sidebarBorder}` }}>
         <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0"

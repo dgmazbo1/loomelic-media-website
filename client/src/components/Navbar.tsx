@@ -9,6 +9,7 @@ import { useState, useEffect, useRef } from "react";
 import { X, Menu, ChevronDown, ChevronRight, Building2, Camera } from "lucide-react";
 import { useLocation } from "wouter";
 import { LOGO_TRANSPARENT } from "@/lib/media";
+import { trackBookACall } from "@/lib/analytics";
 
 /* ─── DEALER SERVICES SUB-ITEMS ─────────────────────────── */
 const DEALER_SUB_ITEMS = [
@@ -227,7 +228,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2 sm:gap-3">
 
             <button
-              onClick={() => goTo("/contact")}
+              onClick={() => { trackBookACall("navbar"); goTo("/contact"); }}
               className="hidden sm:flex btn-pill-light text-xs py-2 px-5"
             >
               BOOK A CALL

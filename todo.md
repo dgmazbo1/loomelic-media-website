@@ -546,3 +546,9 @@
 
 ## Sidebar Navigation Links (Apr 5)
 - [x] Add Dealer Admin and Vendor Admin links to AdminLayout sidebar (Portals group)
+
+## Portal Back-Link & GA4 Conversion (Apr 5)
+- [x] Add back-link to /admin in PortalAdminLayout sidebar (Dealer Admin + Vendor Admin)
+- [x] Add GA4 trackBookACall conversion event on all Book a Call buttons (navbar, hero, about, stats, use-cases)
+- [x] Created client/src/lib/analytics.ts utility for all future GA4 event tracking
+- [x] TypeScript clean (0 errors), 52/52 tests passing

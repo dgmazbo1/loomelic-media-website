@@ -8,6 +8,7 @@ import { useRef } from "react";
 import { useLocation } from "wouter";
 import { CheckCircle } from "lucide-react";
 import { HERO_VIDEOS } from "@/lib/media";
+import { trackBookACall } from "@/lib/analytics";
 
 const PROOF_POINTS = [
   {
@@ -64,6 +65,7 @@ export default function StatsSection() {
           <AnimFade delay={0.15}>
             <button
               onClick={() => {
+                trackBookACall("stats");
                 navigate("/");
                 setTimeout(() => {
                   const el = document.getElementById("contact");
